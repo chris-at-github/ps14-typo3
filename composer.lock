@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aebce2d8113cd8183250ea4f01523caf",
+    "content-hash": "bdc09391744e5ac4264665727c1bce41",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1699,7 +1699,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_component",
-                "reference": "5b09af7e3caf45f7731c76053d5765af38d08b77"
+                "reference": "97dae5339f0da9100b0422566f61fbd6f02f1931"
             },
             "require": {
                 "typo3/cms-core": "^13.4"
@@ -1745,7 +1745,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_foundation",
-                "reference": "41751c3243411d57769fb26c96e30b772c23b09b"
+                "reference": "3d93dc29fce9b8484ded2ab269f92fea8fbc4a9b"
             },
             "require": {
                 "typo3/cms-core": "^13.4"
@@ -1833,7 +1833,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "f38ba3cca77ef95395aa6227ee0b6da17d655a64"
+                "reference": "02a8780e442be45f7e9af7f6f0960899b88e3bb8"
             },
             "require": {
                 "typo3/cms-core": "^13.4"
@@ -1879,7 +1879,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_textmedia",
-                "reference": "ab8ead6665370275da808bc9f2148cb1af5584e0"
+                "reference": "97f75d6b49886c520cb51603e097d0fa1058f653"
             },
             "require": {
                 "typo3/cms-core": "^13.4"
@@ -6707,6 +6707,64 @@
                 }
             ],
             "description": "TYPO3 CMS Install Tool - The Install Tool is used for installation, upgrade, system administration and setup tasks.",
+            "homepage": "https://typo3.org",
+            "support": {
+                "chat": "https://typo3.org/help",
+                "docs": "https://docs.typo3.org",
+                "issues": "https://forge.typo3.org",
+                "source": "https://github.com/typo3/typo3"
+            },
+            "time": "2025-09-09T08:43:17+00:00"
+        },
+        {
+            "name": "typo3/cms-lowlevel",
+            "version": "v13.4.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TYPO3-CMS/lowlevel.git",
+                "reference": "d3b24f99b3b7927a5a6916c9adaef8652fd76594"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TYPO3-CMS/lowlevel/zipball/d3b24f99b3b7927a5a6916c9adaef8652fd76594",
+                "reference": "d3b24f99b3b7927a5a6916c9adaef8652fd76594",
+                "shasum": ""
+            },
+            "require": {
+                "typo3/cms-core": "13.4.18"
+            },
+            "conflict": {
+                "typo3/cms": "*"
+            },
+            "type": "typo3-cms-framework",
+            "extra": {
+                "typo3/cms": {
+                    "Package": {
+                        "partOfFactoryDefault": true
+                    },
+                    "extension-key": "lowlevel"
+                },
+                "branch-alias": {
+                    "dev-main": "13.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\Lowlevel\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Core Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 CMS Lowlevel - Technical analysis of the system. This includes raw database search, checking relations, counting pages and records etc.",
             "homepage": "https://typo3.org",
             "support": {
                 "chat": "https://typo3.org/help",
