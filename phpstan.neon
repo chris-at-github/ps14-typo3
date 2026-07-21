@@ -1,0 +1,14 @@
+parameters:
+    level: 5
+    paths:
+        - packages/ps14_foundation/Classes
+        - packages/ps14_foundation/Configuration
+        - packages/ps14_foundation/ext_localconf.php
+        - packages/ps14_foundation/ext_tables.php
+    ignoreErrors:
+        # Optional integration: content-blocks is a suggested (soft) dependency and is
+        # usually not installed. The ContentContainer ViewHelper only touches
+        # ContentBlockData behind an instanceof guard, which is safe at runtime.
+        -
+            message: '#ContentBlockData#'
+            path: packages/ps14_foundation/Classes/ViewHelpers/Layout/ContentContainerViewHelper.php

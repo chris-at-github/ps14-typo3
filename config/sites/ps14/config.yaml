@@ -3,7 +3,7 @@ websiteTitle: 'Foundation'
 base: /
 baseVariants:
   -
-    base: 'https://ps14-typo3-dev.ddev.site/'
+    base: 'https://ps14-typo3.ddev.site/'
     condition: 'applicationContext == "Development"'
   -
     base: 'https://dev.ps14.de/'
@@ -53,7 +53,7 @@ routes:
       Disallow: /typo3/
       Disallow: /vendor/
       Disallow: /typo3_src/
-      Sitemap: https://ps14-typo3-dev.ddev.site/de/sitemap.xml
-      Sitemap: https://ps14-typo3-dev.ddev.site/en/sitemap.xml
+      Sitemap: https://ps14-typo3.ddev.site/de/sitemap.xml
+      Sitemap: https://ps14-typo3.ddev.site/en/sitemap.xml
 dependencies:
   - foundation/layout

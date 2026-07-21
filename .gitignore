@@ -1,13 +1,21 @@
-.DS_Store
-.idea
-nbproject
-/config/system/additional.php
-/public/.htaccess
-/vendor
-/sql/*
-/var/*
-/public/*
-!/var/labels
-!/public/htaccess
-/packages
+# Dependencies
+/vendor/
+/packages/
 /node_modules/
+
+# TYPO3 generierte Artefakte (Symlinks / Caches)
+/public/index.php
+/public/typo3/
+/public/_assets/
+/public/_assets_install/
+/public/fileadmin/
+/public/typo3temp/
+/public/.htaccess
+/var/
+
+# Umgebungsspezifische Secrets
+/config/system/additional.php
+
+# IDE / Tooling
+/.idea/
+/.claude/settings.local.json

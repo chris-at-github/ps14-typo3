@@ -2,7 +2,6 @@
 return [
     'BE' => [
         'debug' => true,
-        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$ejVFWmlnQlpvbzgwV0xibw$A1EuBGNHZrm1/VL5SkbB1HjWI1GKZIcJZcpcSH8kDrw',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
@@ -11,17 +10,8 @@ return [
     'DB' => [
         'Connections' => [
             'Default' => [
-                'charset' => 'utf8mb4',
-                'dbname' => 'db',
-                'defaultTableOptions' => [
-                    'charset' => 'utf8mb4',
-                    'collation' => 'utf8mb4_unicode_ci',
-                ],
+                'charset' => 'utf8',
                 'driver' => 'mysqli',
-                'host' => 'db',
-                'password' => 'db',
-                'port' => 3306,
-                'user' => 'db',
             ],
         ],
     ],
@@ -35,14 +25,11 @@ return [
             'loginLogo' => '',
             'loginLogoAlt' => '',
         ],
-        'extensionmanager' => [
-            'automaticInstallation' => '1',
-            'offlineMode' => '0',
-        ],
-        'vite_asset_collector' => [
-            'defaultManifest' => '_assets/vite/.vite/manifest.json',
-            'devServerUri' => 'auto',
-            'useDevServer' => 'auto',
+        'tt_address' => [
+            'readOnlyNameField' => '1',
+            'storeBackwardsCompatName' => '1',
+            'telephoneValidationPatternForJs' => '/[^\\d\\+\\s\\-]/g',
+            'telephoneValidationPatternForPhp' => '/[^\\d\\+\\s\\-]/',
         ],
     ],
     'FE' => [
@@ -108,14 +95,15 @@ return [
         ],
         'devIPmask' => '',
         'displayErrors' => 0,
-        'encryptionKey' => 'd5f00fe5cf768da885f90a3d8b3211e1ebde81538d514b185e71d07f5f02f147b35139f4afde2116f29f242da7c12913',
+        'encryptionKey' => 'd8a4b02e129dce9c47df4d2b5457b66926cda260b68d2bb4f0396b27745ca2bfeeeb28da1d4632b8c557aa0a504452e4',
         'exceptionalErrors' => 4096,
         'features' => [
             'frontend.cache.autoTagging' => true,
+            'security.system.enforceAllowedFileExtensions' => true,
         ],
-        'sitename' => 'TYPO3 DEV',
+        'sitename' => 'PS14 TYPO3',
         'systemMaintainers' => [
-            1,
+            2,
         ],
     ],
 ];

@@ -1,66 +1,123 @@
-# TYPO3 CMS Base Distribution
+# PS14 TYPO3
 
-Get going quickly with TYPO3 CMS.
+TYPO3 v14 LTS Base-Distribution, Composer-basiert, lauffähig in einer [DDEV](https://ddev.com/)-Umgebung.
 
-## Prerequisites
+## Tech-Stack
 
-* PHP 8.2
-* [Composer](https://getcomposer.org/download/)
+| Komponente     | Version / Wert        |
+|----------------|-----------------------|
+| TYPO3          | v14 LTS (`^14.3`)     |
+| PHP            | 8.4                   |
+| Webserver      | Apache-fpm            |
+| Datenbank      | MariaDB 11.8          |
+| Composer       | 2                     |
+| DDEV-Projekt   | `ps14-typo3`          |
+| Docroot        | `public`              |
+| Backend-URL    | https://ps14-typo3.ddev.site/typo3 |
 
-## Quickstart
+## Voraussetzungen
 
-* `composer create-project typo3/cms-base-distribution project-name ^13`
-* `cd project-name`
+- [DDEV](https://ddev.com/get-started/) (inkl. Docker) ist installiert.
 
-Note that this distribution installs most, but not all of the TYPO3 CMS core extensions.
-Depending on your need you might also want to install other TYPO3 extensions from
-[packagist.org](https://packagist.org/?type=typo3-cms-framework).
-
-### Setup
-
-To start an interactive installation, you can do so by executing the following
-command and then follow the wizard:
-
-```bash
-composer exec typo3 setup
-```
-
-### Setup unattended (optional)
-
-If you're a more advanced user, you might want to leverage the unattended installation.
-To do this, you need to execute the following command and substitute the arguments
-with your own environment configuration.
+## Schnellstart
 
 ```bash
-export TYPO3_SETUP_ADMIN_PASSWORD=$(tr -dc "_A-Za-z0-9#=$()/" < /dev/urandom | head -c24)
-composer exec -- typo3 setup \
-    --no-interaction \
-    --server-type=other \
-    --driver=sqlite \
-    --admin-username=admin \
-    --admin-email="info@example.com" \
-    --project-name="My TYPO3 Project" \
-    --create-site="http://localhost:8000/"
-echo "Admin password: ${TYPO3_SETUP_ADMIN_PASSWORD}"
+# Projekt starten (Container hochfahren)
+ddev start
+
+# PHP-Abhängigkeiten installieren
+ddev composer install
+
+# TYPO3-Extensions einrichten und Cache leeren
+ddev typo3-extension-setup
+
+# Projekt im Browser öffnen
+ddev launch
 ```
 
-### Development server
+Anschließend ist das Backend unter https://ps14-typo3.ddev.site/typo3 erreichbar.
 
-While it's advised to use a more sophisticated web server such as
-Apache 2 or Nginx, you can instantly run the project by using PHPs` built-in
-[web server](https://secure.php.net/manual/en/features.commandline.webserver.php).
+## Wichtige Befehle
 
-* `TYPO3_CONTEXT=Development php -S localhost:8000 -t public`
-* open your browser at "http://localhost:8000"
+### DDEV-Umgebung
 
-Please be aware that the built-in web server is single threaded and only meant
-to be used for development.
+```bash
+ddev start            # Container starten
+ddev stop             # Container stoppen
+ddev restart          # Container neu starten
+ddev describe         # Status, URLs und Zugangsdaten anzeigen
+ddev launch           # Projekt-URL im Browser öffnen
+ddev ssh              # Shell im Web-Container öffnen
+ddev logs -f          # Logs live verfolgen
+ddev poweroff         # Alle DDEV-Projekte herunterfahren
+```
 
-##  Next steps
+### Composer
 
-* [Getting Started with TYPO3](https://docs.typo3.org/permalink/t3start:start)
-* [Create a Site Package](https://docs.typo3.org/permalink/t3sitepackage:start)
+```bash
+ddev composer install                 # Abhängigkeiten installieren
+ddev composer update                  # Abhängigkeiten aktualisieren
+ddev composer require <paket>         # Paket hinzufügen
+ddev composer remove <paket>          # Paket entfernen
+```
 
-## License
+### TYPO3 (CLI)
 
-GPL-2.0 or later
+```bash
+ddev typo3 --version                  # Installierte TYPO3-Version anzeigen
+ddev typo3 cache:flush                # Cache leeren
+ddev typo3 extension:setup            # Extensions einrichten
+ddev typo3 setup --help               # Optionen des Setup-Befehls anzeigen
+ddev typo3-extension-setup            # Custom-Command: extension:setup + cache:flush
+```
+
+### Datenbank
+
+```bash
+ddev mysql                            # MySQL-Client im Container öffnen
+ddev export-db --file=dump.sql.gz     # Datenbank exportieren
+ddev import-db --file=dump.sql.gz     # Datenbank importieren
+```
+
+## Erstinstallation (von Grund auf)
+
+Nur nötig, wenn das Projekt neu aufgesetzt wird:
+
+```bash
+# TYPO3 v14 Base-Distribution installieren
+ddev composer create "typo3/cms-base-distribution:^14"
+
+# TYPO3 nicht-interaktiv einrichten (DB + Admin-User)
+ddev typo3 setup --no-interaction \
+  --driver=mysqli \
+  --host=db \
+  --port=3306 \
+  --dbname=db \
+  --username=db \
+  --password=db \
+  --admin-username="admin" \
+  --admin-user-password="<passwort>" \
+  --admin-email="admin@example.com" \
+  --project-name="PS14 TYPO3"
+```
+
+## Konfiguration & Secrets
+
+- `config/system/settings.php` wird versioniert und enthält **keine** sensiblen Daten.
+- Umgebungsspezifische Secrets (DB-Verbindung, `encryptionKey`, `installToolPassword`)
+  liegen in `config/system/additional.php` und sind **gitignored**.
+
+## Verzeichnisstruktur
+
+```
+config/    TYPO3-Systemkonfiguration (settings.php, additional.php)
+docs/      Projektdokumentation (Pläne & Specs)
+public/    Docroot (index.php, .htaccess, fileadmin, typo3)
+sql/       SQL-Dateien
+var/       Laufzeit-Artefakte (Caches, Logs) – gitignored
+vendor/    Composer-Abhängigkeiten – gitignored
+```
+
+## Lizenz
+
+Siehe [LICENSE](LICENSE) (GPL-2.0-or-later).
