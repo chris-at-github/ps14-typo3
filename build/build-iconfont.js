@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 //
 const result = await __webfont({
-	files: 'packages/ps14_site/Resources/Private/Source/Svg/Font/**/*.svg',
+	files: 'packages/ps14_site/Resources/Private/Assets/Svg/Font/**/*.svg',
 	fontName: 'iconfont',
 	formats: ['woff2'],
 	dest: 'test/fonts',
@@ -22,5 +22,5 @@ const result = await __webfont({
 await mkdir('public/fonts', { recursive: true });
 await Promise.all([
 	writeFile('packages/ps14_site/Resources/Public/Fonts/iconfont.woff2', result.woff2),
-	writeFile('packages/ps14_site/Resources/Private/Source/Scss/bootstrap/_iconfont.scss', result.template),
+	writeFile('packages/ps14_site/Resources/Private/Assets/Scss/bootstrap/_iconfont.scss', result.template),
 ]);
