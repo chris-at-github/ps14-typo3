@@ -7,21 +7,28 @@
 The following commands are explicitly allowed (no confirmation needed):
 
 ## DDEV
-- `ddev describe`
-- `ddev typo3 --version`
-- `ddev typo3 extension:list`
-- `ddev typo3 extension:setup`
-- `ddev typo3 cache:*`
-- `ddev typo3 upgrade:*`
-- `ddev composer show <package>`
-- `ddev composer validate`
-- `ddev exec vendor/bin/phpstan analyse …`
-- `ddev mysql -e "SELECT …"` (read-only queries only)
-- `ddev exec vendor/bin/rector process`
-- `ddev exec vendor/bin/fractor process`
 
-Any other script (NPM builds, destructive DB operations, deployments, etc.) still
-requires confirmation.
+| Befehl | Beschreibung |
+|--------|--------------|
+| `ddev describe` | Projekt-/Container-Status und URLs anzeigen |
+| `ddev typo3 --version` | Installierte TYPO3-Version ausgeben |
+| `ddev typo3 extension:list` | Installierte Extensions auflisten |
+| `ddev typo3 extension:setup` | Extension-Setup inkl. DB-Schema anwenden |
+| `ddev typo3 cache:*` | Caches leeren/aufwärmen (z. B. `cache:flush`, `cache:warmup`) |
+| `ddev typo3 upgrade:*` | Upgrade-Wizards prüfen/ausführen |
+| `ddev composer show <package>` | Infos zu einem installierten Composer-Paket anzeigen |
+| `ddev composer validate` | `composer.json` validieren |
+| `ddev exec vendor/bin/phpstan analyse …` | Statische Analyse mit PHPStan |
+| `ddev mysql -e "SELECT …"` | Datenbank abfragen (nur lesende Queries) |
+| `ddev exec vendor/bin/rector process` | PHP-Migration/Refactoring mit Rector |
+| `ddev exec vendor/bin/fractor process` | Non-PHP-Migration (TypoScript/FlexForm/XLIFF) mit Fractor |
+| `ddev exec node build/build-iconfont.js` | Icon-Font (woff2 + SCSS) aus den SVGs generieren |
+| `ddev vite` | Vite-Dev-Server bzw. Frontend-Build starten |
+| `ddev npm run lint:css` | SCSS/CSS mit Stylelint prüfen |
+| `ddev npm run lint:css-fix` | SCSS/CSS mit Stylelint prüfen und automatisch fixen |
+
+Any other script (destructive DB operations, deployments, etc.) still requires
+confirmation.
 
 # GIT
 - Add new, relevant files to the repository via `git add`.
