@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+## Description: Run TYPO3 extension:setup and cache:flush
+## Usage: typo3-extension-setup
+## Example: "ddev typo3-extension-setup"
+
+set -eu
+
+echo "Running extension:setup ..."
+vendor/bin/typo3 extension:setup
+
+echo "Running cache:flush ..."
+vendor/bin/typo3 cache:flush
+
+echo "TYPO3 setup completed."
