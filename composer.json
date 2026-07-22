@@ -23,6 +23,7 @@
         "ssch/typo3-rector": "^3.14"
     },
     "require": {
+        "praetorius/vite-asset-collector": "^1.18",
         "ps14/ps14_foundation": "@dev",
         "ps14/ps14_site": "@dev",
         "typo3/cms-backend": "^14.3",

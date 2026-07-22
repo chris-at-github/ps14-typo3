@@ -31,6 +31,11 @@ return [
             'telephoneValidationPatternForJs' => '/[^\\d\\+\\s\\-]/g',
             'telephoneValidationPatternForPhp' => '/[^\\d\\+\\s\\-]/',
         ],
+        'vite_asset_collector' => [
+            'defaultManifest' => '_assets/vite/.vite/manifest.json',
+            'devServerUri' => 'auto',
+            'useDevServer' => 'auto',
+        ],
     ],
     'FE' => [
         'cacheHash' => [
