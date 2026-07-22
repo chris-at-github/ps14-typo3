@@ -7,7 +7,7 @@ use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/packages/ps14_foundation',
+        __DIR__ . '/packages/ps14_site',
     ])
     ->withPhpSets(php84: true)
     ->withSets([
