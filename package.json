@@ -1,6 +1,8 @@
 {
   "type": "module",
   "scripts": {
+    "lint": "npm run lint:css",
+    "lint:fix": "npm run lint:css-fix",
     "lint:css": "stylelint \"packages/ps14_site/Resources/Private/Assets/**/*.{scss,css,sass}\"",
     "lint:css-fix": "stylelint \"packages/ps14_site/Resources/Private/Assets/**/*.{scss,css,sass}\" --fix"
   },
