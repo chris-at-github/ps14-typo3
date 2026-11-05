@@ -10,15 +10,12 @@ v14-Vorlage fehlen. Grundlage für die Auswahl einzelner Features zur modernisie
 - Pfade alt relativ zu `~/www/kist-escherich-com/public/typo3conf/ext/`
 - Pfade neu relativ zu `~/www/ps14-typo3/packages/`
 
-## Offene Grundsatzentscheidung
+## Grundsatzentscheidung Elements
 
-Akkordeon, Tabs, Timeline, Slider und Werte bauen auf der foundation-Tabelle
-`tx_foundation_domain_model_elements` (IRRE „Elements“) auf:
-
-1. **Elements-Modell weiterführen**: Datenkompatibilität mit alten Projekten, ein Mechanismus für alle Elemente.
-2. **Content Blocks mit Collections**: moderner, weniger Code, keine Mini-Extension pro Element, aber Datenmigration für alte Projekte nötig.
-
-Bei Variante 2 entfällt B1 weitgehend.
+Akkordeon, Tabs, Timeline, Slider und Werte bauen alt auf der foundation-Tabelle
+`tx_foundation_domain_model_elements` (IRRE „Elements“) auf. **Entschieden:** Sie werden
+vollständig auf Content Blocks mit Collections umgestellt, zusammen mit der Umsetzung der
+Inhaltselemente (C). Das Elements-Modell wird nicht weitergeführt.
 
 ## A · Fehler und Altlasten in der neuen Vorlage
 
@@ -32,18 +29,18 @@ Bei Variante 2 entfällt B1 weitgehend.
 
 ## B · Unterbau ps14_foundation (generisch)
 
-| ID | Funktion | Pfad alt | Aufwand |
-|---|---|---|---|
-| B1 | **Elements-IRRE vervollständigen**: Feld `tt_content.tx_foundation_elements`, TCA `tx_foundation_parent`, TSconfig colPos 5628, Frontend-Processor `dataProcessing.110`, Labels | `ps14_foundation/Configuration/TCA/Overrides/tt_content.php`, `page.tsconfig`, `TypoScript/System/Content.setup.typoscript` | M |
-| B2 | Feld für das Text-Layout `tx_foundation_text_layout` (z. B. „indent“) als Klasse `container--text-layout-*` | `ps14_foundation/Configuration/TCA/Overrides/tt_content.php` | S |
-| B3 | Farbton über `frame_class` (`hue-container--*`) | `ps14_foundation/Resources/Private/Layouts/Content/Default.html` | S |
-| B4 | Content-Element „Image“ (Template und TCA: maxitems 1) | `ps14_foundation/Resources/Private/Templates/Content/Image.html` | S |
-| B5 | TextImage: vertikale Ausrichtung im FlexForm. Textmedia: Video-Optionen `controls`/`loop` (alt in `ps14_textmedia`) | `ps14_foundation/Configuration/FlexForms/Modules/TextImage.xml`, `ps14_textmedia/` | S |
-| B6 | ViewHelper `format.uri`, `media.isImage`/`isVideo` sowie `CropImageService` | `ps14_foundation/Classes/ViewHelpers/`, `Classes/Service/CropImageService.php` | S |
-| B7 | Favicon: `<link rel="manifest">` ergänzen | `ps14_foundation/Configuration/TypoScript/Page/Favicon.setup.typoscript` | S |
-| B8 | `config.spamProtectEmailAddresses` und `pageType.ajaxContent` als Site Setting | `ps14_foundation/Configuration/TypoScript/System/Config.setup.typoscript` | S |
-| B9 | Seitenmedien: eine Datei, Crop-Varianten desktop/mobile mit 16:9 und 4:3 | `ps14_site/Configuration/TCA/Overrides/pages.php` | S |
-| B10 | cHash-Ausschlussliste (~55 Tracking-Parameter: utm, gclid, fbclid …) | `typo3conf/system/settings.php` (`FE.cacheHash.excludedParameters`) | S |
+| ID | Funktion | Pfad alt | Aufwand | Status |
+|---|---|---|---|---|
+| B1 | Elements-IRRE | `ps14_foundation/Configuration/TCA/Overrides/tt_content.php`, `page.tsconfig`, `TypoScript/System/Content.setup.typoscript` | M | entfällt: Umstellung auf Content Blocks zusammen mit C |
+| B2 | Feld für das Text-Layout `tx_foundation_text_layout` | `ps14_foundation/Configuration/TCA/Overrides/tt_content.php` | S | entfällt: Rest in `ext_tables.sql` entfernt |
+| B3 | Farbton über `frame_class` (`hue-container--*`) | `ps14_foundation/Resources/Private/Layouts/Content/Default.html` | S | entfällt: wird projektspezifisch über `frame_class` gelöst |
+| B4 | Content-Element „Image“ | `ps14_foundation/Resources/Private/Templates/Content/Image.html` | S | zurückgestellt: später als eigenes Content-Element |
+| B5 | TextImage: vertikale Ausrichtung. Textmedia: Video-Optionen `controls`/`loop` | `ps14_foundation/Configuration/FlexForms/Modules/TextImage.xml`, `ps14_textmedia/` | S | entfällt |
+| B6 | ViewHelper `format.uri` (URL als kurzer Linktext, z. B. `example.com`) | `ps14_foundation/Classes/ViewHelpers/Format/UriViewHelper.php` | S | zurückgestellt, bei Bedarf neu (z. B. mit E4). `media.isImage`/`isVideo` und `CropImageService` entfallen. |
+| B7 | Favicon: `<link rel="manifest">` | `ps14_foundation/Configuration/TypoScript/Page/Favicon.setup.typoscript` | S | entfällt |
+| B8 | `config.spamProtectEmailAddresses` und `pageType.ajaxContent` | `ps14_foundation/Configuration/TypoScript/System/Config.setup.typoscript` | S | erledigt: Spam-Schutz auf v14-Standard (aus), typeNum als Site Setting `pageType.ajaxContent` |
+| B9 | Seitenmedien: eine Datei, Crop-Varianten desktop/mobile mit 16:9 und 4:3 | `ps14_site/Configuration/TCA/Overrides/pages.php` | S | zurückgestellt, zusammen mit C8 (Teaser) |
+| B10 | cHash-Ausschlussliste für Tracking-Parameter | `typo3conf/system/settings.php` (`FE.cacheHash.excludedParameters`) | S | erledigt: der v14-Standard enthält die alte Liste bereits. `pdf` kommt mit E5 dazu. |
 
 ## C · Inhaltselemente
 
@@ -130,3 +127,13 @@ Im alten Projekt liegen Zugangsdaten im Klartext. Sie werden **nicht** übernomm
 - CloudConvert-API-Key und Basic-Auth: `typo3conf/system/settings.php`
 
 Secrets gehören neu ausschließlich in `config/system/additional.php` bzw. `.env`.
+
+## Sammelliste: Fehler und Verbesserungen
+
+Bei der Arbeit an der Vorlage gefundene Punkte, unabhängig vom Port aus kist-escherich-com.
+
+| ID | Art | Problem | Pfad | Aufwand |
+|---|---|---|---|---|
+| H1 | Fehler | Die 404-Fehlerseite zeigt auf `t3://page?uid=47` (`/kategorien`, ein Ordner). Jede 404 endet deshalb in einer 500 („Error handler could not fetch error page“). Die eigentliche 404-Seite ist uid 6 (`/404`). | `config/sites/ps14/config.yaml` (`errorHandling`) | S |
+| H2 | Fehler | TSconfig-Bedingungen `[field('CType') === …]` sind ungültig: `field()` gibt es in Page-TSconfig-Bedingungen nicht (Log: „The function "field" does not exist“). Die Blöcke wirken nie und erzeugen Fehler im Log. Ersatz z. B. über `TCEFORM.tt_content.<feld>.types.<CType>`. | `ps14_site/Configuration/page.tsconfig` (Zeilen 1, 11, 18), `ps14_foundation/Configuration/page.tsconfig` (Zeile 131) | S |
+| H3 | Hinweis | Der Einzelelement-Abruf über `pageType.ajaxContent` mit `tx_foundation[content]` braucht wegen `FE.cacheHash.enforceValidation` einen gültigen cHash. Links dafür immer über TYPO3 erzeugen (`f:uri.page`/typolink), nie von Hand zusammensetzen. | `ps14_foundation/Configuration/TypoScript/Page/AjaxContent.setup.typoscript` | – |
