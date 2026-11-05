@@ -7,6 +7,7 @@ use a9f\Typo3Fractor\Set\Typo3LevelSetList;
 
 return FractorConfiguration::configure()
     ->withPaths([
+        __DIR__ . '/packages/ps14_foundation',
         __DIR__ . '/packages/ps14_site',
     ])
     ->withSets([
