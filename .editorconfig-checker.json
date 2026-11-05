@@ -1,0 +1,17 @@
+{
+    "Exclude": [
+        "^vendor/",
+        "^node_modules/",
+        "^public/",
+        "^var/",
+        "/node_modules/",
+        "\\.lock$",
+        "package-lock\\.json$",
+        "\\.(png|jpe?g|gif|ico|webp|woff2?|ttf|eot|otf|pdf|zip)$",
+        "^\\.ddev/",
+        "^LICENSE$"
+    ],
+    "Disable": {
+        "MaxLineLength": true
+    }
+}

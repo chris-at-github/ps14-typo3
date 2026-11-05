@@ -1,51 +1,52 @@
 :root {
-    {% for glyph in glyphs%}--{{ className }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
-    {% endfor %}
+{%- for glyph in glyphs %}
+    --{{ className }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+{%- endfor %}
 }
 
 @font-face {
-  font-display: block;
-  font-family: "{{ fontName }}";
-  font-style: normal;
-  font-weight: 400;
-  {% if formats.indexOf('eot')>-1 -%}
+    font-display: block;
+    font-family: {{ fontName }};
+    font-style: normal;
+    font-weight: 400;
+{%- if formats.indexOf('eot')>-1 %}
     src: url("{{ fontPath }}{{ fontName }}.eot?{{ cacheString }}{% if hash %}&v={{ hash }}{% endif %}");
-  {%- endif -%}
-  {%- set eotIndex = formats.indexOf('eot') -%}
-  {%- set woff2Index = formats.indexOf('woff2') -%}
-  {%- set woffIndex = formats.indexOf('woff') -%}
-  {%- set ttfIndex = formats.indexOf('ttf') -%}
-  {%- set svgIndex = formats.indexOf('svg') %}
-  src: {% if eotIndex != -1 -%}
+    {%- endif -%}
+    {%- set eotIndex = formats.indexOf('eot') -%}
+    {%- set woff2Index = formats.indexOf('woff2') -%}
+    {%- set woffIndex = formats.indexOf('woff') -%}
+    {%- set ttfIndex = formats.indexOf('ttf') -%}
+    {%- set svgIndex = formats.indexOf('svg') %}
+    src: {% if eotIndex != -1 -%}
     url("{{ fontPath }}{{ fontName }}.eot?{% if hash %}v={{ hash }}{% endif %}#iefix") format("embedded-opentype")
     {%- set nothing = formats.splice(eotIndex, 1) -%}
-    {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
-  {%- endif -%}
-  {%- if woff2Index != -1 -%}
+    {%- if formats.length != 0 -%}, {% else -%};{% endif -%}
+    {%- endif -%}
+    {%- if woff2Index != -1 -%}
     url("{{ fontPath }}{{ fontName }}.woff2?{{ cacheString }}{% if hash %}&v={{ hash }}{% endif %}") format("woff2")
     {%- set nothing = formats.splice(woff2Index, 1) -%}
-    {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
-  {%- endif -%}
-  {%- if woffIndex != -1 -%}
+    {%- if formats.length != 0 -%}, {% else -%};{% endif -%}
+    {%- endif -%}
+    {%- if woffIndex != -1 -%}
     url("{{ fontPath }}{{ fontName }}.woff?{{ cacheString }}{% if hash %}&v={{ hash }}{% endif %}") format("woff")
     {%- set nothing = formats.splice(woffIndex, 1) -%}
-    {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
-  {%- endif -%}
-  {%- if ttfIndex != -1 -%}
+    {%- if formats.length != 0 -%}, {% else -%};{% endif -%}
+    {%- endif -%}
+    {%- if ttfIndex != -1 -%}
     url("{{ fontPath }}{{ fontName }}.ttf?{{ cacheString }}{% if hash %}&v={{ hash }}{% endif %}") format("truetype")
     {%- set nothing = formats.splice(ttfIndex, 1) -%}
-    {%- if formats.length != 0 -%}, {% else -%}; {% endif -%}
-  {%- endif -%}
-  {%- if svgIndex != -1 -%}
+    {%- if formats.length != 0 -%}, {% else -%};{% endif -%}
+    {%- endif -%}
+    {%- if svgIndex != -1 -%}
     url("{{ fontPath }}{{ fontName }}.svg?{{ cacheString }}{% if hash %}&v={{ hash }}{% endif %}#{{ fontName }}") format("svg");
-  {%- endif %}
+    {%- endif %}
 }
 
 %{{ className }} {
     position: relative;
     top: -1px;
     display: inline-block;
-    font-family: "{{ fontName }}";
+    font-family: {{ fontName }};
     font-size: var(--font-size-iconfont);
     font-weight: 400;
     font-style: normal;
@@ -58,7 +59,7 @@
 }
 
 .{{ className }}::before {
-  @extend %{{ className }};
+    @extend %{{ className }};
 }
 
 {% for glyph in glyphs %}

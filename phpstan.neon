@@ -1,6 +1,6 @@
 parameters:
-    level: 5
-    paths:
-        - packages/ps14_site/Classes
-        - packages/ps14_site/Configuration
-        - packages/ps14_site/ext_localconf.php
+	level: 5
+	paths:
+		- packages/ps14_site/Classes
+		- packages/ps14_site/Configuration
+		- packages/ps14_site/ext_localconf.php
