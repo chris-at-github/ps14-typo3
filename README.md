@@ -1,23 +1,5 @@
 # PS14 TYPO3
-
-TYPO3 v14 LTS Base-Distribution, Composer-basiert, lauffähig in einer [DDEV](https://ddev.com/)-Umgebung.
-
-## Tech-Stack
-
-| Komponente     | Version / Wert        |
-|----------------|-----------------------|
-| TYPO3          | v14 LTS (`^14.3`)     |
-| PHP            | 8.4                   |
-| Webserver      | Apache-fpm            |
-| Datenbank      | MariaDB 11.8          |
-| Composer       | 2                     |
-| DDEV-Projekt   | `ps14-typo3`          |
-| Docroot        | `public`              |
-| Backend-URL    | https://ps14-typo3.ddev.site/typo3 |
-
-## Voraussetzungen
-
-- [DDEV](https://ddev.com/get-started/) (inkl. Docker) ist installiert.
+https://ps14-typo3.ddev.site/typo3
 
 ## Schnellstart
 
@@ -79,36 +61,7 @@ ddev export-db --file=dump.sql.gz     # Datenbank exportieren
 ddev import-db --file=dump.sql.gz     # Datenbank importieren
 ```
 
-## Erstinstallation (von Grund auf)
-
-Nur nötig, wenn das Projekt neu aufgesetzt wird:
-
-```bash
-# TYPO3 v14 Base-Distribution installieren
-ddev composer create "typo3/cms-base-distribution:^14"
-
-# TYPO3 nicht-interaktiv einrichten (DB + Admin-User)
-ddev typo3 setup --no-interaction \
-  --driver=mysqli \
-  --host=db \
-  --port=3306 \
-  --dbname=db \
-  --username=db \
-  --password=db \
-  --admin-username="admin" \
-  --admin-user-password="<passwort>" \
-  --admin-email="admin@example.com" \
-  --project-name="PS14 TYPO3"
-```
-
-## Konfiguration & Secrets
-
-- `config/system/settings.php` wird versioniert und enthält **keine** sensiblen Daten.
-- Umgebungsspezifische Secrets (DB-Verbindung, `encryptionKey`, `installToolPassword`)
-  liegen in `config/system/additional.php` und sind **gitignored**.
-
 ## Verzeichnisstruktur
-
 ```
 config/    TYPO3-Systemkonfiguration (settings.php, additional.php)
 docs/      Projektdokumentation (Pläne & Specs)
@@ -117,7 +70,3 @@ sql/       SQL-Dateien
 var/       Laufzeit-Artefakte (Caches, Logs) – gitignored
 vendor/    Composer-Abhängigkeiten – gitignored
 ```
-
-## Lizenz
-
-Siehe [LICENSE](LICENSE) (GPL-2.0-or-later).

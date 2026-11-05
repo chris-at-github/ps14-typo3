@@ -1,6 +1,6 @@
 :root {
-	{% for glyph in glyphs%}--{{ className }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
-	{% endfor %}
+    {% for glyph in glyphs%}--{{ className }}-{{ glyph.name }}: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+    {% endfor %}
 }
 
 @font-face {
@@ -42,19 +42,19 @@
 }
 
 %{{ className }} {
-	position: relative;
-	top: -1px;
-	display: inline-block;
-	font-family: "{{ fontName }}";
-	font-size: var(--font-size-iconfont);
-	font-weight: 400;
-	font-style: normal;
-	font-variant: normal;
-	text-rendering: auto;
-	line-height: 1;
-	vertical-align: middle;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    font-family: "{{ fontName }}";
+    font-size: var(--font-size-iconfont);
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    vertical-align: middle;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 }
 
 .{{ className }}::before {
@@ -63,6 +63,6 @@
 
 {% for glyph in glyphs %}
 .{{ className }}-{{ glyph.name }}::before {
-	content: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
+    content: "\{{ glyph.unicode[0].charCodeAt(0).toString(16) }}";
 }
 {% endfor %}

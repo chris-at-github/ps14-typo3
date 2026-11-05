@@ -173,6 +173,21 @@ database schema exists.
 - Verify: `ddev typo3 extension:list` shows the extension active, and
   `ddev typo3 extension:setup --dry-run` reports no pending schema changes (confirm the
   `tx_<ext>_*` tables and new columns actually exist).
+- **Render an actual frontend page — not just warmup.** Some breaking changes are
+  runtime-only: they fatal when the request executes the affected code path, which
+  `cache:warmup` never runs. Fetch a representative page (e.g.
+  `curl -sS -o /dev/null -w "%{http_code}\n" https://<project>.ddev.site/<path>`, expect
+  `200`) and confirm the response body carries no exception.
+  - **String-referenced callbacks now require `#[AsAllowedCallable]` (v14).** Callbacks
+    invoked by `Class->method` string via stdWrap `userFunc` / `preUserFunc` /
+    `postUserFunc` / `postUserFuncInt` (`ContentObjectRenderer`) are asserted against
+    `#[TYPO3\CMS\Core\Attribute\AsAllowedCallable]` on the target method. Without it the
+    request throws `Attribute … AsAllowedCallable required for callback reference: [...]`.
+    Rector has **no** rule for this and PHPStan / `cache:warmup` do **not** catch it —
+    grep the extension's TypoScript for `userFunc` / `postUserFunc` / `preUserFunc` (and
+    `Class->method` refs), then add the attribute to each referenced method. Note:
+    TCA/FlexForm `itemsProcFunc` runs through `GeneralUtility::callUserFunction` with the
+    assertion **off**, so it does not (yet) require the attribute.
 - Commit the fixes on `v<target>-dev`.
 
 ## Quick Reference
@@ -214,3 +229,7 @@ database schema exists.
 - **Turning an optional integration into a hard `require`** just to satisfy PHPStan —
   guarded usage of another extension's class is a soft dependency (`suggest` / `suggests`
   plus a scoped `ignoreErrors`), not a required one.
+- **Proving load but not render** — `cache:warmup` does not execute request code paths, so
+  runtime-only breaks surface only when an actual page is rendered. Chief v14 example:
+  string callbacks (stdWrap `userFunc` / `postUserFunc`) fatal unless their target method
+  carries `#[AsAllowedCallable]` — neither Rector, PHPStan, nor warmup flags it.
