@@ -1,5 +1,6 @@
 layout.logoPath: 'EXT:ps14_site/Resources/Public/Svg/Embed/logo.svg'
 css.mainFilepath: 'EXT:ps14_site/Resources/Private/Assets/Scss/site.scss'
+css.printFilepath: 'EXT:ps14_site/Resources/Private/Assets/Scss/print.scss'
 js.mainFilepath: 'EXT:ps14_site/Resources/Private/Assets/Js/site.js'
 favicon.appleTouchIconFilepath: 'EXT:ps14_site/Resources/Public/Icons/apple-touch-icon.png'
 favicon.pngIconFilepath: 'EXT:ps14_site/Resources/Public/Icons/favicon-96x96.png'
