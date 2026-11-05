@@ -26,6 +26,8 @@ The following commands are explicitly allowed (no confirmation needed):
 | `ddev vite` | Vite-Dev-Server bzw. Frontend-Build starten |
 | `ddev npm run lint:css` | SCSS/CSS mit Stylelint prüfen |
 | `ddev npm run lint:css-fix` | SCSS/CSS mit Stylelint prüfen und automatisch fixen |
+| `ddev exec npm run lint` | Alle Linter ausführen (Stylelint, ESLint, editorconfig-checker, PHP-CS-Fixer, PHPStan) |
+| `ddev exec npm run lint:*` | Einzelne Linter ausführen bzw. automatisch fixen (z. B. `lint:php`, `lint:js-fix`, `lint:fix`) |
 
 Any other script (destructive DB operations, deployments, etc.) still requires
 confirmation.
@@ -56,6 +58,8 @@ confirmation.
 # General Coding Guidelines
 - Use strict typing in PHP (`declare(strict_types=1);` is mandatory on the first line).
 - Follow the PSR-12 (or PER Coding Style) standard.
+- Always apply the settings from `.editorconfig` (indentation style/size, line endings, final newline, no trailing whitespace) to every file you create or modify.
+- Write code that already complies with the configured linters (PHP-CS-Fixer with `typo3/coding-standards`, PHPStan incl. deprecation rules, ESLint, Stylelint, editorconfig-checker) and check changes with `ddev exec npm run lint` during implementation, not only before committing.
 - Exclusively use PHP Attributes (e.g., `#[Inject]`, `#[Validate]`, `#[Route]`). Doctrine annotations are strictly forbidden.
 - Prefer "Constructor Injection" for Dependency Injection. The `#[Inject]` attribute should only be used in exceptional cases.
 - Utilize modern PHP 8.4+ features (e.g., Readonly Classes/Properties, Enums, Match expressions).
