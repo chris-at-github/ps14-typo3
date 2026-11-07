@@ -107,10 +107,10 @@ Die v14-Kompatibilität ist jeweils nur aus `ext_emconf` abgeschätzt, nicht in 
 
 | ID | Funktion | Pfad alt | Aufwand |
 |---|---|---|---|
-| G1 | Skripte für Backup und den Sync von Produktion nach Staging (an das Composer-Layout anpassen) | `~/www/kist-escherich-com/bin/` | S–M |
-| G2 | Umgebungsspezifische `.htaccess` (Staging mit Basic-Auth, Production mit www, HTTPS und Headern) sowie ~470 Redirects nach `sys_redirect` | `~/www/kist-escherich-com/public/htaccess/` | M |
-| G3 | `baseVariant` für Staging in der Site-Config | `typo3conf/sites/kist-escherich/config.yaml` | S |
-| G4 | System-Settings: Mail-Absender, `systemLocale`, Debug-Block für Development | `typo3conf/system/settings.php` | S |
+| G1 | entfällt (KIST-spezifisch): Skripte für Backup und den Sync von Produktion nach Staging (an das Composer-Layout anpassen) | `~/www/kist-escherich-com/bin/` | S–M |
+| G2 | entfällt (KIST-spezifisch): Umgebungsspezifische `.htaccess` (Staging mit Basic-Auth, Production mit www, HTTPS und Headern) sowie ~470 Redirects nach `sys_redirect` | `~/www/kist-escherich-com/public/htaccess/` | M |
+| G3 | entfällt (KIST-spezifisch): `baseVariant` für Staging in der Site-Config | `typo3conf/sites/kist-escherich/config.yaml` | S |
+| G4 | entfällt (KIST-spezifisch): System-Settings: Mail-Absender, `systemLocale`, Debug-Block für Development | `typo3conf/system/settings.php` | S |
 
 ## Vermutlich obsolet
 
