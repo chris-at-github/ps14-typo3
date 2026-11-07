@@ -134,7 +134,7 @@ Bei der Arbeit an der Vorlage gefundene Punkte, unabhängig vom Port aus kist-es
 
 | ID | Art | Problem | Pfad | Aufwand |
 |---|---|---|---|---|
-| H1 | Fehler | Die 404-Fehlerseite zeigt auf `t3://page?uid=47` (`/kategorien`, ein Ordner). Jede 404 endet deshalb in einer 500 („Error handler could not fetch error page“). Die eigentliche 404-Seite ist uid 6 (`/404`). | `config/sites/ps14/config.yaml` (`errorHandling`) | S |
+| H1 | Fehler | **Erledigt.** Die 404-Fehlerseite zeigt auf `t3://page?uid=47` (`/kategorien`, ein Ordner). Jede 404 endet deshalb in einer 500 („Error handler could not fetch error page“). Die eigentliche 404-Seite ist uid 6 (`/404`). | `config/sites/ps14/config.yaml` (`errorHandling`) | S |
 | H2 | Fehler | **Erledigt mit D13.** TSconfig-Bedingungen `[field('CType') === …]` sind ungültig: `field()` gibt es in Page-TSconfig-Bedingungen nicht (Log: „The function "field" does not exist“). Die Blöcke wirken nie und erzeugen Fehler im Log. Ersatz z. B. über `TCEFORM.tt_content.<feld>.types.<CType>`. | `ps14_site/Configuration/page.tsconfig` (Zeilen 1, 11, 18), `ps14_foundation/Configuration/page.tsconfig` (Zeile 131) | S |
 | H3 | Hinweis | Der Einzelelement-Abruf über `pageType.ajaxContent` mit `tx_foundation[content]` braucht wegen `FE.cacheHash.enforceValidation` einen gültigen cHash. Links dafür immer über TYPO3 erzeugen (`f:uri.page`/typolink), nie von Hand zusammensetzen. | `ps14_foundation/Configuration/TypoScript/Page/AjaxContent.setup.typoscript` | – |
 | H4 | Fehler | `meta.themeColor` ist doppelt definiert, in den Sets `foundation/layout` und `foundation/meta`. | `ps14_foundation/Configuration/Sets/Layout/settings.definitions.yaml`, `ps14_foundation/Configuration/Sets/Meta/settings.definitions.yaml` | S |
