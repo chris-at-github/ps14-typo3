@@ -4,6 +4,7 @@
         "^node_modules/",
         "^public/",
         "^var/",
+        "^temp/",
         "/node_modules/",
         "\\.lock$",
         "package-lock\\.json$",

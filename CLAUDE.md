@@ -1,6 +1,7 @@
 # General Rules
 - Ask for confirmation before proceeding with further steps that go beyond my explicit instructions.
 - Do not execute any scripts (e.g., DDEV, NPM) unless they are explicitly specified in this file.
+- Do not create unnecessary Markdown files. Only create them when explicitly asked to.
 
 # Project Structure
 - `ps14-typo3` (this repo) is the main project: Composer/npm setup, DDEV, site config (`config/`), build and lint tooling.
@@ -97,6 +98,15 @@ confirmation.
 - Exclusively use the TYPO3 QueryBuilder (Doctrine DBAL) for database queries outside of Extbase repositories. Never use raw, native SQL.
 - Use PSR-14 Event Registration via `Services.yaml` or `#[AsEventListener]` instead of legacy hooks.
 - Never access global variables like `$_GET` or `$_POST` directly. Always use the PSR-7 Request object instead (`$request->getParsedBody()`, `$request->getQueryParams()`).
+
+# Frontend-Konventionen
+Regeln für HTML/Fluid-Markup und SCSS liegen in `.claude/rules/frontend/`
+(Einstieg: `html-bem.md`). Sie werden beim Bearbeiten passender Dateien
+automatisch geladen; vor dem Erstellen neuer Templates, Komponenten oder Module
+zusätzlich die jeweilige Komponenten-Spezifikation unter
+`.claude/rules/frontend/components/` lesen.
+Regeln für Fluid-Komponenten und Übersetzungen liegen in `.claude/rules/typo3/`
+(`fluid-components.md`, `translations.md`).
 
 # File and Directory Structure
 Ensure strict adherence to the directory structure of a modern TYPO3 extension when generating code:

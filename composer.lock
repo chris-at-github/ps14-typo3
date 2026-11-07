@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53590afdeac47501f7efe4e04530f7d1",
+    "content-hash": "20dc4533afc3c9e6c17882f4535ec26f",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1679,12 +1679,62 @@
             "time": "2026-05-27T14:59:03+00:00"
         },
         {
+            "name": "ps14/ps14_component",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./packages/ps14_component",
+                "reference": "30339358a9ea1bdbb0969aba65f1cc35f72179e4"
+            },
+            "require": {
+                "php": "^8.4",
+                "ps14/ps14_foundation": "@dev",
+                "typo3/cms-core": "^14.3",
+                "typo3/cms-fluid": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_component"
+                },
+                "branch-alias": {
+                    "dev-main": "14.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ps14\\Component\\": "Classes"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Reusable Fluid components for TYPO3 projects based on ps14_foundation.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "components",
+                "extension",
+                "fluid"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "ps14/ps14_foundation",
             "version": "dev-v14-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_foundation",
-                "reference": "4c214486082647933adcf3fc123b70bf86790268"
+                "reference": "144fbd87e8100371badca6f8f0399ae7f779aaf8"
             },
             "require": {
                 "php": "^8.4",
@@ -1733,7 +1783,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "a0f15b5525fe47f2dd3adaec2141d08a0026080b"
+                "reference": "db65f5c6c9e91f6dd35c86c4da0c3af0a570c856"
             },
             "require": {
                 "php": "^8.4",
@@ -10957,6 +11007,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "ps14/ps14_component": 20,
         "ps14/ps14_foundation": 20,
         "ps14/ps14_site": 20
     },

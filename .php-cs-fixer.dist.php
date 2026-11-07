@@ -8,6 +8,7 @@ $config->getFinder()
     ->in([
         __DIR__ . '/packages/ps14_site',
         __DIR__ . '/packages/ps14_foundation',
+        __DIR__ . '/packages/ps14_component',
     ])
     ->exclude(['node_modules'])
     ->append([

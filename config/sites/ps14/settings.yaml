@@ -1,4 +1,4 @@
-layout.logoFilepath: 'EXT:ps14_site/Resources/Public/Svg/Embed/logo.svg'
+layout.logoFilepath: 'EXT:ps14_site/Resources/Private/Assets/Svg/Embed/logo.svg'
 css.mainFilepath: 'EXT:ps14_site/Resources/Private/Assets/Scss/site.scss'
 css.printFilepath: 'EXT:ps14_site/Resources/Private/Assets/Scss/print.scss'
 js.mainFilepath: 'EXT:ps14_site/Resources/Private/Assets/Js/site.js'

@@ -7,7 +7,7 @@
     "lint:css-fix": "stylelint \"packages/ps14_site/Resources/Private/Assets/**/*.{scss,css,sass}\" --fix",
     "lint:js": "eslint .",
     "lint:js-fix": "eslint . --fix",
-    "lint:editorconfig": "editorconfig-checker && editorconfig-checker packages/ps14_site packages/ps14_foundation",
+    "lint:editorconfig": "editorconfig-checker && editorconfig-checker packages/ps14_site packages/ps14_foundation packages/ps14_component",
     "lint:php": "vendor/bin/php-cs-fixer check --diff",
     "lint:php-fix": "vendor/bin/php-cs-fixer fix",
     "lint:phpstan": "vendor/bin/phpstan analyse --no-progress"
