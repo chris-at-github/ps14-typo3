@@ -5,10 +5,62 @@ Classic-Mode, Extensions unter `public/typo3conf/ext/`) vorhanden sind und in de
 v14-Vorlage fehlen. Grundlage für die Auswahl einzelner Features zur modernisierten
 Übernahme.
 
-- Stand: 2026-11-05
+- Stand: 2026-11-07 (angelegt 2026-11-05)
 - Aufwand: **S** = klein, **M** = mittel, **L** = groß
 - Pfade alt relativ zu `~/www/kist-escherich-com/public/typo3conf/ext/`
 - Pfade neu relativ zu `~/www/ps14-typo3/packages/`
+
+## Stand und Fortsetzung
+
+Die Arbeit wurde am 2026-11-07 pausiert. Alle Feature-Branches sind gemergt, offen ist
+kein Branch. Die Änderungen für eine spätere Migration von kist-escherich-com stehen in
+[migration-kist-v14.md](migration-kist-v14.md).
+
+### Übersicht
+
+| Block | Erledigt | Zurückgestellt | Entfällt | Offen |
+|---|---|---|---|---|
+| A · Fehler in der Vorlage | A1–A5 | – | – | – |
+| B · Unterbau foundation | B8, B10 | B4, B6, B9 | B1, B2, B3, B5, B7 | – |
+| C · Inhaltselemente | – | – | – | C1–C11 |
+| D · Layout und Frontend | D2, D4, D7, D8, D11, D13, D15 (D2, D4, D11 abgespeckt) | D1, D3, D6, D9, D12 | D5, D10, D14 | – |
+| E · Fremd-Extensions | – | – | – | E1–E8 |
+| F · KIST-spezifisch | – | – | alles (bleibt im KIST-Projekt) | – |
+| G · Infrastruktur | – | – | G1–G4 (KIST-spezifisch) | – |
+| H · Sammelliste | H1, H2, H4–H8 | – | – | H3 ist nur ein Hinweis |
+
+### Nächste Schritte
+
+1. **Block C** (Inhaltselemente) mit Content Blocks. Content Blocks ist in ps14_foundation
+   nur als `suggest` eingetragen und noch nicht installiert. Laut Grundsatzentscheidung
+   ersetzen Collections das alte Elements-IRRE (Akkordeon, Tabs, Timeline, Slider).
+2. **Block E** (Fremd-Extensions). Vorher die v14-Kompatibilität der Extensions in
+   Packagist/TER prüfen, bisher ist sie nur aus `ext_emconf` geschätzt.
+3. **Zurückgestellte Punkte**:
+   - D1, D3, D6 und D12 warten auf die CSS/JS-Umsetzung. Die Markup-Ausgabe der
+     Navigationen ist vorhanden.
+   - D9: Eigene Komponenten liegen bereits vor.
+   - B4, B6, B9: werden bei Bedarf mit den passenden C/E-Punkten umgesetzt.
+
+### Arbeitsweise
+
+- Pro Punkt ein Feature-Branch `feature/<name>` in jedem betroffenen Repo (Hauptrepo,
+  ps14_foundation, ps14_site).
+- Merge per Squash nach `main` (Hauptrepo) bzw. `v14-dev` (Extensions), erst nach Freigabe
+  der Commit-Message.
+- Vor jedem Commit `ddev exec npm run lint`.
+- Vor der Umsetzung wird der Plan vorgeschlagen und abgestimmt.
+- **Testdaten** wurden bisher über einmalige DataHandler-Skripte in `var/transient/`
+  angelegt (`ddev exec php …`, danach gelöscht). Gewünscht ist künftig eine TYPO3-MCP-Extension.
+
+### Testdaten in der lokalen Datenbank
+
+| Was | uid |
+|---|---|
+| Hauptnavigation: Leistungen (Layout `card`) mit Beratung, Entwicklung (Frontend, Backend), Support; Unternehmen (Navigation Content: tt_content 3) mit Über uns, Team, Karriere; Referenzen | 88–98 |
+| Ordner „Social Media“ mit LinkedIn und Instagram (Seitentyp Link, Icon in `fileadmin/navigation/`) | 99–101 |
+| Text-Element im Footer (colPos 20 auf der Startseite, Backend-Layout „Standard mit Footer“) | tt_content 160 |
+| Englische Übersetzung der Startseite und der 404-Seite | 103, 104 |
 
 ## Grundsatzentscheidung Elements
 
@@ -18,6 +70,8 @@ vollständig auf Content Blocks mit Collections umgestellt, zusammen mit der Ums
 Inhaltselemente (C). Das Elements-Modell wird nicht weitergeführt.
 
 ## A · Fehler und Altlasten in der neuen Vorlage
+
+Alle Punkte erledigt am 2026-11-05 (Branch `feature/template-cleanup`).
 
 | ID | Problem | Pfad neu | Aufwand |
 |---|---|---|---|
@@ -97,6 +151,9 @@ Die v14-Kompatibilität ist jeweils nur aus `ext_emconf` abgeschätzt, nicht in 
 
 ## F · Projektspezifisch KIST (vermutlich nicht in die Vorlage)
 
+Bleibt im KIST-Projekt und wird bei dessen v14-Migration dort umgesetzt (siehe
+[migration-kist-v14.md](migration-kist-v14.md)).
+
 - Produktkatalog: `entity`, `entity_product`, `chart`, `entity_product_import` (external_import und svconnector) **L**
 - Filter-Framework (AJAX) in `ps14_site/Classes/Service/FilterService.php` und `Classes/Filter/` **L**
 - Ansprechpartner-Suche `contact` (tt_address, CSV-Import) **M**
@@ -136,7 +193,7 @@ Bei der Arbeit an der Vorlage gefundene Punkte, unabhängig vom Port aus kist-es
 |---|---|---|---|---|
 | H1 | Fehler | **Erledigt.** Die 404-Fehlerseite zeigt auf `t3://page?uid=47` (`/kategorien`, ein Ordner). Jede 404 endet deshalb in einer 500 („Error handler could not fetch error page“). Die eigentliche 404-Seite ist uid 6 (`/404`). | `config/sites/ps14/config.yaml` (`errorHandling`) | S |
 | H2 | Fehler | **Erledigt mit D13.** TSconfig-Bedingungen `[field('CType') === …]` sind ungültig: `field()` gibt es in Page-TSconfig-Bedingungen nicht (Log: „The function "field" does not exist“). Die Blöcke wirken nie und erzeugen Fehler im Log. Ersatz z. B. über `TCEFORM.tt_content.<feld>.types.<CType>`. | `ps14_site/Configuration/page.tsconfig` (Zeilen 1, 11, 18), `ps14_foundation/Configuration/page.tsconfig` (Zeile 131) | S |
-| H3 | Hinweis | Der Einzelelement-Abruf über `pageType.ajaxContent` mit `tx_foundation[content]` braucht wegen `FE.cacheHash.enforceValidation` einen gültigen cHash. Links dafür immer über TYPO3 erzeugen (`f:uri.page`/typolink), nie von Hand zusammensetzen. | `ps14_foundation/Configuration/TypoScript/Page/AjaxContent.setup.typoscript` | – |
+| H3 | Hinweis | Keine Aktion nötig. Der Einzelelement-Abruf über `pageType.ajaxContent` mit `tx_foundation[content]` braucht wegen `FE.cacheHash.enforceValidation` einen gültigen cHash. Links dafür immer über TYPO3 erzeugen (`f:uri.page`/typolink), nie von Hand zusammensetzen. | `ps14_foundation/Configuration/TypoScript/Page/AjaxContent.setup.typoscript` | – |
 | H4 | Fehler | **Erledigt:** Set `foundation/meta` entfernt, `foundation/layout` in `foundation/settings` umbenannt. `meta.themeColor` ist doppelt definiert, in den Sets `foundation/layout` und `foundation/meta`. | `ps14_foundation/Configuration/Sets/Layout/settings.definitions.yaml`, `ps14_foundation/Configuration/Sets/Meta/settings.definitions.yaml` | S |
 | H5 | Fehler | **Erledigt:** `is--active` für den aktiven Pfad (`item.active`), `is--current` und `aria-current="page"` für die aktuelle Seite. Die Navigation markiert nur die aktuelle Seite (`item.current`), nicht ihre Elternseiten. Steht man auf „Frontend“, sind „Entwicklung“ und „Leistungen“ nicht als aktiv gekennzeichnet. Ersatz über `item.active` (`is--active` am Pfad, `aria-current="page"` nur an der aktuellen Seite). | `ps14_foundation/Resources/Private/Partials/Navigation/Default/Item.html`, `Link.html` | S |
 | H6 | Verbesserung | **Erledigt mit D2.** Jeder Navigationseintrag mit Unterseiten gibt ein leeres `<div class="navigation__content">` aus, auch ohne Mega-Menü-Inhalte. Nur rendern, wenn `item.content` gefüllt ist (gehört zu D2). | `ps14_foundation/Resources/Private/Partials/Navigation/Default/Item.html` | S |
