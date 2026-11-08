@@ -83,6 +83,7 @@ Namespace ist dafür nicht nötig.
 | `fo:cssClass` | `ps14_foundation` | CSS-Klassen bedingt in einer Template-Variable sammeln |
 | `fo:svg.inline` | `ps14_foundation` | SVG-Datei inline einbetten (`source` = voller EXT-Pfad oder FileReference) |
 | `fo:randomId` | `ps14_foundation` | Zufällige ID, z. B. für `id`/`for` von Formularfeldern |
+| `fo:heading.auto` | `ps14_foundation` | Überschriftenebene für Kind-Elemente aus `header_layout` und `tx_foundation_elements_header` |
 | `fo:iterable.contains` | `ps14_foundation` | Prüft, ob ein Wert in einem Array enthalten ist |
 | `fo:media.responsive` | `ps14_foundation` | Responsives Bild mit `srcset` |
 | `cv:slot` | `ps14_component` | Erweiterter `f:slot` mit `variables` („Scoped Slots“), Namespace `http://typo3.org/ns/Ps14/Component/ViewHelpers` |

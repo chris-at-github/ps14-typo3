@@ -51,6 +51,35 @@ Die `<co:heading>`-Komponente rendert eine Überschrift als semantisch korrektes
 <co:heading layout="{data.header_layout}">{data.header}</co:heading>
 ```
 
+### Unterüberschriften mit `fo:heading.auto`
+Für Überschriften von Kind-Elementen (z. B. Cards oder Listeneinträge) berechnet
+der ViewHelper `fo:heading.auto` die passende Ebene aus der Überschrift des
+Inhaltselements und dem Feld `tx_foundation_elements_header`
+(Backend-Feld „Überschrift für Unterelemente“ neben dem Überschriften-Layout):
+
+```html
+<f:for each="{items}" as="item">
+    <co:heading layout="{fo:heading.auto(parent: data.header_layout, children: data.tx_foundation_elements_header)}" class="card__title">
+        {item.title}
+    </co:heading>
+</f:for>
+```
+
+| Parameter  | Typ        | Standard | Beschreibung |
+|------------|------------|----------|--------------|
+| `parent`   | int        | `0`      | `header_layout` des Inhaltselements |
+| `children` | string/int | `auto`   | Wert von `tx_foundation_elements_header` (`auto`, `0`, `2`–`5`) |
+| `default`  | int        | `2`      | Ebene einer Überschrift mit Standard-Layout |
+
+| `parent`       | `children` | Ergebnis |
+|----------------|------------|----------|
+| 1–5            | `auto`     | `parent + 1` |
+| 6              | `auto`     | 6 |
+| 0 (Standard)   | `auto`     | `default + 1` |
+| 100 (verborgen)| `auto`     | `default` |
+| beliebig       | `0`        | `default + 1` |
+| beliebig       | 2–5        | der gewählte Wert |
+
 ### Vollständiges Beispiel mit TYPO3-Content-Block-Daten
 ```html
 <co:heading layout="{data.header_layout}" url="{f:uri.page(pageUid: data.pid)}">

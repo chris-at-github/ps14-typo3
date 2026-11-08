@@ -104,6 +104,17 @@ paths:
   - `class`: CSS-Klassen aus dem HTML-Code (falls vorhanden)
   - Beispiel: `<h2 class="address__title">Stadt Unterschleißheim</h2>` wird
     `<co:heading layout="{headerLayout}" class="address__title">{header}</co:heading>`.
+- Unterüberschriften von Kind-Elementen (z. B. Cards, Listeneinträge eines
+  Inhaltselements) werden nie fest verdrahtet, sondern im aufrufenden Template
+  mit `fo:heading.auto` berechnet und als `headerLayout` übergeben:
+  `headerLayout="{fo:heading.auto(parent: data.header_layout, children: data.tx_foundation_elements_header)}"`
+  - `parent`: `header_layout` des Inhaltselements
+  - `children`: Feld `tx_foundation_elements_header` („auto“, `0`, 2–5)
+  - `default` (optional, Standard 2): Ebene einer Überschrift mit
+    Standard-Layout
+  - Bei „auto“ ergibt sich die Ebene unter der Überschrift des Elements; ist
+    die Überschrift verborgen, erhalten die Kind-Elemente die Standardebene.
+    Das Ergebnis ist immer 1–6.
 
 ## CSS-Klassen
 
