@@ -52,8 +52,7 @@ Linklisten, z. B. Sitemap, Auflistung interner Links, „Mehr zum Thema“.
 
 - Ist eine Trennlinie vorhanden:
   - wird sie als `border-bottom` am `<li>`-Element definiert,
-  - wird dafür die Farb-Variable für Trennlinien verwendet (siehe
-    [scss.md](../scss.md#design-tokens)).
+  - wird dafür die Variable `var(--color-ruler)` verwendet.
 - Wird die Liste auf einem farbigen Hintergrund dargestellt, definiere die
   Hintergrundfarbe über eine CSS-Variable, damit sie leicht austauschbar ist.
 - Die Listenpunkte haben kein vertikales Padding — der gesamte Platz gehört

@@ -56,8 +56,7 @@ Basispfad: `packages/ps14_site/Resources/Private/Assets/Scss/`
   Rohwert (z. B. `gap: 15px`) — erfinde keine Variable.
 - Hardcodierte Werte wie `#0f4058` oder `20px` sind nur erlaubt, wenn es keine
   CSS-Variable dafür gibt.
-- Trennlinien verwenden eine eigene Farb-Variable für Trennlinien. Gibt es
-  noch keine, frage mich, bevor du sie in `bootstrap/_root.scss` ergänzt.
+- Verwende für Trennlinien die Variable `var(--color-ruler)`.
 
 ## Fokus-Outline
 
