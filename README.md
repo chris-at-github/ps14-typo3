@@ -53,6 +53,18 @@ ddev typo3 setup --help               # Optionen des Setup-Befehls anzeigen
 ddev typo3-extension-setup            # Custom-Command: extension:setup + cache:flush
 ```
 
+### Frontend (Vite)
+
+```bash
+ddev npm install                      # Node-Abhängigkeiten installieren
+ddev vite                             # Vite-Dev-Server starten (https://vite.ps14-typo3.ddev.site)
+ddev vite build                       # Frontend-Assets für Produktion bauen
+ddev exec npm run lint                # Alle Linter ausführen
+ddev exec npm run lint:fix            # Linter-Findings automatisch fixen
+```
+
+Der Dev-Server läuft im Web-Container und wird über DDEV unter `https://vite.ps14-typo3.ddev.site` bereitgestellt. Mit `Strg+C` beenden.
+
 ### Datenbank
 
 ```bash
