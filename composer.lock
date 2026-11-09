@@ -1684,7 +1684,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_component",
-                "reference": "30339358a9ea1bdbb0969aba65f1cc35f72179e4"
+                "reference": "5b4e0877daac3e3af862ad3b4cb1e60c5ab38a05"
             },
             "require": {
                 "php": "^8.4",
@@ -1783,7 +1783,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "65fee94564f4216e6ce69b933d5c60554a5f6e84"
+                "reference": "6f787e121d290367e4f6ce304ccf3f0447e164e4"
             },
             "require": {
                 "php": "^8.4",
