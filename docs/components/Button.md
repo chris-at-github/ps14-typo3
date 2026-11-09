@@ -19,7 +19,7 @@ Die `<co:button>`-Komponente rendert einen HTML-`<button>`-Tag mit optionalen Ic
 | `id` | string | nein | Optionale HTML-ID des Buttons |
 | `class` | string | nein | Optionale zusätzliche CSS-Klassen |
 | `url` | string | nein | Optionale URL – wird als `<f:link.typolink>`-Link gerendert statt als `<button>` |
-| `label` | string | nein | Setzt `aria-label` auf das Button-/Link-Element – ergänzt bzw. überschreibt den zugänglichen Namen (z.B. bei generischem Text wie "Weiterlesen"). Wird nur gerendert, wenn ein Wert übergeben wird |
+| `label` | string | nein | Setzt `aria-label` auf das Button-/Link-Element – ergänzt bzw. überschreibt den zugänglichen Namen (z.B. bei generischem Text wie "Weiterlesen"). Ohne Wert bleibt das Attribut leer (wird vom Tidy-ViewHelper entfernt) – dann ist der sichtbare Slot-Text der zugängliche Name |
 
 ## Beispiele
 
