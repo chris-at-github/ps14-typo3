@@ -36,6 +36,9 @@ konsistente UI-Elemente zu erzeugen. Regeln zur Erstellung neuer Komponenten:
 | **Accordion.Item** | Rendert ein einzelnes aufklappbares Element mit Toggle-Button, Überschrift, Icon und ARIA-Unterstützung | [Accordion.Item.md](components/Accordion.Item.md) |
 | **Richtext** | Rendert HTML-Inhalte aus TYPO3-Feldern in einem Container mit BEM-Klassen | [Richtext.md](components/Richtext.md) |
 | **Icon.Container** | Gibt ein Icon (SVG-Pfad oder FileReference) in einem Container mit optionalem Seitenverhältnis und ARIA-Label aus | – |
+| **Navigation** | `<nav>`-Container für Navigationen mit zugänglichem Namen per `aria-label` oder `aria-labelledby` | [Navigation.md](components/Navigation.md) |
+| **Navigation.Title** | Sichtbare Überschrift einer Navigation, Bezug für `aria-labelledby` | [Navigation.Title.md](components/Navigation.Title.md) |
+| **Navigation.List.Item** | Link einer Navigation List (Linkliste, Sitemap) mit optionalem Icon | [Navigation.List.Item.md](components/Navigation.List.Item.md) |
 
 ## Quick Start
 
