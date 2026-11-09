@@ -1694,7 +1694,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_component",
-                "reference": "ca680451b83d11483d2a918dd612fe7dcd697366"
+                "reference": "17382d1f032239a402136ccfc7879032b6a74e3b"
             },
             "require": {
                 "php": "^8.4",
