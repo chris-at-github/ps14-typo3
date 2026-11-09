@@ -19,7 +19,7 @@ Die `<co:button>`-Komponente rendert einen HTML-`<button>`-Tag mit optionalen Ic
 | `id` | string | nein | Optionale HTML-ID des Buttons |
 | `class` | string | nein | Optionale zusätzliche CSS-Klassen |
 | `url` | string | nein | Optionale URL – wird als `<f:link.typolink>`-Link gerendert statt als `<button>` |
-| `ariaLabel` | string | nein | Setzt `aria-label` auf das Button-/Link-Element – ergänzt bzw. überschreibt den zugänglichen Namen (z.B. bei generischem Text wie "Weiterlesen"). Wird nur gerendert, wenn ein Wert übergeben wird |
+| `label` | string | nein | Setzt `aria-label` auf das Button-/Link-Element – ergänzt bzw. überschreibt den zugänglichen Namen (z.B. bei generischem Text wie "Weiterlesen"). Wird nur gerendert, wenn ein Wert übergeben wird |
 
 ## Beispiele
 
@@ -55,7 +55,7 @@ Die `<co:button>`-Komponente rendert einen HTML-`<button>`-Tag mit optionalen Ic
 
 ### Button mit aria-label
 ```html
-<co:button variant="primary" url="https://example.com" ariaLabel="Weitere Informationen zur Veranstaltung, öffnet in neuem Tab">
+<co:button variant="primary" url="https://example.com" label="Weitere Informationen zur Veranstaltung, öffnet in neuem Tab">
     Weitere Informationen
 </co:button>
 ```
