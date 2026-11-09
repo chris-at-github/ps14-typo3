@@ -25,6 +25,13 @@ return [
             'loginLogo' => '',
             'loginLogoAlt' => '',
         ],
+        'in2mcp' => [
+            'fileImport' => '0',
+            'fileImportAllowedHosts' => '',
+            'fileImportMaximumSize' => '10485760',
+            'mcpServer' => '0',
+            'mcpServerPath' => 'mcp',
+        ],
         'vite_asset_collector' => [
             'defaultManifest' => '_assets/vite/.vite/manifest.json',
             'devServerUri' => 'auto',
