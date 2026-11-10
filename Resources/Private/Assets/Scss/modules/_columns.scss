@@ -3,7 +3,7 @@
 .columns {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-24);
+    gap: var(--spacing-grid);
 
     @container (min-width: 768px) {
         // zwei Spalten
