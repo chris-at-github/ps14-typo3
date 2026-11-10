@@ -1,11 +1,18 @@
 // ---------------------------------------------------------------------------------------------------------------------
+// Imports
+@use "../mixins/utilities" as utility;
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Variables
+// Farben: siehe globale Navigations-Variablen (--navigation-*) in bootstrap/_root.scss
 :root {
-    --navigation-list-background-color: transparent;
-    --navigation-list-link-color: var(--color-font);
-    --navigation-list-link-hover-color: var(--color-important);
-    --navigation-list-link-hover-background-color: var(--color-neutral-100);
+    --navigation-list-gap: 0;
+    --navigation-list-link-gap: var(--spacing-12);
+    --navigation-list-link-padding-x: var(--spacing-8);
+    --navigation-list-link-padding-y: var(--spacing-8);
     --navigation-list-link-current-font-weight: var(--font-weight-semibold);
+    --navigation-list-icon-size: 24px;
+    --navigation-list-icon-link-size: 44px;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -13,49 +20,144 @@
 .navigation-list {
     display: flex;
     flex-direction: column;
+    gap: var(--navigation-list-gap);
     margin: 0;
     padding: 0;
     list-style: none;
-    background-color: var(--navigation-list-background-color);
 }
 
 .navigation-list__item {
     padding: 0;
-    border-bottom: 1px solid var(--color-ruler);
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Link
+// Der Link ragt um sein horizontales Padding aus der Liste heraus: Der Text bleibt buendig zum umgebenden Inhalt, der
+// eingefaerbte Hintergrund (Hover, Fokus) erhaelt trotzdem Luft zum Text.
 .navigation-list__link {
     display: flex;
-    gap: var(--spacing-12);
+    gap: var(--navigation-list-link-gap);
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: var(--spacing-12) var(--spacing-8);
-    color: var(--navigation-list-link-color);
+    margin-inline: calc(var(--navigation-list-link-padding-x) * -1);
+    padding: var(--navigation-list-link-padding-y) var(--navigation-list-link-padding-x);
+    color: var(--navigation-font-color);
     text-decoration: none;
-    border-radius: var(--border-radius-small);
+    border-radius: var(--border-radius-default);
 }
 
 .navigation-list__link[aria-current="page"] {
     font-weight: var(--navigation-list-link-current-font-weight);
 }
 
-.navigation-list__link:hover {
-    color: var(--navigation-list-link-hover-color);
-    background-color: var(--navigation-list-link-hover-background-color);
+.navigation-list__link:hover,
+.navigation-list__link:focus-visible {
+    color: var(--navigation-active-font-color);
+    background-color: var(--navigation-active-background-color);
 }
 
 .navigation-list__link:focus-visible {
-    color: var(--navigation-list-link-hover-color);
-    background-color: var(--navigation-list-link-hover-background-color);
-    outline: 1px solid var(--color-focus-outline);
-    outline-offset: -1px;
+    outline: 2px solid var(--color-focus-outline);
+    outline-offset: 2px;
 }
 
 .navigation-list__icon {
     flex-shrink: 0;
-    width: 1em;
-    height: 1em;
+    width: var(--navigation-list-icon-size);
+    height: var(--navigation-list-icon-size);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variant: Listing (Icon-Kachel, Titel und Beschreibung)
+.navigation-list--listing {
+    --navigation-list-gap: var(--spacing-4);
+    --navigation-list-link-gap: var(--spacing-16);
+
+    .navigation-list__link {
+        display: grid;
+        grid-template-areas:
+            "title"
+            "description";
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+    }
+
+    .navigation-list__link:has(.navigation-list__icon) {
+        grid-template-areas:
+            "icon title"
+            "icon description";
+        grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    // Ohne Beschreibung entfaellt die zweite Zeile: Der Titel steht vertikal mittig zum Icon
+    .navigation-list__link:has(.navigation-list__icon):not(:has(.navigation-list__description)) {
+        grid-template-areas: "icon title";
+    }
+
+    .navigation-list__icon {
+        box-sizing: content-box;
+        grid-area: icon;
+        padding: var(--spacing-8);
+        color: var(--navigation-icon-color);
+        background-color: var(--navigation-icon-background-color);
+        border-radius: var(--border-radius-default);
+    }
+
+    .navigation-list__title {
+        grid-area: title;
+        align-self: end;
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--display-line-height);
+    }
+
+    .navigation-list__title:last-child {
+        align-self: center;
+    }
+
+    .navigation-list__description {
+        grid-area: description;
+        align-self: start;
+        font-size: var(--font-size-small);
+        color: var(--navigation-description-color);
+    }
+
+    .navigation-list__link:hover .navigation-list__icon,
+    .navigation-list__link:focus-visible .navigation-list__icon {
+        color: var(--navigation-active-icon-color);
+        background-color: var(--navigation-active-icon-background-color);
+    }
+
+    .navigation-list__link:hover .navigation-list__description,
+    .navigation-list__link:focus-visible .navigation-list__description {
+        color: var(--navigation-active-description-color);
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variant: Icon (Icon-Kacheln, z. B. Social Media; der Titel bleibt nur fuer Screenreader erhalten)
+.navigation-list--icon {
+    --navigation-list-gap: var(--spacing-8);
+    --navigation-list-icon-size: 20px;
+
+    flex-flow: row wrap;
+
+    .navigation-list__link {
+        position: relative;
+        justify-content: center;
+        width: var(--navigation-list-icon-link-size);
+        height: var(--navigation-list-icon-link-size);
+        margin-inline: 0;
+        padding: 0;
+        color: var(--navigation-icon-color);
+        background-color: var(--navigation-icon-background-color);
+    }
+
+    .navigation-list__link:hover,
+    .navigation-list__link:focus-visible {
+        color: var(--navigation-active-icon-color);
+        background-color: var(--navigation-active-icon-background-color);
+    }
+
+    .navigation-list__title {
+        @include utility.visually-hidden;
+    }
 }

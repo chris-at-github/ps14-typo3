@@ -22,6 +22,19 @@
     --color-section-background: transparent;
 
     // -------------------------------------------------------------------------------------------------------------------
+    // Navigation: Farbregeln fuer alle Navigationen (z. B. Navigation List, Mainmenu). "active" = Hover + Focus-Visible
+    --navigation-background-color: transparent;
+    --navigation-font-color: var(--color-font);
+    --navigation-description-color: var(--color-muted);
+    --navigation-icon-color: var(--color-font);
+    --navigation-icon-background-color: var(--color-neutral-100);
+    --navigation-active-background-color: var(--color-neutral-100);
+    --navigation-active-font-color: var(--color-important);
+    --navigation-active-description-color: var(--color-neutral-700);
+    --navigation-active-icon-color: var(--color-important);
+    --navigation-active-icon-background-color: var(--color-neutral-200);
+
+    // -------------------------------------------------------------------------------------------------------------------
     // Fonts
     --font-family-default: 'DM Sans', arial, sans-serif;
     --font-weight-normal: 400;
