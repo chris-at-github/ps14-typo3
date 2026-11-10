@@ -25,6 +25,7 @@
         "typo3/coding-standards": "^0.9.0"
     },
     "require": {
+        "b13/container": "^4.1",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
         "ps14/ps14_component": "@dev",
