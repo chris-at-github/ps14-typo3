@@ -5,10 +5,11 @@
     "type": "project",
     "config": {
         "allow-plugins": {
-            "typo3/class-alias-loader": true,
-            "typo3/cms-composer-installers": true,
             "a9f/fractor-extension-installer": true,
-            "phpstan/extension-installer": true
+            "php-http/discovery": false,
+            "phpstan/extension-installer": true,
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
         },
         "platform": {
             "php": "8.4.0"
