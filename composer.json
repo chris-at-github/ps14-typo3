@@ -32,6 +32,7 @@
         "ps14/ps14_component": "@dev",
         "ps14/ps14_container": "@dev",
         "ps14/ps14_foundation": "@dev",
+        "ps14/ps14_menu": "@dev",
         "ps14/ps14_site": "@dev",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",

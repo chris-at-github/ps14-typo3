@@ -38,7 +38,8 @@ konsistente UI-Elemente zu erzeugen. Regeln zur Erstellung neuer Komponenten:
 | **Icon.Container** | Gibt ein Icon (SVG-Pfad oder FileReference) in einem Container mit optionalem Seitenverhältnis und ARIA-Label aus | – |
 | **Navigation** | `<nav>`-Container für Navigationen mit zugänglichem Namen per `aria-label` oder `aria-labelledby` | [Navigation.md](components/Navigation.md) |
 | **Navigation.Title** | Sichtbare Überschrift einer Navigation, Bezug für `aria-labelledby` | [Navigation.Title.md](components/Navigation.Title.md) |
-| **Navigation.List.Item** | Link einer Navigation List (Linkliste, Sitemap) mit optionalem Icon | [Navigation.List.Item.md](components/Navigation.List.Item.md) |
+| **Navigation.List** | `<ul>`-Liste einer Navigation List mit Modifier für die Ansicht (Liste, Listing, Icon-Menü) | [Navigation.List.md](components/Navigation.List.md) |
+| **Navigation.List.Item** | Eintrag einer Navigation List (`<li>` mit Link, optionalem Icon und Beschreibung) | [Navigation.List.Item.md](components/Navigation.List.Item.md) |
 
 ## Quick Start
 

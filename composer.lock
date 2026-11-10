@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e5ad5e85c67d147bbd7942f3fb2603a",
+    "content-hash": "b12674e0e1fbe14febddedeaea320369",
     "packages": [
         {
             "name": "b13/container",
@@ -2346,8 +2346,53 @@
             }
         },
         {
+            "name": "ps14/ps14_menu",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./packages/ps14_menu",
+                "reference": "e1245313ed682d41b3792d3927896866eb336bf8"
+            },
+            "require": {
+                "php": "^8.4",
+                "ps14/ps14_component": "@dev",
+                "ps14/ps14_foundation": "@dev",
+                "typo3/cms-core": "^14.3",
+                "typo3/cms-fluid-styled-content": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_menu"
+                },
+                "branch-alias": {
+                    "dev-v14-dev": "14.0.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Extends the TYPO3 menu content elements with display options and additional views.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "extension",
+                "menu"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "ps14/ps14_site",
-            "version": "dev-v14-dev",
+            "version": "dev-feature/ps14-menu",
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
@@ -11622,6 +11667,7 @@
         "ps14/ps14_component": 20,
         "ps14/ps14_container": 20,
         "ps14/ps14_foundation": 20,
+        "ps14/ps14_menu": 20,
         "ps14/ps14_site": 20
     },
     "prefer-stable": false,

@@ -52,7 +52,7 @@ paths:
   `<f:section name="Header" />`, sonst erscheint sie doppelt.
 - Die `id` wird im Template erzeugt und über `{_all}` an die Partials
   übergeben: `<f:variable name="id">navigation--{fo:randomId()}</f:variable>`.
-- Template (`Templates/Content/MenuPages.html`):
+- Template (`Templates/Content/MenuPages.html` in `ps14_menu`):
 
   ```html
   <f:layout name="Default" />
@@ -74,17 +74,22 @@ paths:
       <f:if condition="{menu}">
           <co:navigation title="{data.header}" titleType="{data.header_layout}" id="{id}">
               <co:navigation.title id="{id}" type="{data.header_layout}" class="heading">{data.header}</co:navigation.title>
-              <ul class="navigation-list">
+              <co:navigation.list>
                   <f:for each="{menu}" as="page">
-                      <li class="navigation-list__item">
-                          <co:navigation.list.item link="{page.link}" current="{page.current}">{page.title}</co:navigation.list.item>
-                      </li>
+                      <co:navigation.list.item link="{page.link}" target="{page.target}" current="{page.current}">{page.title}</co:navigation.list.item>
                   </f:for>
-              </ul>
+              </co:navigation.list>
           </co:navigation>
       </f:if>
   </f:section>
   ```
 
+- Die Basis-Templates und -Partials der Menüs (`MenuPages.html`,
+  `MenuSubpages.html`, `Content/Menu/Layout/Default|Listing|Icon.html`)
+  liefert `ps14_menu` (Key `108`). In `ps14_site` liegen nur
+  Überschreibungen und projektspezifische Varianten.
+- `ps14_menu` stellt die FlexForm-Optionen als `{options}` bereit
+  (`includeNotInMenu`, `showIcon`, `showDescription`) und das Seiten-Icon
+  als `{page.icon.0}`.
 - Markup und SCSS der Linkliste folgen
   `.claude/rules/frontend/components/navigation-list.md`.

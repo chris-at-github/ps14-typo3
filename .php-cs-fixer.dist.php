@@ -10,6 +10,7 @@ $config->getFinder()
         __DIR__ . '/packages/ps14_foundation',
         __DIR__ . '/packages/ps14_component',
         __DIR__ . '/packages/ps14_container',
+        __DIR__ . '/packages/ps14_menu',
     ])
     ->exclude(['node_modules'])
     ->append([
