@@ -18,12 +18,13 @@ Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die da
 | `current`     | bool   | nein    | –        | Markiert den Link als aktuelle Seite (`aria-current="page"`) |
 | `icon`        | mixed  | nein    | –        | Voller EXT-Pfad zur SVG-Datei oder Datei-Referenz (z. B. das Icon einer Seite); eingebettet über `fo:svg.inline` mit der Klasse `navigation-list__icon` |
 | `description` | string | nein    | –        | Beschreibung unter dem Titel; wird in `<span class="navigation-list__description">` ausgegeben |
+| `headerLayout` | integer | nein   | –        | Überschriften-Typ des Titels (1–6); der Titel wird dann über `co:heading` als `<h1>`–`<h6>` mit der Klasse `navigation-list__title` ausgegeben, ohne Angabe als `<span>` |
 | `class`       | string | nein    | –        | Zusätzliche CSS-Klassen für den Eintrag (`<li>`) |
 
 ## Slot
 | Slot          | Beschreibung |
 |---------------|--------------|
-| Standard-Slot | Titel des Links; wird in `<span class="navigation-list__title">` ausgegeben |
+| Standard-Slot | Titel des Links; wird in `<span class="navigation-list__title">` ausgegeben (mit `headerLayout` als Überschrift) |
 
 ## Beispiele
 
@@ -66,10 +67,18 @@ Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die da
 ```html
 <co:navigation.list variant="listing">
     <f:for each="{menu}" as="page">
-        <co:navigation.list.item link="{page.link}" current="{page.current}" icon="{page.icon.0}" description="{page.data.abstract}">{page.title}</co:navigation.list.item>
+        <co:navigation.list.item
+            link="{page.link}"
+            current="{page.current}"
+            icon="{page.icon.0}"
+            description="{page.data.abstract}"
+            headerLayout="{fo:heading.auto(parent: data.header_layout, children: data.tx_foundation_elements_header)}"
+        >{page.title}</co:navigation.list.item>
     </f:for>
 </co:navigation.list>
 ```
+
+Die Ansicht `listing` wertet damit die Einstellung „Überschriften der Elemente“ (`tx_foundation_elements_header`) des Inhaltselements aus.
 
 ### Downloads aus einer Dateisammlung
 ```html

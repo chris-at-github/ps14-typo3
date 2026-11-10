@@ -39,6 +39,10 @@ Basispfad: `packages/ps14_site/Resources/Private/Assets/Scss/`
 - Ein BEM-Block darf nie Außenabstand (`margin`) haben.
 - Verwende für gruppierte Darstellungen `display: flex;` oder `display: grid;`
   und definiere Abstände mit `gap`, nicht mit `margin`.
+- Platziere Grid-Elemente über benannte Bereiche (`grid-template-areas` am
+  Container, `grid-area` am Element). Verzichte möglichst auf numerische
+  Linien- und Span-Angaben wie `grid-row: 1 / span 2;` — sie sind schwer
+  lesbar.
 - **PFLICHT:** Übernimm auch spezielle CSS-Eigenschaften aus dem Design
   vollständig. Lasse keine Eigenschaft aus, auch wenn sie unbekannt oder
   ungewöhnlich erscheint (z. B. `text-decoration-thickness`,
