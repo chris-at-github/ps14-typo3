@@ -62,6 +62,13 @@ confirmation.
 - Propose the commit message for the squash commit on `main` and ask me for approval.
 - After the squash merge, verify the feature branch matches `main` (`git diff --quiet main <branch>`), then delete it immediately (`git branch -D`).
 
+# Example Content
+- Every new module (content element, container, plugin) gets an example page below "Modules" [29], created via MCP (`in2mcp`).
+- One visible page per module (`hidden = 0`), titled like the module.
+- Before creating the examples, ask me which variants should be created. Propose a list based on the requirements (e.g. `tx_foundation_variant` values, FlexForm options) and mark your recommendation.
+- Create one content element per agreed variant; the header names the variant. Containers and nested modules get realistic child content in every column.
+- Verify the examples in the frontend (HTTP 200, expected markup) and note the page/element uids in the status section of the current plan.
+
 # General Coding Guidelines
 - Use strict typing in PHP (`declare(strict_types=1);` is mandatory on the first line).
 - Follow the PSR-12 (or PER Coding Style) standard.

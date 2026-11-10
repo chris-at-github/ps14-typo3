@@ -154,7 +154,8 @@ Jede Extension hat eine kurze `Readme.md` (Deutsch, max. 80 Zeichen pro Zeile):
 ## Prüfung
 
 - `ddev exec npm run lint` ohne Befund.
-- Testdaten per MCP (`in2mcp`) anlegen und Backend (TCA-Schema, Labels) sowie
-  Frontend (HTTP 200, erwartetes Markup) prüfen.
+- Beispielinhalte nach „Example Content“ in `CLAUDE.md` anlegen (Seite unter
+  „Modules“ [29], Varianten vorher abstimmen) und Backend (TCA-Schema, Labels)
+  sowie Frontend (HTTP 200, erwartetes Markup) prüfen.
 - Änderungen, die bestehende Projekte (z. B. KIST) betreffen, in der
   jeweiligen Migrationsanleitung dokumentieren.
