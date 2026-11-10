@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f3b4d93e9b086d0db4be8d838578a74",
+    "content-hash": "9e5ad5e85c67d147bbd7942f3fb2603a",
     "packages": [
         {
             "name": "b13/container",
@@ -2246,6 +2246,50 @@
                 "components",
                 "extension",
                 "fluid"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "ps14/ps14_container",
+            "version": "dev-feature/c7-container",
+            "dist": {
+                "type": "path",
+                "url": "./packages/ps14_container",
+                "reference": "28fb2a6ed9df63037761de7c685c58c8a40d2cd1"
+            },
+            "require": {
+                "b13/container": "^4.1",
+                "php": "^8.4",
+                "ps14/ps14_foundation": "@dev",
+                "typo3/cms-core": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_container"
+                },
+                "branch-alias": {
+                    "dev-v14-dev": "14.0.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Container content elements with two and three columns based on b13/container.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "container",
+                "extension"
             ],
             "transport-options": {
                 "symlink": true,
@@ -11576,6 +11620,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "ps14/ps14_component": 20,
+        "ps14/ps14_container": 20,
         "ps14/ps14_foundation": 20,
         "ps14/ps14_site": 20
     },

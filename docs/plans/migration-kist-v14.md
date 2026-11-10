@@ -5,7 +5,7 @@ Diese Anleitung sammelt alle Änderungen, die bei der Arbeit an der v14-Vorlage
 Migration von `~/www/kist-escherich-com` (TYPO3 12.4, Classic-Mode) betreffen.
 Zu jeder Änderung stehen die nötigen Schritte im KIST-Projekt.
 
-- Stand: 2026-11-07
+- Stand: 2026-11-10
 - Grundlage: ps14_foundation Branch `v14-dev`, ps14_site Branch `v14-dev`, Hauptrepo `main`
 - Feature-Inventar mit Entscheidungen und IDs: [feature-inventory-kist.md](feature-inventory-kist.md)
 - Pfade alt relativ zu `~/www/kist-escherich-com/public/typo3conf/ext/`
@@ -379,6 +379,39 @@ Mit *Analyze Database Structure* entfernen:
 - `tt_content.tx_foundation_text_layout`
 - `tx_foundation_pages_content_mm`, nach 5.2
 
+### 5.7 Container (C7): FlexForm-Spaltenbreiten → Aufteilung
+
+`ps14_container` liegt als eigenes Repo unter `packages/ps14_container` (Branch
+`v14-dev`, Paket `ps14/ps14_container`, setzt `b13/container` ^4.1 voraus). CTypes
+(`ps14_container_2_column`, `ps14_container_3_column`) und colPos (4001–4003) bleiben
+gleich, die Kind-Elemente brauchen keine Migration.
+
+- TypoScript: `ps14_site/Configuration/TypoScript/Extensions/Ps14Container.setup.typoscript`
+  mit `@import 'EXT:ps14_container/Configuration/TypoScript/setup.typoscript'`. Alte Pfade
+  `ps14_site/Resources/Private/Extensions/Container/` entfallen; Overrides liegen jetzt
+  unter `ps14_site/Resources/Private/Templates/Content/ContainerTwoColumn.html` bzw.
+  `ContainerThreeColumn.html`.
+- Frontend: Statt `grid grid--column-2` / `grid__column--<n>` wird `columns columns--<aufteilung>`
+  / `columns__column` ausgegeben (SCSS `modules/_columns.scss`). Leere Spalten werden
+  weiterhin als Spalte ausgegeben, damit das Grid stabil bleibt.
+- FlexForm: Die Felder `settings.columnOneWidth` … `settings.columnThreeWidth` (12er-Raster)
+  werden durch ein Feld `ratio` ersetzt. Bestehende Datensätze per Skript umschreiben:
+
+  | alt (Spalte 1/2/3) | neu `ratio` |
+  |---|---|
+  | 6 / 6 | `50-50` |
+  | 4 / 8 | `33-66` |
+  | 8 / 4 | `66-33` |
+  | 3 / 9 | `25-75` |
+  | 9 / 3 | `75-25` |
+  | 4 / 4 / 4 | `33-33-33` |
+  | 3 / 6 / 3 | `25-50-25` |
+  | 6 / 3 / 3 | `50-25-25` |
+  | 3 / 3 / 6 | `25-25-50` |
+
+  Leere oder abweichende Kombinationen fallen auf den Default (`50-50` bzw. `33-33-33`)
+  zurück und müssen redaktionell geprüft werden.
+
 ## 6. Was im KIST-Projekt bleibt
 
 Nicht Teil der Vorlage, im KIST-Sitepackage bzw. in KIST-Extensions auf v14 heben:
@@ -413,3 +446,4 @@ Nicht Teil der Vorlage, im KIST-Sitepackage bzw. in KIST-Extensions auf v14 hebe
 | Seitentyp 120 entfernt (H8) | `447e4e6` | – | `dd0edec` |
 | Aktiv-Zustände Navigation (H5) | `3e35e6f` | `917a3a4` | `57db2f9` |
 | 404-Fehlerseite (H1) | – | – | `9bacead` |
+| Container 2/3-spaltig (C7), ps14_container `833b2a6`, `ff7cc15` | – | `89139c6` | `ece9fa3` (b13/container) und C7-Commit |

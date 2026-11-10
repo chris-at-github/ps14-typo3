@@ -5,7 +5,7 @@ Classic-Mode, Extensions unter `public/typo3conf/ext/`) vorhanden sind und in de
 v14-Vorlage fehlen. Grundlage für die Auswahl einzelner Features zur modernisierten
 Übernahme.
 
-- Stand: 2026-11-07 (angelegt 2026-11-05)
+- Stand: 2026-11-10 (angelegt 2026-11-05)
 - Aufwand: **S** = klein, **M** = mittel, **L** = groß
 - Pfade alt relativ zu `~/www/kist-escherich-com/public/typo3conf/ext/`
 - Pfade neu relativ zu `~/www/ps14-typo3/packages/`
@@ -21,8 +21,8 @@ kein Branch. Die Änderungen für eine spätere Migration von kist-escherich-com
 | Block | Erledigt | Zurückgestellt | Entfällt | Offen |
 |---|---|---|---|---|
 | A · Fehler in der Vorlage | A1–A5 | – | – | – |
-| B · Unterbau foundation | B8, B10 | B4, B6, B9 | B1, B2, B3, B5, B7 | – |
-| C · Inhaltselemente | – | – | – | C1–C11 |
+| B · Unterbau foundation | B8, B10 | B4, B6, B9 | B1, B2, B3, B5, B7 | B11 |
+| C · Inhaltselemente | C7 | – | – | C1–C6, C8–C11 |
 | D · Layout und Frontend | D2, D4, D7, D8, D11, D13, D15 (D2, D4, D11 abgespeckt) | D1, D3, D6, D9, D12 | D5, D10, D14 | – |
 | E · Fremd-Extensions | – | – | – | E1–E8 |
 | F · KIST-spezifisch | – | – | alles (bleibt im KIST-Projekt) | – |
@@ -61,6 +61,7 @@ kein Branch. Die Änderungen für eine spätere Migration von kist-escherich-com
 | Ordner „Social Media“ mit LinkedIn und Instagram (Seitentyp Link, Icon in `fileadmin/navigation/`) | 99–101 |
 | Text-Element im Footer (colPos 20 auf der Startseite, Backend-Layout „Standard mit Footer“) | tt_content 160 |
 | Englische Übersetzung der Startseite und der 404-Seite | 103, 104 |
+| Seite „Container“ unter Modules mit 2- und 3-spaltigem Container (C7) | Seite 105, tt_content 162–167 |
 
 ## Grundsatzentscheidung Elements
 
@@ -95,6 +96,7 @@ Alle Punkte erledigt am 2026-11-05 (Branch `feature/template-cleanup`).
 | B8 | `config.spamProtectEmailAddresses` und `pageType.ajaxContent` | `ps14_foundation/Configuration/TypoScript/System/Config.setup.typoscript` | S | erledigt: Spam-Schutz auf v14-Standard (aus), typeNum als Site Setting `pageType.ajaxContent` |
 | B9 | Seitenmedien: eine Datei, Crop-Varianten desktop/mobile mit 16:9 und 4:3 | `ps14_site/Configuration/TCA/Overrides/pages.php` | S | zurückgestellt, zusammen mit C8 (Teaser) |
 | B10 | cHash-Ausschlussliste für Tracking-Parameter | `typo3conf/system/settings.php` (`FE.cacheHash.excludedParameters`) | S | erledigt: der v14-Standard enthält die alte Liste bereits. `pdf` kommt mit E5 dazu. |
+| B11 | FlexForm-Auswahllisten über TypoScript-Settings (`TcaService->getItemsBySettingsIdentifier`, `module.tx_….settings < plugin.tx_….settings`), bisher in `TextImage.xml` (Spalten, Anordnung, Ausrichtung, Überschrift-Position) | `ps14_foundation/Configuration/FlexForms/Modules/TextImage.xml`, `Classes/Service/TcaService.php`, `TypoScript/Modules/TextImage.setup.typoscript` | S–M | offen: feste `items` im FlexForm, projektspezifische Anpassung per Page-TSconfig `TCEFORM.tt_content.pi_flexform.<CType>.<sheet>.<feld>` (`addItems`, `removeItems`, `altLabels`); `getItemsBySettingsIdentifier` danach entfernen. Frontend-Werte je Auswahl (z. B. `pictureMediaQueries`) bleiben im TypoScript. KIST: eigene Overrides der `options` in TSconfig überführen (Migrationsanleitung) |
 
 ## C · Inhaltselemente
 
@@ -108,7 +110,7 @@ Alt jeweils als eigene Mini-Extension umgesetzt, neu als Content Block oder in f
 | C4 | **Hero-Slider** | `ps14_hero/` | tiny-slider wird nicht mehr gepflegt: Swiper, Embla oder CSS-Scroll-Snap | M |
 | C5 | **Timeline**: Datum, Text, Bilder, Scroll-Fortschritt | `ps14_timeline/` | IntersectionObserver oder scroll-driven animations | S–M |
 | C6 | **Downloads**: Dateiliste mit Größe und Endung | `ps14_downloads/` | prüfen, ob Core-`uploads` mit eigenem Template reicht | S |
-| C7 | **Container 2/3-spaltig** mit FlexForm-Spaltenbreiten | `ps14_container/` | b13/container (laut `ext_emconf` bis 14.99), CSS-Grid | S–M |
+| C7 | **Container 2/3-spaltig** mit FlexForm-Spaltenbreiten | `ps14_container/` | erledigt: eigenes Repo `ps14_container` (v14-dev) mit b13/container 4, feste Aufteilungen (`ratio`), CSS-Grid `columns` | S–M |
 | C8 | **Teaser**: Seiten-Teaser aus Seiten, Unterseiten oder Kategorien, Teaser-Felder in `pages` | `ps14_teaser/` | `list_type` und `TSFE` sind entfernt: CType-Plugin oder Content Block mit DataProcessor | L |
 | C9 | **Menü Unterseiten** mit Sortierung aus dem FlexForm | `ps14_site/Classes/DataProcessing/MenuProcessor.php` | zuerst Core-`alternativeSortingField` prüfen | S |
 | C10 | Marker: Bild, Legende, Slider (eher projektspezifisch) | `ps14_marker/` | wie C4 | M |

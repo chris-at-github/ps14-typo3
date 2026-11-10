@@ -29,6 +29,7 @@
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
         "ps14/ps14_component": "@dev",
+        "ps14/ps14_container": "@dev",
         "ps14/ps14_foundation": "@dev",
         "ps14/ps14_site": "@dev",
         "typo3/cms-backend": "^14.3",
