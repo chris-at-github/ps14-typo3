@@ -107,7 +107,7 @@
 
 .page-footer__meta-list {
     // Die Links ragen um ihr Padding (8px) aus der Liste: 24px Abstand ergeben 8px Luft zwischen den Hover-Flaechen
-    --navigation-list-gap: 0 var(--spacing-24);
+    --navigation-gap: 0 var(--spacing-24);
 
     flex-flow: row wrap;
 }
