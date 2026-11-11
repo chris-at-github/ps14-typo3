@@ -48,17 +48,35 @@ Basispfad: `packages/ps14_site/Resources/Private/Assets/Js/`
 - Projektspezifische Werte werden als Optionen übergeben. Dazu gehören die
   Texte (z. B. `aria-label`); die Klasse selbst enthält nur englische
   Standardwerte.
+- Texte stehen nie fest im JavaScript — die Seite ist mehrsprachig. Das
+  Fluid-Template gibt sie übersetzt als `data-label-*`-Attribute am
+  Block-Element aus (`f:translate`, siehe `translations.md`), das Bootstrap
+  reicht sie als Optionen weiter. Fehlt ein Attribut, wird die Option nicht
+  gesetzt, damit der Standardwert der Klasse greift.
 - Die Verbindung mehrerer Komponenten (eine Komponente reagiert auf das
   Event einer anderen) liegt im Bootstrap, nie in der Klasse.
+
+```html
+<div class="collapse"
+    data-label-open="{f:translate(key: 'collapse.open', domain: 'ps14_site.messages')}"
+    data-label-close="{f:translate(key: 'collapse.close', domain: 'ps14_site.messages')}">
+```
 
 ```js
 import { Collapse } from '../components/collapse.js';
 
 document.querySelectorAll('.collapse').forEach((element) => {
-  new Collapse(element, {
-    ariaLabelOpen: 'Eintrag öffnen',
-    ariaLabelClose: 'Eintrag schließen',
-  });
+  const options = {};
+
+  if (element.dataset.labelOpen !== undefined) {
+    options.ariaLabelOpen = element.dataset.labelOpen;
+  }
+
+  if (element.dataset.labelClose !== undefined) {
+    options.ariaLabelClose = element.dataset.labelClose;
+  }
+
+  new Collapse(element, options);
 });
 ```
 
@@ -73,6 +91,14 @@ document.querySelectorAll('.collapse').forEach((element) => {
 - Funktionen, die ein zweites Skript ebenfalls braucht, wandern nach
   `utilities/`.
 - Lege dafür keinen weiteren Ordner an.
+- Listener auf `scroll` und `resize`, die das DOM ändern, werden mit
+  `requestAnimationFrame` gebündelt; `scroll` wird mit `{passive: true}`
+  registriert. Der Zustand wird beim Laden einmal direkt gesetzt, damit er
+  auch auf einer bereits gescrollten Seite stimmt (Vorlage:
+  `bootstrap/page-header.js`).
+- Ein reiner Darstellungszustand ohne Animation (z. B. „Seite ist
+  gescrollt“) ist ein Modifier am Block (`page-header--sticky`). Die
+  Zustandsklassen `is--*` bleiben der Zustandskette vorbehalten.
 
 ## Klasse
 
@@ -100,11 +126,142 @@ document.querySelectorAll('.collapse').forEach((element) => {
     Zustandskette (siehe unten).
   - `get<Wert>()`: liest einen Wert aus dem DOM.
 - Muss eine Komponente abschaltbar sein (z. B. nur unterhalb eines
-  Breakpoints aktiv), erhält sie zusätzlich `initialize()` und `destroy()`.
-  Die Listener werden dann im Constructor als Eigenschaft gebunden
-  (`this._handleToggle = () => this.handleToggle();`), damit `destroy()` sie
-  wieder entfernen kann. `initialize()` setzt die Klasse `is--initialized`,
-  `destroy()` entfernt sie und stellt das ursprüngliche Markup wieder her.
+  Breakpoints aktiv), erhält sie zusätzlich `initialize()` und `destroy()`
+  (siehe „Abschaltbare Komponenten“).
+
+## Abschaltbare Komponenten: initialize und destroy
+
+Für Komponenten, die nur zeitweise aktiv sind, z. B. ein Off-Canvas, das es
+nur unterhalb eines Breakpoints gibt. Vorlage: `components/off-canvas.js`
+und `bootstrap/off-canvas.js`.
+
+### Klasse
+
+- Der Constructor sucht nur die Elemente, setzt die Optionen und bindet die
+  Listener als Eigenschaft (`this._handleToggle = () => this.handleToggle();`),
+  damit `destroy()` sie wieder entfernen kann. Er registriert keine Listener
+  und ändert das DOM nicht.
+- `initialize()`:
+  - bricht ab, wenn ein benötigtes Kind-Element fehlt oder die Komponente
+    bereits initialisiert ist (`isInitialized()`),
+  - setzt den geschlossenen Zustand (`hidden`, `aria-expanded="false"`),
+  - registriert die Listener,
+  - setzt zuletzt die Klasse `is--initialized`.
+- `destroy()` stellt das Markup des Templates vollständig wieder her — auch
+  mitten in einer Animation:
+  - bricht ab, wenn die Komponente nicht initialisiert ist,
+  - bricht den Timer ab (`clearTimeout(this.timer)`),
+  - entfernt alle Listener und von JavaScript erzeugte Elemente (z. B.
+    Backdrop),
+  - entfernt die Inline-Styles der Animation und das Attribut `hidden`,
+  - setzt die ARIA-Attribute auf den Wert des Templates zurück,
+  - entfernt alle Zustandsklassen und `is--initialized`.
+- Beide Methoden dürfen mehrfach hintereinander aufgerufen werden, ohne
+  etwas doppelt zu registrieren oder zu entfernen.
+
+### Bootstrap
+
+- Ob die Komponente aktiv ist, entscheidet das SCSS über eine CSS-Variable
+  am Block: `--<block>-enabled: 1` bzw. `0`. So steht der Breakpoint nur im
+  SCSS und nie im JavaScript (kein `matchMedia`, keine Pixelwerte).
+- Das Bootstrap hält alle Instanzen, liest die Variable beim Laden und bei
+  jedem `resize` und ruft `initialize()` bzw. `destroy()` auf.
+
+```js
+import { OffCanvas } from '../components/off-canvas.js';
+
+const instances = [];
+
+function isEnabled(element) {
+  return getComputedStyle(element).getPropertyValue('--off-canvas-enabled').trim() === '1';
+}
+
+function handleBreakpoint() {
+  instances.forEach((instance) => {
+    if (isEnabled(instance.element) === true) {
+      instance.initialize();
+    } else {
+      instance.destroy();
+    }
+  });
+}
+
+document.querySelectorAll('.off-canvas').forEach((element) => {
+  instances.push(new OffCanvas(element));
+});
+
+handleBreakpoint();
+
+window.addEventListener('resize', handleBreakpoint);
+```
+
+### Markup und SCSS
+
+- Das Template gibt den Inhalt so aus, wie er ohne die Komponente
+  dargestellt wird: ohne `hidden` am Container. `hidden` setzt erst
+  `initialize()`.
+- Das SCSS der Komponente hängt vollständig an `is--initialized`
+  (`.off-canvas.is--initialized .off-canvas__container`). Ohne die Klasse
+  wird der Inhalt ganz normal dargestellt; Elemente, die nur zur Komponente
+  gehören (Toggle, Close-Button, eigener Header), sind dann ausgeblendet.
+- Der einsetzende Block schaltet die Komponente ein und verhindert das
+  Aufblitzen des Inhalts, bis das JavaScript geladen ist:
+
+```scss
+.page-header__navigation {
+    --off-canvas-enabled: 0;
+
+    @media (width <= 860px) {
+        --off-canvas-enabled: 1;
+    }
+}
+
+@media (width <= 860px) {
+    .page-header__navigation:not(.is--initialized) .off-canvas__container {
+        display: none;
+    }
+}
+```
+
+## Überlagernde Komponenten (Off-Canvas, Modal)
+
+Für Komponenten, die sich über die Seite legen. Vorlage:
+`components/off-canvas.js`.
+
+- Der Toggle-Button liegt innerhalb des Elements, das er öffnet (z. B.
+  innerhalb der `<nav>`), und verweist per `aria-controls` auf den
+  Container.
+- Geschlossen trägt der Container `hidden`: Der Inhalt ist weder sichtbar
+  noch per Tastatur oder Screenreader erreichbar. Ein Verschieben aus dem
+  Viewport allein reicht nicht.
+- Fokus:
+  - `activate()` setzt den Fokus in die Komponente (auf den Close-Button),
+  - `deactivate()` setzt ihn zurück auf den Toggle,
+  - solange die Komponente offen ist, bleibt der Fokus darin: `Tab` springt
+    vom letzten zum ersten fokussierbaren Element und umgekehrt
+    (`trapFocus(event)`). Berücksichtigt werden nur sichtbare Elemente
+    (`element.getClientRects().length > 0`).
+- `Escape` schließt die Komponente. Der `keydown`-Listener hängt dafür am
+  `document` — die einzige erlaubte Ausnahme von der Regel, nur am eigenen
+  Element zu lauschen. Er reagiert nur, wenn `isActive()` zutrifft.
+- Ein Backdrop wird in `activate()` per JavaScript erzeugt und in
+  `deactivate()` wieder entfernt; ein Klick darauf schließt die Komponente.
+  Seine Klasse steht in den Optionen (`backdropCssClass`).
+- Scrollverhalten: Der Container erhält `overflow: auto` und
+  `overscroll-behavior: contain`. Das Scrollen der Seite wird nicht per
+  JavaScript gesperrt.
+- Hat der Container vor dem Öffnen `display: none` (`hidden`), liefert
+  `getComputedStyle()` für die animierte Eigenschaft keinen brauchbaren
+  Startwert. Der Startframe ist dann der geschlossene Wert aus den Optionen
+  (z. B. `closedTranslate: '100% 0'`); nur bei einem Abbruch der
+  Gegenrichtung ist es der aktuelle Wert:
+
+```js
+const closed = this.container.hasAttribute('hidden');
+
+this.container.removeAttribute('hidden');
+this.container.style.translate = closed === true ? this.options.closedTranslate : this.getTranslate();
+```
 
 ## Zustandskette: activate → activated → deactivate → deactivated
 
@@ -339,5 +496,10 @@ Das SCSS folgt [scss.md](scss.md) und liegt in `components/_<block>.scss`.
    ergänzen.
 5. Markup: Block-Klasse, BEM-Elemente, `hidden` und ARIA-Attribute im
    Fluid-Template setzen — JavaScript ändert sie nur.
-6. Prüfen: schneller Doppelklick, Tastaturbedienung, reduzierte Bewegung,
-   `ddev exec npm run lint:js`.
+6. Texte als `data-label-*`-Attribute im Template ausgeben und im Bootstrap
+   als Optionen übergeben.
+7. Abschaltbare Komponente: `--<block>-enabled` im SCSS setzen und den
+   Wechsel über den Breakpoint in beide Richtungen prüfen — auch bei
+   geöffneter Komponente.
+8. Prüfen: schneller Doppelklick, Tastaturbedienung (Fokus, `Escape`),
+   reduzierte Bewegung, `ddev exec npm run lint:js`.

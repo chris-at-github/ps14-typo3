@@ -18,6 +18,14 @@ paths:
 
 - Lege projektspezifische SVGs in `ps14_site` ab, allgemeine SVGs für alle
   Projekte in `ps14_foundation`.
+- Icons dürfen immer dem Set von [Lucide](https://lucide.dev/icons/)
+  entnommen werden; zeichne ein Icon nur selbst, wenn es dort kein
+  passendes gibt.
+  - Der Dateiname ist der Name des Icons bei Lucide, z. B. `menu.svg`,
+    `x.svg`.
+  - Übernimm den SVG-Code unverändert (`viewBox="0 0 24 24"`,
+    `fill="none"`, `stroke="currentColor"`, `stroke-width="2"`). Entferne
+    nur `width`, `height` und `class`.
 - SVGs werden nicht unter `Resources/Public/` abgelegt. Ausnahme: Ein SVG
   muss öffentlich per URL erreichbar sein (z. B. Favicon unter
   `Resources/Public/Icons/`).
