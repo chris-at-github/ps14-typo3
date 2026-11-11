@@ -107,8 +107,9 @@ confirmation.
 - Never access global variables like `$_GET` or `$_POST` directly. Always use the PSR-7 Request object instead (`$request->getParsedBody()`, `$request->getQueryParams()`).
 
 # Frontend-Konventionen
-Regeln für HTML/Fluid-Markup und SCSS liegen in `.claude/rules/frontend/`
-(Einstieg: `html-bem.md`). Sie werden beim Bearbeiten passender Dateien
+Regeln für HTML/Fluid-Markup, SCSS und JavaScript liegen in
+`.claude/rules/frontend/` (Einstieg: `html-bem.md`, JavaScript:
+`javascript.md`). Sie werden beim Bearbeiten passender Dateien
 automatisch geladen; vor dem Erstellen neuer Templates, Komponenten oder Module
 zusätzlich die jeweilige Komponenten-Spezifikation unter
 `.claude/rules/frontend/components/` lesen.

@@ -23,7 +23,8 @@ den allgemeinen Regeln ihre Spezifikation:
 
 Weitere Regeln: [hierarchy.md](hierarchy.md) (Page, Section, Modul,
 Komponente), [scss.md](scss.md), [svg.md](svg.md),
-[interaction-states.md](interaction-states.md).
+[interaction-states.md](interaction-states.md),
+[javascript.md](javascript.md) (Aufbau interaktiver Komponenten).
 
 ## BEM
 
