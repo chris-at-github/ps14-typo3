@@ -37,11 +37,6 @@ mod.web_layout.BackendLayouts {
   }
 }
 
-TCAdefaults.tt_content {
-  space_before_class.types.div = large
-  space_after_class.types.div = large
-}
-
 TCEFORM.tt_content {
   imageborder.types.image.disabled = 1
 }
