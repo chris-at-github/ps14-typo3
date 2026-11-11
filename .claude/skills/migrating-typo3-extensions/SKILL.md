@@ -113,6 +113,31 @@ only handles PHP):
   acceptable, and verify nothing was lost — confirm XLIFF `trans-unit` ids and
   `<source>` texts are unchanged and the XML still validates.
 
+**FlexForm select lists — by hand** (neither Rector nor Fractor migrates this):
+- Legacy extensions often fill FlexForm select fields through an `itemsProcFunc` that
+  reads the options from TypoScript settings (e.g. `plugin.tx_<ext>.settings` copied to
+  `module.tx_<ext>.settings`). Replace that with fixed `items` in the FlexForm XML and
+  delete the `itemsProcFunc` plus the settings it read. Keep an `itemsProcFunc` only for
+  lists that depend on data (e.g. categories).
+- Project-specific changes to those lists move to Page TSconfig in the sitepackage
+  (e.g. `Configuration/page.tsconfig`), not into the extension:
+  ```typoscript
+  TCEFORM.tt_content.pi_flexform.<CType>.<sheet>.<field> {
+    removeItems = 25-75, 75-25
+    addItems.20-80 = 20 % / 80 %
+    altLabels.50-50 = Equal width
+  }
+  ```
+  Available: `addItems`, `removeItems`, `keepItems`, `altLabels`, `disabled`.
+- The key below `pi_flexform` is the **CType**, because the FlexForm is assigned per
+  type via
+  `$GLOBALS['TCA']['tt_content']['types'][<CType>]['columnsOverrides']['pi_flexform']['config']['ds']`
+  (not via `addPiFlexFormValue`). Project TSconfig that still uses an older key stops
+  working without an error — grep the sitepackage for `pi_flexform` and adjust the keys.
+- Frontend values that depend on a selected option (e.g. image sizes) stay in TypoScript
+  or Site Settings. Document the override in the extension's readme, and check in the
+  backend that the form shows the expected options.
+
 ### 6. Static analysis with PHPStan
 
 Rector/Fractor miss real breaking changes; PHPStan finds them in one pass. This is the
@@ -218,6 +243,10 @@ database schema exists.
   Fractor for non-PHP files.
 - **Committing Fractor's output unchecked** — it reformats whole files; verify no
   translation/config content was lost.
+- **Keeping FlexForm option lists in TypoScript settings** — an `itemsProcFunc` that reads
+  settings is not migrated by any tool. Use fixed `items` and let projects override them
+  via Page TSconfig (`TCEFORM.tt_content.pi_flexform.<CType>.<sheet>.<field>`); outdated
+  `pi_flexform` keys in project TSconfig fail without an error.
 - **Skipping PHPStan after the automated tools** — it is what catches trait-less
   `renderStatic`, removed classes, and signature incompatibilities Rector/Fractor miss.
 - **Trusting a green Rector/Fractor run as "done"** — the extension may still fatal on
