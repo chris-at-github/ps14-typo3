@@ -1,3 +1,121 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Imports
+@use "../mixins/utilities" as utility;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+// Aufbau: Inhalt (Marke [colPos 20] + Navigation [colPos 21]) und Meta-Zeile (Copyright + rechtliche Navigation).
+// Die Inhalte sind normale Inhaltselemente; ihre Styles liegen in den jeweiligen Modulen und Komponenten.
 .page-footer {
-    display: none;
+    // Farben: Der Footer liegt auf --color-neutral-100, die Standardwerte der Navigation waeren darauf nicht sichtbar
+    --color-muted: var(--color-neutral-700);
+    --navigation-description-color: var(--color-neutral-700);
+    --navigation-icon-background-color: var(--color-neutral-200);
+    --navigation-active-background-color: var(--color-neutral-200);
+    --navigation-active-icon-background-color: var(--color-neutral-300);
+
+    padding: var(--spacing-64) var(--container-spacing-x) var(--spacing-32);
+    font-size: var(--font-size-small);
+    color: var(--color-font);
+    background-color: var(--color-neutral-100);
+
+    @media (width <= 600px) {
+        padding-top: var(--spacing-48);
+    }
+}
+
+// Unsichtbare Ueberschrift des Footers; alle Ueberschriften der Inhaltselemente liegen als h3 darunter
+.page-footer__title {
+    @include utility.visually-hidden;
+}
+
+.page-footer__inner {
+    max-width: var(--container-width-default);
+    margin-inline: auto;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Inhalt: Marke + Navigation
+// Die Navigation uebernimmt die Spalten per Subgrid: Jedes Inhaltselement belegt eine Spalte.
+.page-footer__content {
+    display: grid;
+    grid-template-areas: "brand navigation navigation navigation";
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    gap: var(--spacing-40);
+    padding-bottom: var(--spacing-48);
+
+    @media (width <= 860px) {
+        grid-template-areas:
+            "brand brand brand"
+            "navigation navigation navigation";
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (width <= 600px) {
+        grid-template-areas:
+            "brand brand"
+            "navigation navigation";
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--spacing-32) var(--spacing-24);
+    }
+
+    @media (width <= 380px) {
+        grid-template-areas:
+            "brand"
+            "navigation";
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.page-footer__brand,
+.page-footer__navigation {
+    // Die Inhaltselemente (.section--outer) erhalten im Footer keinen eigenen Seitenabstand
+    --container-spacing-x: 0;
+}
+
+.page-footer__brand {
+    display: flex;
+    flex-direction: column;
+    grid-area: brand;
+    gap: var(--spacing-24);
+    max-width: 320px; // Laufweite des Textes begrenzen
+}
+
+.page-footer__navigation {
+    display: grid;
+    grid-area: navigation;
+    grid-template-columns: subgrid;
+    gap: inherit;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Meta: Copyright + rechtliche Navigation
+.page-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-12) var(--spacing-32);
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: var(--spacing-24);
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-ruler);
+
+    @media (width <= 600px) {
+        flex-direction: column;
+    }
+}
+
+.page-footer__meta-list {
+    // Die Links ragen um ihr Padding (8px) aus der Liste: 24px Abstand ergeben 8px Luft zwischen den Hover-Flaechen
+    --navigation-list-gap: 0 var(--spacing-24);
+
+    flex-flow: row wrap;
+}
+
+// Button zum Oeffnen der Cookie-Einstellungen: sieht aus wie die Links der Navigation
+.page-footer__consent-button {
+    appearance: none;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 }

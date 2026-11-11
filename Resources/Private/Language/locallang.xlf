@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2026-11-11T00:00:00Z" product-name="ps14_site">
+        <header/>
+        <body>
+            <trans-unit id="page-footer.title">
+                <source>Footer</source>
+            </trans-unit>
+            <trans-unit id="page-footer.meta-navigation">
+                <source>Legal information</source>
+            </trans-unit>
+            <trans-unit id="page-footer.consent-settings">
+                <source>Cookie settings</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -6,6 +6,12 @@
             <trans-unit id="pages.navigation-layout.card">
                 <target>Karten</target>
             </trans-unit>
+            <trans-unit id="backend-layout.footer.brand">
+                <target>Footer: Marke (Text, Social Media)</target>
+            </trans-unit>
+            <trans-unit id="backend-layout.footer.navigation">
+                <target>Footer: Navigation (eine Spalte je Element)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

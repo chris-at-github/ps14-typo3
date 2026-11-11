@@ -22,13 +22,20 @@ page {
       breadcrumb < navigation.breadcrumb
       navigationMain < navigation.main
       navigationMeta < navigation.meta
-      navigationFooter < navigation.footer
       navigationLanguage < navigation.language
-      navigationSocial < navigation.social
     }
 
     dataProcessing {
       150 = TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+
+      // Rechtliche Navigation im Footer (Ausgabe in Partials/Page/Layout/Footer.html)
+      200 = menu
+      200 {
+        special = directory
+        special.value = {$navigation.footer}
+        levels = 1
+        as = navigationFooter
+      }
 
       // Navigationen
       #			10 < navigation.main

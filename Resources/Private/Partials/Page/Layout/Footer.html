@@ -1,0 +1,35 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:co="http://typo3.org/ns/Ps14/Component/Components/ComponentCollection"
+    data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <footer class="page__footer page-footer" id="page-footer" aria-labelledby="page-footer-title">
+            <h2 class="page-footer__title" id="page-footer-title"><f:translate key="page-footer.title" domain="ps14_site.messages" /></h2>
+
+            <div class="page-footer__inner">
+                <f:cObject typoscriptObjectPath="block.footerContent" />
+
+                <div class="page-footer__meta">
+                    <p class="page-footer__copyright">© <f:format.date date="now" format="Y" /> {site.configuration.websiteTitle}</p>
+
+                    <f:if condition="{navigationFooter} || {site.settings.consent.settingsButton}">
+                        <co:navigation title="{f:translate(key: 'page-footer.meta-navigation', domain: 'ps14_site.messages')}" class="page-footer__meta-navigation">
+                            <co:navigation.list class="page-footer__meta-list">
+                                <f:for each="{navigationFooter}" as="page">
+                                    <co:navigation.list.item link="{page.link}" target="{page.target}" current="{page.current}">{page.title}</co:navigation.list.item>
+                                </f:for>
+                                <f:if condition="{site.settings.consent.settingsButton}">
+                                    <li class="navigation-list__item">
+                                        <button class="navigation-list__link page-footer__consent-button" type="button" data-consent-settings>
+                                            <span class="navigation-list__title"><f:translate key="page-footer.consent-settings" domain="ps14_site.messages" /></span>
+                                        </button>
+                                    </li>
+                                </f:if>
+                            </co:navigation.list>
+                        </co:navigation>
+                    </f:if>
+                </div>
+            </div>
+        </footer>
+    </f:section>
+</html>

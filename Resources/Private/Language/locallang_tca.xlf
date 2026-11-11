@@ -6,6 +6,12 @@
             <trans-unit id="pages.navigation-layout.card">
                 <source>Cards</source>
             </trans-unit>
+            <trans-unit id="backend-layout.footer.brand">
+                <source>Footer: brand (text, social media)</source>
+            </trans-unit>
+            <trans-unit id="backend-layout.footer.navigation">
+                <source>Footer: navigation (one column per element)</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

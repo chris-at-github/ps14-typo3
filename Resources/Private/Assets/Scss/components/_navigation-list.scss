@@ -10,6 +10,7 @@
     --navigation-list-link-gap: var(--spacing-12);
     --navigation-list-link-padding-x: var(--spacing-8);
     --navigation-list-link-padding-y: var(--spacing-8);
+    --navigation-list-link-line-height: 1.3; // nur der Zeilenabstand bei Umbruch, die Hoehe steuert das Padding
     --navigation-list-link-current-font-weight: var(--font-weight-semibold);
     --navigation-list-icon-size: 24px;
     --navigation-list-icon-link-size: 44px;
@@ -40,9 +41,24 @@
     align-items: center;
     margin-inline: calc(var(--navigation-list-link-padding-x) * -1);
     padding: var(--navigation-list-link-padding-y) var(--navigation-list-link-padding-x);
+    line-height: var(--navigation-list-link-line-height);
     color: var(--navigation-font-color);
     text-decoration: none;
     border-radius: var(--border-radius-default);
+}
+
+// Text-Box auf Versalhoehe und Grundlinie beschneiden: Der Zeilenabstand erzeugt keinen Leerraum ueber und unter dem
+// Text, die Hoehe des Links ergibt sich allein aus dem Padding. Unterlaengen (g, y) ragen in das Padding.
+// Ohne Unterstuetzung (z. B. Firefox) bleibt das kleinere Padding mit dem Zeilenabstand als Leerraum.
+@supports (text-box-trim: trim-both) {
+    :root {
+        --navigation-list-link-padding-y: var(--spacing-12);
+    }
+
+    .navigation-list__title {
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+    }
 }
 
 .navigation-list__link[aria-current="page"] {
@@ -71,6 +87,8 @@
 .navigation-list--listing {
     --navigation-list-gap: var(--spacing-4);
     --navigation-list-link-gap: var(--spacing-16);
+    --navigation-list-link-padding-y: var(--spacing-8);
+    --navigation-list-link-line-height: var(--font-line-height);
 
     .navigation-list__link {
         display: grid;
@@ -107,6 +125,7 @@
         align-self: end;
         font-weight: var(--font-weight-semibold);
         line-height: var(--display-line-height);
+        text-box-trim: none; // Titel und Beschreibung stehen untereinander und behalten ihren Zeilenabstand
     }
 
     .navigation-list__title:last-child {
