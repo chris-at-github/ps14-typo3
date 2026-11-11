@@ -1,5 +1,10 @@
 // ---------------------------------------------------------------------------------------------------------------------
 // HTML
+html {
+    // Sprungmarken landen unterhalb des fixierten Headers, nicht dahinter
+    scroll-padding-top: var(--page-header-height);
+}
+
 body {
     font-family: var(--font-family-default);
     font-size: var(--font-size-normal);
@@ -28,7 +33,7 @@ a {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-top: var(--page-body-offset);
+    padding-top: var(--page-header-offset); // Der Header ist immer fixiert: Der Inhalt beginnt mit einem festen Abstand
 }
 
 .page__main {

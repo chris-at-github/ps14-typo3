@@ -80,8 +80,8 @@
 
     // -------------------------------------------------------------------------------------------------------------------
     // Page Header
-    --page-header-height: 0;
-    --page-body-offset: 0;
+    --page-header-height: 152px; // Hoehe des fixierten Headers (mobil: siehe layout/_header.scss)
+    --page-header-offset: var(--page-header-height); // Abstand, mit dem der Inhalt unter dem fixierten Header beginnt
 
     // -------------------------------------------------------------------------------------------------------------------
     // Container

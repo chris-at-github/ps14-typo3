@@ -1,0 +1,61 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+// Hauptnavigation im Seiten-Header. Die Eintraege sind navigation-items (components/_navigation-item.scss).
+// Technisch ist bisher nur die erste Ebene umgesetzt, die zweite Ebene ist fest ausgeblendet.
+.main-menu {
+    display: flex;
+    gap: var(--spacing-8);
+    list-style: none;
+
+    @media (width <= 860px) {
+        flex-direction: column;
+        gap: 0;
+        padding-block: var(--spacing-8) var(--spacing-24);
+    }
+}
+
+.main-menu__list {
+    display: none;
+}
+
+// Die Eintraege ragen nicht aus der Liste: Ihre Flaeche ist beim aktiven Eintrag immer sichtbar
+.main-menu__link {
+    --navigation-item-padding-x: var(--spacing-16);
+
+    margin-inline: 0;
+    font-size: var(--font-size-large);
+
+    @media (width <= 860px) {
+        --navigation-item-padding-x: calc(var(--container-spacing-x) - 3px); // abzueglich der Linie am linken Rand
+        --navigation-item-padding-y: var(--spacing-12);
+
+        border-left: 3px solid transparent;
+        border-radius: 0;
+
+        // Der Eintrag reicht bis an den Rand des Off-Canvas: Die Outline liegt innen, sonst wird sie abgeschnitten
+        &:focus-visible {
+            outline-offset: -2px;
+        }
+    }
+}
+
+// Aktive Seite bzw. aktiver Bereich: am Desktop eine Linie unter dem Eintrag, im Off-Canvas am linken Rand.
+// Die Linie ist ein eigenes Element, damit sie gerade bleibt (der Eintrag selbst ist rundum abgerundet).
+.main-menu__link--active,
+.main-menu__link[aria-current="page"] {
+    @media (width > 860px) {
+        position: relative;
+
+        &::after {
+            position: absolute;
+            inset: auto calc(var(--navigation-item-padding-x) - 1px) 0; // ragt je 1px ueber den Text hinaus
+            height: 2px;
+            content: "";
+            background-color: var(--color-important);
+        }
+    }
+
+    @media (width <= 860px) {
+        border-left-color: var(--color-important);
+    }
+}

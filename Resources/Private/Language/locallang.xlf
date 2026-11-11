@@ -3,6 +3,24 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2026-11-11T00:00:00Z" product-name="ps14_site">
         <header/>
         <body>
+            <trans-unit id="page-header.logo">
+                <source>%s – go to homepage</source>
+            </trans-unit>
+            <trans-unit id="page-header.main-navigation">
+                <source>Main navigation</source>
+            </trans-unit>
+            <trans-unit id="page-header.meta-navigation">
+                <source>Service</source>
+            </trans-unit>
+            <trans-unit id="page-header.language-navigation">
+                <source>Language</source>
+            </trans-unit>
+            <trans-unit id="page-header.menu-open">
+                <source>Open menu</source>
+            </trans-unit>
+            <trans-unit id="page-header.menu-close">
+                <source>Close menu</source>
+            </trans-unit>
             <trans-unit id="page-footer.title">
                 <source>Footer</source>
             </trans-unit>

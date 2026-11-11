@@ -1,0 +1,51 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers"
+    xmlns:co="http://typo3.org/ns/Ps14/Component/Components/ComponentCollection"
+    data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <header class="page__header page-header" id="page-header">
+            <div class="page-header__inner">
+                <f:render section="Logo" arguments="{site: site}" />
+
+                <f:comment><!-- Meta-Menü und Sprachwechsel werden doppelt ausgegeben, damit die Tab-Reihenfolge am Desktop (vor der Hauptnavigation) und im Off-Canvas (nach der Hauptnavigation) der Darstellung entspricht. Die jeweils andere Kopie ist per display: none ausgeblendet. --></f:comment>
+                <f:render section="Meta" arguments="{navigationMeta: navigationMeta, navigationLanguage: navigationLanguage, variant: 'bar'}" />
+
+                <nav
+                    class="page-header__navigation off-canvas"
+                    aria-label="{f:translate(key: 'page-header.main-navigation', domain: 'ps14_site.messages')}"
+                    data-label-open="{f:translate(key: 'page-header.menu-open', domain: 'ps14_site.messages')}"
+                    data-label-close="{f:translate(key: 'page-header.menu-close', domain: 'ps14_site.messages')}">
+                    <button class="button button--icon off-canvas__toggle page-header__toggle" type="button" aria-expanded="false" aria-controls="page-header-off-canvas" aria-label="{f:translate(key: 'page-header.menu-open', domain: 'ps14_site.messages')}">
+                        <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/menu.svg" class="button__icon" />
+                    </button>
+
+                    <div class="off-canvas__container" id="page-header-off-canvas">
+                        <div class="off-canvas__header">
+                            <f:render section="Logo" arguments="{site: site}" />
+                            <co:button.icon icon="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/x.svg" label="{f:translate(key: 'page-header.menu-close', domain: 'ps14_site.messages')}" class="off-canvas__close" />
+                        </div>
+
+                        <div class="off-canvas__body">
+                            <f:render partial="Page/Navigation/Main" section="Main" arguments="{navigationMain: navigationMain}" />
+                            <f:render section="Meta" arguments="{navigationMeta: navigationMeta, navigationLanguage: navigationLanguage, variant: 'off-canvas'}" />
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+    </f:section>
+
+    <f:section name="Logo">
+        <f:link.page pageUid="{site.configuration.rootPageId}" class="page-header__logo" additionalAttributes="{aria-label: '{f:translate(key: \'page-header.logo\', domain: \'ps14_site.messages\', arguments: {0: site.configuration.websiteTitle})}'}">
+            <fo:svg.inline source="{site.settings.layout.logoFilepath}" class="page-header__logo-object" />
+        </f:link.page>
+    </f:section>
+
+    <f:section name="Meta">
+        <div class="page-header__meta page-header__meta--{variant}">
+            <f:render partial="Page/Navigation/Meta" section="Main" arguments="{navigationMeta: navigationMeta}" />
+            <f:render partial="Page/Navigation/Language" section="Main" arguments="{navigationLanguage: navigationLanguage}" />
+        </div>
+    </f:section>
+</html>

@@ -21,12 +21,14 @@
 @use "components/navigation";
 @use "components/navigation-item";
 @use "components/ruler";
+@use "components/off-canvas";
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Layout
 @use "layout/section";
 @use "layout/main";
 @use "layout/header";
+@use "layout/main-menu";
 @use "layout/footer";
 
 // ---------------------------------------------------------------------------------------------------------------------

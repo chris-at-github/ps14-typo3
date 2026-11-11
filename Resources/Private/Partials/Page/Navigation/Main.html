@@ -1,0 +1,30 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:comment><!-- Hauptnavigation: Liste innerhalb der <nav> des Seiten-Headers (Partials/Page/Layout/Header.html). Die zweite Ebene wird ausgegeben, ist aber noch per CSS ausgeblendet. --></f:comment>
+    <f:section name="Main">
+        <ul class="main-menu">
+            <f:for each="{navigationMain}" as="page">
+                <li class="main-menu__item">
+                    <f:render section="Link" arguments="{page: page}" />
+
+                    <f:if condition="{page.children}">
+                        <ul class="main-menu__list">
+                            <f:for each="{page.children}" as="child">
+                                <li class="main-menu__list-item">
+                                    <f:render section="Link" arguments="{page: child}" />
+                                </li>
+                            </f:for>
+                        </ul>
+                    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="Link">
+        <a class="navigation-item main-menu__link{f:if(condition: page.active, then: ' main-menu__link--active')}" href="{page.link}" target="{page.target}" aria-current="{f:if(condition: page.current, then: 'page')}">
+            <span class="navigation-item__title">{page.title}</span>
+        </a>
+    </f:section>
+</html>

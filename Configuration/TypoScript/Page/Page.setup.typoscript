@@ -20,9 +20,6 @@ page {
 
     variables {
       breadcrumb < navigation.breadcrumb
-      navigationMain < navigation.main
-      navigationMeta < navigation.meta
-      navigationLanguage < navigation.language
     }
 
     dataProcessing {
@@ -35,6 +32,31 @@ page {
         special.value = {$navigation.footer}
         levels = 1
         as = navigationFooter
+      }
+
+      // Navigationen im Header (Ausgabe in Partials/Page/Layout/Header.html)
+      // Hauptnavigation: Die zweite Ebene wird ausgegeben, aber noch per CSS ausgeblendet
+      210 = menu
+      210 {
+        special = directory
+        special.value = {$navigation.main}
+        levels = 2
+        expandAll = 1
+        as = navigationMain
+      }
+
+      220 = menu
+      220 {
+        special = directory
+        special.value = {$navigation.meta}
+        levels = 1
+        as = navigationMeta
+      }
+
+      230 = language-menu
+      230 {
+        languages = {$navigation.language}
+        as = navigationLanguage
       }
 
       // Navigationen
