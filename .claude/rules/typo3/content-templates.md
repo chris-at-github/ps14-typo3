@@ -91,5 +91,7 @@ paths:
 - `ps14_menu` stellt die FlexForm-Optionen als `{options}` bereit
   (`includeNotInMenu`, `showIcon`, `showDescription`) und das Seiten-Icon
   als `{page.icon.0}`.
-- Markup und SCSS der Linkliste folgen
-  `.claude/rules/frontend/components/navigation-list.md`.
+- Varianten (`listing`, `icon`) werden als `variant` an `co:navigation`
+  (Liste) und an jedes `co:navigation.list.item` (Eintrag) übergeben.
+- Markup und SCSS der Navigation folgen
+  `.claude/rules/frontend/components/navigation.md`.

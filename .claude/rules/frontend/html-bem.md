@@ -18,7 +18,7 @@ den allgemeinen Regeln ihre Spezifikation:
 | Card | Kachel, Teaser | [components/card.md](components/card.md) |
 | Badge | Pill, Tag | [components/badge.md](components/badge.md) |
 | Adresse | Standort, Kontakt | [components/address.md](components/address.md) |
-| Navigation List | Linkliste, Sitemap, Auflistung interner Links, „Mehr zum Thema“ | [components/navigation-list.md](components/navigation-list.md) |
+| Navigation | Linkliste, Sitemap, Auflistung interner Links, „Mehr zum Thema“, Icon-Menü | [components/navigation.md](components/navigation.md) |
 | Richtext | Fließtext, RTE-Inhalt | [components/richtext.md](components/richtext.md) |
 
 Weitere Regeln: [hierarchy.md](hierarchy.md) (Page, Section, Modul,

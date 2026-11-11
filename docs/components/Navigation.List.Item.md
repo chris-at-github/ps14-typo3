@@ -1,9 +1,9 @@
 # Navigation.List.Item
 
 ## Beschreibung
-Die `<co:navigation.list.item>`-Komponente rendert einen Eintrag einer Navigation List: das `<li class="navigation-list__item">` mit dem Link `<a class="navigation-list__link">`, optionalem Icon, Titel und optionaler Beschreibung. Der Link wird über `f:link.typolink` erzeugt und unterstützt daher interne, externe, Download- und Anker-Links.
+Die `<co:navigation.list.item>`-Komponente rendert einen Eintrag einer Navigation: das `<li class="navigation__item">` mit dem Link `<a class="navigation-item">` (eigener BEM-Block), optionalem Icon, Titel und optionaler Beschreibung. Der Link wird über `f:link.typolink` erzeugt und unterstützt daher interne, externe, Download- und Anker-Links.
 
-Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die das `<ul class="navigation-list">` rendert.
+Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die das `<ul class="navigation__list">` rendert.
 
 ## Aufruf
 ```html
@@ -13,18 +13,19 @@ Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die da
 ## Parameter
 | Parameter     | Typ    | Pflicht | Standard | Beschreibung |
 |---------------|--------|---------|----------|--------------|
+| `variant`     | string | nein    | –        | Modifier für die Ansicht des Links, z. B. `listing` → `navigation-item--listing`, `icon` → `navigation-item--icon` |
 | `link`        | string | nein    | –        | Link-Angabe (URL, `t3://`-URI o. ä.), ausgewertet über `f:link.typolink` |
 | `target`      | string | nein    | –        | Zielfenster des Links, z. B. `_blank` |
 | `current`     | bool   | nein    | –        | Markiert den Link als aktuelle Seite (`aria-current="page"`) |
-| `icon`        | mixed  | nein    | –        | Voller EXT-Pfad zur SVG-Datei oder Datei-Referenz (z. B. das Icon einer Seite); eingebettet über `fo:svg.inline` mit der Klasse `navigation-list__icon` |
-| `description` | string | nein    | –        | Beschreibung unter dem Titel; wird in `<span class="navigation-list__description">` ausgegeben |
-| `headerLayout` | integer | nein   | –        | Überschriften-Typ des Titels (1–6); der Titel wird dann über `co:heading` als `<h1>`–`<h6>` mit der Klasse `navigation-list__title` ausgegeben, ohne Angabe als `<span>` |
+| `icon`        | mixed  | nein    | –        | Voller EXT-Pfad zur SVG-Datei oder Datei-Referenz (z. B. das Icon einer Seite); eingebettet über `fo:svg.inline` mit der Klasse `navigation-item__icon` |
+| `description` | string | nein    | –        | Beschreibung unter dem Titel; wird in `<span class="navigation-item__description">` ausgegeben |
+| `headerLayout` | integer | nein   | –        | Überschriften-Typ des Titels (1–6); der Titel wird dann über `co:heading` als `<h1>`–`<h6>` mit der Klasse `navigation-item__title` ausgegeben, ohne Angabe als `<span>` |
 | `class`       | string | nein    | –        | Zusätzliche CSS-Klassen für den Eintrag (`<li>`) |
 
 ## Slot
 | Slot          | Beschreibung |
 |---------------|--------------|
-| Standard-Slot | Titel des Links; wird in `<span class="navigation-list__title">` ausgegeben (mit `headerLayout` als Überschrift) |
+| Standard-Slot | Titel des Links; wird in `<span class="navigation-item__title">` ausgegeben (mit `headerLayout` als Überschrift) |
 
 ## Beispiele
 
@@ -42,7 +43,7 @@ Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die da
 
 ### Eintrag mit Beschreibung
 ```html
-<co:navigation.list.item link="t3://page?uid=12" description="Kurzer Text zur Seite">Unterseite</co:navigation.list.item>
+<co:navigation.list.item variant="listing" link="t3://page?uid=12" description="Kurzer Text zur Seite">Unterseite</co:navigation.list.item>
 ```
 
 ### Aktuelle Seite markieren
@@ -65,9 +66,10 @@ Die Komponente wird immer innerhalb von `<co:navigation.list>` verwendet, die da
 
 ### Seiten-Icon und Zusammenfassung (`ps14_menu`)
 ```html
-<co:navigation.list variant="listing">
+<co:navigation.list>
     <f:for each="{menu}" as="page">
         <co:navigation.list.item
+            variant="listing"
             link="{page.link}"
             current="{page.current}"
             icon="{page.icon.0}"

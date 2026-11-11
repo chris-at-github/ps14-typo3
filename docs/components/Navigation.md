@@ -16,7 +16,7 @@ Die `<co:navigation>`-Komponente rendert ein `<nav>`-Element mit der Klasse `nav
 ## Parameter
 | Parameter   | Typ    | Pflicht | Standard | Beschreibung |
 |-------------|--------|---------|----------|--------------|
-| `variant`   | string | nein    | –        | Modifier, z. B. `"footer"` → `navigation--footer` |
+| `variant`   | string | nein    | –        | Modifier für die Ansicht, z. B. `"listing"` → `navigation--listing`, `"icon"` → `navigation--icon` |
 | `class`     | string | nein    | –        | Zusätzliche CSS-Klassen für das `<nav>`-Element |
 | `title`     | string | nein    | –        | Titel der Navigation; wird als `aria-label` ausgegeben, falls kein `aria-labelledby` verwendet wird |
 | `titleType` | int    | nein    | `100`    | `100` = Titel nur als `aria-label`; jeder andere Wert = sichtbare Überschrift, Verweis per `aria-labelledby` |
@@ -25,18 +25,16 @@ Die `<co:navigation>`-Komponente rendert ein `<nav>`-Element mit der Klasse `nav
 ## Slot
 | Slot          | Beschreibung |
 |---------------|--------------|
-| Standard-Slot | Inhalt der Navigation, z. B. `<co:navigation.title>` und eine Liste mit `<co:navigation.list.item>` |
+| Standard-Slot | Inhalt der Navigation, z. B. `<co:navigation.title>` und `<co:navigation.list>` mit `<co:navigation.list.item>` |
 
 ## Beispiele
 
 ### Navigation mit unsichtbarem Titel
 ```html
 <co:navigation title="Hauptnavigation">
-    <ul class="navigation-list">
-        <li class="navigation-list__item">
-            <co:navigation.list.item link="t3://page?uid=1">Startseite</co:navigation.list.item>
-        </li>
-    </ul>
+    <co:navigation.list>
+        <co:navigation.list.item link="t3://page?uid=1">Startseite</co:navigation.list.item>
+    </co:navigation.list>
 </co:navigation>
 ```
 
@@ -44,17 +42,15 @@ Die `<co:navigation>`-Komponente rendert ein `<nav>`-Element mit der Klasse `nav
 ```html
 <co:navigation title="Mehr zum Thema" titleType="2" id="nav-related">
     <co:navigation.title id="nav-related" type="2">Mehr zum Thema</co:navigation.title>
-    <ul class="navigation-list">
-        <li class="navigation-list__item">
-            <co:navigation.list.item link="t3://page?uid=12">Unterseite</co:navigation.list.item>
-        </li>
-    </ul>
+    <co:navigation.list>
+        <co:navigation.list.item link="t3://page?uid=12">Unterseite</co:navigation.list.item>
+    </co:navigation.list>
 </co:navigation>
 ```
 
 ### Variante und zusätzliche Klasse
 ```html
-<co:navigation variant="footer" class="page__footer-navigation" title="Footer-Navigation">
+<co:navigation variant="icon" class="page-footer__social-navigation" title="Social Media">
     ...
 </co:navigation>
 ```
@@ -70,12 +66,10 @@ Die Überschrift des Inhaltselements dient als Titel. Ist sie verborgen
 
 <co:navigation title="{data.header}" titleType="{data.header_layout}" id="{id}">
     <co:navigation.title id="{id}" type="{data.header_layout}">{data.header}</co:navigation.title>
-    <ul class="navigation-list">
+    <co:navigation.list>
         <f:for each="{menu}" as="page">
-            <li class="navigation-list__item">
-                <co:navigation.list.item link="{page.link}" current="{page.current}">{page.title}</co:navigation.list.item>
-            </li>
+            <co:navigation.list.item link="{page.link}" current="{page.current}">{page.title}</co:navigation.list.item>
         </f:for>
-    </ul>
+    </co:navigation.list>
 </co:navigation>
 ```
