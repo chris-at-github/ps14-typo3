@@ -7,3 +7,5 @@ favicon.pngIconFilepath: 'EXT:ps14_site/Resources/Public/Icons/favicon-96x96.png
 favicon.svgIconFilepath: 'EXT:ps14_site/Resources/Public/Icons/favicon.svg'
 favicon.icoIconFilepath: 'EXT:ps14_site/Resources/Public/Icons/favicon.ico'
 navigation.social: 99
+consent:
+  settingsButton: true
