@@ -240,10 +240,25 @@ Für Komponenten, die sich über die Seite legen. Vorlage:
   - solange die Komponente offen ist, bleibt der Fokus darin: `Tab` springt
     vom letzten zum ersten fokussierbaren Element und umgekehrt
     (`trapFocus(event)`). Berücksichtigt werden nur sichtbare Elemente
-    (`element.getClientRects().length > 0`).
+    (`element.checkVisibility({visibilityProperty: true})`) — so zählen auch
+    Elemente nicht mit, die per `visibility: hidden` überdeckt sind.
 - `Escape` schließt die Komponente. Der `keydown`-Listener hängt dafür am
-  `document` — die einzige erlaubte Ausnahme von der Regel, nur am eigenen
-  Element zu lauschen. Er reagiert nur, wenn `isActive()` zutrifft.
+  `document`. Er reagiert nur, wenn `isActive()` zutrifft.
+- Ein Klick außerhalb schließt Dropdowns über einen `click`-Listener am
+  `document`. `keydown` und `click` am `document` sind die einzigen
+  erlaubten Ausnahmen von der Regel, nur am eigenen Element zu lauschen.
+- Verschachtelte Komponenten (z. B. Hauptmenü im Off-Canvas): Die innere
+  Komponente lauscht am eigenen Element und ruft `event.preventDefault()`
+  auf, wenn sie die Taste verarbeitet. Die äußere ignoriert Events mit
+  `event.defaultPrevented === true`. So schließt `Escape` zuerst nur die
+  innere Ebene.
+- Überdeckt eine Ebene andere Inhalte, werden diese per SCSS über die
+  Zustandsklasse mit `visibility: hidden` aus Tab-Reihenfolge und
+  Screenreader genommen.
+- Schließt sich die äußere Komponente, setzt das Bootstrap die innere über
+  deren Events zurück (`off-canvas.deactivated` → `instance.close(false)`).
+  `initialize()` und `destroy()` lösen dafür ebenfalls ein Event aus
+  (`<block>.initialize`, `<block>.destroy`).
 - Ein Backdrop wird in `activate()` per JavaScript erzeugt und in
   `deactivate()` wieder entfernt; ein Klick darauf schließt die Komponente.
   Seine Klasse steht in den Optionen (`backdropCssClass`).
@@ -316,6 +331,27 @@ Animation abgeschlossen ist.
 - Inline-Styles der Animation werden am Ende gezielt entfernt
   (`style.removeProperty('max-height')`), nicht per
   `removeAttribute('style')`.
+
+### Komponenten mit mehreren Einträgen
+
+Für Komponenten, die mehrere gleichartige Einträge verwalten (z. B.
+Hauptmenü, Tabs). Vorlage: `components/main-menu.js`.
+
+- Der Constructor sammelt je Eintrag ein Objekt mit seinen Elementen und
+  einem eigenen Timer (`{item, toggle, container, timer}`). Die Methoden der
+  Zustandskette erhalten den Eintrag als Argument: `activate(entry)`.
+- Die Zustandsklassen sitzen am Element des Eintrags
+  (`.main-menu__item.is--active`). Der Block erhält zusätzlich `is--active`,
+  solange ein Eintrag offen ist.
+- Ist immer nur ein Eintrag offen, schließt `activate(entry)` zuerst den
+  bisher offenen.
+- Unterscheidet sich die Animation je Ansicht (z. B. Dropdown am Desktop,
+  Einfahren im Off-Canvas), legt das SCSS den Startframe als CSS-Variable
+  fest (`--main-menu-closed-translate`). JavaScript setzt sie als
+  Inline-Style (`style.translate = 'var(--main-menu-closed-translate)'`)
+  und kennt die Ansicht nicht.
+- Braucht das JavaScript doch die Ansicht, liest es sie am DOM ab (z. B.
+  „der Zurück-Button ist sichtbar“), nie über Breakpoints.
 
 ### Events
 
