@@ -3,6 +3,9 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2026-11-06T00:00:00Z" product-name="ps14_site">
         <header/>
         <body>
+            <trans-unit id="pages.navigation-layout.listing">
+                <source>List with icon and description</source>
+            </trans-unit>
             <trans-unit id="pages.navigation-layout.card">
                 <source>Cards</source>
             </trans-unit>

@@ -45,6 +45,8 @@ export class OffCanvas {
     }
 
     this.element.classList.add(this.options.initializedCssClass);
+
+    this.element.dispatchEvent(new CustomEvent('off-canvas.initialize'));
   }
 
   // Stellt das ursprüngliche Markup wieder her: Der Inhalt wird wieder ganz normal dargestellt.
@@ -75,6 +77,8 @@ export class OffCanvas {
       this.options.deactivateCssClass,
       this.options.initializedCssClass,
     );
+
+    this.element.dispatchEvent(new CustomEvent('off-canvas.destroy'));
   }
 
   handleToggle() {
@@ -92,7 +96,9 @@ export class OffCanvas {
   }
 
   handleKeydown(event) {
-    if (this.isActive() === false) {
+    // Hat eine Komponente im Off-Canvas die Taste bereits verarbeitet (z. B. das Hauptmenü schließt seine
+    // zweite Ebene), bleibt das Off-Canvas unverändert.
+    if (this.isActive() === false || event.defaultPrevented === true) {
       return;
     }
 
@@ -129,7 +135,7 @@ export class OffCanvas {
 
   getFocusable() {
     return Array.from(this.container.querySelectorAll(this.options.focusableSelector))
-      .filter((element) => element.getClientRects().length > 0);
+      .filter((element) => element.checkVisibility({visibilityProperty: true}) === true);
   }
 
   activate(animate = true) {

@@ -35,7 +35,7 @@ page {
       }
 
       // Navigationen im Header (Ausgabe in Partials/Page/Layout/Header.html)
-      // Hauptnavigation: Die zweite Ebene wird ausgegeben, aber noch per CSS ausgeblendet
+      // Hauptnavigation mit zwei Ebenen: Die zweite Ebene zeigt Icon (tx_foundation_icon) und Beschreibung (abstract)
       210 = menu
       210 {
         special = directory
@@ -43,6 +43,14 @@ page {
         levels = 2
         expandAll = 1
         as = navigationMain
+
+        dataProcessing {
+          20 = files
+          20 {
+            as = icon
+            references.fieldName = tx_foundation_icon
+          }
+        }
       }
 
       220 = menu

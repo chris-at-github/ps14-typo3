@@ -21,6 +21,9 @@
             <trans-unit id="page-header.menu-close">
                 <source>Close menu</source>
             </trans-unit>
+            <trans-unit id="main-menu.back">
+                <source>Back</source>
+            </trans-unit>
             <trans-unit id="page-footer.title">
                 <source>Footer</source>
             </trans-unit>

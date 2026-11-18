@@ -63,6 +63,7 @@
         "title"
         "description";
     grid-template-columns: minmax(0, 1fr);
+    align-items: start;
     row-gap: 0;
 
     &:has(.navigation-item__icon) {

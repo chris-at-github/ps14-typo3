@@ -12,6 +12,8 @@
 // Der Header ist immer fixiert, der Inhalt beginnt mit --page-header-offset (siehe .page in layout/_main.scss). So
 // springt die Seite beim Scrollen nicht. Aufbau: Logo, Meta (Meta-Menue + Sprachwechsel) und Hauptnavigation.
 .page-header {
+    --page-header-spacing-y: var(--spacing-20); // fester Abstand oben und unten
+
     position: fixed;
     top: 0;
     left: 0;
@@ -39,7 +41,7 @@
     max-width: var(--container-width-default);
     height: 100%;
     margin-inline: auto;
-    padding-block: var(--spacing-20);
+    padding-block: var(--page-header-spacing-y);
 
     @media (width <= 860px) {
         grid-template-areas: "logo navigation";
@@ -197,12 +199,14 @@
 .page-header__navigation {
     --off-canvas-enabled: 0;
 
+    position: relative; // Bezugsrahmen fuer das Dropdown der Hauptnavigation (layout/_main-menu.scss)
     grid-area: navigation;
     justify-self: start;
 
     @media (width <= 860px) {
         --off-canvas-enabled: 1;
 
+        position: static;
         justify-self: end; // Burger-Button rechts
     }
 }
@@ -215,5 +219,10 @@
 
     .page-header__toggle {
         display: inline-flex;
+    }
+
+    // Ist die zweite Ebene der Hauptnavigation geoeffnet, ist das Meta-Menue ueberdeckt und nicht erreichbar
+    .page-header__navigation:has(.main-menu.is--active) .page-header__meta--off-canvas {
+        visibility: hidden;
     }
 }
