@@ -29,10 +29,10 @@
         "b13/container": "^4.1",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
-        "ps14/ps14_component": "@dev",
-        "ps14/ps14_container": "@dev",
-        "ps14/ps14_foundation": "@dev",
-        "ps14/ps14_menu": "@dev",
+        "ps14/ps14_component": "^14.0@dev",
+        "ps14/ps14_container": "^14.0@dev",
+        "ps14/ps14_foundation": "^14.0@dev",
+        "ps14/ps14_menu": "^14.0@dev",
         "ps14/ps14_site": "@dev",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",
@@ -66,8 +66,31 @@
             "type": "path",
             "url": "./packages/*",
             "options": {
-                "symlink": true
+                "symlink": true,
+                "versions": {
+                    "ps14/ps14_component": "14.x-dev",
+                    "ps14/ps14_container": "14.x-dev",
+                    "ps14/ps14_foundation": "14.x-dev",
+                    "ps14/ps14_menu": "14.x-dev"
+                }
             }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-component.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-container.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-foundation.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-menu.git"
         }
-    ]
+    ],
+    "prefer-stable": true
 }

@@ -17,28 +17,43 @@ denselben Regeln, haben aber eigene Zuständigkeiten (siehe `CLAUDE.md`).
 
 ## Repository und Branches
 
-- Jede Extension ist ein eigenes Git-Repository unter `packages/<extension_key>`
-  (im Hauptrepo per `/packages/` ignoriert). Klone per HTTPS und setze danach
-  `origin` auf die SSH-URL (`git@github.com:…`), da SSH in DDEV/WSL nicht immer
-  verfügbar ist.
-- Die Entwicklung für TYPO3 v14 läuft auf `v14-dev`. Ältere Stände (z. B. v12
-  für bestehende Projekte) bleiben auf `master` bzw. ihrem Branch und werden
-  nicht überschrieben.
-- Feature-Branches `feature/<name>` zweigen von `v14-dev` ab und werden per
-  Squash nach `v14-dev` gemergt.
+- Jede Extension ist ein eigenes Git-Repository
+  (`github.com/chris-at-github/ps14-<name>`). Zum Entwickeln wird sie unter
+  `packages/<extension_key>` geklont (im Hauptrepo per `/packages/`
+  ignoriert). Klone per HTTPS und setze danach `origin` auf die SSH-URL
+  (`git@github.com:…`), da SSH in DDEV/WSL nicht immer verfügbar ist.
+- `main` ist die aktuelle Major (TYPO3 14) und Default-Branch auf GitHub.
+  Ältere Majors liegen auf Wartungsbranches (`13.x`, `12.x`) und werden nicht
+  überschrieben. Kunden-Branches werden nicht mehr angelegt —
+  Projektanpassungen gehören in `ps14_site`.
+- Feature-Branches `feature/<name>` zweigen von `main` ab und werden per
+  Squash nach `main` gemergt.
+
+## Versionierung und Release
+
+- Gemeinsame Pakete (`ps14_foundation`, `ps14_component`, `ps14_container`,
+  `ps14_menu`) werden mit annotierten Tags `MAJOR.MINOR.PATCH` ohne `v`
+  versioniert; Major = TYPO3-Version (`14.x.x`). Patch für Bugfixes, Minor
+  für neue Funktionen, Breaking Changes nur mit neuer TYPO3-Major.
+- Release-Ablauf: Squash-Merge nach `main` → `version` in `ext_emconf.php`
+  anheben und committen → `git tag -a 14.1.0 -m "14.1.0"`. Push von `main`
+  und Tags übernimmt der Nutzer (`git push origin main --follow-tags`).
+- Projekte übernehmen ein Release mit `ddev composer update 'ps14/*'`.
 
 ## Metadaten
 
 - `composer.json`:
   - Paketname `ps14/<extension_key>` (z. B. `ps14/ps14_container`).
-  - `require`: `php: ^8.4`, `typo3/cms-core: ^14.3`, eigene Pakete als `@dev`
-    (z. B. `ps14/ps14_foundation`), Fremdpakete mit Versions-Constraint.
+  - `require`: `php: ^8.4`, `typo3/cms-core: ^14.3`, eigene Pakete mit
+    `^14.0` (z. B. `ps14/ps14_foundation`, nie `@dev`), Fremdpakete mit
+    Versions-Constraint.
   - `license: proprietary`, `homepage: https://ps14.de/`, Autor wie in den
     bestehenden Extensions.
   - `extra.typo3/cms.extension-key` und
-    `extra.branch-alias: {"dev-v14-dev": "14.0.x-dev"}`.
+    `extra.branch-alias: {"dev-main": "14.x-dev"}`.
   - `autoload` nur, wenn es `Classes/` gibt.
-- `ext_emconf.php`: `version` `14.0.0`, `depends` passend zu `composer.json`
+- `ext_emconf.php`: `version` = aktuelles Release, `depends` passend zu
+  `composer.json`
   (`typo3` `14.0.0-14.99.99`, abhängige Extensions mit Versionsbereich).
 - Lösche leere oder überflüssige Dateien (`ext_localconf.php` ohne Inhalt,
   `Services.yaml` ohne `Classes/`, leere Konstanten-Dateien, ungenutzte
@@ -46,15 +61,32 @@ denselben Regeln, haben aber eigene Zuständigkeiten (siehe `CLAUDE.md`).
 
 ## Einbindung ins Hauptprojekt
 
-- Installation mit `ddev composer require ps14/<extension_key>:@dev` (Path-Repo
-  `packages/*` ist eingerichtet). Der Befehl ist nicht freigegeben — frage
-  vorher nach. Danach `ddev typo3 extension:setup -e <extension_key>` und
-  `ddev typo3 cache:flush`.
-- Trage die Extension in die Linter des Hauptrepos ein:
-  - `.php-cs-fixer.dist.php` (Finder `in([...])`)
-  - `phpstan.neon` (`paths`: `Classes`, `Configuration`, ggf.
+- Gemeinsame Pakete kommen als Release aus GitHub. Ein neues Paket wird im
+  Hauptrepo so eingebunden:
+  - GitHub-Repo `ps14-<name>` anlegen (Default-Branch `main`) und zum
+    Composer-Token hinzufügen (Fine-grained, Contents read-only; Token liegt
+    in `~/.ddev/homeadditions/.composer/auth.json`) — beides macht der
+    Nutzer.
+  - In der Root-`composer.json`: VCS-Eintrag
+    `{"type": "vcs", "url": "https://github.com/chris-at-github/ps14-<name>.git"}`,
+    `"ps14/<extension_key>": "14.x-dev"` unter
+    `repositories[path].options.versions` und in `require`
+    `"ps14/<extension_key>": "^14.0@dev"`.
+  - In `build/check-composer-lock.js` in `SHARED_PACKAGES` aufnehmen.
+  - `ddev composer update 'ps14/*'` (nicht freigegeben — frage vorher nach),
+    danach `ddev typo3 extension:setup -e <extension_key>` und
+    `ddev typo3 cache:flush`.
+- Zum Entwickeln das Paket nach `packages/<extension_key>` klonen und
+  `ddev composer update ps14/<extension_key>` ausführen (Symlink,
+  `14.x-dev`). Danach Ordner entfernen und `ddev composer update 'ps14/*'`.
+  Eine `composer.lock` mit Path-Eintrag für ein gemeinsames Paket nie
+  committen (`npm run lint:composer-lock` bricht ab).
+- Trage die Extension in die Linter des Hauptrepos ein (gelintet werden nur
+  Pakete, die unter `packages/` ausgecheckt sind):
+  - `phpstan.paths.php` (`Classes`, `Configuration`, ggf.
     `ext_localconf.php`)
-  - `package.json` → `lint:editorconfig`
+  - `.php-cs-fixer.dist.php` und `lint:editorconfig` erfassen alle Ordner
+    unter `packages/` automatisch.
 - Hat die Extension kein Site Set, liefert sie
   `Configuration/TypoScript/setup.typoscript`. Eingebunden wird es per
   `@import` in

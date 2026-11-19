@@ -1,13 +1,14 @@
 {
   "type": "module",
   "scripts": {
-    "lint": "npm run lint:css && npm run lint:js && npm run lint:editorconfig && npm run lint:php && npm run lint:phpstan",
+    "lint": "npm run lint:composer-lock && npm run lint:css && npm run lint:js && npm run lint:editorconfig && npm run lint:php && npm run lint:phpstan",
+    "lint:composer-lock": "node build/check-composer-lock.js",
     "lint:fix": "npm run lint:css-fix && npm run lint:js-fix && npm run lint:php-fix",
     "lint:css": "stylelint \"packages/ps14_site/Resources/Private/Assets/**/*.{scss,css,sass}\"",
     "lint:css-fix": "stylelint \"packages/ps14_site/Resources/Private/Assets/**/*.{scss,css,sass}\" --fix",
     "lint:js": "eslint .",
     "lint:js-fix": "eslint . --fix",
-    "lint:editorconfig": "editorconfig-checker && editorconfig-checker packages/ps14_site packages/ps14_foundation packages/ps14_component packages/ps14_container packages/ps14_menu",
+    "lint:editorconfig": "editorconfig-checker && editorconfig-checker packages/*/",
     "lint:php": "vendor/bin/php-cs-fixer check --diff",
     "lint:php-fix": "vendor/bin/php-cs-fixer fix",
     "lint:phpstan": "vendor/bin/phpstan analyse --no-progress"

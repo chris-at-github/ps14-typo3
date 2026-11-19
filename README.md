@@ -7,7 +7,7 @@ https://ps14-typo3.ddev.site/typo3
 # Projekt starten (Container hochfahren)
 ddev start
 
-# PHP-Abhängigkeiten installieren
+# PHP-Abhängigkeiten installieren (GitHub-Token, siehe „Gemeinsame Pakete“)
 ddev composer install
 
 # TYPO3-Extensions einrichten und Cache leeren
@@ -42,6 +42,43 @@ ddev composer update                  # Abhängigkeiten aktualisieren
 ddev composer require <paket>         # Paket hinzufügen
 ddev composer remove <paket>          # Paket entfernen
 ```
+
+### Gemeinsame Pakete
+
+`ps14_foundation`, `ps14_component`, `ps14_container` und `ps14_menu` werden
+als getaggte Releases (`14.x.x`, Major = TYPO3-Version) aus GitHub installiert
+(`vendor/ps14/`). `ps14_site` liegt als Path-Paket unter `packages/`.
+
+Voraussetzung ist ein GitHub-Token (Fine-grained, nur die Paket-Repos,
+Contents read-only) in `~/.ddev/homeadditions/.composer/auth.json`, danach
+`ddev restart`:
+
+```json
+{
+    "github-oauth": {
+        "github.com": "github_pat_…"
+    }
+}
+```
+
+```bash
+ddev composer update 'ps14/*'         # Neueste 14.x-Releases übernehmen
+```
+
+**Paket lokal entwickeln:** Liegt ein Paket unter `packages/`, bindet Composer
+es als Symlink (`14.x-dev`) statt des Releases ein.
+
+```bash
+git clone git@github.com:chris-at-github/ps14-foundation.git packages/ps14_foundation
+ddev composer update ps14/ps14_foundation   # lokales Paket einbinden
+# … entwickeln, im Paket-Repo committen, mergen, taggen, pushen …
+rm -rf packages/ps14_foundation
+ddev composer update 'ps14/*'               # zurück auf das Release
+```
+
+Eine `composer.lock`, die ein gemeinsames Paket aus `packages/` einbindet,
+darf nicht committet werden — `npm run lint` (`lint:composer-lock`) bricht
+dann ab.
 
 ### TYPO3 (CLI)
 

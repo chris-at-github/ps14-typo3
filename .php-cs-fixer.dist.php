@@ -5,17 +5,13 @@ declare(strict_types=1);
 $config = \TYPO3\CodingStandards\CsFixerConfig::create();
 $config->setCacheFile(__DIR__ . '/var/cache/.php-cs-fixer.cache');
 $config->getFinder()
-    ->in([
-        __DIR__ . '/packages/ps14_site',
-        __DIR__ . '/packages/ps14_foundation',
-        __DIR__ . '/packages/ps14_component',
-        __DIR__ . '/packages/ps14_container',
-        __DIR__ . '/packages/ps14_menu',
-    ])
+    // Only packages checked out under packages/ (shared packages may come from vendor/)
+    ->in(glob(__DIR__ . '/packages/*', GLOB_ONLYDIR))
     ->exclude(['node_modules'])
     ->append([
         __DIR__ . '/.php-cs-fixer.dist.php',
         __DIR__ . '/fractor.php',
+        __DIR__ . '/phpstan.paths.php',
         __DIR__ . '/rector.php',
     ])
 ;

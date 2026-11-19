@@ -7,10 +7,10 @@ use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 use Ssch\TYPO3Rector\TYPO313\v3\MigrateFluidStandaloneMethodsRector;
 
 return RectorConfig::configure()
-    ->withPaths([
+    ->withPaths(array_values(array_filter([
         __DIR__ . '/packages/ps14_foundation',
         __DIR__ . '/packages/ps14_site',
-    ])
+    ], is_dir(...))))
     ->withPhpSets(php84: true)
     ->withSets([
         Typo3LevelSetList::UP_TO_TYPO3_14,
