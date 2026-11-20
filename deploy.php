@@ -24,9 +24,8 @@ set('env', [
 ]);
 
 // KIST + ESCHERICH: Hetzner webhosting of the old project (user kistae).
-// TODO: SSH host is still open (plan deployment.md, open point 1).
 host('staging')
-    ->setHostname('TODO-ssh-host')
+    ->setHostname('kist-escherich.com')
     ->setRemoteUser('kistae')
     ->setPort(222)
     ->setSshArguments(['-o StrictHostKeyChecking=accept-new'])
@@ -36,7 +35,7 @@ host('staging')
     ->set('check_files', ['.htpasswd']);
 
 host('production')
-    ->setHostname('TODO-ssh-host')
+    ->setHostname('kist-escherich.com')
     ->setRemoteUser('kistae')
     ->setPort(222)
     ->setSshArguments(['-o StrictHostKeyChecking=accept-new'])
