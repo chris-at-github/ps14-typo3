@@ -1,6 +1,7 @@
 # Dependencies
 /vendor/
-/packages/
+/packages/*
+!/packages/ps14_site/
 /node_modules/
 
 # TYPO3 generierte Artefakte (Symlinks / Caches)

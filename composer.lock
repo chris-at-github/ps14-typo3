@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "844b2ee5e2abc399cbfd995231a32e2e",
+    "content-hash": "6b5a7d8cc5d6e5f5dfb1f80e924a5d6e",
     "packages": [
         {
             "name": "b13/container",
@@ -2420,7 +2420,7 @@
         },
         {
             "name": "ps14/ps14_site",
-            "version": "dev-v14-dev",
+            "version": "14.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
