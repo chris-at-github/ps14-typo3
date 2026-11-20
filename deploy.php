@@ -23,20 +23,22 @@ set('env', [
     'PHPVERSION' => '8.4',
 ]);
 
+// KIST + ESCHERICH: Hetzner webhosting of the old project (user kistae).
+// TODO: SSH host is still open (plan deployment.md, open point 1).
 host('staging')
-    ->setHostname('example.com')
-    ->setRemoteUser('example')
+    ->setHostname('TODO-ssh-host')
+    ->setRemoteUser('kistae')
     ->setPort(222)
     ->setSshArguments(['-o StrictHostKeyChecking=accept-new'])
     ->set('deploy_path', '~/public_html/staging-v14')
-    ->set('branch', 'main')
+    ->set('branch', 'kist-escherich')
     // Basic Auth, see public/htaccess/.htaccess-staging
     ->set('check_files', ['.htpasswd']);
 
 host('production')
-    ->setHostname('example.com')
-    ->setRemoteUser('example')
+    ->setHostname('TODO-ssh-host')
+    ->setRemoteUser('kistae')
     ->setPort(222)
     ->setSshArguments(['-o StrictHostKeyChecking=accept-new'])
     ->set('deploy_path', '~/public_html/production-v14')
-    ->set('branch', 'main');
+    ->set('branch', 'kist-escherich');
