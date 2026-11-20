@@ -101,7 +101,7 @@ return [
         ],
         'devIPmask' => '',
         'displayErrors' => 0,
-        'encryptionKey' => 'd8a4b02e129dce9c47df4d2b5457b66926cda260b68d2bb4f0396b27745ca2bfeeeb28da1d4632b8c557aa0a504452e4',
+        'encryptionKey' => '102e483eed34e17f490e49f42254dd6343ea3896087a5f3ebc96ffc17ddc796e570898087b8c86f50ca0b7ea2c616033',
         'exceptionalErrors' => 4096,
         'features' => [
             'frontend.cache.autoTagging' => true,
