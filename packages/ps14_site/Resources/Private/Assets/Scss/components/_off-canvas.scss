@@ -1,0 +1,78 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+// Inhalt, der von der Seite hereinfaehrt (z. B. die Hauptnavigation in der mobilen Ansicht). Ohne die Klasse
+// is--initialized (Js/components/off-canvas.js) wird der Inhalt ganz normal dargestellt; Toggle und Header des
+// Off-Canvas sind dann ausgeblendet. Ob das Off-Canvas aktiv ist, steuert --off-canvas-enabled am Block (0 oder 1).
+.off-canvas {
+    --off-canvas-width: min(100vw, 400px);
+    --off-canvas-transition-duration: 250ms;
+    --off-canvas-background-color: var(--color-background);
+    --off-canvas-backdrop-color: rgb(0 0 0 / 30%);
+
+    @media (prefers-reduced-motion: reduce) {
+        --off-canvas-transition-duration: 0s;
+    }
+}
+
+.off-canvas__toggle,
+.off-canvas__header {
+    display: none;
+}
+
+.off-canvas__toggle,
+.off-canvas__close {
+    // Transparenter Icon-Button: Der Hintergrund erscheint erst bei Hover und Fokus (siehe components/_button.scss)
+    --button-icon-object-size: 24px;
+}
+
+.off-canvas__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background-color: var(--off-canvas-backdrop-color);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// State: initialisiert
+// Die Position (translate) setzt das JavaScript als Inline-Style, das SCSS liefert nur die Transition.
+.off-canvas.is--initialized {
+    .off-canvas__toggle {
+        display: inline-flex;
+    }
+
+    .off-canvas__container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        width: var(--off-canvas-width);
+        height: 100dvh;
+        overflow: auto;
+        overscroll-behavior: contain; // Scrollen im Off-Canvas scrollt die Seite dahinter nicht weiter
+        background-color: var(--off-canvas-background-color);
+        transition: translate var(--off-canvas-transition-duration) ease;
+    }
+
+    // Geschlossen: Der Inhalt ist weder sichtbar noch per Tastatur oder Screenreader erreichbar
+    .off-canvas__container[hidden] {
+        display: none;
+    }
+
+    .off-canvas__header {
+        display: flex;
+        flex-shrink: 0;
+        gap: var(--spacing-24);
+        align-items: center;
+        justify-content: space-between;
+        min-height: var(--page-header-height);
+        padding-inline: var(--container-spacing-x);
+    }
+
+    .off-canvas__body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,131 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+:root {
+    --button-height: 43px;
+    --button-padding: 0 var(--spacing-32);
+    --button-font-color: var(--color-font);
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    --button-interactive-font-color: var(--color-font);
+    --button-interactive-background-color: var(--color-neutral-100);
+    --button-interactive-border-color: var(--color-neutral-100);
+    --button-icon-size: var(--button-height);
+    --button-icon-object-size: 16px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Defintion
+@mixin button-default {
+    min-height: var(--button-height);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--button-padding);
+    font-weight: var(--font-weight-semibold);
+    color: var(--button-font-color);
+    background: var(--button-background-color);
+    cursor: pointer;
+    border: 0;
+    border-color: var(--button-border-color);
+    border-radius: var(--border-radius-default);
+    text-decoration: none;
+}
+
+@mixin button-default-outline {
+    --button-background-color: transparent;
+    --button-interactive-font-color: var(--color-neutral-900);
+    --button-interactive-background-color: transparent;
+    --button-interactive-border-color: var(--color-neutral-800);
+
+    border: 2px solid var(--button-border-color);
+}
+
+@mixin button-default-interactive {
+    color: var(--button-interactive-font-color);
+    background: var(--button-interactive-background-color);
+    border-color: var(--button-interactive-border-color);
+}
+
+@mixin button-default-focus {
+    outline: 2px solid var(--color-focus-outline);
+    outline-offset: 2px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Classes
+.button {
+    @include button-default;
+
+    &:disabled,
+    &.is--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.button:hover {
+    @include button-default-interactive;
+}
+
+.button:focus-visible {
+    @include button-default-interactive;
+    @include button-default-focus;
+}
+
+.button--default {
+    --button-background-color: var(--color-neutral-200);
+    --button-interactive-font-color: var(--color-neutral-50);
+    --button-interactive-background-color: var(--color-neutral-800);
+}
+
+.button--primary {
+    --button-font-color: var(--color-neutral-800);
+    --button-background-color: var(--color-primary-500);
+    --button-interactive-background-color: var(--color-primary-300);
+}
+
+.button--default-outline,
+.button--primary-outline {
+    --button-background-color: transparent;
+    --button-interactive-font-color: var(--color-neutral-900);
+    --button-interactive-background-color: transparent;
+    --button-interactive-border-color: var(--button-border-color);
+
+    border: 2px solid var(--button-border-color);
+}
+
+.button--default-outline {
+    --button-interactive-background-color: var(--color-neutral-100);
+    --button-border-color: var(--color-neutral-400);
+}
+
+.button--primary-outline {
+    --button-interactive-background-color: var(--color-neutral-100);
+    --button-border-color: var(--color-primary-500);
+}
+
+.button__icon {
+    width: var(--button-icon-object-size);
+    height: var(--button-icon-object-size);
+    flex-shrink: 0;
+}
+
+.button--icon {
+    width: var(--button-icon-size);
+    height: var(--button-icon-size);
+    padding: 0;
+    justify-content: center;
+}
+
+.button--icon-prefix,
+.button--icon-suffix {
+    gap: var(--spacing-12);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Button Group
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-8);
+}

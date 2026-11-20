@@ -1,0 +1,15 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Ueberschreiben des Standard Content Elements
+lib.contentElement {
+  layoutRootPaths {
+    110 = EXT:ps14_site/Resources/Private/Layouts/Content/
+  }
+
+  templateRootPaths {
+    110 = EXT:ps14_site/Resources/Private/Templates/Content/
+  }
+
+  partialRootPaths {
+    110 = EXT:ps14_site/Resources/Private/Partials/
+  }
+}

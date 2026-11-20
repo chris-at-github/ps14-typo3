@@ -1,0 +1,13 @@
+# Load default processing options
+imports:
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Base.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Plugins.yaml" }
+  - { resource: "EXT:ps14_foundation/Configuration/RTE/Default.yaml" }
+  - { resource: "EXT:ps14_site/Configuration/RTE/Global.yaml" }
+
+editor:
+  config:
+    contentsCss:
+      - 'EXT:rte_ckeditor/Resources/Public/Css/contents.css'
+      - "%vite('EXT:ps14_site/Resources/Private/Assets/Scss/editor.scss')%"

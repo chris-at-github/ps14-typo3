@@ -47,7 +47,12 @@ ddev composer remove <paket>          # Paket entfernen
 
 `ps14_foundation`, `ps14_component`, `ps14_container` und `ps14_menu` werden
 als getaggte Releases (`14.x.x`, Major = TYPO3-Version) aus GitHub installiert
-(`vendor/ps14/`). `ps14_site` liegt als Path-Paket unter `packages/`.
+(`vendor/ps14/`). `ps14_site` ist Teil dieses Repos und wird als Path-Paket
+aus `packages/ps14_site` eingebunden (Version `14.x-dev`).
+
+`main` enthält die Vorlage. Jedes Kundenprojekt liegt auf einem langlebigen
+Kunden-Branch (z. B. `kist-escherich`), der Änderungen per `git merge main`
+übernimmt.
 
 Voraussetzung ist ein GitHub-Token (Fine-grained, nur die Paket-Repos,
 Contents read-only) in `~/.ddev/homeadditions/.composer/auth.json`, danach
@@ -112,10 +117,13 @@ ddev import-db --file=dump.sql.gz     # Datenbank importieren
 
 ## Verzeichnisstruktur
 ```
+build/     Build-Skripte (Iconfont, Lock-Prüfung)
 config/    TYPO3-Systemkonfiguration (settings.php, additional.php)
 docs/      Projektdokumentation (Pläne & Specs)
+packages/  ps14_site (versioniert) und lokal geklonte gemeinsame Pakete – sonst gitignored
 public/    Docroot (index.php, .htaccess, fileadmin, typo3)
 sql/       SQL-Dateien
+temp/      Ablage für Sicherungen, Vorlagen und Zwischenstände – gitignored, von ESLint ignoriert
 var/       Laufzeit-Artefakte (Caches, Logs) – gitignored
 vendor/    Composer-Abhängigkeiten – gitignored
 ```

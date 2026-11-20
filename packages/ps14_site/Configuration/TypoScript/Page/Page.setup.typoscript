@@ -1,0 +1,86 @@
+page {
+  #	// Eigene Farbangaben
+  #	headerData {
+  #		1567860045.wrap = <link rel="mask-icon" href="|icons/safari-pinned-tab.svg" color="#000">
+  #		1567860047.value = <meta name="msapplication-TileColor" content="#000">
+  #	}
+
+  10 {
+    layoutRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Layouts/Page/
+    }
+
+    templateRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Templates/Page/
+    }
+
+    partialRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Partials/
+    }
+
+    variables {
+      breadcrumb < navigation.breadcrumb
+    }
+
+    dataProcessing {
+      150 = TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+
+      // Rechtliche Navigation im Footer (Ausgabe in Partials/Page/Layout/Footer.html)
+      200 = menu
+      200 {
+        special = directory
+        special.value = {$navigation.footer}
+        levels = 1
+        as = navigationFooter
+      }
+
+      // Navigationen im Header (Ausgabe in Partials/Page/Layout/Header.html)
+      // Hauptnavigation mit zwei Ebenen: Die zweite Ebene zeigt Icon (tx_foundation_icon) und Beschreibung (abstract)
+      210 = menu
+      210 {
+        special = directory
+        special.value = {$navigation.main}
+        levels = 2
+        expandAll = 1
+        as = navigationMain
+
+        dataProcessing {
+          20 = files
+          20 {
+            as = icon
+            references.fieldName = tx_foundation_icon
+          }
+        }
+      }
+
+      220 = menu
+      220 {
+        special = directory
+        special.value = {$navigation.meta}
+        levels = 1
+        as = navigationMeta
+      }
+
+      230 = language-menu
+      230 {
+        languages = {$navigation.language}
+        as = navigationLanguage
+      }
+
+      // Navigationen
+      #			10 < navigation.main
+      #			20 < navigation.footer
+      #			30 < navigation.breadcrumb
+      #			40 < navigation.language
+      #			50 < navigation.meta
+
+      // Page DataProcessing
+      #			100 < dataProcessing.settings
+      #			110 < dataProcessing.pageLayout
+      #			120 < dataProcessing.flash
+      #			130 < dataProcessing.providerData
+      #			140 < dataProcessing.site
+      #			150 < dataProcessing.pageResource
+    }
+  }
+}

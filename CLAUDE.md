@@ -7,7 +7,9 @@
 - `ps14-typo3` (this repo) is the main project: Composer/npm setup, DDEV, site config (`config/`), build and lint tooling.
 - `packages/ps14_foundation` is the base extension shared by all TYPO3 projects (ViewHelpers, DataProcessors, TCA, TypoScript, Site Sets, base templates). It is **never adapted to a specific project** — project changes belong in `ps14_site`.
 - `packages/ps14_site` is the project-specific sitepackage: it overrides templates and configuration of `ps14_foundation` and contains the project's CSS/JS (`Resources/Private/Assets`, built with Vite).
-- Both extensions are separate git repositories (gitignored in the main repo) — branch and commit in each repository the change touches.
+- `ps14_site` is part of this repo. `ps14_foundation` and the other shared packages (`ps14_component`, `ps14_container`, `ps14_menu`) are separate git repositories, installed as tagged releases into `vendor/` and cloned to `packages/` (gitignored) only for development — branch and commit in each repository the change touches.
+- `temp/` (gitignored) is the permanent place for backups, templates and intermediate states. Never delete the folder; delete its contents only after confirmation.
+- `main` holds the template. Each customer project lives on a long-lived customer branch of this repo (e.g. `kist-escherich`) that takes over changes from `main` via `git merge main`.
 
 # Allowed Commands
 `php` and `composer` are not available on the host — always run them through DDEV.

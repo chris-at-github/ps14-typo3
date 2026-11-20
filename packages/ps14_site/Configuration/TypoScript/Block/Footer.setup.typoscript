@@ -1,0 +1,44 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Inhalte des Footers (werden von der Root-Seite auf alle Unterseiten vererbt)
+// Die Ueberschriften aller Inhaltselemente liegen unter der (unsichtbaren) h2 des Footers und werden deshalb auf h3
+// gesetzt, siehe Ps14\Site\DataProcessing\HeadingLevelProcessor.
+lib.contentElement.dataProcessing {
+  5 = Ps14\Site\DataProcessing\HeadingLevelProcessor
+  5 {
+    register = headingLevel
+  }
+}
+
+// Marke: Text, Social Media (colPos 20)
+block.contentFooter {
+  stdWrap.wrap = <div class="page-footer__brand">|</div>
+
+  renderObj = COA
+  renderObj {
+    10 = LOAD_REGISTER
+    10.headingLevel = 3
+
+    20 =< tt_content
+
+    30 = RESTORE_REGISTER
+  }
+}
+
+// Navigation: jedes Inhaltselement ist eine Spalte (colPos 21)
+block.contentFooterNavigation < block.contentFooter
+block.contentFooterNavigation {
+  stdWrap.wrap = <div class="page-footer__navigation">|</div>
+  select.where = colPos = 21
+}
+
+// Beide Bereiche; ohne Inhalt entfaellt der gesamte Wrapper
+block.footerContent = COA
+block.footerContent {
+  10 < block.contentFooter
+  20 < block.contentFooterNavigation
+
+  stdWrap {
+    required = 1
+    wrap = <div class="page-footer__content">|</div>
+  }
+}

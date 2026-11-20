@@ -1,0 +1,84 @@
+@use "../functions" as *;
+@use "../mixins" as *;
+
+:root {
+    // -------------------------------------------------------------------------------------------------------------------
+    // Colors
+    --color-gray-50: #eee;
+    --color-gray-100: #d4d4d4;
+    --color-gray-200: #b8b8b8;
+    --color-gray-300: #9b9b9b;
+    --color-gray-400: #858585;
+    --color-gray-500: #707070;
+    --color-gray-600: #686868;
+    --color-gray-700: #5d5d5d;
+    --color-gray-800: #535353;
+    --color-gray-900: #414141;
+    --color-background: #fff;
+    --color-font: var(--color-gray-800);
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Transitions
+    --transition-duration-default: 350ms;
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Fonts
+    --font-family-primary: 'DM Sans', arial, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 600;
+    --font-line-height: 1.7;
+    --font-size-tiny: #{rem(13px)};
+    --font-size-small: #{rem(16px)};
+    --font-size-normal: #{rem(18px)};
+    --font-size-large: #{rem(21px)};
+    --font-size-huge: #{rem(52px)};
+    --font-size-iconfont: #{rem(18px)};
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Header
+    --header-font-family: var(--font-family-primary);
+    --header-font-weight: 500;
+    --header-font-color: var(--color-gray-800);
+    --header-line-height: 1.2;
+    --header-1-font-size: #{rem(28px)};
+    --header-2-font-size: #{rem(21px)};
+    --header-3-font-size: #{rem(18px)};
+    --header-4-font-size: #{rem(18px)};
+    --header-5-font-size: #{rem(18px)};
+    --header-6-font-size: #{rem(18px)};
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Spacings
+    --spacing-heading: #{rem(8px)}; // Abstand zwischen Elementen zu Ueberschrift
+    --spacing-element: #{rem(16px)}; // Abstand zwischen Elementen zu Elementen z.B. p + ul
+    --spacing-block: #{rem(12px)}; // Abstand zwischen Elementen zu Sonderelementen z.B. .media-container
+    --indent-text-l: 0; // Einrueckung (links) von Texten und Ueberschriften
+    --indent-text-r: 0; // Einrueckung (links) von Texten und Ueberschriften
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Page Header
+    // --page-header-height: {rem(64px)};
+    --page-body-offset: 0;
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Container
+    --container-max-width: #{rem(936px)}; // 840px + 48px + 48px
+    --container-spacing-x: #{rem(24px)};
+    --container-spacing-y-none: 0;
+    --container-spacing-y-small: #{rem(8px)};
+    --container-spacing-y-medium: #{rem(24px)};
+    --container-spacing-y-large: #{rem(48px)};
+    --container-spacing-y-huge: #{rem(64px)};
+    --container-indent-x: 0;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 992px
+@include media-breakpoint-up(lg) {
+    :root {
+        --font-size-iconfont: #{rem(21px)};
+        --header-1-font-size: #{rem(32px)};
+        --container-spacing-x: #{rem(48px)};
+    }
+}

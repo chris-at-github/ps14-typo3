@@ -1,0 +1,3 @@
+@import 'EXT:ps14_foundation/Configuration/TypoScript/Foundation.constants.typoscript'
+@import 'EXT:ps14_foundation/Configuration/TypoScript/Extensions/*.constants.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Extensions/*.constants.typoscript'

@@ -1,0 +1,54 @@
+@use "../functions" as *;
+@use "../mixins/breakpoints" as *;
+
+%list--default-ul,
+%list--default-ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: rem(4px);
+    padding: 0;
+}
+
+%list--default-ul {
+    li {
+        position: relative;
+        padding: rem(0, 0, 0, 16px);
+    }
+
+    li::before {
+        content: '';
+        position: absolute;
+        top: 13px; left: 2px;
+        border: 2px solid var(--color-gray-400);
+        border-radius: 1px;
+    }
+
+    ul {
+        margin-top: 0;
+        padding: 0;
+    }
+}
+
+%list--default-ol {
+    counter-reset: ol;
+
+    li {
+        position: relative;
+        padding: rem(0, 0, 0, 20px);
+        counter-increment: ol;
+    }
+
+    li::before {
+        content: counter(ol) ".";
+        position: absolute;
+        top: 0; left: 0;
+        font-size: var(--font-size-normal);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-gray-400);
+    }
+
+    ol li::before {
+        content: counter(ol, lower-latin) ".";
+    }
+}

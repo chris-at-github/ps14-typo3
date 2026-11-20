@@ -17,15 +17,19 @@ denselben Regeln, haben aber eigene Zuständigkeiten (siehe `CLAUDE.md`).
 
 ## Repository und Branches
 
-- Jede Extension ist ein eigenes Git-Repository
+- Jede gemeinsame Extension ist ein eigenes Git-Repository
   (`github.com/chris-at-github/ps14-<name>`). Zum Entwickeln wird sie unter
-  `packages/<extension_key>` geklont (im Hauptrepo per `/packages/`
+  `packages/<extension_key>` geklont (im Hauptrepo per `/packages/*`
   ignoriert). Klone per HTTPS und setze danach `origin` auf die SSH-URL
   (`git@github.com:…`), da SSH in DDEV/WSL nicht immer verfügbar ist.
 - `main` ist die aktuelle Major (TYPO3 14) und Default-Branch auf GitHub.
   Ältere Majors liegen auf Wartungsbranches (`13.x`, `12.x`) und werden nicht
   überschrieben. Kunden-Branches werden nicht mehr angelegt —
   Projektanpassungen gehören in `ps14_site`.
+- Ausnahme `ps14_site`: liegt versioniert im Hauptrepo
+  (`packages/ps14_site`) und hat keine eigenen Branches, Tags oder Releases.
+  Projektanpassungen laufen über die Kunden-Branches des Hauptrepos
+  (z. B. `kist-escherich`).
 - Feature-Branches `feature/<name>` zweigen von `main` ab und werden per
   Squash nach `main` gemergt.
 

@@ -1,0 +1,228 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+// Hoehe und Offset des Headers: siehe --page-header-height und --page-header-offset in bootstrap/_root.scss
+@media (width <= 860px) {
+    :root {
+        --page-header-height: 88px;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+// Der Header ist immer fixiert, der Inhalt beginnt mit --page-header-offset (siehe .page in layout/_main.scss). So
+// springt die Seite beim Scrollen nicht. Aufbau: Logo, Meta (Meta-Menue + Sprachwechsel) und Hauptnavigation.
+.page-header {
+    --page-header-spacing-y: var(--spacing-20); // fester Abstand oben und unten
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: var(--page-header-height);
+    padding-inline: var(--container-spacing-x);
+    background-color: var(--color-background);
+}
+
+// Sobald die Seite gescrollt ist (gesetzt in Js/bootstrap/page-header.js): abschliessende Linie
+.page-header--sticky {
+    box-shadow: 0 1px 0 var(--color-ruler);
+}
+
+.page-header__inner {
+    display: grid;
+    grid-template-areas:
+        "logo meta"
+        "logo navigation";
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--spacing-8) var(--spacing-48);
+    align-content: space-between; // Der Abstand oben und unten ist fest: Ein hoeherer Header vergroessert nur den Abstand zwischen Meta und Hauptnavigation
+    align-items: center;
+    max-width: var(--container-width-default);
+    height: 100%;
+    margin-inline: auto;
+    padding-block: var(--page-header-spacing-y);
+
+    @media (width <= 860px) {
+        grid-template-areas: "logo navigation";
+        align-content: center;
+        padding-block: 0;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Logo
+// Die Flaeche des Logos ist der Hintergrund des Links, das Zeichen im SVG uebernimmt die Schriftfarbe (currentColor)
+.page-header__logo {
+    display: block;
+    grid-area: logo;
+    align-self: end; // Unterkante buendig mit der Hauptnavigation (die beiden Zeilen daneben sind hoeher als das Logo)
+    width: 80px;
+    color: var(--color-important);
+    background-color: var(--color-neutral-100);
+    border-radius: 8%; // Rundung der Logo-Flaeche, sie waechst mit der Groesse des Logos
+
+    &:hover,
+    &:focus-visible {
+        background-color: var(--color-neutral-200);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-focus-outline);
+        outline-offset: 2px;
+    }
+
+    @media (width <= 860px) {
+        align-self: center;
+        width: 64px;
+    }
+}
+
+.page-header__logo-object {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Meta: Meta-Menue + Sprachwechsel
+// Wird doppelt ausgegeben, damit die Tab-Reihenfolge der Darstellung entspricht: --bar steht am Desktop vor der
+// Hauptnavigation, --off-canvas mobil dahinter. Die jeweils andere Kopie ist ausgeblendet.
+.page-header__meta {
+    --navigation-font-color: var(--color-muted);
+
+    font-size: var(--font-size-small);
+}
+
+.page-header__meta--bar {
+    display: flex;
+    grid-area: meta;
+    gap: var(--spacing-24);
+    align-items: center;
+    justify-self: end;
+
+    @media (width <= 860px) {
+        display: none;
+    }
+}
+
+.page-header__meta--off-canvas {
+    display: none;
+
+    // Im Off-Canvas: am unteren Rand, Hintergrund und Trennlinie wie im Footer. Die Standardfarben der Navigation waeren darauf nicht sichtbar
+    @media (width <= 860px) {
+        --navigation-font-color: var(--color-neutral-700);
+        --navigation-active-background-color: var(--color-neutral-200);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-16);
+        margin-top: auto;
+        padding: var(--spacing-16) var(--container-spacing-x) var(--spacing-24);
+        background-color: var(--color-neutral-100);
+    }
+}
+
+.page-header__meta-list {
+    // Die Links ragen um ihr Padding (8px) aus der Liste: 24px Abstand ergeben 8px Luft zwischen den Hover-Flaechen
+    --navigation-gap: 0 var(--spacing-24);
+
+    flex-flow: row wrap;
+
+    @media (width <= 860px) {
+        --navigation-gap: var(--spacing-4);
+
+        flex-flow: column nowrap;
+    }
+}
+
+// Aktive Seite: dunkle Schrift statt der gedaempften Farbe der uebrigen Eintraege
+.page-header__meta-link[aria-current="page"] {
+    color: var(--navigation-active-font-color);
+}
+
+// Sprachwechsel: am Desktop durch eine Linie vom Meta-Menue getrennt. Die Linie ist nur so hoch wie der Text
+.page-header__language {
+    display: flex;
+    gap: var(--spacing-24);
+    align-items: center;
+
+    &::before {
+        width: 1px;
+        height: 1em;
+        content: "";
+        background-color: var(--color-ruler);
+    }
+
+    @media (width <= 860px) {
+        display: block;
+
+        &::before {
+            display: none;
+        }
+
+        // Im Off-Canvas: waagerechte Trennlinie zum Meta-Menue
+        .page-header__meta-navigation + & {
+            padding-top: var(--spacing-16);
+            border-top: 1px solid var(--color-ruler);
+        }
+    }
+}
+
+.page-header__language-list {
+    --navigation-gap: var(--spacing-4);
+
+    flex-flow: row wrap;
+
+    @media (width <= 860px) {
+        // Die Eintraege ragen nicht aus der Liste: buendig zu den Links des Meta-Menues ausrichten
+        margin-inline: calc(var(--navigation-item-padding-x) * -1);
+    }
+}
+
+.page-header__language-link {
+    --navigation-item-padding-y: var(--spacing-4);
+
+    margin-inline: 0;
+    text-transform: uppercase;
+}
+
+.page-header__language-link[aria-current="true"] {
+    color: var(--navigation-active-font-color);
+    background-color: var(--navigation-active-background-color);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Hauptnavigation
+// Unterhalb des Breakpoints wird sie zum Off-Canvas (components/_off-canvas.scss): --off-canvas-enabled schaltet das
+// JavaScript ein (Js/bootstrap/off-canvas.js), oberhalb stellt destroy() die normale Darstellung wieder her.
+.page-header__navigation {
+    --off-canvas-enabled: 0;
+
+    position: relative; // Bezugsrahmen fuer das Dropdown der Hauptnavigation (layout/_main-menu.scss)
+    grid-area: navigation;
+    justify-self: start;
+
+    @media (width <= 860px) {
+        --off-canvas-enabled: 1;
+
+        position: static;
+        justify-self: end; // Burger-Button rechts
+    }
+}
+
+@media (width <= 860px) {
+    // Bis das JavaScript initialisiert ist, bleibt der Inhalt des Off-Canvas ausgeblendet (kein Aufblitzen beim Laden)
+    .page-header__navigation:not(.is--initialized) .off-canvas__container {
+        display: none;
+    }
+
+    .page-header__toggle {
+        display: inline-flex;
+    }
+
+    // Ist die zweite Ebene der Hauptnavigation geoeffnet, ist das Meta-Menue ueberdeckt und nicht erreichbar
+    .page-header__navigation:has(.main-menu.is--active) .page-header__meta--off-canvas {
+        visibility: hidden;
+    }
+}

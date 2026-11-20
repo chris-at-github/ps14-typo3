@@ -1,0 +1,64 @@
+@use "sass:math";
+@use "../functions" as *;
+@use "../mixins" as *;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Ueberschriften
+.ce-heading {
+    &--layout-1 {
+        .ce-heading__title {
+            @extend %header-1;
+        }
+    }
+
+    &--layout-2 {
+        .ce-heading__title  {
+            @extend %header-2;
+        }
+    }
+
+    &--layout-3 {
+        .ce-heading__title  {
+            @extend %header-3;
+        }
+    }
+
+    &--layout-4 {
+        .ce-heading__title {
+            @extend %header-4;
+        }
+    }
+
+    &__title {
+        &--align-left {
+            text-align: left;
+        }
+
+        &--align-center {
+            text-align: center;
+        }
+
+        &--align-right {
+            text-align: right;
+        }
+    }
+
+
+    & + .ce-bodytext {
+        margin-top: var(--spacing-heading);
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bodytext
+.ce-bodytext {
+    @include bodytext;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Einrueckung
+.ce-heading,
+.ce-bodytext { /* stylelint-disable-line no-descending-specificity */
+    padding-left: var(--ce-indent-text-l);
+    padding-right: var(--ce-indent-text-r);
+}

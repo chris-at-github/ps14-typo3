@@ -1,0 +1,21 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Seite
+@page {
+    margin: 2cm;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Seitenumbrueche (Inhaltselement -> Erscheinungsbild -> Druck)
+.print--break-before {
+    break-before: page;
+}
+
+.print--break-after {
+    break-after: page;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Sichtbarkeit (Inhaltselement -> Erscheinungsbild -> Druck)
+.print--visibility-hidden {
+    display: none;
+}

@@ -1,0 +1,13 @@
+navigation.default {
+  layoutRootPaths {
+    20 = EXT:ps14_site/Resources/Private/Layouts/Navigation/
+  }
+
+  templateRootPaths {
+    20 = EXT:ps14_site/Resources/Private/Templates/Navigation/
+  }
+
+  partialRootPaths {
+    20 = EXT:ps14_site/Resources/Private/Partials/
+  }
+}

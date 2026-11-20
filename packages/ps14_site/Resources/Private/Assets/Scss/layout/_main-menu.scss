@@ -1,0 +1,268 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+// Hauptnavigation im Seiten-Header mit zwei Ebenen. Die Eintraege sind navigation-items
+// (components/_navigation-item.scss). Eintraege mit Unterseiten sind ein Button, der die zweite Ebene oeffnet:
+// am Desktop als Dropdown unter dem Header, im Off-Canvas faehrt sie von rechts ein (Js/components/main-menu.js).
+.main-menu {
+    --main-menu-transition-duration: 200ms;
+    --main-menu-closed-translate: 0 -8px; // Startframe der zweiten Ebene (Dropdown): leicht nach oben versetzt ...
+    --main-menu-closed-opacity: 0; // ... und transparent
+    --main-menu-column-width: 300px; // Breite einer Spalte des Dropdowns (Unterseiten bzw. Inhalte)
+
+    display: flex;
+    gap: var(--spacing-8);
+    list-style: none;
+
+    @media (width <= 860px) {
+        --main-menu-closed-translate: 100% 0; // Startframe im Off-Canvas: rechts ausserhalb
+        --main-menu-closed-opacity: 1;
+
+        flex-direction: column;
+        gap: 0;
+        padding-block: var(--spacing-8) var(--spacing-24);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --main-menu-transition-duration: 0s;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Erste Ebene
+// Die Eintraege ragen nicht aus der Liste: Ihre Flaeche ist bei Hover und Fokus immer vollstaendig sichtbar
+.main-menu__link {
+    --navigation-item-padding-x: var(--spacing-16);
+
+    margin-inline: 0;
+    font-size: var(--font-size-large);
+
+    @media (width <= 860px) {
+        --navigation-item-padding-x: calc(var(--container-spacing-x) - 3px); // abzueglich der Linie am linken Rand
+        --navigation-item-padding-y: var(--spacing-12);
+
+        border-left: 3px solid transparent;
+        border-radius: 0;
+
+        // Der Eintrag reicht bis an den Rand des Off-Canvas: Die Outline liegt innen, sonst wird sie abgeschnitten
+        &:focus-visible {
+            outline-offset: -2px;
+        }
+    }
+}
+
+// Aktive Seite bzw. aktiver Bereich: am Desktop eine Linie unter dem Eintrag, im Off-Canvas am linken Rand.
+// Die Linie ist ein eigenes Element, damit sie gerade bleibt (der Eintrag selbst ist rundum abgerundet).
+.main-menu__link--active,
+.main-menu__link[aria-current="page"] {
+    @media (width > 860px) {
+        position: relative;
+
+        &::after {
+            position: absolute;
+            inset: auto calc(var(--navigation-item-padding-x) - 1px) 0; // ragt je 1px ueber den Text hinaus
+            height: 2px;
+            content: "";
+            background-color: var(--color-important);
+        }
+    }
+
+    @media (width <= 860px) {
+        border-left-color: var(--color-important);
+    }
+}
+
+// Eintrag mit zweiter Ebene: Button statt Link
+.main-menu__toggle {
+    --navigation-item-gap: var(--spacing-4);
+
+    appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+
+    @media (width > 860px) {
+        border-left: 0;
+    }
+
+    @media (width <= 860px) {
+        justify-content: space-between;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+// Indikator fuer die zweite Ebene: zeigt am Desktop nach unten (geoeffnet nach oben), im Off-Canvas nach rechts
+.main-menu__indicator {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    transition: rotate var(--main-menu-transition-duration) ease;
+
+    @media (width <= 860px) {
+        width: 20px;
+        height: 20px;
+        rotate: -90deg;
+    }
+}
+
+@media (width > 860px) {
+    .main-menu__toggle[aria-expanded="true"] .main-menu__indicator {
+        rotate: 180deg;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Zweite Ebene
+// Position und Deckkraft (translate, opacity) setzt das JavaScript als Inline-Style, das SCSS liefert die Transition.
+// Desktop: Dropdown unter dem Header, linksbuendig mit der Hauptnavigation (.page-header__navigation ist der
+// Bezugsrahmen). Es ist zwei Spalten breit: Unterseiten in zwei Spalten oder Unterseiten + Inhalte.
+.main-menu__container {
+    position: absolute;
+    top: calc(100% + var(--page-header-spacing-y)); // Unterkante des Headers
+    left: 0;
+    z-index: 1;
+    width: max-content;
+    max-height: calc(100dvh - var(--page-header-height));
+    overflow: auto;
+    overscroll-behavior: contain;
+    font-size: var(--font-size-normal);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-ruler);
+    border-radius: var(--border-radius-default);
+    transition:
+        translate var(--main-menu-transition-duration) ease,
+        opacity var(--main-menu-transition-duration) ease;
+
+    // Off-Canvas: Die Ebene ueberdeckt den Inhalt des Off-Canvas unterhalb von dessen Header (Logo, Close-Button)
+    @media (width <= 860px) {
+        position: fixed;
+        top: var(--page-header-height);
+        right: 0;
+        left: auto;
+        width: var(--off-canvas-width);
+        height: calc(100dvh - var(--page-header-height));
+        border: 0;
+        border-radius: 0;
+    }
+}
+
+// Geschlossen: Der Inhalt ist weder sichtbar noch per Tastatur oder Screenreader erreichbar
+.main-menu__container[hidden] {
+    display: none;
+}
+
+// Zurueck-Button: nur im Off-Canvas
+.main-menu__header {
+    display: none;
+
+    @media (width <= 860px) {
+        display: flex;
+        padding: var(--spacing-8) var(--container-spacing-x) 0;
+    }
+}
+
+.main-menu__back {
+    --button-padding: 0 var(--spacing-16) 0 var(--spacing-8);
+    --button-icon-object-size: 20px;
+
+    gap: var(--spacing-4);
+}
+
+// Aufbau: Navigation (uebergeordneter Punkt + Unterseiten) und optional die Spalte fuer Inhalte
+.main-menu__body {
+    display: grid;
+    grid-template-areas: "navigation";
+    grid-template-columns: minmax(0, 1fr);
+
+    &:has(.main-menu__content) {
+        grid-template-areas: "navigation content";
+        grid-template-columns: auto auto;
+    }
+
+    @media (width <= 860px) {
+        &:has(.main-menu__content) {
+            grid-template-areas:
+                "navigation"
+                "content";
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+}
+
+.main-menu__navigation {
+    display: flex;
+    flex-direction: column;
+    grid-area: navigation;
+    padding: var(--spacing-24);
+
+    @media (width <= 860px) {
+        padding: var(--spacing-16) var(--container-spacing-x) var(--spacing-24);
+    }
+}
+
+// Uebergeordneter Punkt: Der Eintrag der ersten Ebene oeffnet nur die zweite Ebene, hier ist er als Link erreichbar.
+// Groesse und Abstand kommen von der Ueberschrift (heading heading--layout-3, components/_heading.scss).
+.main-menu__parent {
+    display: block;
+    align-self: start;
+    color: var(--navigation-font-color);
+    text-decoration: none;
+    border-radius: var(--border-radius-default);
+
+    &:hover,
+    &:focus-visible {
+        color: var(--navigation-active-font-color);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--color-focus-outline);
+        outline-offset: 2px;
+    }
+}
+
+// Unterseiten: am Desktop in zwei Spalten, neben der Spalte fuer Inhalte in einer.
+// Darstellung der Eintraege: einfache Liste oder "listing" (Icon, Titel, Beschreibung), siehe Main.html
+.main-menu__list {
+    --navigation-gap: var(--spacing-4) var(--spacing-32);
+
+    display: grid;
+    grid-template-columns: repeat(2, var(--main-menu-column-width));
+
+    @media (width <= 860px) {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (width > 860px) {
+    .main-menu__body:has(.main-menu__content) .main-menu__list {
+        grid-template-columns: var(--main-menu-column-width);
+    }
+}
+
+// Spalte fuer Inhalte: Inhaltselemente aus dem Seitenfeld "Navigation > Inhalte" (tx_foundation_navigation_content)
+.main-menu__content {
+    // Die Inhaltselemente (.section--outer) erhalten hier keinen eigenen Seitenabstand
+    --container-spacing-x: 0;
+
+    grid-area: content;
+    padding: var(--spacing-24);
+    background-color: var(--color-neutral-100);
+
+    @media (width > 860px) {
+        width: calc(var(--main-menu-column-width) + var(--spacing-24) * 2);
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// State: zweite Ebene im Off-Canvas geoeffnet
+// Die erste Ebene ist ueberdeckt und deshalb weder per Tastatur noch per Screenreader erreichbar
+@media (width <= 860px) {
+    .main-menu.is--active > .main-menu__item > .main-menu__link {
+        visibility: hidden;
+    }
+}
