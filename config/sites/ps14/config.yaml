@@ -6,7 +6,7 @@ baseVariants:
     base: 'https://kist-escherich-com-v14.ddev.site/'
     condition: 'applicationContext == "Development"'
   -
-    base: 'https://staging.kist-escherich.com/'
+    base: 'https://staging-v14.kist-escherich.com/'
     condition: 'applicationContext == "Production/Staging"'
   -
     base: 'https://www.kist-escherich.com/'
