@@ -25,6 +25,7 @@ The following commands are explicitly allowed (no confirmation needed):
 | `ddev typo3 extension:setup` | Extension-Setup inkl. DB-Schema anwenden |
 | `ddev typo3 cache:*` | Caches leeren/aufwärmen (z. B. `cache:flush`, `cache:warmup`) |
 | `ddev typo3 upgrade:*` | Upgrade-Wizards prüfen/ausführen |
+| `ddev composer install` | Abhängigkeiten gemäß `composer.lock` installieren |
 | `ddev composer show <package>` | Infos zu einem installierten Composer-Paket anzeigen |
 | `ddev composer validate` | `composer.json` validieren |
 | `ddev exec vendor/bin/phpstan analyse …` | Statische Analyse mit PHPStan |
