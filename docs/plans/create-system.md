@@ -294,4 +294,6 @@ Geklärt am 2026-11-20:
     Datei manuell kopiert.
 - [x] Task 3 – Skill
 - [x] Task 4 – Doku
-- [ ] Task 5 – KIST nachziehen
+- [x] Task 5 – KIST nachziehen (`kist-escherich`: Merge `ed74320`, neuer
+  `encryptionKey` `676f5a0`, `additional.php` aus der Vorlage, in2mcp lokal
+  registriert über `--from mcp`, Vite-Build nachgeholt, `verify` OK)
