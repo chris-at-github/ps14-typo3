@@ -1,12 +1,15 @@
 rootPageId: 1
-websiteTitle: 'Foundation'
+websiteTitle: 'KIST + ESCHERICH'
 base: /
 baseVariants:
   -
     base: 'https://kist-escherich-com-v14.ddev.site/'
     condition: 'applicationContext == "Development"'
   -
-    base: 'https://dev.ps14.de/'
+    base: 'https://staging.kist-escherich.com/'
+    condition: 'applicationContext == "Production/Staging"'
+  -
+    base: 'https://www.kist-escherich.com/'
     condition: 'applicationContext == "Production"'
 languages:
   -
@@ -53,7 +56,7 @@ routes:
       Disallow: /typo3/
       Disallow: /vendor/
       Disallow: /typo3_src/
-      Sitemap: https://kist-escherich-com-v14.ddev.site/de/sitemap.xml
-      Sitemap: https://kist-escherich-com-v14.ddev.site/en/sitemap.xml
+      Sitemap: https://www.kist-escherich.com/de/sitemap.xml
+      Sitemap: https://www.kist-escherich.com/en/sitemap.xml
 dependencies:
   - foundation/settings
