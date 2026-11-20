@@ -65,6 +65,12 @@ confirmation.
 - Propose the commit message for the squash commit on `main` and ask me for approval.
 - After the squash merge, verify the feature branch matches `main` (`git diff --quiet main <branch>`), then delete it immediately (`git branch -D`).
 
+# Content & Pages
+- Create and change content and pages (pages, content elements, records, files) exclusively via MCP (`in2mcp`), never via SQL writes or DataHandler/CLI scripts.
+- Exception: importing a complete database dump while setting up a project (e.g. via the install script).
+- `ddev mysql -e "SELECT …"` stays allowed for read-only checks.
+- If the `in2mcp` server is not available in the current project, tell me instead of falling back to another method.
+
 # Example Content
 - Every new module (content element, container, plugin) gets an example page below "Modules" [29], created via MCP (`in2mcp`).
 - One visible page per module (`hidden = 0`), titled like the module.
