@@ -168,6 +168,9 @@ step_configure() {
     # generates additional.php if it is missing or still marked as generated.
     cp config/system/additional.ddev.php config/system/additional.php
 
+    # Environment file (TYPO3_CONTEXT); the DDEV post-start hook does the same.
+    [[ -f .env ]] || cp .env.ddev .env
+
     # System settings: new encryption key and site name. A PHP string may
     # contain escaped quotes, so configure can be run more than once.
     local php_string="'[^'\\\\]*(\\\\.[^'\\\\]*)*'"

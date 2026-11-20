@@ -44,9 +44,19 @@ The following commands are explicitly allowed (no confirmation needed):
 | Befehl | Beschreibung |
 |--------|--------------|
 | `bin/create-system.sh …` | Neues Kundenprojekt aus der Vorlage anlegen (Skill `creating-typo3-projects`), erst nach bestätigter Zusammenfassung der Projektdaten |
+| `ddev exec bin/update-system.sh` | Lokal `extension:setup`, `upgrade:run`, `cache:flush`, `cache:warmup` |
+| `ddev exec vendor/bin/dep build:artifact <stage>` | Deploy-Artefakt lokal bauen (`temp/deploy/package.tgz`), ohne Server-Zugriff |
 
 Any other script (destructive DB operations, deployments, etc.) still requires
 confirmation.
+
+## Deployment
+- Run `vendor/bin/dep` tasks that touch a server (`deploy`, `rollback`,
+  `deploy:unlock`, `ssh`, …) only on my explicit instruction, naming the
+  stage. Production needs a separate confirmation even if staging was
+  approved.
+- Never change files in `shared/` on a server (`.env`, `additional.php`,
+  `.htpasswd`) without asking; never print their secrets.
 
 # GIT
 
@@ -57,7 +67,7 @@ confirmation.
 ## Staging
 - Add new files that are relevant to the project on your own via `git add`.
 - Never add temporary files.
-- Never commit `.idea/`, `node_modules/`, `.env*`, build artifacts or other generated files — these belong in `.gitignore`.
+- Never commit `.idea/`, `node_modules/`, `.env`, `.env.*.local`, build artifacts or other generated files — these belong in `.gitignore`. The templates `.env.dist` and `.env.ddev` are versioned and must not contain secrets.
 
 ## Commits
 - Commit individual sections of a plan on your own.

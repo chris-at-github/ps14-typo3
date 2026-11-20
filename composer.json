@@ -6,6 +6,7 @@
     "config": {
         "allow-plugins": {
             "a9f/fractor-extension-installer": true,
+            "helhum/dotenv-connector": true,
             "php-http/discovery": false,
             "phpstan/extension-installer": true,
             "typo3/class-alias-loader": true,
@@ -18,6 +19,7 @@
     },
     "require-dev": {
         "a9f/typo3-fractor": "^1.0",
+        "deployer/deployer": "^7.5",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.2",
         "phpstan/phpstan-deprecation-rules": "^2.0",
@@ -27,6 +29,7 @@
     },
     "require": {
         "b13/container": "^4.1",
+        "helhum/dotenv-connector": "^3.0",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
         "ps14/ps14_component": "^14.0@dev",
@@ -93,5 +96,12 @@
             "url": "https://github.com/chris-at-github/ps14-menu.git"
         }
     ],
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "helhum/dotenv-connector": {
+            "env-dir": ".",
+            "env-file-name": ".env",
+            "allow-overrides": false
+        }
+    }
 }

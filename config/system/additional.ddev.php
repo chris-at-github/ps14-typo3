@@ -10,7 +10,6 @@ declare(strict_types=1);
  * so DDEV does not overwrite it. In addition, the MCP server of in2mcp is
  * enabled — only locally, never on staging or production.
  */
-
 if (getenv('IS_DDEV_PROJECT') == 'true') {
     $ddevConfig = [
         // This GFX configuration allows processing by installed ImageMagick 6

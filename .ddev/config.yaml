@@ -11,8 +11,10 @@ database:
     version: "11.8"
 use_dns_when_possible: true
 composer_version: "2"
-web_environment:
-    - TYPO3_CONTEXT=Development
+# TYPO3_CONTEXT comes from .env (created from .env.ddev on start)
+hooks:
+    post-start:
+        - exec-host: "cp -n .env.ddev .env 2>/dev/null || true"
 corepack_enable: false
 
 # Key features of DDEV's config.yaml:
