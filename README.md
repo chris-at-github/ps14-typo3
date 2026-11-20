@@ -117,10 +117,13 @@ ddev import-db --file=dump.sql.gz     # Datenbank importieren
 
 ## Verzeichnisstruktur
 ```
+build/     Build-Skripte (Iconfont, Lock-Prüfung)
 config/    TYPO3-Systemkonfiguration (settings.php, additional.php)
 docs/      Projektdokumentation (Pläne & Specs)
+packages/  ps14_site (versioniert) und lokal geklonte gemeinsame Pakete – sonst gitignored
 public/    Docroot (index.php, .htaccess, fileadmin, typo3)
 sql/       SQL-Dateien
+temp/      Ablage für Sicherungen, Vorlagen und Zwischenstände – gitignored, von ESLint ignoriert
 var/       Laufzeit-Artefakte (Caches, Logs) – gitignored
 vendor/    Composer-Abhängigkeiten – gitignored
 ```

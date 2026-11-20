@@ -3,7 +3,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['vendor/', 'public/', 'var/', 'packages/*/Resources/Public/'],
+    ignores: ['vendor/', 'public/', 'var/', 'temp/', 'packages/*/Resources/Public/'],
   },
   js.configs.recommended,
   {

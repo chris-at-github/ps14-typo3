@@ -256,7 +256,13 @@ Geklärt am 2026-11-20:
   - `composer validate` ok, `npm run lint` ohne Befund.
 - [x] Task 2 – Dokumentation: Commit aedebf7 (`CLAUDE.md`, `README.md`, `own-extensions.md`;
   zusätzlich Kunden-Branches des Hauptrepos beschrieben).
-- [ ] Task 3 – Squash-Merge nach `main`
-- [ ] Task 4 – Import auf `main`
+- [x] Task 3 – Squash-Merge nach `main`: 4bfad51, Feature-Branch gelöscht.
+- [x] Task 4 – Import auf `main`: 2ec6b00 (`git subtree add`, 203 Commits).
+  - Inhalt identisch mit `temp/ps14_site-repo`; die ignorierten
+    Iconfont-Artefakte per `ddev exec node build/build-iconfont.js` neu erzeugt.
+  - `.gitignore`: neue Datei in `ps14_site` sichtbar, in `ps14_foundation` nicht.
+  - `extension:setup`, `cache:flush` ok; `/de/` und `/typo3/` HTTP 200.
+  - ESLint lintete die Sicherung in `temp/` → `temp/` in `eslint.config.js`
+    ignoriert (`temp/` bleibt dauerhaft als Ablage für Zwischenstände).
 - [ ] Task 5 – Übernahme in `kist-escherich-com-v14`
 - [ ] Task 6 – Aufräumen
