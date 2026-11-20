@@ -1,0 +1,3 @@
+-- Runs after the database import of bin/create-system.sh (step "data").
+-- Add statements that adapt the template data to a new project.
+-- The file is skipped as long as it contains only comments.

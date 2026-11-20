@@ -1,2 +1,3 @@
 *.gz
 *.sql
+!/post-import.sql
