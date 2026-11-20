@@ -1,4 +1,4 @@
-name: ps14-typo3
+name: kist-escherich-com-v14
 type: typo3
 docroot: public
 php_version: "8.4"

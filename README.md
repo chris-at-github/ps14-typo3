@@ -1,5 +1,5 @@
 # PS14 TYPO3
-https://ps14-typo3.ddev.site/typo3
+https://kist-escherich-com-v14.ddev.site/typo3
 
 ## Schnellstart
 
@@ -17,7 +17,7 @@ ddev typo3-extension-setup
 ddev launch
 ```
 
-Anschließend ist das Backend unter https://ps14-typo3.ddev.site/typo3 erreichbar.
+Anschließend ist das Backend unter https://kist-escherich-com-v14.ddev.site/typo3 erreichbar.
 
 ## Wichtige Befehle
 
@@ -94,13 +94,13 @@ ddev typo3-extension-setup            # Custom-Command: extension:setup + cache:
 
 ```bash
 ddev npm install                      # Node-Abhängigkeiten installieren
-ddev vite                             # Vite-Dev-Server starten (https://vite.ps14-typo3.ddev.site)
+ddev vite                             # Vite-Dev-Server starten (https://vite.kist-escherich-com-v14.ddev.site)
 ddev vite build                       # Frontend-Assets für Produktion bauen
 ddev exec npm run lint                # Alle Linter ausführen
 ddev exec npm run lint:fix            # Linter-Findings automatisch fixen
 ```
 
-Der Dev-Server läuft im Web-Container und wird über DDEV unter `https://vite.ps14-typo3.ddev.site` bereitgestellt. Mit `Strg+C` beenden.
+Der Dev-Server läuft im Web-Container und wird über DDEV unter `https://vite.kist-escherich-com-v14.ddev.site` bereitgestellt. Mit `Strg+C` beenden.
 
 ### Datenbank
 
