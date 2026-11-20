@@ -23,3 +23,8 @@
 
 # Temporäre Ablage (Vorlagen, Zwischenstände)
 /temp/
+
+# Umgebungsdatei (Vorlagen .env.dist und .env.ddev sind versioniert)
+/.env
+/.env.local
+/.env.*.local

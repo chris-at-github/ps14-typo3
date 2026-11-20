@@ -18,6 +18,8 @@ ddev launch
 ```
 
 Anschließend ist das Backend unter https://ps14-typo3.ddev.site/typo3 erreichbar.
+`ddev start` legt `.env` aus `.env.ddev` an, falls sie fehlt (siehe
+„Umgebung“).
 
 ## Neues Projekt anlegen
 
@@ -54,6 +56,57 @@ der Vorlage, registriert den MCP-Server lokal und prüft das Ergebnis.
 
 Anschließend `ddev exec npm run lint` ausführen und die Änderungen als
 `chore: configure project <name>` committen.
+
+## Umgebung (`.env`)
+
+Umgebungsspezifische Werte stehen in `.env` im Projektverzeichnis.
+`helhum/dotenv-connector` lädt sie vor dem Start von TYPO3; echte
+Umgebungsvariablen haben Vorrang. Nutzbar in der Site-Konfiguration
+(`%env(NAME)%`) und in TypoScript (`getEnv()`).
+
+| Datei | Zweck |
+|---|---|
+| `.env` | Aktive Werte, gitignored – nie committen |
+| `.env.ddev` | Lokale Vorlage (versioniert), wird beim `ddev start` nach `.env` kopiert, falls diese fehlt |
+| `.env.dist` | Vorlage für Staging/Produktion (versioniert), auf dem Server als `shared/.env` |
+
+Derzeit enthält `.env` nur `TYPO3_CONTEXT` (lokal `Development`, Staging
+`Production/Staging`, Produktion `Production`). Neue Variablen in beiden
+Vorlagen ergänzen; keine Secrets in die Vorlagen.
+
+## Deployment
+
+Deployer läuft ausschließlich in DDEV. Auf dem Server sind weder Composer
+noch Repo-Zugang nötig: Lokal wird aus dem committeten Stand ein Artefakt
+gebaut (`vendor/` ohne Dev-Pakete, Iconfont, Vite-Build), hochgeladen und
+als neues Release aktiviert.
+
+```bash
+ddev auth ssh                               # SSH-Schlüssel in DDEV laden
+ddev exec vendor/bin/dep deploy staging     # Deploy auf Staging
+ddev exec vendor/bin/dep rollback staging   # Vorheriges Release aktivieren
+ddev exec vendor/bin/dep build:artifact staging  # Nur das Artefakt bauen (temp/deploy/package.tgz)
+```
+
+- Hosts und Projekt-Besonderheiten: `deploy.php` (pro Kunden-Branch;
+  in `main` nur Beispiele). Allgemeine Tasks: `deploy/typo3.php`.
+- Der Deploy bricht ab, wenn nicht der Branch des Hosts ausgecheckt ist
+  oder der Arbeitsbaum Änderungen enthält.
+- Ablauf auf dem Server: Release anlegen, Artefakt entpacken,
+  `public/htaccess/.htaccess-<stage>` nach `public/.htaccess` kopieren,
+  Shared-Dateien verlinken, `bin/update-system.sh` (`extension:setup`,
+  `upgrade:run`, `cache:flush`, `cache:warmup`), `current` umschalten.
+  Es bleiben 3 Releases.
+- Struktur: `<deploy_path>/releases/`, `shared/`, `current` → Docroot der
+  Domain ist `<deploy_path>/current/public`.
+- Vor dem ersten Deploy in `<deploy_path>/shared/` anlegen:
+  - `.env` (aus `.env.dist`),
+  - `config/system/additional.php` (DB-Zugang),
+  - `.htpasswd` (nur Staging, Basic Auth).
+- Gemeinsam über Releases: `public/fileadmin`, `public/typo3temp/assets`,
+  `var/log`, `var/session`, `var/lock`.
+- Hetzner-Webhosting: SSH-Port `222`, PHP-Version der CLI über
+  `PHPVERSION` (in `deploy.php`).
 
 ## Wichtige Befehle
 
@@ -129,6 +182,7 @@ ddev typo3 cache:flush                # Cache leeren
 ddev typo3 extension:setup            # Extensions einrichten
 ddev typo3 setup --help               # Optionen des Setup-Befehls anzeigen
 ddev typo3-extension-setup            # Custom-Command: extension:setup + cache:flush
+ddev exec bin/update-system.sh        # extension:setup, upgrade:run, cache:flush, cache:warmup
 ```
 
 ### Frontend (Vite)
@@ -153,9 +207,10 @@ ddev import-db --file=dump.sql.gz     # Datenbank importieren
 
 ## Verzeichnisstruktur
 ```
-bin/       Host-Skripte (create-system.sh)
+bin/       Skripte (create-system.sh auf dem Host, update-system.sh in DDEV/auf dem Server)
 build/     Build-Skripte (Iconfont, Lock-Prüfung)
 config/    TYPO3-Systemkonfiguration (settings.php, additional.php, additional.ddev.php)
+deploy/    Deployer-Recipe (typo3.php); Hosts in deploy.php
 docs/      Projektdokumentation (Pläne & Specs)
 packages/  ps14_site (versioniert) und lokal geklonte gemeinsame Pakete – sonst gitignored
 public/    Docroot (index.php, .htaccess, fileadmin, typo3)

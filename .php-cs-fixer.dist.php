@@ -10,6 +10,9 @@ $config->getFinder()
     ->exclude(['node_modules'])
     ->append([
         __DIR__ . '/.php-cs-fixer.dist.php',
+        __DIR__ . '/config/system/additional.ddev.php',
+        __DIR__ . '/deploy.php',
+        __DIR__ . '/deploy/typo3.php',
         __DIR__ . '/fractor.php',
         __DIR__ . '/phpstan.paths.php',
         __DIR__ . '/rector.php',

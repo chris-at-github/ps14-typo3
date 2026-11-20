@@ -102,7 +102,9 @@ and must not appear in the commit. Never push.
 - Commit on `<branch>`; pushing is up to the user.
 - MCP (`in2mcp`) is registered locally for `<dir>` and becomes active once
   Claude is started in `<dir>`.
-- Open points, e.g. real content, deployment.
+- `.env` was created from `.env.ddev` (`TYPO3_CONTEXT=Development`).
+- Open points, e.g. real content, deployment: hosts in `deploy.php` still
+  hold the examples from `main` (see the Deployment section of `README.md`).
 
 ## Removing a project
 
