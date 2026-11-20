@@ -264,5 +264,11 @@ Geklärt am 2026-11-20:
   - `extension:setup`, `cache:flush` ok; `/de/` und `/typo3/` HTTP 200.
   - ESLint lintete die Sicherung in `temp/` → `temp/` in `eslint.config.js`
     ignoriert (`temp/` bleibt dauerhaft als Ablage für Zwischenstände).
-- [ ] Task 5 – Übernahme in `kist-escherich-com-v14`
+- [x] Task 5 – Übernahme in `kist-escherich-com-v14`: Merge-Commit a10ccbe
+  auf `kist-escherich` (ohne Konflikte, Kunden-Hostnamen bleiben erhalten).
+  - Site-Clone nach `temp/ps14_site-repo` verschoben, Inhalt identisch.
+  - `ddev composer install`: `ps14/ps14_site` `14.x-dev` als Symlink.
+  - Iconfont neu erzeugt, `npm run lint` ohne Befund.
+  - TYPO3-Prüfungen (`extension:setup`, `cache:flush`, HTTP) offen: die
+    Datenbank des Kundenprojekts ist noch leer (Import/Setup steht aus).
 - [ ] Task 6 – Aufräumen
