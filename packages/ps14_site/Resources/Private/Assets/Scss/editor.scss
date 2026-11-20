@@ -1,0 +1,53 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap
+@use "bootstrap/root";
+@use "bootstrap/normalize";
+@use "bootstrap/font";
+@use "bootstrap/typography";
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Mixins
+@use "mixins/richtext" as richtext;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Components
+@use "components/link";
+@use "components/list" as list;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Root
+:root {
+    --font-size-normal: 16px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CKE
+body {
+    padding: 24px;
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--font-line-height);
+    color: var(--color-font);
+    text-align: left;
+
+    & > *:first-child {
+        margin-top: 0;
+    }
+}
+
+ul {
+    @include list.list-default;
+    @include list.list-default-ul;
+}
+
+ol {
+    @include list.list-default;
+    @include list.list-default-ol;
+}
+
+// table {
+// 	@include table--layout-0;
+// }
+
+@include richtext.richtext;

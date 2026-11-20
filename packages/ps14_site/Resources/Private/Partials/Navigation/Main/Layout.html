@@ -1,0 +1,30 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Card">
+        <ul class="navigation__group navigation__group--cards">
+            <f:for each="{item.children}" as="card">
+                <li class="navigation__group-item card{f:if(condition: card.active, then: ' is--active')}{f:if(condition: card.current, then: ' is--current')}">
+                    <f:if condition="{card.current}">
+                        <f:then>
+                            <a class="card__link" href="{card.link}" aria-current="page">
+                                <f:render section="CardInner" arguments="{card: card, settings: settings}" />
+                            </a>
+                        </f:then>
+                        <f:else>
+                            <a class="card__link" href="{card.link}">
+                                <f:render section="CardInner" arguments="{card: card, settings: settings}" />
+                            </a>
+                        </f:else>
+                    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="CardInner">
+        <f:if condition="{card.media.0}">
+            <f:render partial="Media/Main" section="Main" arguments="{file: card.media.0, settings: settings.picture, cssClass: 'card__media'}" />
+        </f:if>
+
+        <span class="card__title">{card.title}</span>
+    </f:section>
+</html>

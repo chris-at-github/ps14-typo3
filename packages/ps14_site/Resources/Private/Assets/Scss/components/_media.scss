@@ -1,0 +1,83 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+:root {
+    --media-container-media-ratio: auto;
+    --media-container-icon-size: 48px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container
+.media-container {
+    // damit spannt sich der Container nur so breit wie das Bild
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.media-container__source + .media-container__description,
+.media-container__source + .media-container__copyright {
+    margin: 8px 0 0;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Components
+.media-description {
+    font-size: var(--font-size-small);
+    line-height: 1.4;
+    color: var(--color-muted);
+
+    // hat keine eigene Breite, sondern orientiert sich an der Breite des Containers
+    width: 0;
+    min-width: 100%;
+}
+
+.media-copyright {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: var(--font-size-small);
+    color: var(--color-muted);
+
+    // hat keine eigene Breite, sondern orientiert sich an der Breite des Containers
+    width: 0;
+    min-width: 100%;
+}
+
+.media-copyright__value:has(+ .media-copyright__value) {
+    &::after {
+        margin: 0 3px;
+        content: '/';
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Ratio
+.media-container--ratio-1-1 {
+    --media-container-media-ratio: 1 / 1;
+}
+
+.media-container--ratio-4-3 {
+    --media-container-media-ratio: 4 / 3;
+}
+
+.media-container--ratio-16-9 {
+    --media-container-media-ratio: 16 / 9;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Images
+.media-container--picture {
+    &.media-container--ratio .media-container__source {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: var(--media-container-media-ratio);
+    }
+}
+
+.media-container--icon {
+    .media-container__source {
+        width: var(--media-container-icon-size);
+        height: var(--media-container-icon-size);
+    }
+}

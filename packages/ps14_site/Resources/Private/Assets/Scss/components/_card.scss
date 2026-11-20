@@ -1,0 +1,176 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Imports
+@use "button" as button;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+:root {
+    --card-container-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    --card-template-columns: 1fr;
+    --card-template-area: "image" "body" "actions";
+    --card-background-color: tranparent;
+    --card-border-color: transparent;
+    --card-font-color: var(--color-font);
+    --card-interactive-border-color: tranparent;
+    --card-interactive-background-color: tranparent;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container
+.card-container {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: var(--card-container-template-columns);
+    list-style: none;
+}
+
+.card-container > .card-container__item,
+.card-container > li {
+    container-type: inline-size;
+}
+
+.card-container--layout-horizontal-2 {
+    --card-container-template-columns: 1fr;
+
+    @container (min-width: 530px) {
+        --card-container-template-columns: 1fr 1fr;
+    }
+}
+
+.card-container--layout-vertical {
+    --card-container-template-columns: 1fr;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Card
+.card {
+    border-radius: var(--border-radius-default);
+    box-shadow: 0 0 0 1px var(--card-border-color);
+    overflow: hidden;
+    display: grid;
+    grid-template-areas: var(--card-template-area);
+    grid-template-columns: var(--card-template-columns);
+    background: var(--card-background-color);
+}
+
+.card--interactive {
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: left;
+
+    &:hover {
+        box-shadow: 0 0 0 2px var(--card-interactive-border-color);
+        background: var(--card-interactive-background-color);
+
+        .button {
+            @include button.button-default-interactive;
+        }
+    }
+
+    &:focus-visible {
+        box-shadow: 0 0 0 2px var(--card-interactive-border-color);
+        background: var(--card-interactive-background-color);
+        outline: 1px solid var(--color-focus-outline);
+        outline-offset: 4px;
+
+        .button {
+            @include button.button-default-interactive;
+        }
+    }
+}
+
+.card__image {
+    grid-area: image;
+}
+
+.card__image--icon {
+    --icon-container-size: 100%;
+    --icon-size: 48px;
+}
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+    padding: 16px;
+    color: var(--card-font-color);
+    grid-area: body;
+}
+
+.card__title {
+    font-weight: var(--font-weight-semibold);
+}
+
+.card__description {
+    font-size: var(--font-size-small);
+}
+
+.card__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    list-style: none;
+    grid-area: actions;
+}
+
+.card__action {
+    display: flex;
+    justify-content: center;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variants
+.card--neutral {
+    --card-background-color: var(--color-neutral-200);
+    --card-interactive-background-color: var(--color-neutral-300);
+}
+
+.card--neutral-outline {
+    --card-border-color: var(--color-neutral-200);
+    --card-interactive-border-color: var(--color-neutral-600);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Layouts
+// Horizontal: Image, Body, Actions
+.card--layout-horizontal-im-bo-ac {
+    --card-template-columns: 1fr;
+
+    @container (min-width: 450px) {
+        --card-template-area: "image body" "image actions";
+        --card-template-columns: minmax(100px, 1fr) 2fr;
+    }
+
+    @container (min-width: 800px) {
+        --card-template-area: "image body actions";
+        --card-template-columns: 175px 1fr minmax(min-content, 275px);
+    }
+
+    .card__image {
+        max-width: 100%;
+        height: 100%;
+    }
+}
+
+// Horizontal: Image, Body
+.card--layout-horizontal-im-bo {
+    --card-template-columns: 1fr;
+
+    @container (min-width: 450px) {
+        --card-template-area: "image body";
+        --card-template-columns: minmax(100px, 1fr) 2fr;
+    }
+
+    @container (min-width: 800px) {
+        --card-template-area: "image body";
+        --card-template-columns: 175px 1fr;
+    }
+
+    .card__image {
+        max-width: 100%;
+        height: 100%;
+    }
+}

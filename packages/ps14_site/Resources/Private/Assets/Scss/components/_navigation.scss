@@ -1,0 +1,42 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+// Farben: siehe globale Navigations-Variablen (--navigation-*) in bootstrap/_root.scss
+:root {
+    --navigation-gap: 0;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Block
+.navigation {
+    color: var(--navigation-font-color);
+    background-color: var(--navigation-background-color);
+}
+
+.navigation__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--navigation-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navigation__item {
+    padding: 0;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variant: Listing (Eintraege mit Icon-Kachel, Titel und Beschreibung, siehe navigation-item--listing)
+.navigation--listing {
+    --navigation-gap: var(--spacing-4);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variant: Icon (Icon-Kacheln nebeneinander, z. B. Social Media, siehe navigation-item--icon)
+.navigation--icon {
+    --navigation-gap: var(--spacing-8);
+
+    .navigation__list {
+        flex-flow: row wrap;
+    }
+}

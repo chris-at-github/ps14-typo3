@@ -1,0 +1,48 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables
+:root {
+    --link-color: var(--color-font);
+    --link-font-weight: var(--font-weight-normal);
+    --link-underline-color: var(--color-neutral-400);
+    --link-active-color: #000;
+    --link-active-underline-color: var(--color-neutral-900);
+    --link-focus-outline-color: var(--color-focus-outline);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Defintions
+@mixin link-default {
+    font-weight: var(--link-font-weight);
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--link-underline-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    border-radius: var(--border-radius-default);
+}
+
+@mixin link-default-hover {
+    color: var(--link-active-color);
+    text-decoration-color: var(--link-active-underline-color);
+}
+
+@mixin link-default-focus {
+    color: var(--link-active-color);
+    text-decoration-color: var(--link-active-underline-color);
+    outline: 1px solid var(--link-focus-outline-color);
+    outline-offset: 3px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Classes
+.link--default {
+    @include link-default;
+}
+
+.link--default:hover {
+    @include link-default-hover;
+}
+
+.link--default:focus-visible {
+    @include link-default-focus;
+}

@@ -1,0 +1,20 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:co="http://typo3.org/ns/Ps14/Component/Components/ComponentCollection"
+    data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{navigationMeta}">
+            <co:navigation title="{f:translate(key: 'page-header.meta-navigation', domain: 'ps14_site.messages')}" class="page-header__meta-navigation">
+                <co:navigation.list class="page-header__meta-list">
+                    <f:for each="{navigationMeta}" as="page">
+                        <li class="navigation__item">
+                            <a class="navigation-item page-header__meta-link" href="{page.link}" target="{page.target}" aria-current="{f:if(condition: page.current, then: 'page')}">
+                                <span class="navigation-item__title">{page.title}</span>
+                            </a>
+                        </li>
+                    </f:for>
+                </co:navigation.list>
+            </co:navigation>
+        </f:if>
+    </f:section>
+</html>

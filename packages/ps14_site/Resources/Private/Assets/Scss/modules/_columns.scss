@@ -1,0 +1,47 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Columns (Container mit zwei und drei Spalten, EXT:ps14_container)
+.columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-grid);
+
+    @container (min-width: 768px) {
+        // zwei Spalten
+        &--50-50 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        &--33-66 {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        }
+
+        &--66-33 {
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        }
+
+        &--25-75 {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+        }
+
+        &--75-25 {
+            grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+        }
+
+        // drei Spalten
+        &--33-33-33 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        &--25-50-25 {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+        }
+
+        &--50-25-25 {
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+        }
+
+        &--25-25-50 {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
+        }
+    }
+}

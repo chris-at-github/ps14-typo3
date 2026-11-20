@@ -1,0 +1,33 @@
+# Listen werden beim Import per Index ueberschrieben (array_replace_recursive), daher werden die
+# Definitionen aus EXT:ps14_foundation/Configuration/RTE/Global.yaml hier vollstaendig wiederholt.
+editor:
+  config:
+    style:
+      definitions:
+        - { name: 'LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_rte.xlf:link.download', element: 'a', classes: [ 'link--download' ] }
+        - { name: 'LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_rte.xlf:link.external', element: 'a', classes: [ 'link--external' ] }
+        - { name: 'LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_rte.xlf:link.mail', element: 'a', classes: [ 'link--mail' ] }
+        - { name: 'LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_rte.xlf:link.phone', element: 'a', classes: [ 'link--phone' ] }
+        - { name: 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_rte.xlf:link.cta', element: 'a', classes: [ 'link--cta' ] }
+        - { name: 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_rte.xlf:text.small', element: 'span', classes: [ 'text--small' ] }
+        - { name: 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_rte.xlf:text.large', element: 'span', classes: [ 'text--large' ] }
+
+buttons:
+  link:
+    properties:
+      class:
+        allowedClasses:
+          - 'link--download'
+          - 'link--external'
+          - 'link--mail'
+          - 'link--phone'
+          - 'link--cta'
+
+classesAnchor:
+  linkCtaInternal:
+    class: 'link--cta'
+    type: 'page'
+
+  linkCtaMail:
+    class: 'link--cta'
+    type: 'mail'

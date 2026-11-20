@@ -1,0 +1,6 @@
+[
+    "../Resources/Private/Assets/Scss/site.scss",
+    "../Resources/Private/Assets/Scss/print.scss",
+    "../Resources/Private/Assets/Scss/editor.scss",
+    "../Resources/Private/Assets/Js/site.js"
+]

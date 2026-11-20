@@ -1,0 +1,137 @@
+// -------------------------------------------------------------------------------------------------------------------
+// Import
+@use "../mixins/richtext" as *;
+@use "../bootstrap/typography" as *;
+
+// -------------------------------------------------------------------------------------------------------------------
+// Default
+.section {
+    &--outer {
+        padding-left: var(--container-spacing-x);
+        padding-right: var(--container-spacing-x);
+    }
+
+    &__inner {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        container-type: inline-size;
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Abstaende
+    &--space-before-small,
+    &--space-before-medium,
+    &--space-before-large,
+    &--space-before-huge {
+        padding-top: 0.1px; // eventuelle Margins innerhalb spannen den Container auf
+    }
+
+    &--space-after-small,
+    &--space-after-medium,
+    &--space-after-large,
+    &--space-after-huge {
+        padding-bottom: 0.1px; // eventuelle Margins innerhalb spannen den Container auf
+    }
+
+    &--space-before-small > &__inner {
+        margin-top: var(--container-spacing-y-small);
+    }
+
+    &--space-before-medium > &__inner {
+        margin-top: var(--container-spacing-y-medium);
+    }
+
+    &--space-before-large > &__inner {
+        margin-top: var(--container-spacing-y-large);
+    }
+
+    &--space-before-huge > &__inner {
+        margin-top: var(--container-spacing-y-huge);
+    }
+
+    &--space-after-small > &__inner {
+        margin-bottom: var(--container-spacing-y-small);
+    }
+
+    &--space-after-medium > &__inner {
+        margin-bottom: var(--container-spacing-y-medium);
+    }
+
+    &--space-after-large > &__inner {
+        margin-bottom: var(--container-spacing-y-large);
+    }
+
+    &--space-after-huge > &__inner {
+        margin-bottom: var(--container-spacing-y-huge);
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Farben und Theme
+    // Theme: gemeinsame Farbregel fuer alle Theme-Modifier
+    &[class*="section--theme-"] {
+        & > .section__inner {
+            color: var(--color-section-font);
+            background-color: var(--color-section-background);
+        }
+    }
+
+    // // Theme: example
+    // &--theme-example {
+    // 	--color-theme-background: var(--color-gray-20);
+    // 	--color-theme-font: var(--color-secondary-120);
+    // }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Laufweiten (Layout)
+
+    /* stylelint-disable-next-line no-duplicate-selectors */
+    &--outer {
+        // 0: Standard Einrueckung, schmale Laufweite
+        &.section--layout-0 > .section__inner {
+            max-width: var(--container-width-default);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Ueberschriften + Richtext (Bodytext)
+.section__heading {
+    & + .richtext {
+        margin-top: var(--spacing-heading);
+    }
+}
+
+.richtext {
+    @include richtext;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Sonderregeln
+.page__main {
+    // erstes Element auf der Seite erhält Abstand nach oben (wenn Abstand auf Auto)
+    & > .section--space-before-auto {
+        padding-top: 0.1px;
+
+        .section__inner {
+            margin-top: var(--container-spacing-y-large);
+        }
+    }
+
+    // letztes Element auf der Seite erhält Abstand nach unten -> damit es nicht am Footer klebt (wenn Abstand auf Auto)
+    & > .section--space-after-auto:last-child {
+        padding-bottom: 0.1px;
+
+        .section__inner {
+            margin-bottom: var(--container-spacing-y-large);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Nur im Druck sichtbar (Inhaltselement -> Erscheinungsbild -> Druck)
+@media screen {
+    .print--visibility-visible {
+        display: none;
+    }
+}

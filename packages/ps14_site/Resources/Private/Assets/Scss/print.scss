@@ -1,0 +1,10 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Import
+@use "sass:meta";
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Layout
+// Zusaetzlich zu media="print" am Link-Tag gekapselt, da der Vite-Dev-Server das Attribut nicht setzt
+@media print {
+    @include meta.load-css("layout/print");
+}

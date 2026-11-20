@@ -1,0 +1,49 @@
+// Backend layout with the footer columns "brand" (colPos 20) and "navigation" (colPos 21)
+mod.web_layout.BackendLayouts {
+  defaultFooter {
+    title = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_tca.xlf:backend-layout.default-footer.title
+    config {
+      backend_layout {
+        colCount = 3
+        rowCount = 2
+        rows {
+          1 {
+            columns {
+              1 {
+                name = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_tca.xlf:backend-layout.default.main
+                colPos = 0
+                colspan = 3
+              }
+            }
+          }
+
+          2 {
+            columns {
+              1 {
+                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.brand
+                colPos = 20
+              }
+
+              2 {
+                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.navigation
+                colPos = 21
+                colspan = 2
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+TCEFORM.tt_content {
+  imageborder.types.image.disabled = 1
+}
+
+// Darstellung der zweiten Ebene der Hauptnavigation (Feld an der Seite der ersten Ebene).
+// Ohne Auswahl: einfache Liste der Unterseiten. "card" ist vorgesehen, aber noch nicht umgesetzt.
+TCEFORM.pages.tx_foundation_navigation_layout.addItems {
+  listing = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.listing
+  card = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.card
+}

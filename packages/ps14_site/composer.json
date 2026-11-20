@@ -1,0 +1,35 @@
+{
+    "name": "ps14/ps14_site",
+    "type": "typo3-cms-extension",
+    "description": "TYPO3 extension for customizing a TYPO3 installation to meet the specific requirements of a customer's website.",
+    "keywords": [
+        "TYPO3",
+        "extension"
+    ],
+    "homepage": "http://ps14.de/",
+    "require": {
+        "php": "^8.4",
+        "typo3/cms-core": "^14.3",
+        "ps14/ps14_foundation": "^14.0"
+    },
+    "suggest": {
+        "ps14/ps14_image": "^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ps14\\Site\\": "Classes"
+        }
+    },
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Christian Pschorr",
+            "email": "pschorr.christian@gmail.com"
+        }
+    ],
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "ps14_site"
+        }
+    }
+}

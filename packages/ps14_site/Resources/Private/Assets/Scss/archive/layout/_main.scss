@@ -1,0 +1,88 @@
+@use "../functions" as *;
+@forward "../components/link";
+
+// ---------------------------------------------------------------------------------------------------------------------
+// HTML
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--font-line-height);
+    color: var(--color-font);
+    text-align: left;
+    background: var(--color-background);
+}
+
+a {
+    color: var(--link-color);
+
+    &:hover {
+        color: var(--link-active-color);
+    }
+
+    &:focus-visible {
+        color: var(--link-active-color);
+
+        // outline: var(--focus-outline-size) var(--focus-outline-style) var(--focus-outline-color);
+        // outline-offset: var(--focus-outline-offset);
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Page
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: var(--page-body-offset);
+}
+
+.page__main {
+    width: 100%;
+    flex: 1;
+    z-index: 5;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Page Header
+.page__header {
+    margin: rem(32px 0);
+
+    .logo {
+        display: block;
+        width: rem(64px);
+        height: rem(64px);
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Footer
+.page__footer {
+    margin: rem(32px 0 8px 0);
+}
+
+.page-footer__inner {
+    display: flex;
+    gap: rem(16px);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Footer Navigation
+.navigation--footer {
+    .navigation__group {
+        display: flex;
+        gap: rem(8px);
+    }
+
+    .navigation-item {
+        @extend %link-default;
+
+        &:hover {
+            @extend %link-default-hover;
+        }
+
+        &:focus-visible {
+            @extend %link-default-focus;
+        }
+    }
+}

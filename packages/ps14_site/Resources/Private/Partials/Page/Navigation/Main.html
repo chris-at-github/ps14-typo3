@@ -1,0 +1,71 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers"
+    xmlns:co="http://typo3.org/ns/Ps14/Component/Components/ComponentCollection"
+    data-namespace-typo3-fluid="true">
+    <f:comment><!-- Hauptnavigation: Liste innerhalb der <nav> des Seiten-Headers (Partials/Page/Layout/Header.html). Einträge mit Unterseiten sind ein Button, der die zweite Ebene öffnet (Desktop: Dropdown, Off-Canvas: Ebene fährt von rechts ein, siehe Js/components/main-menu.js). --></f:comment>
+    <f:section name="Main">
+        <ul class="main-menu">
+            <f:for each="{navigationMain}" as="page">
+                <li class="main-menu__item">
+                    <f:if condition="{page.children}">
+                        <f:then>
+                            <f:render section="Submenu" arguments="{page: page}" />
+                        </f:then>
+                        <f:else>
+                            <a class="navigation-item main-menu__link{f:if(condition: page.active, then: ' main-menu__link--active')}" href="{page.link}" target="{page.target}" aria-current="{f:if(condition: page.current, then: 'page')}">
+                                <span class="navigation-item__title">{page.title}</span>
+                            </a>
+                        </f:else>
+                    </f:if>
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="Submenu">
+        <button class="navigation-item main-menu__link main-menu__toggle{f:if(condition: page.active, then: ' main-menu__link--active')}" type="button" aria-expanded="false" aria-controls="main-menu-container-{page.data.uid}">
+            <span class="navigation-item__title">{page.title}</span>
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/chevron-down.svg" class="main-menu__indicator" />
+        </button>
+
+        <div class="main-menu__container" id="main-menu-container-{page.data.uid}" hidden="hidden">
+            <div class="main-menu__header">
+                <button class="button button--icon-prefix main-menu__back" type="button">
+                    <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/chevron-left.svg" class="button__icon" />
+                    <f:translate key="main-menu.back" domain="ps14_site.messages" />
+                </button>
+            </div>
+
+            <div class="main-menu__body">
+                <div class="main-menu__navigation">
+                    <f:comment><!-- Der übergeordnete Punkt ist auf der zweiten Ebene nochmals als Link vorhanden, da der Eintrag der ersten Ebene nur die Ebene öffnet. --></f:comment>
+                    <f:if condition="{page.data.tx_foundation_navigation_not_linked} == 0">
+                        <a class="heading heading--layout-3 main-menu__parent" href="{page.link}" target="{page.target}" aria-current="{f:if(condition: page.current, then: 'page')}">{page.title}</a>
+                    </f:if>
+
+                    <f:comment><!-- Darstellung der Unterseiten: Seitenfeld "Navigation > Layout" (tx_foundation_navigation_layout) der Seite der ersten Ebene. Ohne Auswahl einfache Liste, "listing" mit Icon und Beschreibung. --></f:comment>
+                    <co:navigation.list class="main-menu__list">
+                        <f:for each="{page.children}" as="child">
+                            <f:if condition="{page.data.tx_foundation_navigation_layout} == 'listing'">
+                                <f:then>
+                                    <co:navigation.list.item variant="listing" link="{child.link}" target="{child.target}" current="{child.current}" icon="{child.icon.0}" description="{child.data.abstract}">{child.title}</co:navigation.list.item>
+                                </f:then>
+                                <f:else>
+                                    <co:navigation.list.item link="{child.link}" target="{child.target}" current="{child.current}">{child.title}</co:navigation.list.item>
+                                </f:else>
+                            </f:if>
+                        </f:for>
+                    </co:navigation.list>
+                </div>
+
+                <f:comment><!-- Spalte für Inhalte: Inhaltselemente aus dem Seitenfeld "Navigation > Inhalte" (tx_foundation_navigation_content) der Seite der ersten Ebene. --></f:comment>
+                <f:if condition="{page.data.tx_foundation_navigation_content}">
+                    <div class="main-menu__content">
+                        <f:cObject typoscriptObjectPath="block.navigationContent" data="{page.data}" />
+                    </div>
+                </f:if>
+            </div>
+        </div>
+    </f:section>
+</html>

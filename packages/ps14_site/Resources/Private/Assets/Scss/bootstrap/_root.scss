@@ -1,0 +1,100 @@
+:root {
+    // -------------------------------------------------------------------------------------------------------------------
+    // Colors
+    --color-neutral-50:  #fcfbf9;
+    --color-neutral-100: #efeeeb;
+    --color-neutral-200: #dbd9d5;
+    --color-neutral-300: #c2bfb8;
+    --color-neutral-400: #a8a59f;
+    --color-neutral-500: #8f8c87;
+    --color-neutral-600: #77746e;
+    --color-neutral-700: #605d57;
+    --color-neutral-800: #494742;
+    --color-neutral-900: #33322e;
+    --color-background: #fff;
+    --color-font: var(--color-neutral-800);
+    --color-important: var(--color-neutral-900);
+    --color-muted: var(--color-neutral-600);
+    --color-error: #c5261e;
+    --color-focus-outline: var(--color-neutral-700);
+    --color-ruler: var(--color-neutral-200);
+    --color-section-font: var(--color-neutral-800);
+    --color-section-background: transparent;
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Navigation: Farbregeln fuer alle Navigationen (z. B. Navigation List, Mainmenu). "active" = Hover + Focus-Visible
+    --navigation-background-color: transparent;
+    --navigation-font-color: var(--color-font);
+    --navigation-description-color: var(--color-muted);
+    --navigation-icon-color: var(--color-font);
+    --navigation-icon-background-color: var(--color-neutral-100);
+    --navigation-active-background-color: var(--color-neutral-100);
+    --navigation-active-font-color: var(--color-important);
+    --navigation-active-description-color: var(--color-neutral-700);
+    --navigation-active-icon-color: var(--color-important);
+    --navigation-active-icon-background-color: var(--color-neutral-200);
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Fonts
+    --font-family-default: 'DM Sans', arial, sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 600;
+    --font-line-height: 1.7;
+    --font-size-small: 15px;
+    --font-size-normal: 17px;
+    --font-size-large: 20px;
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Display (Header)
+    --display-font-family: var(--font-family-default);
+    --display-font-weight: 500;
+    --display-line-height: 1.2;
+    --display-1-font-size: 28px;
+    --display-2-font-size: 21px;
+    --display-3-font-size: 18px;
+    --display-4-font-size: 18px;
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Spacings
+    --spacing-4: 4px;
+    --spacing-8: 8px;
+    --spacing-12: 12px;
+    --spacing-16: 16px;
+    --spacing-20: 20px;
+    --spacing-24: 24px;
+    --spacing-32: 32px;
+    --spacing-40: 40px;
+    --spacing-48: 48px;
+    --spacing-56: 56px;
+    --spacing-64: 64px;
+    --spacing-72: 72px;
+    --spacing-80: 80px;
+    --spacing-96: 96px;
+    --spacing-128: 128px;
+    --spacing-heading: var(--spacing-8); // Abstand zwischen Elementen zu Ueberschrift
+    --spacing-element: var(--spacing-16); // Abstand zwischen Elementen zu Elementen z.B. p + ul
+    --spacing-block: var(--spacing-12); // Abstand zwischen Elementen zu Sonderelementen z.B. .media-container
+    --spacing-section: var(--spacing-24); // Abstand zwischen Abschnitten, z.B. Element zu folgender Ueberschrift im Fliesstext
+    --spacing-grid: var(--spacing-48); // Abstand zwischen Spalten im Grid, z.B. .columns
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Page Header
+    --page-header-height: 152px; // Hoehe des fixierten Headers (mobil: siehe layout/_header.scss)
+    --page-header-offset: var(--page-header-height); // Abstand, mit dem der Inhalt unter dem fixierten Header beginnt
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Container
+    --container-width-default: 940px; // max. Breite von .section__inner (zzgl. --container-spacing-x links und rechts)
+    --container-spacing-x: 24px;
+    --container-spacing-y-none: 0;
+    --container-spacing-y-small: var(--spacing-8);
+    --container-spacing-y-medium: var(--spacing-24);
+    --container-spacing-y-large: var(--spacing-48);
+    --container-spacing-y-huge: var(--spacing-64);
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Border Radius
+    --border-radius-small: 2px;
+    --border-radius-default: 4px;
+}
