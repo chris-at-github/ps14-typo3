@@ -19,6 +19,42 @@ ddev launch
 
 Anschließend ist das Backend unter https://kist-escherich-com-v14.ddev.site/typo3 erreichbar.
 
+## Neues Projekt anlegen
+
+Ein Kundenprojekt entsteht als eigener Clone der Vorlage auf einem
+Kunden-Branch. Am einfachsten über den Claude-Skill
+`creating-typo3-projects`: Er fragt die Daten ab und führt das Skript aus.
+Direkt in der Vorlage (`main` ausgecheckt, ohne Änderungen, DDEV läuft):
+
+```bash
+bin/create-system.sh \
+    --dir ~/www/kist-escherich-com-v14 \
+    --name kist-escherich-com-v14 \
+    --branch kist-escherich \
+    --title 'KIST + ESCHERICH' \
+    --live-url https://www.kist-escherich.com/ \
+    --staging-url https://staging.kist-escherich.com/
+```
+
+Das Skript klont `main`, legt den Kunden-Branch an und setzt DDEV-Namen,
+Hostnamen, Site-Konfiguration und einen neuen `encryptionKey`. Danach
+installiert und baut es das Projekt, übernimmt Datenbank und `fileadmin`
+der Vorlage, registriert den MCP-Server lokal und prüft das Ergebnis.
+
+- Optionen: `--staging-url` (ohne → keine Staging-Variante), `--mcp-user`
+  (Backend-Benutzer für den MCP-Key, Standard `1`), `--from <schritt>`
+  (nach einem Fehler fortsetzen).
+- Schritte: `clone`, `configure`, `start`, `install`, `build`, `data`,
+  `setup`, `mcp`, `verify`.
+- Log: `<projekt>/temp/create-system.log`.
+- SQL nach dem Import: `sql/post-import.sql` (übersprungen, solange nur
+  Kommentare enthalten sind).
+- Lokale Einstellungen inkl. MCP-Server: Vorlage
+  `config/system/additional.ddev.php`, wird nach `additional.php` kopiert.
+
+Anschließend `ddev exec npm run lint` ausführen und die Änderungen als
+`chore: configure project <name>` committen.
+
 ## Wichtige Befehle
 
 ### DDEV-Umgebung
@@ -117,12 +153,13 @@ ddev import-db --file=dump.sql.gz     # Datenbank importieren
 
 ## Verzeichnisstruktur
 ```
+bin/       Host-Skripte (create-system.sh)
 build/     Build-Skripte (Iconfont, Lock-Prüfung)
-config/    TYPO3-Systemkonfiguration (settings.php, additional.php)
+config/    TYPO3-Systemkonfiguration (settings.php, additional.php, additional.ddev.php)
 docs/      Projektdokumentation (Pläne & Specs)
 packages/  ps14_site (versioniert) und lokal geklonte gemeinsame Pakete – sonst gitignored
 public/    Docroot (index.php, .htaccess, fileadmin, typo3)
-sql/       SQL-Dateien
+sql/       SQL-Dumps (gitignored) und post-import.sql
 temp/      Ablage für Sicherungen, Vorlagen und Zwischenstände – gitignored, von ESLint ignoriert
 var/       Laufzeit-Artefakte (Caches, Logs) – gitignored
 vendor/    Composer-Abhängigkeiten – gitignored

@@ -39,6 +39,12 @@ The following commands are explicitly allowed (no confirmation needed):
 | `ddev exec npm run lint` | Alle Linter ausführen (Stylelint, ESLint, editorconfig-checker, PHP-CS-Fixer, PHPStan) |
 | `ddev exec npm run lint:*` | Einzelne Linter ausführen bzw. automatisch fixen (z. B. `lint:php`, `lint:js-fix`, `lint:fix`) |
 
+## Scripts
+
+| Befehl | Beschreibung |
+|--------|--------------|
+| `bin/create-system.sh …` | Neues Kundenprojekt aus der Vorlage anlegen (Skill `creating-typo3-projects`), erst nach bestätigter Zusammenfassung der Projektdaten |
+
 Any other script (destructive DB operations, deployments, etc.) still requires
 confirmation.
 
@@ -64,6 +70,14 @@ confirmation.
 - **Never** merge into `main` automatically. Merge only on request, via squash (`git merge --squash`), so that each feature results in exactly one commit on `main`.
 - Propose the commit message for the squash commit on `main` and ask me for approval.
 - After the squash merge, verify the feature branch matches `main` (`git diff --quiet main <branch>`), then delete it immediately (`git branch -D`).
+
+# Content & Pages
+- Create and change content and pages (pages, content elements, records, files) exclusively via MCP (`in2mcp`), never via SQL writes or DataHandler/CLI scripts.
+- Exception: importing a complete database dump while setting up a project (e.g. via the install script).
+- `ddev mysql -e "SELECT …"` stays allowed for read-only checks.
+- If the `in2mcp` server is not available in the current project, tell me instead of falling back to another method.
+- Use only the local DDEV server (`in2mcp`) by default. MCP servers of staging or production (e.g. `in2mcp-staging`, `in2mcp-prod`) only on my explicit instruction for the specific action.
+- Register or remove MCP servers only via `claude mcp add|remove … --scope local`; never edit `~/.claude.json` directly and never print API keys.
 
 # Example Content
 - Every new module (content element, container, plugin) gets an example page below "Modules" [29], created via MCP (`in2mcp`).
