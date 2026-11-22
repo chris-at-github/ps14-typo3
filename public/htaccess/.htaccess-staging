@@ -6,12 +6,21 @@
 #
 #####
 
+# Addition: PHP version of the web server. Only needed if the hosting's
+# default PHP is older than required (e.g. Hetzner konsoleH: FastCGI wrapper);
+# enable it in the customer branch, adjusting the path to the hosting.
+#FcgidWrapper "/home/httpd/cgi-bin/php84-fcgi-starter.fcgi" .php
+
 # Addition: Basic Auth. @DEPLOY_PATH@ is replaced with the absolute deploy
-# path; the .htpasswd lives outside the docroot in shared/.
-AuthType Basic
-AuthName "Staging"
-AuthUserFile @DEPLOY_PATH@/shared/.htpasswd
-Require valid-user
+# path; the .htpasswd lives outside the docroot in shared/. Only requested
+# via HTTPS, so plain HTTP requests are redirected first (see "redirect to
+# HTTPS") and credentials are never sent unencrypted.
+<If "%{HTTPS} == 'on' || %{HTTP:X-Forwarded-Proto} == 'https'">
+	AuthType Basic
+	AuthName "Staging"
+	AuthUserFile @DEPLOY_PATH@/shared/.htpasswd
+	Require valid-user
+</If>
 
 # Addition: keep staging out of search engines
 <IfModule mod_headers.c>
