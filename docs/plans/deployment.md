@@ -340,3 +340,9 @@ Noch zu bestätigen:
     (KIST `3f59c0c`). Ab Release 9 OK; ob der Block unter mod_fcgid
     greift oder der Prozess neu gestartet wurde, ist nicht eindeutig.
   - `fileadmin` per `rsync` nach `shared/public/fileadmin` (2.121 Dateien).
+  - Vorlage: OPcache-Block in `.htaccess-staging`/`-production` nur als
+    Kommentar (`ef0f57a`); KIST hat ihn aktiv, auch in
+    `.htaccess-production` (`1d1864c`), ebenso `FcgidWrapper` (`0e066da`).
+- Plan abgeschlossen am 2026-11-22. Offen außerhalb des Plans: erster
+  Deploy auf production (eigene Freigabe; `FcgidWrapper` und
+  OPcache-Block dort noch ungetestet).
