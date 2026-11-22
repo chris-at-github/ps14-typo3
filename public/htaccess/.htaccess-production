@@ -6,6 +6,21 @@
 #
 #####
 
+# Addition: OPcache: revalidate paths to avoid stale opcode after symlink-based
+# deployments. Only needed if PHP keeps serving the previous release after a
+# deploy; enable it in the customer branch.
+# see https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.revalidate-path
+# and https://deployer.org/docs/8.x/avoid-php-fpm-reloading#fix-for-apache
+#<IfModule mod_php.c>
+#	php_value opcache.revalidate_path 1
+#</IfModule>
+#<IfModule mod_php8.c>
+#	php_value opcache.revalidate_path 1
+#</IfModule>
+#<IfModule mod_proxy_fcgi.c>
+#	SetEnv PHP_VALUE "opcache.revalidate_path=1"
+#</IfModule>
+
 #####
 #
 # Example .htaccess file for TYPO3 CMS - for use with Apache Webserver
