@@ -6,6 +6,10 @@
 #
 #####
 
+# Addition: run PHP 8.4 via the FastCGI wrapper of the hosting (konsoleH);
+# the server default is older and fails the Composer platform check.
+FcgidWrapper "/home/httpd/cgi-bin/php84-fcgi-starter.fcgi" .php
+
 #####
 #
 # Example .htaccess file for TYPO3 CMS - for use with Apache Webserver
