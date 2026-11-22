@@ -279,7 +279,7 @@ nach `main` nur auf deine Anweisung.
 ### Task 5: KIST Staging
 
 - Server vorbereiten (mit dir): Docroot, DB, `shared/.env`,
-  `shared/config/system/additional.php`, `shared/public/.htpasswd`.
+  `shared/config/system/additional.php`, `shared/.htpasswd`.
 - Szenarien 3–6 auf `staging-v14`, Ergebnis im Status.
 
 # Entscheidungen
@@ -308,7 +308,7 @@ Noch zu bestätigen:
 
 # Status
 
-- [ ] Offene Punkte geklärt
+- [x] Offene Punkte geklärt (SSH `kistae`/Port 222, CLI `PHPVERSION=8.4`, DB `staging_v14`, Domain `staging-v14.kist-escherich.com`, Basic Auth Benutzer `kist`)
 - [x] Task 1 – `.env` und `update-system.sh` (Szenario 1 lokal OK: Kontext `Development` aus `.env` in Web und CLI, `update-system.sh` läuft durch)
 - [x] Task 2 – Deployer und Recipe (`22a9be8`, Fix `var/` im Artefakt)
   - Szenario 2 lokal OK: Archiv 28 MB, ohne `.git`, `node_modules`,
@@ -321,5 +321,22 @@ Noch zu bestätigen:
     `.htaccess-production` erzwingt HTTPS. `deploy.php` und `deploy/` sind
     im PHP-CS-Fixer-Finder.
 - [x] Task 3 – Doku
-- [ ] Task 4 – KIST übernehmen
-- [ ] Task 5 – KIST Staging
+- [x] Task 4 – KIST übernehmen (Merge `e883a5f`, Hosts `5c1a153`,
+  SSH-Host `b318376`, Staging-Domain `3ca5a17`)
+- [x] Task 5 – KIST Staging (Stand Release 11, 2026-11-22)
+  - Szenario 3 OK: `/de/`, `/en/`, `/typo3/` HTTP 200, Basic Auth aktiv,
+    Kontext `Production/Staging` in Web und CLI.
+  - Szenario 4 OK: geänderte Testmarkierung im Footer sofort sichtbar
+    (Release 10).
+  - Szenario 5 OK: `dep rollback staging` → vorheriger Stand sofort
+    sichtbar (Release 9).
+  - Fix PHP-Version: Webserver-Default älter als 8.4 → `FcgidWrapper` in
+    `.htaccess-staging`/`-production` des Kunden-Branches; in der Vorlage
+    nur als Kommentar.
+  - Fix Basic Auth: nur über HTTPS abgefragt, `http://` leitet direkt mit
+    301 weiter (Vorlage `3a46064`).
+  - OPcache: Release 8 zeigte noch alten Code (PHP-Prozess im alten
+    Release); danach `opcache.revalidate_path` per `.htaccess` ergänzt
+    (KIST `3f59c0c`). Ab Release 9 OK; ob der Block unter mod_fcgid
+    greift oder der Prozess neu gestartet wurde, ist nicht eindeutig.
+  - `fileadmin` per `rsync` nach `shared/public/fileadmin` (2.121 Dateien).
