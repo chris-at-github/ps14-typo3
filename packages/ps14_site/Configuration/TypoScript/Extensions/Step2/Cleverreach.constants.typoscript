@@ -1,0 +1,19 @@
+// Zugangsdaten (clientId, login, password) nicht im Repository: in Schritt 2 ueber .env bzw. additional.php setzen
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:cleverreach/Configuration/TypoScript/constants.typoscript">
+
+plugin.tx_cleverreach {
+  clientId =
+  login =
+  password =
+  formId = 389114
+  groupId = 619215
+  debug = 1
+  authMode = bearer
+}
+
+[siteLanguage("languageId") == "1"]
+  plugin.tx_cleverreach {
+    formId = 409389
+    groupId = 635450
+  }
+[END]

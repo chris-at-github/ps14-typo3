@@ -1,0 +1,132 @@
+:root {
+    --button--rounded-icon-size: #{rem(45px)};
+    --button--rounded-icon-svg-size: #{rem(19px)};
+}
+
+%button {
+    & {
+        position: relative;
+        display: inline-block;
+        padding: rem(12px 30px);
+        border: 0;
+        background: $theme-color-primary;
+        color: #fff;
+    }
+
+    &:hover, .focusable &:focus {
+        background: $theme-color-primary-dark;
+        background-size: 0;
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+%button--inverted {
+    & {
+        background: #fff;
+        color: $theme-color-primary;
+    }
+
+    &:hover, .focusable &:focus {
+        background: #fff;
+        color: $theme-color-primary-dark;
+    }
+}
+
+%button--rounded-icon {
+    & {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--button--rounded-icon-size);
+        height: var(--button--rounded-icon-size);
+        padding: 0;
+        border: 0;
+        background: none;
+        color: inherit;
+        outline: 0;
+        opacity: inherit;
+        cursor: pointer;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        border: 2px solid $theme-color-primary;
+        border-radius: 50%;
+        background: $theme-color-primary;
+        transition-property: border, background;
+        transition-duration: $transition-duration;
+    }
+
+    &:hover, .focusable &:focus {
+        &::before {
+            border-color: $theme-color-primary;
+            background: #fff;
+        }
+
+        svg {
+            fill: $theme-color-primary;
+        }
+    }
+
+    svg {
+        position: relative;
+        z-index: 10;
+        fill: #fff;
+        transition: fill $transition-duration;
+        width: var(--button--rounded-icon-svg-size);
+        height: var(--button--rounded-icon-svg-size);
+    }
+
+    &[disabled] {
+        & {
+            cursor: not-allowed;
+        }
+
+        &::before {
+            background: $color-grey-lighten;
+        }
+    }
+}
+
+%button--rounded-icon--inverted {
+    &::before {
+        border-color: $theme-color-primary;
+        background: #fff;
+    }
+
+    svg {
+        fill: $theme-color-primary;
+    }
+
+    &:hover:not([disabled]), .focusable &:focus:not([disabled]) {
+        &::before {
+            background: $theme-color-primary;
+        }
+
+        svg {
+            fill: #fff;
+        }
+    }
+}
+
+// => 768px
+@include media-breakpoint-up(md) {
+    :root {
+        --button--rounded-icon-size: #{rem(55px)};
+        --button--rounded-icon-svg-size: #{rem(25px)};
+    }
+}
+
+// => 1200px
+@include media-breakpoint-up(xl) {
+    :root {
+        --button--rounded-icon-size: #{rem(65px)};
+        --button--rounded-icon-svg-size: #{rem(29px)};
+    }
+}

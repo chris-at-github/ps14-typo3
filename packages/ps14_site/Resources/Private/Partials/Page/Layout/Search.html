@@ -1,0 +1,20 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Icon">
+        <f:link.page pageUid="{site.settings.pages.search}" class="search-widget search-widget--link" aria-expanded="false" aria-controls="search-widget--field" aria-label="{f:translate(key: 'search.link', domain: 'ps14_foundation.frontend')}">
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/search.svg" />
+        </f:link.page>
+    </f:section>
+
+    <f:section name="Field">
+        <form action="{f:uri.page(pageUid: site.settings.pages.search)}" class="search-widget search-widget--field" id="search-widget--field">
+            <input type="hidden" name="tx_kesearch_pi1[page]" value="1">
+            <input type="text" class="search-widget--keyword" name="tx_kesearch_pi1[sword]" aria-label="{f:translate(key: 'search.placeholder', domain: 'ps14_foundation.frontend')}" placeholder="{f:translate(key: 'search.placeholder', domain: 'ps14_foundation.frontend')}" tabindex="-1" />
+            <button class="search-widget--submit" type="submit" aria-label="{f:translate(key: 'search.submit', domain: 'ps14_foundation.frontend')}" tabindex="-1">
+                <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/search.svg" />
+            </button>
+            <button class="search-widget--close" type="button"  aria-label="{f:translate(key: 'search.close', domain: 'ps14_foundation.frontend')}" tabindex="-1">
+                <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/close.svg" />
+            </button>
+        </form>
+    </f:section>
+</html>

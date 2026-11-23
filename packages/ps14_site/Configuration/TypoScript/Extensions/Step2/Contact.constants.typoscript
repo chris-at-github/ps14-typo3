@@ -1,0 +1,8 @@
+@import 'EXT:contact/Configuration/TypoScript/constants.typoscript'
+
+plugin.tx_contact {
+  persistence.storagePid = 115
+  settings.searchRequestPageUid = 118
+  settings.searchRequestPageType = 1548191072
+  settings.listingMapFilepath = /fileadmin/Bilder/04_Unternehmen/contact/world-map.svg
+}

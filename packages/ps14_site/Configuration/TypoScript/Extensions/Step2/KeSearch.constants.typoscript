@@ -1,0 +1,7 @@
+@import 'EXT:ke_search/Configuration/TypoScript/constants.typoscript'
+
+#plugin.tx_kesearch {
+#	layoutRootPath = EXT:xna/Resources/Private/Extensions/KeSearch/Layouts/
+#	templateRootPath = EXT:xna/Resources/Private/Extensions/KeSearch/Templates/
+#	partialRootPath = EXT:xna/Resources/Private/Extensions/KeSearch/Partials/
+#}

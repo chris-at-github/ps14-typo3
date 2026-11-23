@@ -1,0 +1,75 @@
+.breadcrumb {
+    & {
+        display: none;
+        font-size: rem(17px);
+    }
+
+    ul {
+        & {
+            @include list-unstyled;
+
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            & {
+                margin: rem(0 12px 0 0);
+            }
+
+            &:last-child {
+                margin: 0;
+                color: $theme-color-primary;
+            }
+        }
+    }
+
+    li + li {
+        & {
+            position: relative;
+            padding: rem(0 0 0 18px);
+        }
+
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: rem(8px); left: 0;
+            width: rem(6px); height: rem(12px);
+            background: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNyAxMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjIiPjxwYXRoIGQ9Ik0zODcyLjc5LDI0OC4wNTRMMzg2OC43OSwyNDMuOTE0QzM4NjguNiwyNDMuNzE1IDM4NjguNiwyNDMuMzk5IDM4NjguOCwyNDMuMjA3QzM4NjguOTIsMjQzLjA5NSAzODY5LjA1LDI0Mi45NzEgMzg2OS4xNiwyNDIuODZDMzg2OS4zNiwyNDIuNjY4IDM4NjkuNjgsMjQyLjY3MyAzODY5Ljg3LDI0Mi44NzJDMzg3MC44NCwyNDMuODc0IDM4NzMuNTUsMjQ2LjY4OCAzODc0LjUyLDI0Ny42ODlDMzg3NC41OCwyNDcuNzU1IDM4NzQuNjMsMjQ3LjgzMiAzODc0LjY1LDI0Ny45MTRDMzg3NC43LDI0OC4wODMgMzg3NC42NiwyNDguMjc0IDM4NzQuNTMsMjQ4LjQxQzM4NzMuNTYsMjQ5LjQxMyAzODcwLjg0LDI1Mi4yMzIgMzg2OS44NywyNTMuMjM1QzM4NjkuNjgsMjUzLjQzNCAzODY5LjM2LDI1My40MzkgMzg2OS4xNiwyNTMuMjQ4QzM4NjkuMDUsMjUzLjEzNiAzODY4LjkyLDI1My4wMTIgMzg2OC44LDI1Mi45QzM4NjguNiwyNTIuNzA4IDM4NjguNiwyNTIuMzkyIDM4NjguNzksMjUyLjE5M0wzODcyLjc5LDI0OC4wNTRaIiBmaWxsPSIjNzQ3NDc0IiB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwxLC0zODY4LjY1LC0yNDIuNzE5KSBtYXRyaXgoMC43NTA0NywwLDAsMi43OTI0OSwzNjcxLjE0LC04ODYuOTc5KSBtYXRyaXgoMS4zMzI1LDAsMCwwLjM1ODEwMywtNDg5MS43OSwzMTcuNjMpIi8+PC9zdmc+") no-repeat 0 0;
+        }
+    }
+
+    a {
+        & {
+            font-weight: $font-weight-normal;
+            color: $color-grey;
+        }
+
+        & > span {
+            @extend %link--animation;
+        }
+
+        &:hover, .focusable &:focus {
+            & {
+                color: $theme-color-primary;
+                text-decoration: none;
+            }
+
+            span {
+                background-size: 100% 1px;
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 768px
+@include media-breakpoint-up(md) {
+    .breadcrumb {
+        & {
+            display: flex;
+            align-items: flex-end;
+        }
+    }
+}

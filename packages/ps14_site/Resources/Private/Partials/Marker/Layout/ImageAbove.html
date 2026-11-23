@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+    <f:section name="Main">
+        <f:if condition="{data.bodytext}">
+            <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+        </f:if>
+
+        <div class="marker marker--layout-{data.tx_foundation_variant}">
+            <f:if condition="{images.0}">
+                <div class="marker--media">
+                    <f:render partial="Media/Main" section="Main" arguments="{
+                        file: images.0,
+                        settings: '{fo:settings.get(extension: \'Ps14Marker\', path: \'images.above\')}'
+                    }" />
+                </div>
+            </f:if>
+
+            <f:if condition="{elements}">
+                <f:render partial="Marker/Listing/Listing" section="Main" arguments="{_all}" />
+            </f:if>
+        </div>
+    </f:section>
+</html>

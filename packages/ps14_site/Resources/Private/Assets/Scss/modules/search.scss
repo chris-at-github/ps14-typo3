@@ -1,0 +1,231 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Search Form
+.search--form {
+    & {
+        margin: $spacing-default 0 0 0;
+    }
+
+    .search--form-keyword-container {
+        & {
+            position: relative;
+        }
+
+        &.is--search-keyword {
+            .search--form-keyword-reset {
+                opacity: 1;
+            }
+        }
+    }
+
+    .search--form-keyword {
+        & {
+            display: block;
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            padding: rem(12px 20px);
+            border: 0;
+            border-radius: $border-radius-default;
+            background: $color-grey-lighter;
+        }
+
+        &:focus {
+            background: $color-grey-light;
+        }
+    }
+
+    .search--form-keyword-reset {
+        & {
+            position: absolute;
+            top: 0; right: 0;
+            z-index: 10;
+            width: rem(52px);
+            height: rem(52px);
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            text-align: center;
+            opacity: 0;
+            transition: opacity $transition-duration;
+
+            svg {
+                margin: 15px 0 0;
+                width: 21px;
+                height: 21px;
+            }
+        }
+
+        svg {
+            fill: #666;
+        }
+
+        &:hover, &:focus {
+            svg {
+                fill: $link-color-hover;
+            }
+        }
+    }
+
+    .search--form-action {
+        margin: rem(10px 0 0 0);
+    }
+}
+
+.search--result-notice {
+    margin-top: rem(45px);
+}
+
+.search--result-list {
+    & {
+        list-style: none;
+        padding: 0;
+    }
+
+    & > li {
+        position: relative;
+        margin-top: rem(45px);
+    }
+
+    .search--result-list-item-title {
+        margin-top: 0;
+    }
+
+    .search--result-list-item-title + .search--result-list-item-teaser {
+        margin-top: rem(5px);
+    }
+
+    .hit {
+        color: #000;
+        border-bottom: 1px dotted $theme-color-primary;
+    }
+}
+
+.search--result-pagination-container {
+    & {
+        margin: rem(45px 0 0 0);
+    }
+
+    .search--result-pagination-description {
+        color: $color-grey-darken;
+    }
+}
+
+.search--result-pagination {
+    & {
+        margin: rem(10px 0 0 0);
+    }
+
+    ul {
+        display: flex;
+        margin: rem(0 - 5px);
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        padding: rem(0 5px);
+    }
+
+    a {
+        & {
+            display: block;
+            background: #fff;
+            color: $theme-color-primary;
+            width: rem(34px);
+            height: rem(34px);
+            border: 2px solid $theme-color-primary;
+            border-radius: 50%;
+            text-align: center;
+            line-height: rem(30px);
+            font-weight: $font-weight-base;
+            transition: all $transition-duration;
+            cursor: pointer;
+        }
+
+        &:hover, .focusable &:focus {
+            background: $theme-color-primary;
+            color: #fff;
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    .current {
+        display: block;
+        background: $theme-color-primary;
+        color: #fff;
+        width: rem(34px);
+        height: rem(34px);
+        border: 2px solid $theme-color-primary;
+        border-radius: 50%;
+        text-align: center;
+        line-height: rem(30px);
+        font-weight: $font-weight-bold;
+        cursor: default;
+    }
+
+    .prev, .next {
+        svg {
+            position: relative;
+            fill: $theme-color-primary;
+            width: rem(9px);
+            height: rem(15px);
+            transition: fill $transition-duration;
+        }
+
+        &:hover, .focusable &:focus {
+            & {
+                background: $theme-color-primary;
+            }
+
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+
+    .prev svg {
+        top: 2px; right: 1px;
+    }
+
+    .next svg {
+        top: 2px; left: 1px;
+    }
+}
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 768px
+@include media-breakpoint-up(md) {
+    .search--form {
+        margin: 0;
+    }
+
+    .search--result-list {
+        & {
+            margin: rem(75px 0 0 0);
+        }
+
+        .search--result-list-item-title {
+            & {
+                font-size: rem(22px);
+            }
+
+            a {
+                font-weight: $font-weight-base;
+            }
+        }
+    }
+}

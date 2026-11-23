@@ -1,0 +1,19 @@
+%logo {
+    & {
+        display: block;
+        background: none;
+    }
+
+    &::after {
+        display: none;
+    }
+
+    img, svg {
+        max-width: 100%;
+        display: block;
+    }
+
+    img {
+        height: auto;
+    }
+}

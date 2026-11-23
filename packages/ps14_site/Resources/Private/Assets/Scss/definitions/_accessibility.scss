@@ -1,0 +1,64 @@
+@import '../vendors/bootstrap/mixins/screen-reader';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Screenreader
+%accessibility-hidden {
+    @include sr-only;
+}
+
+%accessibility-hidden-focusable {
+    @include sr-only-focusable;
+}
+
+%accessibility-shortcut {
+    @extend %accessibility-hidden-focusable;
+
+    &:focus {
+        position: fixed;
+        top: 5px;
+        left: 5px; right: 5px;
+        z-index: 100;
+        background: #fff;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Focusable
+%accessibility-focus {
+    &:focus {
+        outline: 2px dashed rgba($font-color-base, 0.75);
+        transition: outline $transition-duration;
+    }
+}
+
+%accessibility-focus-within {
+    &:focus-within {
+        outline: 2px dashed rgba($font-color-base, 0.75);
+        transition: outline $transition-duration;
+    }
+}
+
+%accessibility-focus-overflow {
+    &:focus, &:focus-within {
+        & {
+            display: block;
+            position: relative;
+            outline: 0;
+        }
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            transition: border $transition-duration;
+        }
+
+        &::before {
+            border: 2px solid #fff;
+        }
+
+        &::after {
+            border: 2px dashed rgba($font-color-base, 0.75);
+        }
+    }
+}

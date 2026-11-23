@@ -1,0 +1,18 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// etracker (Site Settings tracking.etrackerSecureCode und tracking.etrackerProxyDomain)
+[site("settings").get("tracking.etrackerSecureCode") != "" && applicationContext != "Development"]
+  page.headerData {
+    1745353055 = TEXT
+    1745353055 {
+      value = {$tracking.etrackerProxyDomain}
+      required = 1
+      wrap = <script>var et_proxy_redirect = "\/\/|";</script>
+    }
+
+    1745353056 = TEXT
+    1745353056 {
+      value = {$tracking.etrackerSecureCode}
+      wrap = <script id="_etLoader" charset="UTF-8" data-block-cookies="true" data-secure-code="|" src="//{$tracking.etrackerProxyDomain}/code/e.js" async></script>
+    }
+  }
+[END]

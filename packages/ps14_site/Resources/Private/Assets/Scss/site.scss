@@ -1,63 +1,43 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// Bootstrap
-@use "bootstrap/root";
-@use "bootstrap/normalize";
-@use "bootstrap/font";
-@use "bootstrap/typography";
-@use "bootstrap/iconfont";
+// Define Variables
+$stylesheet-context: 'screen', 'import' !default;
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+@import 'definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Vendors
+@import 'vendors/tiny-slider';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Components
-@use "components/component";
-@use "components/heading";
-@use "components/link";
-@use "components/list";
-@use "components/icon";
-@use "components/button";
-@use "components/media";
-@use "components/form";
-@use "components/badge";
-@use "components/card";
-@use "components/navigation";
-@use "components/navigation-item";
-@use "components/ruler";
-@use "components/off-canvas";
+@import 'iconfont';
+@import 'components/grid';
+@import 'components/link';
+@import 'components/list';
+@import 'components/button';
+@import 'components/table';
+@import 'components/form';
+@import 'components/badge';
+@import 'components/media';
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Layout
-@use "layout/section";
-@use "layout/main";
-@use "layout/header";
-@use "layout/main-menu";
-@use "layout/footer";
+// @import 'xna/components/modal';
+// @import 'xna/components/flash';
+@import 'components/responsive-table';
+@import 'components/readmore-container';
+@import 'components/loader';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Modules
-@use "modules/textmedia";
-@use "modules/columns";
+@import 'modules/menu';
 
-// // ---------------------------------------------------------------------------------------------------------------------
-// // Global
-// @use "variables";
-// @use "functions";
-// // ---------------------------------------------------------------------------------------------------------------------
-// // Bootstrap
-// @use "bootstrap/root";
-// @use "bootstrap/normalize";
-// @use "bootstrap/font";
-// @use "bootstrap/iconfont";
-// // ---------------------------------------------------------------------------------------------------------------------
-// // Components
-// @use "components/header";
-// @use "components/link";
-// @use "components/list";
-// //// ---------------------------------------------------------------------------------------------------------------------
-// //// Layout
-// //// @import "../../../../ps14_theme/Resources/Public/Sass/layout/hue-container";
-// //// @import "../../../../ps14_theme/Resources/Public/Sass/layout/container";
-// //// @import "../../../../ps14_theme/Resources/Public/Sass/layout/modules";
-// //// @import "../../../../ps14_theme/Resources/Public/Sass/layout/navigation";
-// @use "layout/container";
-// @use "layout/content-elements";
-// @use "layout/main";
-
+// ---------------------------------------------------------------------------------------------------------------------
+// Layout
+@import 'layout/layout';
+@import 'components/layout/sticky';

@@ -1,0 +1,154 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & Site
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS-Variablen
+:root {
+    --accordion--container-space-after: #{rem(45px)};
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Komponente
+@include stylesheet-context($stylesheet-context-screen) {
+    .accordion {
+        & {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .accordion--header {
+            h1, h2, h3, h4 {
+                margin-top: 0;
+                font-size: inherit;
+            }
+
+            button {
+                & {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding: rem(15px 0);
+                    border: 0;
+                    border-bottom: 1px solid $color-grey-light;
+                    background: transparent;
+                    font-weight: $font-weight-normal;
+                    text-align: left;
+                    color: $font-color-base;
+                    cursor: pointer;
+                }
+
+                &[aria-expanded="true"] {
+                    svg {
+                        transform: rotate(180deg);
+                    }
+                }
+            }
+
+            svg {
+                display: block;
+                width: 19px;
+                height: 11px;
+                margin: 0 4px 0 0;
+                transition: transform $transition-duration;
+            }
+        }
+
+        // Accordeon-Elemente mit direkter Texteingabe
+        .accordion--container-default {
+            margin-top: rem(30px);
+            margin-bottom: var(--accordion--container-space-after);
+        }
+
+        // Accordeon-Elemente mit unter Inhaltselementen
+        .accordion--container-record {
+            & > .ce-frame--space-after-auto:last-child .ce-frame--inner {
+                margin-bottom: var(--accordion--container-space-after);
+            }
+        }
+
+        & > li:last-child {
+            .accordion--container-default,
+            .accordion--container-record > .ce-frame--space-after-auto:last-child .ce-frame--inner {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        :root {
+            --accordion--container-space-after: #{rem(65px)};
+        }
+
+        .accordion--container-default {
+            padding-right: percentage(2 / 12);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Print
+@include stylesheet-context($stylesheet-context-print) {
+    .accordion {
+        .accordion__item + .accordion__item {
+            margin-top: 20px;
+        }
+
+        .accordion--header {
+            break-after: avoid;
+            page-break-after: avoid;
+        }
+
+        .accordion--header button {
+            & {
+                display: block;
+                padding: 0;
+                border: 0;
+            }
+
+            svg {
+                display: none;
+            }
+        }
+
+        .accordion--container-default {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .collapse {
+            display: block !important;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Module
+.ce-accordion {
+    &.ce-frame--variant-default {
+        .accordion--header button {
+            font-size: rem(21px);
+        }
+    }
+
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        &.ce-frame--variant-default {
+            .accordion--header button {
+                font-size: rem(26px);
+            }
+        }
+    }
+}

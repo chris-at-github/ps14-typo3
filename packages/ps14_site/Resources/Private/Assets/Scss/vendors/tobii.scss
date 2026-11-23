@@ -1,0 +1,122 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Package Import
+@import '@midzer/tobii/src/scss/tobii';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Overwrite Variables
+:root {
+        --slide-max-width: 100%;
+        --slide-max-height: 85vh;
+        --tobii-button-size: #{rem(45px)};
+        --caption-color: #{$theme-color-primary};
+        --caption-background: #fff;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Overwrite
+.tobii {
+        & {
+                font-size: $font-size-base;
+                background: rgba(#fff, 0.95);
+        }
+
+        .tobii__slide {
+                & [data-type] {
+                        overflow: inherit;
+                        margin-left: $spacing-medium;
+                        margin-right: $spacing-medium;
+                        background: #fff;
+                }
+
+                figure > figcaption {
+                        width: max-content;
+                        margin: rem(30px) auto 0;
+                        padding: rem(3px 18px);
+                        background: $theme-color-primary;
+                        text-align: center;
+                        font-weight: 700;
+                        color: #fff;
+                        border-radius: 3px;
+                }
+        }
+
+        & > button {
+                & {
+                        @extend %button--rounded-icon;
+
+                        color: inherit;
+                        outline: 0;
+                        opacity: inherit;
+                }
+
+                svg {
+                        stroke: none;
+                        color: inherit;
+                }
+
+                &.tobii__btn--previous, &.tobii__btn--next {
+                        &, &:hover, &:focus {
+                                top: 50%;
+                                transform: translateY(-50%);
+                        }
+
+                        svg {
+                                width: rem(11px);
+                                height: rem(19px);
+                        }
+                }
+
+                &.tobii__btn--previous svg {
+                        margin-right: 3px;
+                }
+
+                &.tobii__btn--next svg {
+                        margin-left: 3px;
+                }
+
+                &.tobii__btn--close {
+                        & {
+                                top: rem(20px);
+                                right: rem(20px);
+                        }
+
+                        svg {
+                                transform: scale(1);
+                        }
+                }
+        }
+}
+
+// => 768px
+@include media-breakpoint-up(md) {
+        .tobii {
+                & > button {
+                        &.tobii__btn--previous, &.tobii__btn--next {
+                                svg {
+                                        width: rem(15px);
+                                        height: rem(25px);
+                                }
+                        }
+                }
+        }
+}
+
+@include media-breakpoint-up(xl) {
+        .tobii {
+                & > button {
+                        &.tobii__btn--previous, &.tobii__btn--next {
+                                svg {
+                                        width: rem(17px);
+                                        height: rem(29px);
+                                }
+                        }
+                }
+        }
+}

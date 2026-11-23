@@ -1,0 +1,36 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:section name="Main">
+    <div class="filter">
+        <f:if condition="{filter.title}">
+            <div class="filter-title">{filter.title}</div>
+        </f:if>
+
+        <f:form id="filter-{filter.identifier}" fieldNamePrefix="{filter.namespace}" pageType="{filter.pageType}" method="post">
+            <div>
+                <input type="hidden" name="tx_foundation[content]" value="{filter.record}" />
+            </div>
+
+            <div class="filter-items">
+                <f:for each="{filter.items}" as="item">
+                    <f:render partial="Filter/Item/{item.renderType -> f:format.case(mode: 'capital')}" section="Main" arguments="{_all}" />
+                </f:for>
+            </div>
+
+            <f:if condition="{filter.submitAll} == 1 || {filter.resetAll} == 1">
+                <div class="filter-actions">
+                    <f:if condition="{filter.submitAll} == 1">
+                        <button class="button filter--submit-all" type="submit"><f:translate key="filter.action.submit" domain="ps14_site.messages" /></button>
+                    </f:if>
+
+                    <f:if condition="{filter.resetAll} == 1">
+                        <button class="filter-reset--all" type="button">
+                            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/close.svg" />
+                            <f:translate key="filter.action.reset" domain="ps14_site.messages" />
+                        </button>
+                    </f:if>
+                </div>
+            </f:if>
+        </f:form>
+    </div>
+</f:section>
+</html>

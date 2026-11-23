@@ -1,21 +1,91 @@
+// Druck-Layout (aus print.scss ausgelagert, damit alle @import-Regeln vor den Regeln stehen)
 // ---------------------------------------------------------------------------------------------------------------------
-// Seite
-@page {
-    margin: 2cm;
+// XNA Global
+// ---------------------------------------------------------------------------------------------------------------------
+// Layout
+.hamburger, .off-canvas, #breadcrumb, #content--footer, .sticky--container, #footer {
+    display: none !important;
+}
+
+.page--layout-0, .page--layout-4, .page--layout-5 {
+    #header + .ce-content, #header + #breadcrumb + .ce-content {
+        .container-outer:first-child .container-inner, .ce-frame--outer:first-child > .ce-frame--inner {
+            padding-top: 45px !important;
+        }
+    }
+}
+
+.ce-frame--space-before-medium, .ce-frame--space-before-large {
+    .ce-frame--inner {
+        margin-top: 20px !important;
+    }
+}
+
+.ce-frame--space-after-medium, .ce-frame--space-after-large {
+    .ce-frame--inner {
+        margin-bottom: 20px !important;
+    }
+}
+
+.ce-frame--class-1, .ce-frame--class-2, .ce-frame--class-3, .ce-frame--class-4 {
+    background: none !important;
+}
+
+.ce-frame--class-2, .ce-frame--class-3, .ce-frame--class-4 {
+    &, a {
+        color: $font-color-base !important;
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Seitenumbrueche (Inhaltselement -> Erscheinungsbild -> Druck)
+// XO print settings fields
 .print--break-before {
-    break-before: page;
+    page-break-before: always;
 }
 
 .print--break-after {
-    break-after: page;
+    page-break-after: always;
+}
+
+.print--visibility-hidden {
+    display: none !important;
+}
+
+.print--visibility-visible {
+    display: block !important;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Sichtbarkeit (Inhaltselement -> Erscheinungsbild -> Druck)
-.print--visibility-hidden {
+// Header
+.page-header {
+    & {
+        position: relative;
+    }
+
+    .container-inner {
+        display: block !important;
+    }
+
+    .logo {
+        width: 208px;
+        height: 56px;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// HTML Elements | Basic Styles
+h1, .h1 {
+    margin-top: 40px !important;
+}
+
+table {
+    page-break-inside: avoid;
+}
+
+.link--cta {
     display: none;
+}
+
+.tobii {
+    display: none !important;
 }

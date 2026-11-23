@@ -5,10 +5,52 @@ Diese Anleitung sammelt alle Änderungen, die bei der Arbeit an der v14-Vorlage
 Migration von `~/www/kist-escherich-com` (TYPO3 12.4, Classic-Mode) betreffen.
 Zu jeder Änderung stehen die nötigen Schritte im KIST-Projekt.
 
-- Stand: 2026-11-10
+- Stand: 2026-11-10, ergänzt 2026-11-23 (Abschnitt 0)
 - Grundlage: ps14_foundation Branch `v14-dev`, ps14_site Branch `v14-dev`, Hauptrepo `main`
 - Feature-Inventar mit Entscheidungen und IDs: [feature-inventory-kist.md](feature-inventory-kist.md)
 - Pfade alt relativ zu `~/www/kist-escherich-com/public/typo3conf/ext/`
+
+## 0. Stand nach Schritt 1 (KIST v14, 2026-11-23)
+
+Schritt 1 ist umgesetzt im Plan [kist-v14-functionality.md](kist-v14-functionality.md)
+(Branch `feature/kist-v14-functionality`). Er weicht in folgenden Punkten bewusst
+von den Abschnitten 2–5 ab, die für die Vorlage geschrieben wurden:
+
+- **Altes Markup bleibt** (Entscheidung 1): Für KIST gelten die Abschnitte
+  3.1–3.5 nicht. `ps14_site` überschreibt Seiten-Layouts, Header, Footer,
+  Navigationen und Content-Layout mit dem v12-Markup. Übernommen aus der
+  Vorlage wurden nur Site Settings, Navigation Content über
+  `block.navigationContent` (3.3) und die Asset-Einbindung über Vite.
+- **Footer-Seite bleibt** (abweichend von 5.4): Spalten „Mitte“/„Rechts“
+  weiter von der Footer-Seite (`pages.footerContent`, Backend-Layout
+  `footer`), colPos 20 wie in v12 unterhalb des Hauptbereichs. Social Links
+  (3.4/5.5) kommen mit der Adresse (tt_address) in Schritt 2.
+- **Navigations-Content-Seite bleibt** (`pages.navigationContent`, 186) als
+  Ablageort der Inhalte; die Bedingung `[186 in tree.rootLineIds]` ist auf
+  das Site Setting umgestellt.
+- **Sticky-Leiste bleibt** (abweichend von 4.2): Feld
+  `pages.tx_site_disable_sticky` in `ps14_site`.
+- **Site Set `site/settings`** (ergänzt 2.1/2.2): abhängig von
+  `foundation/settings`, zusätzliche Settings `pages.contact`,
+  `pages.footerContent`, `pages.navigationContent`,
+  `pages.individualProduct`, `tracking.etrackerSecureCode`,
+  `tracking.etrackerProxyDomain` (ersetzt D14 für KIST).
+- **Assets** (ergänzt 2.4): Ein Vite-Entrypoint pro bisheriger
+  Webpack-Datei, kritisches CSS (`site-inline`) inline, Modul-CSS per
+  `vite:asset` im Template. Iconfont über das Mixin `iconfont()` mit
+  `var(--icon-font-*)`.
+- **Datenmigrationen** (ersetzt die SQL-Vorlagen in 5.1–5.3, 5.6, 5.7):
+  Upgrade-Wizards in `ps14_site` (`ps14Site_*`, siehe Plan Task 7),
+  Ausführung mit `ddev typo3 upgrade:run` nach `extension:setup`.
+  Danach per *Analyze Database Structure* nur die Quellen entfernen, die
+  diese Wizards migriert haben: `pages.tx_foundation_disable_sticky`,
+  Tabelle `tx_foundation_pages_content_mm`, `pages.url` (nach dem
+  Core-Wizard „Migrate links of pages of type link“). Alle übrigen
+  Altspalten und -tabellen (Elements, Readmore, tt_address, Extensions)
+  bleiben bis zu ihrem eigenen Migrationsschritt.
+- **Text-Layout** (`tt_content.tx_foundation_text_layout`): wird in KIST
+  nicht ausgegeben, keine Migration; Spalte später mit den übrigen
+  Altspalten entfernen.
 
 ## 1. Grundlagen
 

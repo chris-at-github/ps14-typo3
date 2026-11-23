@@ -1,0 +1,24 @@
+plugin.tx_ps14foundation_addressrecord {
+  view {
+    layoutRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Extensions/Foundation/Layouts/
+    }
+
+    templateRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Extensions/Foundation/Templates/
+    }
+
+    partialRootPaths {
+      20 = EXT:ps14_site/Resources/Private/Extensions/Foundation/Partials/
+      25 = EXT:ps14_site/Resources/Private/Partials/
+    }
+  }
+
+  settings {
+    structuredDataTypes {
+      localBusiness = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_plugin.xlf:address.structured-datatype.local-business
+    }
+  }
+}
+
+module.tx_ps14foundation_addressrecord.settings < plugin.tx_ps14foundation_addressrecord.settings

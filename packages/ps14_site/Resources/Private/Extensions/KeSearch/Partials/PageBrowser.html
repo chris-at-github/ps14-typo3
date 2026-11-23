@@ -1,0 +1,60 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:kesearch="http://typo3.org/ns/Tpwd/KeSearch/ViewHelpers"
+    xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:if condition="{numberofresults} > {conf.resultsPerPage}">
+    <div class="search--result-pagination-container">
+
+        <f:comment>
+            <div class="search--result-pagination-description">{f:translate(key: 'LLL:EXT:ke_search/Resources/Private/Language/locallang_searchbox.xlf:results')} {pagination.startRecordNumber}
+                {f:translate(key: 'LLL:EXT:ke_search/Resources/Private/Language/locallang_searchbox.xlf:until')} {pagination.endRecordNumber}
+                {f:translate(key: 'LLL:EXT:ke_search/Resources/Private/Language/locallang_searchbox.xlf:of')} {numberofresults}</div>
+        </f:comment>
+
+        <div class="search--result-pagination">
+            <f:spaceless>
+                <ul class="pagination">
+                    <li class="page-item{f:if(condition: '{pagination.previousPageNumber}', else: ' disabled')}">
+                        <kesearch:link
+                            piVars="{page: 1}"
+                            keepPiVars="1"
+                            additionalAttributes="{'aria-label': '{f:translate(key: \'LLL:EXT:ps_foundation/Resources/Private/Language/locallang_frontend.xlf:prev\')}'}"
+                            class="page-link prev">
+                            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/chevron-left.svg" />
+                        </kesearch:link>
+                    </li>
+                    <f:for each="{pagination.allPageNumbers}" as="page">
+                        <f:if condition="{page} == {pagination.paginator.currentPageNumber}">
+                            <f:then>
+                                <li class="page-item active">
+                                    <span class="page-link current">{page}</span>
+                                </li>
+                            </f:then>
+                            <f:else>
+                                <li class="page-item">
+                                    <kesearch:link
+                                        piVars="{page: page}"
+                                        keepPiVars="1"
+                                        class="page-link">{page}</kesearch:link>
+                                </li>
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                    <li class="page-item{f:if(condition: '{pagination.nextPageNumber}', else: ' disabled')}">
+                        <kesearch:link
+                            piVars="{page: pagination.nextPageNumber}"
+                            keepPiVars="1"
+                            class="next"
+                            additionalAttributes="{'aria-label': '{f:translate(key: \'LLL:EXT:ps/Resources/Private/Language/locallang_frontend.xlf:next\')}'}">
+                            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/chevron-right.svg" />
+                        </kesearch:link>
+                    </li>
+                </ul>
+            </f:spaceless>
+        </div>
+    </div>
+</f:if>
+
+</html>

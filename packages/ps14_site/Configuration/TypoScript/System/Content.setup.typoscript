@@ -12,4 +12,9 @@ lib.contentElement {
   partialRootPaths {
     110 = EXT:ps14_site/Resources/Private/Partials/
   }
+
+  // Rahmen-Klassen (ce-frame--*) und Attribute fuer Layouts/Content/Default.html
+  dataProcessing {
+    100 = Ps14\Site\DataProcessing\ContentElementProcessor
+  }
 }

@@ -1,0 +1,48 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" xmlns:ce="http://typo3.org/ns/TYPO3/CMS/FluidStyledContent/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <div class="media-container {cssClass}">
+            <f:if condition="{file.link}">
+                <f:then>
+                    <f:link.typolink parameter="{file.link}" class="media-container__link">
+                        <f:render section="Rendering" arguments="{file: file, settings: settings}" />
+                    </f:link.typolink>
+                </f:then>
+                <f:else if="{data.image_zoom}">
+                    <f:link.typolink parameter="{file.link}" class="media-container__link media-container__link--enlarge">
+                        <f:render section="Rendering" arguments="{file: file, settings: settings}" />
+                    </f:link.typolink>
+                </f:else>
+                <f:else>
+                    <f:render section="Rendering" arguments="{file: file, settings: settings}" />
+                </f:else>
+            </f:if>
+
+            <f:render section="Caption" arguments="{file: file, settings: settings}" />
+        </div>
+    </f:section>
+
+    <f:section name="Rendering">
+        <f:if condition="{file.extension -> fo:format.toLower()} == 'svg'">
+            <f:then>
+                <f:render partial="Media/Rendering/Svg" arguments="{_all}" />
+            </f:then>
+            <f:else if="{file.extension -> fo:format.toLower()} == 'mp4'">
+                <f:render partial="Media/Rendering/Video" section="Video" arguments="{_all}" />
+            </f:else>
+            <f:else>
+                <f:render partial="Media/Rendering/Picture" arguments="{
+                    file: file,
+                    sizes: settings.mediaQueries,
+                    settings: settings,
+                    cssClass: cssClass,
+                }" />
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="Caption">
+        <f:if condition="{file.description}">
+            <div class="image--caption">{file.description -> f:format.nl2br()}</div>
+        </f:if>
+    </f:section>
+</html>

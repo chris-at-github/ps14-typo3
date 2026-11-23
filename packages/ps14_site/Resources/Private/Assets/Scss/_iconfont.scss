@@ -1,0 +1,15 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Iconfont
+// Die Schrift, die Klassen .icon-font-<name> und die Variablen --icon-font-<name> erzeugt
+// `ddev exec node build/build-iconfont.js` aus Svg/Font/*.svg in bootstrap/_iconfont.scss.
+// Ausgegeben wird die Datei nur in Stylesheets mit $iconfont-create-font-face: true (site-inline, pdf).
+// Das Mixin bleibt fuer die bestehenden Aufrufe erhalten: .my-icon { @include iconfont('check'); }
+
+@mixin iconfont($icon) {
+    &::before {
+        font-family: iconfont;
+        font-style: normal;
+        font-weight: 400;
+        content: var(--icon-font-#{$icon});
+    }
+}

@@ -1,0 +1,69 @@
+// Lists
+
+// Unstyled keeps list items block level, just removes default browser padding and list-style
+@mixin list-unstyled {
+    & {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@mixin list-default-ul {
+    & {
+        padding: 0;
+    }
+
+    li {
+        & {
+            position: relative;
+            list-style: none;
+            margin: rem(5px 0 0 0);
+            padding: rem(0 0 0 24px);
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 4px;
+            width: 5px; height: 5px;
+            border: 2px solid $theme-color-primary;
+            border-radius: 2px;
+            background: $theme-color-primary;
+        }
+    }
+
+    ul {
+        margin-top: 0;
+        padding: 0;
+    }
+}
+
+@mixin list-default-ol {
+    & {
+        padding: rem(0 0 0 20px);
+    }
+
+    li {
+        padding: rem(0 0 0 3px);
+    }
+}
+
+@mixin list--check {
+    li {
+        @include iconfont(check);
+
+        padding: rem(0 0 0 20px);
+    }
+
+    li::before {
+        border: 0;
+        top: 6px;
+        font-size: rem(9px);
+    }
+}

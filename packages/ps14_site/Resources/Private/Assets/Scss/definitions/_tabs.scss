@@ -1,0 +1,31 @@
+%tab--container {
+    & {
+        display: flex;
+        flex-wrap: wrap;
+        margin: rem(-10px - 5px 0 - 5px);
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        margin: rem(10px 0 0 0);
+        padding: rem(0 5px);
+    }
+}
+
+%tab--item {
+    padding: rem(3px 18px);
+    border: 2px solid $theme-color-primary;
+    border-radius: $border-radius-default;
+    background: #fff;
+    font-size: rem(15px);
+    font-weight: $font-weight-bold;
+    color: $theme-color-primary;
+    cursor: pointer;
+    transition: all $transition-duration;
+}
+
+%tab--item-active {
+    background: $theme-color-primary;
+    color: #fff;
+}

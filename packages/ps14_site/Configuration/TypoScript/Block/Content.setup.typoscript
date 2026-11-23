@@ -1,0 +1,44 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Inhalte unterhalb des Hauptbereichs (colPos 20), von der Startseite auf alle Unterseiten vererbt.
+// Der Wrapper (id="content--footer") kommt aus dem Seiten-Layout.
+block.contentFooter {
+  stdWrap >
+}
+
+// Produkt-Inhalte (Backend-Layout "product", colPos 15)
+block.contentProduct = CONTENT
+block.contentProduct {
+  table = tt_content
+  select {
+    orderBy = sorting
+    where = colPos = 15
+    languageField = sys_language_uid
+  }
+}
+
+// Spalten des Footers von der Footer-Seite (Site Setting pages.footerContent, Backend-Layout "footer")
+block.contentFooterMiddle = CONTENT
+block.contentFooterMiddle {
+  table = tt_content
+  select {
+    orderBy = sorting
+    where = colPos = 0
+    languageField = sys_language_uid
+    pidInList = {$pages.footerContent}
+  }
+}
+
+block.contentFooterRight < block.contentFooterMiddle
+block.contentFooterRight.select.where = colPos = 2
+
+// URL der aktuellen Seite als PDF (Seitentyp der PDF-Extension, siehe Schritt 2)
+block.linkToPdf = TEXT
+block.linkToPdf {
+  typolink {
+    parameter.data = page:uid
+    addQueryString = untrusted
+    addQueryString.exclude = type
+    additionalParams = &type=8080
+    returnLast = url
+  }
+}

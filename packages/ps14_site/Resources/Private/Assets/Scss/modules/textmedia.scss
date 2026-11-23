@@ -1,0 +1,46 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+$ce-news-use-css: true !default;
+$ce-news-layout-detail: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container Layout Override
+.ce-header + .ce-textmedia {
+    &.ce-frame--space-before-auto {
+        margin-top: rem(35px);
+    }
+}
+
+.ce-textmedia.ce-frame--layout-2 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@include media-breakpoint-up(xl) {
+    .ce-textmedia.ce-frame--layout-2 {
+        .video, .video__preview-image {
+            width: 100%;
+            height: rem(650px);
+            aspect-ratio: auto;
+        }
+    }
+
+    .ce-textmedia.ce-frame--space-after-auto {
+        & + .ce-frame--class-1, & + .ce-frame--class-2, & + .ce-frame--class-3, & + .ce-frame--class-4 {
+            margin-top: rem(35px);
+        }
+    }
+}

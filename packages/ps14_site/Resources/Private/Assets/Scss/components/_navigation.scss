@@ -1,42 +1,40 @@
-// ---------------------------------------------------------------------------------------------------------------------
-// Variables
-// Farben: siehe globale Navigations-Variablen (--navigation-*) in bootstrap/_root.scss
-:root {
-    --navigation-gap: 0;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Block
 .navigation {
-    color: var(--navigation-font-color);
-    background-color: var(--navigation-background-color);
-}
+    ul {
+        @include list-unstyled;
+    }
 
-.navigation__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--navigation-gap);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+    li {
+        display: block;
+    }
 
-.navigation__item {
-    padding: 0;
-}
+    a, li > span  {
+        display: block;
+        padding: 3px 10px;
+        text-decoration: none;
+        font-weight: $font-weight-normal;
+    }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Variant: Listing (Eintraege mit Icon-Kachel, Titel und Beschreibung, siehe navigation-item--listing)
-.navigation--listing {
-    --navigation-gap: var(--spacing-4);
-}
+    a {
+        & {
+            background: none;
+        }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Variant: Icon (Icon-Kacheln nebeneinander, z. B. Social Media, siehe navigation-item--icon)
-.navigation--icon {
-    --navigation-gap: var(--spacing-8);
+        & > span {
+            @extend %link--animation;
 
-    .navigation__list {
-        flex-flow: row wrap;
+            display: inline;
+        }
+
+        &:hover, .focusable &:focus {
+            & {
+                text-decoration: none;
+            }
+
+            & > span {
+                // transform: scaleX(1);
+                // transform-origin: bottom left;
+                background-size: 100% 1px;
+            }
+        }
     }
 }

@@ -1,0 +1,65 @@
+@mixin modal--backdrop {
+    min-height: 100%;
+    z-index: 100;
+    padding: 0.1px rem(20px);
+    background: rgba(#ccc, 0.65);
+    opacity: 0;
+    transition: opacity 0.45s;
+}
+
+@mixin modal--close {
+    position: absolute;
+    top: 0; right: 0;
+    z-index: 110;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+@mixin modal {
+    position: relative;
+    z-index: 105;
+    width: ($page-max-width + 40px);
+    max-width: 100%;
+    margin: 150px auto 50px;
+}
+
+@mixin modal--container {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 1200;
+    width: 0;
+    height: 0;
+    overflow-y: auto;
+}
+
+@mixin is--modal-open {
+    .hamburger {
+        opacity: 0;
+    }
+
+    .modal--container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .modal--backdrop {
+        opacity: 1;
+    }
+}
+
+@mixin is--modal-closing {
+    .hamburger {
+        opacity: 1;
+    }
+
+    .modal--container {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .modal--backdrop {
+        transition-duration: 0.75s;
+        opacity: 0;
+    }
+}

@@ -1,0 +1,153 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variablen
+$tx-product-key-fact-use-css: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+@include stylesheet-context($stylesheet-context-screen) {
+    @if $tx-product-key-fact-use-css {
+        .product--key-facts-header {
+            &, h1, h2, h3, h4 {
+                font-size: rem(21px);
+                font-weight: $font-weight-base;
+            }
+
+            h1, h2, h3, h4 {
+                margin: 0;
+            }
+
+            & + .product--key-facts {
+                margin-top: rem(20px);
+            }
+        }
+
+        .product--key-facts {
+            & {
+                list-style: none;
+                padding: 0;
+            }
+
+            & > li {
+                & {
+                    position: relative;
+                    padding: rem(0 0 0 30px);
+                }
+
+                svg {
+                    position: absolute;
+                    top: rem(8px); left: 0;
+                    width: rem(18px);
+                    height: rem(13px);
+                    fill: currentcolor;
+                }
+            }
+
+            & > li + li {
+                margin-top: rem(15px);
+            }
+
+            header, p {
+                display: inline;
+            }
+
+            header {
+                margin: rem(0 4px 0 0);
+                font-weight: $font-weight-bold;
+            }
+
+            p {
+                & {
+                    margin: 0;
+                }
+
+                & + p {
+                    margin-top: rem(5px);
+                }
+            }
+        }
+
+        // >= 768px
+        @include media-breakpoint-up(md) {
+            .ce-entityproduct-keyfact {
+                .ce-frame--inner {
+                    display: flex;
+                }
+
+                .product--key-facts-header {
+                    width: percentage(4 / 12);
+                    padding-right: rem(30px);
+                }
+
+                .product--key-facts {
+                    width: percentage(8 / 12);
+                }
+            }
+
+            .product--key-facts-header {
+                &, h1, h2, h3, h4 {
+                    font-size: rem(26px);
+                }
+
+                & + .product--key-facts {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        // >= 1200px
+        @include media-breakpoint-up(xl) {
+            .ce-entityproduct-keyfact {
+                .product--key-facts-header {
+                    width: percentage(3 / 12);
+                }
+
+                .product--key-facts {
+                    width: percentage(9 / 12);
+                }
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Print
+@include stylesheet-context($stylesheet-context-print) {
+    .ce-entityproduct-keyfact {
+        .ce-frame--inner {
+            flex-direction: column;
+            margin-bottom: 0 !important;
+        }
+
+        .product--key-facts-header {
+            h2, h3 {
+                width: 100% !important;
+                font-size: 22px !important;
+            }
+        }
+
+        .product--key-facts {
+            & {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            & > li svg {
+                width: 15px;
+                top: 6px;
+            }
+        }
+    }
+}

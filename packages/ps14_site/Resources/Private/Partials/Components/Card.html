@@ -1,0 +1,95 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:section name="Main">
+    <f:if condition="{link}">
+        <f:then>
+            <div class="card" data-uri-target="{link}">
+                <f:render section="Inner" arguments="{_all}" />
+            </div>
+        </f:then>
+        <f:else>
+            <div class="card">
+                <f:render section="Inner" arguments="{_all}" />
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Inner">
+    <div class="card--body">
+        <f:if condition="{data.title}">
+            <f:render section="Header" arguments="{title: data.title, link: link}" />
+        </f:if>
+    </div>
+</f:section>
+
+<f:section name="Header">
+    <div class="card--header">
+        <f:render section="Title" arguments="{title: title, link: link}" />
+    </div>
+</f:section>
+
+<f:section name="Description">
+    <div class="card--description"><f:format.html>{description}</f:format.html></div>
+</f:section>
+
+<f:section name="ReadMore">
+    <a href="{link}" class="card--readmore">
+        <span>{label}</span><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/arrow-right.svg" />
+    </a>
+</f:section>
+
+<f:section name="Title">
+    <f:switch expression="{titleType}">
+        <f:case value="1">
+            <h1 class="card--title"><f:render section="TitleInner" arguments="{title: title, link: link}" /></h1>
+        </f:case>
+        <f:case value="2">
+            <h2 class="card--title"><f:render section="TitleInner" arguments="{title: title, link: link}" /></h2>
+        </f:case>
+        <f:case value="3">
+            <h3 class="card--title"><f:render section="TitleInner" arguments="{title: title, link: link}" /></h3>
+        </f:case>
+        <f:case value="4">
+            <h4 class="card--title"><f:render section="TitleInner" arguments="{title: title, link: link}" /></h4>
+        </f:case>
+        <f:defaultCase>
+            <f:if condition="{link}">
+                <f:then>
+                    <a href="{link}" class="card--title"><span>{title}</span></a>
+                </f:then>
+                <f:else>
+                    <div class="card--title"><span>{title}</span></div>
+                </f:else>
+            </f:if>
+        </f:defaultCase>
+    </f:switch>
+</f:section>
+
+<f:section name="TitleInner">
+    <f:if condition="{link}">
+        <f:then><a href="{link}"><span>{title}</span></a></f:then>
+        <f:else>{title}</f:else>
+    </f:if>
+</f:section>
+
+<f:section name="Media">
+    <div class="card--media">
+        <f:if condition="{media}">
+            <f:render partial="Media/Main" section="Main" arguments="{
+                file: media,
+                settings: settings
+            }" />
+        </f:if>
+    </div>
+</f:section>
+
+<f:section name="Badges">
+    <f:if condition="{badges}">
+        <ul class="card--badge-container">
+            <f:for each="{badges}" as="badge">
+                <li class="badge badge--default">{badge.title}</li>
+            </f:for>
+        </ul>
+    </f:if>
+</f:section>
+</html>

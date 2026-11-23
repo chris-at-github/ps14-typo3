@@ -1,0 +1,20 @@
+.language-navigation {
+    & {
+        @include navigation--layout-0;
+    }
+
+    ul {
+        @include list-unstyled;
+
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+
+    a, span {
+        display: block;
+        padding: 3px 5px;
+        font-weight: $font-weight-bold;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}

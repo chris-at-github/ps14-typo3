@@ -1,18 +1,38 @@
-// Backend layout with the footer columns "brand" (colPos 20) and "navigation" (colPos 21)
+// ---------------------------------------------------------------------------------------------------------------------
+// Backend-Layouts
+// "default" (ps14_foundation) um die Spalte unterhalb des Hauptbereichs erweitern (colPos 20, block.contentFooter)
 mod.web_layout.BackendLayouts {
-  defaultFooter {
-    title = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_tca.xlf:backend-layout.default-footer.title
+  default {
     config {
       backend_layout {
-        colCount = 3
         rowCount = 2
+        rows {
+          2 {
+            columns {
+              1 {
+                name = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_tca.xlf:backend-layout.default.footer
+                colPos = 20
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Produktseiten (Seiten-Layout "Produkt", block.contentProduct)
+  product {
+    title = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.product.title
+    config {
+      backend_layout {
+        colCount = 1
+        rowCount = 3
         rows {
           1 {
             columns {
               1 {
-                name = LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_tca.xlf:backend-layout.default.main
+                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.product.main
                 colPos = 0
-                colspan = 3
               }
             }
           }
@@ -20,14 +40,17 @@ mod.web_layout.BackendLayouts {
           2 {
             columns {
               1 {
-                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.brand
-                colPos = 20
+                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.product.product
+                colPos = 15
               }
+            }
+          }
 
-              2 {
-                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.navigation
-                colPos = 21
-                colspan = 2
+          3 {
+            columns {
+              1 {
+                name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.product.footer
+                colPos = 20
               }
             }
           }
@@ -37,13 +60,130 @@ mod.web_layout.BackendLayouts {
   }
 }
 
-TCEFORM.tt_content {
-  imageborder.types.image.disabled = 1
+// Footer-Seite (Site Setting pages.footerContent): Spalten "Mitte" und "Rechts" des Footers
+[{$pages.footerContent} > 0 && {$pages.footerContent} in tree.rootLineIds]
+  mod.web_layout.BackendLayouts {
+    footer {
+      title = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.title
+      config {
+        backend_layout {
+          colCount = 2
+          rowCount = 1
+          rows {
+            1 {
+              columns {
+                1 {
+                  name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.middle
+                  colPos = 0
+                }
+
+                2 {
+                  name = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:backend-layout.footer.right
+                  colPos = 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+[END]
+
+TCEFORM {
+  pages {
+    layout {
+      addItems {
+        4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.layout.4
+        5 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.layout.5
+      }
+    }
+
+    // Darstellung der Unterseiten im Mega-Menue (erste Ebene der Hauptnavigation)
+    tx_foundation_navigation_layout {
+      addItems {
+        product = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.product
+        card = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.card
+        largeCard = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.large-card
+      }
+    }
+  }
+
+  tt_content {
+    imageborder.types.image.disabled = 1
+
+    layout {
+      altLabels {
+        1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.1
+        2 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.2
+      }
+
+      // Ueberschreibt "1,2,3" aus ps14_foundation: KIST nutzt die Layouts 1 und 2
+      removeItems = 3
+
+      // Layout 4 (z. B. Hero) nur fuer bestimmte Inhaltstypen
+      types {
+        ps14_hero.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
+        ps14_hero_slider.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
+        textmedia.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
+      }
+    }
+
+    // Farbschemata (Klasse ce-frame--class-<wert>)
+    frame_class {
+      addItems {
+        0 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.frame-class.0
+        1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.frame-class.1
+        2 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.frame-class.2
+        3 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.frame-class.3
+        4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.frame-class.4
+      }
+
+      removeItems = default, primary, ruler-before, ruler-after, indent, indent-left, indent-right, none
+    }
+
+    // Varianten (Klasse ce-<ctype>--<wert>)
+    tx_foundation_variant.types {
+      menu_pages.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.1
+      menu_subpages.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.1
+      powermail_pi1.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.powermail.1
+      ps14_timeline.addItems.no-date = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.timeline.no-date
+      ps14_tabs.addItems.radio = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.tabs.radio
+    }
+  }
 }
 
-// Darstellung der zweiten Ebene der Hauptnavigation (Feld an der Seite der ersten Ebene).
-// Ohne Auswahl: einfache Liste der Unterseiten. "card" ist vorgesehen, aber noch nicht umgesetzt.
-TCEFORM.pages.tx_foundation_navigation_layout.addItems {
-  listing = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.listing
-  card = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.navigation-layout.card
+// ---------------------------------------------------------------------------------------------------------------------
+// Vorgaben fuer neue Inhaltselemente je Inhaltstyp (v14-Syntax statt [field('CType') === ...])
+TCAdefaults.tt_content {
+  layout.types.text = 1
+
+  header_layout.types.ps14_hero = 100
+  header_layout.types.ps14_hero_slider = 100
+  layout.types.ps14_hero = 4
+  layout.types.ps14_hero_slider = 4
+
+  frame_class.types.entityproduct_keyfacts = 2
+  space_before_class.types.entityproduct_keyfacts = medium
+  space_after_class.types.entityproduct_keyfacts = large
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Rechte fuer neue Seiten: Besitzergruppe "Seitenbaumrechte"
+TCEMAIN.permissions.groupid = 2
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Inhalte des Footers und der Hauptnavigation (Site Settings pages.footerContent, pages.navigationContent)
+[{$pages.footerContent} > 0 && {$pages.footerContent} in tree.rootLineIds]
+  TCAdefaults.tt_content {
+    header_layout = container
+    tx_foundation_no_frame = 0
+  }
+[END]
+
+[{$pages.navigationContent} > 0 && {$pages.navigationContent} in tree.rootLineIds]
+  TCAdefaults.tt_content {
+    header_layout = container
+    tx_foundation_no_frame = 0
+  }
+[END]

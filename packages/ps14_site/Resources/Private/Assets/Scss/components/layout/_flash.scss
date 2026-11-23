@@ -1,0 +1,16 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Flash
+#flash {
+    & {
+        @extend %container-class-1;
+        @extend %container-space-before-small;
+        @extend %container-space-after-small;
+
+        position: relative;
+        z-index: 5;
+    }
+
+    .ce-header {
+        font-weight: $font-weight-bold;
+    }
+}

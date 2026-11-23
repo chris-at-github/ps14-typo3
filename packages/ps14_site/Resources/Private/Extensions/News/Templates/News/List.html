@@ -1,0 +1,55 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+            xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+            xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers"
+            data-namespace-typo3-fluid="true">
+<f:layout name="General"/>
+
+<f:section name="Main">
+    <f:if condition="{news}">
+        <f:then>
+            <div class="news-list-view" >
+                <f:if condition="{settings.hidePagination}">
+                    <f:then>
+                        <f:render section="CardContainer" arguments="{news: news, settings: settings}" />
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{settings.list.paginate.insertAbove}">
+                            <f:render partial="List/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}"/>
+                        </f:if>
+
+                        <f:render section="ReadmoreContainer" arguments="{news: pagination.paginator.paginatedItems, settings:settings, iterator:iterator}"/>
+
+                        <f:if condition="{settings.list.paginate.insertBelow}">
+                            <f:render partial="List/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}"/>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="no-news-found">
+                <f:translate key="list_nonewsfound"/>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="ReadmoreContainer">
+    <div class="readmore-container">
+        <div class="readmore-container--collapse">
+            <f:render section="CardContainer" arguments="{news: news, settings: settings, additionalClass: 'readmore-container--body'}" />
+        </div>
+        <div class="readmore-container--toggle">
+            <button class="button"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/readmore.svg" /><f:translate key="action.loadmore" domain="ps14_foundation.frontend" /></button>
+        </div>
+    </div>
+</f:section>
+
+<f:section name="CardContainer">
+    <ul class="card--container {additionalClass}">
+        <f:for each="{news}" as="newsItem" iteration="iterator">
+            <f:render partial="List/Item" section="Main" arguments="{newsItem: newsItem, settings:settings, iterator:iterator}"/>
+        </f:for>
+    </ul>
+</f:section>
+</html>

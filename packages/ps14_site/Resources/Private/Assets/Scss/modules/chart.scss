@@ -1,0 +1,137 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variablen
+$tx-chart-use-css: true !default;
+$tx-chart-layout-default: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+@include stylesheet-context($stylesheet-context-screen) {
+    @if $tx-chart-use-css {
+        // -------------------------------------------------------------------------------------------------------------------
+        // CSS Variablen
+        :root {
+            --chart--line-chart-height: 315px;
+        }
+
+        .chart {
+            margin-top: $spacing-default;
+        }
+
+        .chart--legend {
+            .chart--legend-title {
+                margin: rem(15px 0 5px 0);
+            }
+
+            ul {
+                margin: 0 rem(-10px);
+                padding: 0;
+                list-style: none;
+                display: flex;
+            }
+
+            li {
+                position: relative;
+                padding: 0 rem(10px);
+            }
+
+            .chart--legend-item-color {
+                position: absolute;
+                top: 9px; left: rem(10px);
+                display: block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+
+            .chart--legend-item-title {
+                padding: 0 0 0 18px;
+            }
+        }
+
+        .chart--container {
+            margin: $spacing-default 0 0 0;
+        }
+
+        @if $tx-chart-layout-default {
+            .chart--container {
+                height: var(--chart--line-chart-height);
+            }
+        }
+
+        // >= 768px
+        @include media-breakpoint-up(md) {
+            :root {
+                --chart--line-chart-height: 425px;
+            }
+
+            @if $tx-chart-layout-default {
+                .chart {
+                    @include make-row;
+
+                    flex-direction: row-reverse;
+                }
+
+                .chart--description {
+                    & > *:first-child {
+                        margin-top: 0;
+                    }
+                }
+
+                .chart--legend {
+                    & {
+                        @include make-col-ready;
+                        @include make-col(4);
+                    }
+
+                    .chart--legend-title {
+                        margin-top: rem(30px);
+                    }
+
+                    ul {
+                        flex-direction: column;
+                    }
+                }
+
+                .chart--container {
+                    @include make-col-ready;
+                    @include make-col(8);
+
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Print
+// @include stylesheet-context($stylesheet-context-print) {
+//	.chart--legend {
+//		& {
+//			flex: 0;
+//			max-width: 100%;
+//		}
+//		.chart--legend-title {
+//			margin-top: 0;
+//		}
+//		ul {
+//			display: -webkit-box;
+//		}
+//	}
+//	.chart--description {
+//		display: none;
+//	}
+// }

@@ -59,4 +59,4 @@ routes:
       Sitemap: https://www.kist-escherich.com/de/sitemap.xml
       Sitemap: https://www.kist-escherich.com/en/sitemap.xml
 dependencies:
-  - foundation/settings
+  - site/settings

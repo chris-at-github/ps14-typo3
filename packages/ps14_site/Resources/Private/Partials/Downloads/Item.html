@@ -1,0 +1,44 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:render section="Variant{data.tx_foundation_variant -> fo:format.ucFirst()}" optional="1" arguments="{_all}">
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/download.svg" />
+
+            <f:switch expression="{data.tx_foundation_elements_header}">
+                <f:case value="2">
+                    <h2><f:render section="Link" arguments="{_all}" /></h2>
+                </f:case>
+                <f:case value="3">
+                    <h3><f:render section="Link" arguments="{_all}" /></h3>
+                </f:case>
+                <f:case value="4">
+                    <h4><f:render section="Link" arguments="{_all}" /></h4>
+                </f:case>
+                <f:defaultCase>
+                    <f:render section="Link" arguments="{_all}" />
+                </f:defaultCase>
+            </f:switch>
+
+            <f:if condition="{file.description}">
+                <p class="download--item-description"><f:format.nl2br>{file.description}</f:format.nl2br></p>
+            </f:if>
+
+            <f:if condition="{file.properties.extension} || {file.properties.size}">
+                <ul class="download--item-properties">
+                    <f:if condition="{file.properties.extension}">
+                        <li class="download--item-property download--item-property-type">{file.properties.extension}</li>
+                    </f:if>
+
+                    <f:if condition="{file.properties.size}">
+                        <li class="download--item-property download--item-property-size">{file.properties.size -> fo:format.fileSize()}</li>
+                    </f:if>
+                </ul>
+            </f:if>
+        </f:render>
+    </f:section>
+
+    <f:section name="Link">
+        <a class="download--item-link" href="{f:uri.typolink(parameter: file.publicUrl)}" target="_blank">
+            <f:if condition="{file.title}">{file.title}</span></f:if>
+        </a>
+    </f:section>
+</div>

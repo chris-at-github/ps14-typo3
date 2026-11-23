@@ -1,38 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2026-11-11T00:00:00Z" product-name="ps14_site">
-        <header/>
-        <body>
-            <trans-unit id="page-header.logo">
-                <source>%s – go to homepage</source>
-            </trans-unit>
-            <trans-unit id="page-header.main-navigation">
-                <source>Main navigation</source>
-            </trans-unit>
-            <trans-unit id="page-header.meta-navigation">
-                <source>Service</source>
-            </trans-unit>
-            <trans-unit id="page-header.language-navigation">
-                <source>Language</source>
-            </trans-unit>
-            <trans-unit id="page-header.menu-open">
-                <source>Open menu</source>
-            </trans-unit>
-            <trans-unit id="page-header.menu-close">
-                <source>Close menu</source>
-            </trans-unit>
-            <trans-unit id="main-menu.back">
-                <source>Back</source>
-            </trans-unit>
-            <trans-unit id="page-footer.title">
-                <source>Footer</source>
-            </trans-unit>
-            <trans-unit id="page-footer.meta-navigation">
-                <source>Legal information</source>
-            </trans-unit>
-            <trans-unit id="page-footer.consent-settings">
-                <source>Cookie settings</source>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-11-22T00:00:00Z" product-name="ps14_site">
+    <header/>
+    <body>
+      <trans-unit id="sticky.print-pdf">
+        <source>Print as PDF</source>
+      </trans-unit>
+      <trans-unit id="sticky.contact">
+        <source>Direct contact</source>
+      </trans-unit>
+      <trans-unit id="sticky.to-top">
+        <source>Scroll to top</source>
+      </trans-unit>
+      <trans-unit id="teaser.technology.title-prefix">
+        <source>Technology</source>
+      </trans-unit>
+      <trans-unit id="teaser.technology.readmore">
+        <source>Go to technology</source>
+      </trans-unit>
+      <trans-unit id="filter.action.submit">
+        <source>Accept</source>
+      </trans-unit>
+      <trans-unit id="filter.action.reset">
+        <source>Reset all filters</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

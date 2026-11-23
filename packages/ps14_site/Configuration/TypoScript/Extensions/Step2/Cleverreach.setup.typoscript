@@ -1,0 +1,5 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:cleverreach/Configuration/TypoScript/setup.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:cleverreach/Configuration/TypoScript/Powermail/setup.typoscript">
+
+// Eigener Finisher: ueberspringt Formulare ohne CleverReach-Einstellung (vermeidet Warnung "Undefined array key")
+plugin.tx_powermail.settings.setup.finishers.1.class = Ps14\Site\Powermail\Finisher\CleverReachFinisher

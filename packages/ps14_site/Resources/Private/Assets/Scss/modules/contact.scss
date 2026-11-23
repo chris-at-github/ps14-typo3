@@ -1,0 +1,453 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$stylesheet-context: 'screen' !default;
+$tx-contact-use-css: true !default;
+$tx-contact-layout-search: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & Site
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// -------------------------------------------------------------------------------------------------------------------
+// Component
+@if $tx-contact-use-css {
+    // -------------------------------------------------------------------------------------------------------------------
+    // Component
+    .contact-item {
+        & {
+            margin: $spacing-default 0 0 0;
+            padding: rem(10px 15px);
+        }
+
+        .address--name + .address--item,
+        .address--company + .address--item {
+            margin: $spacing-default 0 0 0;
+        }
+
+        .address--name + .address--company {
+            margin: 0;
+        }
+
+        .contact-item--vcard {
+            & {
+                margin: rem(10px 0 0 0);
+            }
+
+            &:hover {
+                .badge {
+                    background: #aaa;
+                }
+            }
+
+            .badge {
+                margin-right: rem(8px);
+                transition: background 0.25s;
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------------------------------------------------
+    // Suche
+    @if $tx-contact-layout-search {
+        .contact-search--result {
+            & {
+                overflow: hidden;
+                max-height: 0;
+                opacity: 1;
+                transition-property: max-height, opacity;
+                transition-duration: 0.25s;
+            }
+
+            .contact-search--result-error {
+                font-weight: $font-weight-bold;
+                color: $theme-color-error;
+            }
+        }
+
+        .is-contact-loading {
+            .contact-search--result {
+                opacity: 0;
+            }
+        }
+    }
+}
+
+.contact-item {
+    & {
+        margin: 0;
+        padding: 0;
+    }
+
+    .contact-item--vcard,  {
+        a {
+            background-position: 34px 100%;
+        }
+
+        & .badge, &:hover .badge {
+            background: $theme-color-primary-dark;
+        }
+    }
+}
+
+.contact-search--form-container > .row {
+    align-items: center;
+}
+
+.contact-search--form {
+    & > .row {
+        margin-top: rem(20px);
+    }
+
+    select.form-field {
+        min-height: rem(39px);
+    }
+}
+
+.contact-search--submit {
+    --button--rounded-icon-size: 60px;
+
+    & {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: rem(45px);
+        min-height: rem(65px);
+    }
+
+    button {
+        & {
+            position: relative;
+
+            @extend %button--rounded-icon;
+
+            transform: rotate(90deg);
+            pointer-events: none;
+            transition-property: width, height;
+            transition-duration: $transition-duration;
+        }
+
+        &::before {
+            transition-property: border, background;
+        }
+
+        svg {
+            transition-property: fill, transform;
+        }
+
+        &:not([disabled]) {
+            pointer-events: initial;
+        }
+    }
+}
+
+.ce-frame--class-1 {
+    .contact-search--form {
+        .form-field {
+            & {
+                border: 2px solid $color-grey-lighten;
+                background: #fff;
+            }
+
+            &[disabled] {
+                border-color: $color-grey-light;
+                background: $color-grey-light;
+            }
+        }
+    }
+
+    .contact-search--submit {
+        button {
+            &::before {
+                border-color: $color-grey-lighten;
+            }
+
+            svg {
+                fill: $color-grey;
+            }
+
+            &:not([disabled]) {
+                &::before {
+                    border-color: $theme-color-primary;
+                }
+
+                svg {
+                    fill: #fff;
+                }
+            }
+
+            &:hover:not([disabled]), .focusable &:focus:not([disabled]) {
+                &::before {
+                    background: #fff;
+                }
+
+                svg {
+                    fill: $theme-color-primary;
+                }
+            }
+        }
+    }
+}
+
+.ce-frame--class-4 {
+    .contact-search--form {
+        .form-field {
+            & {
+                border: 2px solid #a2b0bb;
+                background: #fff;
+            }
+
+            &:focus {
+                border-color: $theme-color-primary;
+            }
+
+            &[disabled] {
+                border-color: #dee2e7;
+                background: #dee2e7;
+            }
+        }
+    }
+
+    .contact-search--submit {
+        button {
+            &::before {
+                border-color: #dee2e7;
+                background: #dee2e7;
+            }
+
+            svg {
+                fill: #a2b0bb;
+            }
+
+            &:not([disabled]) {
+                &::before {
+                    border-color: $theme-color-primary;
+                    background: $theme-color-primary;
+                }
+
+                svg {
+                    fill: #fff;
+                }
+            }
+
+            &:hover:not([disabled]), .focusable &:focus:not([disabled]) {
+                &::before {
+                    background: #fff;
+                }
+
+                svg {
+                    fill: $theme-color-primary;
+                }
+            }
+        }
+    }
+}
+
+.ce-frame--class-2 {
+    .contact-search--form {
+        .form-field {
+            & {
+                border: 2px solid $theme-color-primary-dark;
+            }
+
+            &[disabled] {
+                border-color: $theme-color-primary-dark;
+                background: $color-grey-lighten;
+            }
+        }
+    }
+
+    .contact-search--submit {
+        button {
+            & {
+                @extend %button--rounded-icon--inverted;
+            }
+
+            &::before {
+                border: 3px solid $theme-color-primary-dark;
+            }
+
+            &:hover:not([disabled]), .focusable &:focus:not([disabled]) {
+                &::before {
+                    border-color: #fff;
+                    background: $theme-color-primary-dark;
+                }
+            }
+        }
+    }
+}
+
+.contact-search--result-container {
+    & {
+        padding: rem(20px);
+        border-radius: $border-radius-default;
+        background: #fff;
+        color: $theme-color-primary;
+    }
+
+    .is-contact-open & {
+        margin-top: rem(45px);
+    }
+
+    a {
+        .ce-frame--class-2 & {
+            color: $theme-color-primary;
+            background-image: linear-gradient(#{$theme-color-primary}, #{$theme-color-primary});
+        }
+    }
+}
+
+.contact-listing--map-continent {
+    fill: $color-grey-lighten;
+    transition: all $transition-duration;
+}
+
+.contact-listing--map-continent-default {
+    &:hover {
+        fill: darken($color-grey-lighten, 15%);
+        cursor: pointer;
+    }
+}
+
+.contact-listing--map-continent-active {
+    &, &:hover {
+        fill: $theme-color-primary;
+    }
+}
+
+.contact-listing--header + .contact-listing--tabs {
+    margin-top: rem(35px);
+}
+
+.contact-listing--tabs {
+    .table--scroll-container a {
+        position: relative;
+        z-index: 1000;
+    }
+
+    .table--fixed-container tr > td:first-child {
+        position: relative;
+        z-index: 1005;
+    }
+}
+
+.contact-listing--table {
+    // & {
+    //	display: block;
+    //	width: 100%;
+    // }
+    // tbody, tr {
+    //	display: block;
+    // }
+    // thead {
+    //	display: none;
+    // }
+    // tr {
+    //	padding: rem(15px 0);
+    //	border-bottom: 1px solid #ececed;
+    // }
+    // td {
+    //	& {
+    //		display: block;
+    //		margin-top: rem(10px);
+    //	}
+    //	&:first-child {
+    //		margin-top: 0;
+    //	}
+    // }
+    .contact-listing--country-title {
+        margin: 0;
+        font-size: $font-size-base;
+        line-height: 1.5;
+    }
+
+    .contact-listing--country-product-lines {
+        li:first-child {
+            margin-top: 0;
+        }
+    }
+
+    .contact-listing--country-description {
+        .list--default {
+            & {
+                margin-top: 0;
+            }
+
+            li {
+                & {
+                    margin-top: rem(3px);
+                    padding: rem(0 0 0 15px);
+                }
+
+                &::before {
+                    top: 10px;
+                    width: 4px;
+                    height: 4px;
+                }
+            }
+        }
+    }
+
+    .address--phone, .address--mail {
+        white-space: nowrap;
+    }
+}
+
+// => 768px
+@include media-breakpoint-up(md) {
+    .contact-search--submit {
+        --button--rounded-icon-size: 70px;
+    }
+}
+
+// => 992px
+@include media-breakpoint-up(lg) {
+    .contact-search--submit {
+        & {
+            margin-top: 0;
+        }
+
+        button {
+            transform: rotate(0deg);
+        }
+    }
+
+    .is-contact-open .contact-search--result-container {
+        margin-top: 0;
+    }
+
+    .contact-listing--table {
+        .contact-listing--country-title {
+            font-weight: $font-weight-bold;
+        }
+
+        .address--phone, .address--mail {
+            white-space: normal;
+        }
+    }
+}
+
+// => 1200px
+@include media-breakpoint-up(xl) {
+    .contact-listing--table tr {
+        th, td {
+            &:nth-child(1) {
+                width: 18%;
+            }
+
+            &:nth-child(2) {
+                width: 18%;
+            }
+
+            &:nth-child(3) {
+                width: 32%;
+            }
+
+            &:nth-child(4) {
+                width: 32%;
+            }
+        }
+    }
+}

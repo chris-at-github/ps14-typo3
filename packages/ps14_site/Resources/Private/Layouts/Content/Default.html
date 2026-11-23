@@ -1,0 +1,41 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<fo:format.html>
+    <f:if condition="{data.tx_foundation_no_frame} == 0">
+        <f:then>
+
+            <div id="c{data.uid}" class="ce-frame ce-frame--layout-{data.layout} ce-frame--class-{data.frame_class} ce-frame--variant-{data.tx_foundation_variant} {data.frame_classes} ce-frame--space-before-{data.space_before_class} ce-frame--space-after-{data.space_after_class}" {data.additional_attributes -> f:format.raw()}>
+                <div class="ce-frame--inner">
+                    <f:render section="Before" optional="true">
+                        <f:render partial="DropIn/Before/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="Header" optional="true">
+                        <f:render partial="Header/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="Main" optional="true" />
+                    <f:render section="Readmore" optional="true">
+                        <f:render partial="Content/Readmore" section="Main" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="Footer" optional="true">
+                        <f:render partial="Footer/All" arguments="{_all}" />
+                    </f:render>
+                    <f:render section="After" optional="true">
+                        <f:render partial="DropIn/After/All" arguments="{_all}" />
+                    </f:render>
+                </div>
+            </div>
+
+        </f:then>
+        <f:else>
+
+            <f:render section="Header" optional="true">
+                <f:render partial="Header/All" arguments="{_all}" />
+            </f:render>
+            <f:render section="Main" optional="true" />
+            <f:render section="Footer" optional="true">
+                <f:render partial="Footer/All" arguments="{_all}" />
+            </f:render>
+
+        </f:else>
+    </f:if>
+</fo:format.html>
+</html>

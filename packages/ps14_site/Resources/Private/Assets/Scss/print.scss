@@ -1,10 +1,26 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// Import
-@use "sass:meta";
+// Define Variables
+$stylesheet-context: 'print' !default;
+$tx-product-frontend-use-css: false !default;
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+@import 'definitions';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Layout
-// Zusaetzlich zu media="print" am Link-Tag gekapselt, da der Vite-Dev-Server das Attribut nicht setzt
-@media print {
-    @include meta.load-css("layout/print");
-}
+@import 'layout/print';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Components | Modules
+@import 'modules/accordion';
+@import 'modules/product-frontend';
+@import 'modules/product-keyfact';
+@import 'modules/teaser';
+@import 'modules/marker';
+@import 'modules/chart';

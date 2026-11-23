@@ -1,0 +1,18 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <fo:variable name="cssClass">
+            navigation__group-item
+            {f:if(condition: item.current, then: 'is--active')}
+            {f:if(condition: item.data.tx_foundation_identifier, then: 'navigation__group-item--{item.data.tx_foundation_identifier}')}
+            {f:if(condition: item.data.tx_foundation_navigation_layout, then: 'navigation__group-item--layout-{item.data.tx_foundation_navigation_layout}')}
+        </fo:variable>
+
+        <li class="{cssClass}">
+            <f:render partial="Navigation/Default/Link" section="Main" arguments="{item: item}" />
+
+            <f:if condition="{item.children}">
+                <f:render partial="Navigation/Default/Listing" section="Main" arguments="{navigation: item.children, parent: item}" />
+            </f:if>
+        </li>
+    </f:section>
+</div>

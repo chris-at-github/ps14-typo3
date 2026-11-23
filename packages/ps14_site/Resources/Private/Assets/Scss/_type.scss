@@ -1,0 +1,63 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// HTML
+h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
+    @extend %header-x;
+}
+
+h1, .h1 {
+    @extend %header-1;
+}
+
+h2, .h2 {
+    @extend %header-2;
+}
+
+h3, .h3 {
+    @extend %header-3;
+}
+
+h4, .h4 {
+    @extend %header-4;
+}
+
+h2, .h2, h3, .h3, h4, .h4 {
+    & + %header-sibling {
+        margin-top: $spacing-small;
+    }
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+}
+
+p, ul, ol, table, dl {
+    @extend %header-sibling;
+
+    margin: $spacing-default 0 0 0;
+}
+
+b, strong {
+    font-weight: $font-weight-bold;
+}
+
+a {
+    @extend %link--default;
+    @extend %link--animation;
+}
+
+table {
+    @include table--default;
+}
+
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Text-Klassen
+.text--small {
+    font-size: 85%;
+}
+
+.text--large {
+    font-size: 120%;
+}

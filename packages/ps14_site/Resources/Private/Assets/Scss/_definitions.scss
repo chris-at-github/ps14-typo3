@@ -1,0 +1,357 @@
+@use "sass:math";
+@import 'definitions/accessibility';
+@import 'definitions/logo';
+@import 'definitions/form';
+@import 'definitions/filter';
+@import 'definitions/slider';
+@import 'definitions/tabs';
+@import 'definitions/button';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Typography
+%header-x {
+    margin-top: rem(40px);
+    margin-bottom: 0;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+}
+
+%header-1 {
+    @include header-1;
+}
+
+%header-2 {
+    @include header-2;
+}
+
+%header-3 {
+    @include header-3;
+}
+
+%header-4 {
+    @include header-4;
+}
+
+%subheader {
+    font-size: rem(21px);
+}
+
+h1 + %subheader, h2 + %subheader, h3 + %subheader, h4 + %subheader {
+    margin-top: rem(10px);
+}
+
+p, ul, ol, table {
+    @extend %header-sibling !optional;
+}
+
+%link--default {
+    & {
+        font-weight: $font-weight-bold;
+        color: $link-color;
+        text-decoration: none;
+        transition: color 0.35s;
+    }
+
+    &:hover, .focusable &:focus {
+        color: $link-color-hover;
+        text-decoration: underline;
+    }
+}
+
+%link--animation {
+    & {
+        background: linear-gradient(#{$theme-color-primary}, #{$theme-color-primary}) no-repeat 0 100%;
+        background-size: 0 1px;
+        transition: background-size 0.25s ease-out;
+    }
+
+    &:hover, .focusable &:focus {
+        background-size: 100% 1px;
+        text-decoration: none;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Images
+%image-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container
+%container-outer {
+    padding-left: rem(15px);
+    padding-right: rem(15px);
+}
+
+%container-inner {
+    max-width: 100%;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container / Laufweiten
+%container-width-full {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+%container-width-wide {
+    & {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    %container-inner {
+        width: 1200px;
+    }
+}
+
+%container-width-normal {
+    %container-inner {
+        width: $page-max-width;
+    }
+}
+
+%container-width-indent-right {
+    %container-inner {
+        width: $page-max-width;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container / Ausrichtung
+%container-align-center {
+    %container-inner {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container / Abstaende
+%container-space-before-small,
+%container-space-before-medium,
+%container-space-before-large {
+    padding-top: 0.1px;
+}
+
+%container-space-after-small,
+%container-space-after-medium,
+%container-space-after-large {
+    padding-bottom: 0.1px;
+}
+
+%container-space-before-small > %container-inner {
+    margin-top: rem(25px);
+}
+
+%container-space-before-medium > %container-inner {
+    margin-top: rem(35px);
+}
+
+%container-space-before-large > %container-inner {
+    margin-top: rem(55px);
+}
+
+%container-space-after-small > %container-inner {
+    margin-bottom: rem(25px);
+}
+
+%container-space-after-medium > %container-inner {
+    margin-bottom: rem(35px);
+}
+
+%container-space-after-large > %container-inner {
+    margin-bottom: rem(55px);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Container / Varianten
+
+%container-class-1 {
+    background: #f7f7f7;
+}
+
+%container-class-2 {
+    background: $theme-color-primary;
+}
+
+%container-class-3 {
+    background: $theme-color-primary-dark;
+}
+
+%container-class-4 {
+    background: #eff2f6;
+}
+
+%container-class-2, %container-class-3 {
+    &, h3, a {
+        color: #fff;
+    }
+
+    a {
+        background-image: linear-gradient(#fff, #fff);
+    }
+
+    .focusable &, .no-js & {
+        a, input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]) {
+            outline-color: #fff;
+        }
+    }
+
+    .link--cta {
+        @extend %button--inverted;
+    }
+
+    .link--phone {
+        &, &:hover, .focusable &:focus {
+            color: #fff;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Address
+%address {
+    & {
+        font-style: normal;
+    }
+
+    .address--name, .address--header {
+        font-weight: $font-weight-bold;
+    }
+
+    .address--item-group {
+        &, & + .address--item {
+            margin: rem(10px 0 0 0);
+        }
+    }
+
+    .address--zip + .address--city {
+        margin-left: 5px;
+    }
+
+    .address--directors, .address--vat-number, .address--commercial-register, .address--registered-office {
+        margin: rem(15px 0 0 0);
+    }
+
+    .address--opening-hours {
+        dl {
+            margin-top: 0;
+        }
+
+        dt {
+            display: block;
+        }
+
+        dd {
+            display: block;
+            margin: 0;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 576px
+@include media-breakpoint-up(sm) {
+    %address {
+        .address--opening-hours {
+            dl {
+                display: grid;
+                grid-template-columns: rem(200px) auto;
+            }
+
+            dt {
+                grid-column: 1;
+            }
+
+            dd {
+                grid-column: 2;
+            }
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 768px
+@include media-breakpoint-up(md) {
+    %container-outer {
+        padding-left: rem(30px);
+        padding-right: rem(30px);
+    }
+
+    %container-space-before-small > %container-inner {
+        margin-top: rem(35px);
+    }
+
+    %container-space-before-medium > %container-inner {
+        margin-top: rem(55px);
+    }
+
+    %container-space-before-large > %container-inner {
+        margin-top: rem(75px);
+    }
+
+    %container-space-after-small > %container-inner {
+        margin-bottom: rem(35px);
+    }
+
+    %container-space-after-medium > %container-inner {
+        margin-bottom: rem(55px);
+    }
+
+    %container-space-after-large > %container-inner {
+        margin-bottom: rem(75px);
+    }
+
+    %container-width-wide {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    %container-width-indent-right {
+        %container-inner {
+            padding-right: math.percentage(math.div(2, 12));
+        }
+    }
+
+    %subheader {
+        font-size: rem(24px);
+    }
+
+    // %link--animation {
+    //	& {
+    //		display: inline-block;
+    //		position: relative;
+    //	}
+    //	&:after {
+    //		content: '';
+    //		position: absolute;
+    //		width: 100%;
+    //		transform: scaleX(0);
+    //		//height: 2px;
+    //		bottom: 0; left: 0;
+    //		//background-color: $theme-color-primary;
+    //		border-bottom: 2px solid $theme-color-primary;
+    //		transform-origin: bottom right;
+    //		transition: transform 0.25s ease-out;
+    //	}
+    //	&:hover, &:focus {
+    //		&:after {
+    //			transform: scaleX(1);
+    //			transform-origin: bottom left;
+    //		}
+    //	}
+    // }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= LG
+@include media-breakpoint-up(xl) {
+    %container-width-indent-right {
+        %container-inner {
+            padding-right: rem(190px);
+        }
+    }
+}

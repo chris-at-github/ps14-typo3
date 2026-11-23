@@ -1,0 +1,193 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Variablen
+$ce-history-use-css: true !default;
+$ce-history-layout-default: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+@include stylesheet-context($stylesheet-context-screen) {
+    @if $ce-history-use-css {
+        .ce-timeline {
+            .ce-frame--inner {
+                position: relative;
+            }
+        }
+
+        .ce-timeline--static {
+            *, *::before {
+                transition-duration: 0s !important;
+            }
+        }
+
+        .ce-history__indicator {
+            position: absolute;
+            top: 23px;
+            left: 18px;
+            z-index: 10;
+            width: 4px;
+            height: 0;
+            background: $theme-color-primary;
+            transition: height 0.1s;
+        }
+
+        .ce-history__container {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ce-history-item__date {
+            font-size: rem(24px);
+            color: $theme-color-secondary;
+            opacity: 0;
+            transform: translate(75px, 0);
+            transition: all ease-out 0.45s;
+        }
+
+        .ce-history-item__content {
+            opacity: 0;
+            transform: translate(75px, 0);
+            transition: all 0.45s ease-out 0.045s;
+        }
+
+        .ce-history-item__title {
+            & {
+                margin-top: rem(5px);
+            }
+
+            &, h2, h3, h4 {
+                font-size: rem(20px);
+                font-weight: $font-weight-bold;
+            }
+
+            & + p {
+                margin-top: 0;
+            }
+        }
+
+        .ce-history-item__media-item {
+            & {
+                margin: rem(10px 0 0 0);
+            }
+
+            img {
+                @extend %image-responsive;
+            }
+        }
+
+        .ce-history-item__media {
+            margin: rem(10px 0 0 0);
+            padding: 0;
+            list-style: none;
+        }
+
+        .ce-history-item {
+            & {
+                position: relative;
+                z-index: 5;
+                padding: rem(10px 0 0 60px);
+                overflow: hidden;
+            }
+
+            &::before {
+                content: '';
+                background: $theme-color-primary;
+                position: absolute;
+                top: 20px; left: 11px;
+                width: 18px;
+                height: 18px;
+                transform: scale(0);
+                border-radius: 50%;
+                transition: transform $transition-duration;
+            }
+
+            & + .ce-history-item {
+                margin-top: rem(45px);
+            }
+        }
+
+        .ce-history-item--visible {
+            &::before {
+                transform: scale(1);
+            }
+
+            .ce-history-item__date, .ce-history-item__content {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+        }
+
+        .ce-timeline--no-date {
+            .ce-history-item__date {
+                display: none;
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // >= 576px
+        @include media-breakpoint-up(sm) {
+            .ce-history-item__media {
+                display: flex;
+            }
+
+            .ce-history-item__media-item {
+                margin: rem(10px 10px 0 0);
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // >= 992px
+        @include media-breakpoint-up(lg) {
+            .ce-history__indicator {
+                left: rem(125px);
+            }
+
+            .ce-history-item {
+                & {
+                    display: flex;
+                    padding: rem(10px 0 0 0);
+                }
+
+                &::before {
+                    left: rem(118px);
+                }
+            }
+
+            .ce-history-item__date {
+                width: rem(100px);
+                transform: translate(-75px, 0);
+                font-size: rem(28px);
+            }
+
+            .ce-history-item__content {
+                flex: 1;
+                padding: rem(0 0 0 70px);
+            }
+
+            .ce-timeline--no-date {
+                .ce-history__indicator {
+                    left: rem(18px);
+                }
+
+                .ce-history-item {
+                    &::before {
+                        left: rem(11px);
+                    }
+                }
+            }
+        }
+    }
+}

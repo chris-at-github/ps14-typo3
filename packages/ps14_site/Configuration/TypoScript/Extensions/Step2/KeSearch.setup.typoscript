@@ -1,0 +1,46 @@
+// Geparkt fuer Schritt 2: Pfade /assets/... werden mit der Extension auf Vite (vite:asset) umgestellt
+@import 'EXT:ke_search/Configuration/TypoScript/setup.typoscript'
+
+plugin.tx_kesearch_pi1 {
+  view {
+    layoutRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/KeSearch/Layouts/
+    }
+
+    templateRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/KeSearch/Templates/
+    }
+
+    partialRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/KeSearch/Partials/
+      20 = EXT:ps14_foundation/Resources/Private/Partials/
+      30 = EXT:ps14_site/Resources/Private/Partials/
+    }
+  }
+}
+
+plugin.tx_kesearch_pi2 {
+  view {
+    layoutRootPaths < plugin.tx_kesearch_pi1.view.layoutRootPaths
+    templateRootPaths < plugin.tx_kesearch_pi1.view.templateRootPaths
+    partialRootPaths < plugin.tx_kesearch_pi1.view.partialRootPaths
+  }
+}
+
+plugin.tx_kesearch_pi1.cssFile >
+plugin.tx_kesearch_pi2.cssFile >
+
+tt_content.ke_search_pi1 {
+  dataProcessing {
+    200 = Ps14\Foundation\DataProcessing\ModuleProcessor
+    200 {
+      importCss {
+        10 = /assets/css/modules/search.css
+      }
+
+      importJs {
+        10 = /assets/js/modules/search.js
+      }
+    }
+  }
+}

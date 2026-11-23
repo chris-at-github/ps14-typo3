@@ -1,0 +1,59 @@
+// Geparkt fuer Schritt 2: Pfade /assets/... werden mit der Extension auf Vite (vite:asset) umgestellt
+@import 'EXT:powermail/Configuration/TypoScript/Main/setup.typoscript'
+
+plugin.tx_powermail {
+  view {
+    layoutRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/Powermail/Layouts/
+    }
+
+    templateRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/Powermail/Templates/
+    }
+
+    partialRootPaths {
+      10 = EXT:ps14_site/Resources/Private/Extensions/Powermail/Partials/
+      20 = EXT:ps14_foundation/Resources/Private/Partials/
+      30 = EXT:ps14_site/Resources/Private/Partials/
+    }
+  }
+
+  settings.setup {
+
+    // @see: https://www.forestlake.de/2018/07/12/powermail-link-in-label/
+    misc.htmlForLabels = 1
+
+    excludeFromPowermailAllMarker {
+      confirmationPage {
+        excludeFromMarkerNames = dataprotection
+        excludeFromFieldTypes = password, captcha
+      }
+
+      submitPage {
+        excludeFromMarkerNames = dataprotection
+        excludeFromFieldTypes = password, captcha
+      }
+
+      receiverMail {
+        excludeFromMarkerNames = dataprotection
+        excludeFromFieldTypes = password, captcha
+      }
+
+      senderMail {
+        excludeFromMarkerNames = dataprotection
+        excludeFromFieldTypes = password, captcha
+      }
+    }
+  }
+}
+
+tt_content.powermail_pi1 {
+  dataProcessing {
+    200 = Ps14\Foundation\DataProcessing\ModuleProcessor
+    200 {
+      importCss {
+        10 = /assets/css/modules/powermail.css
+      }
+    }
+  }
+}

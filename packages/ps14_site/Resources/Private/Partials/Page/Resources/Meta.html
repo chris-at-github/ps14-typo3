@@ -1,0 +1,13 @@
+<html data-namespace-typo3-fluid="true" xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers">
+    <fo:format.html>
+        <link rel="apple-touch-icon" sizes="180x180" href="{f:uri.resource(path: '{site.settings.favicon.appleTouchIconFilepath}')}" />
+        <link rel="icon" type="image/png" sizes="96x96" href="{f:uri.resource(path: '{site.settings.favicon.pngIconFilepath}')}" />
+        <link rel="icon" type="image/svg+xml" href="{f:uri.resource(path: '{site.settings.favicon.svgIconFilepath}')}" />
+        <link rel="shortcut icon" href="{f:uri.resource(path: '{site.settings.favicon.icoIconFilepath}')}" />
+        <link rel="manifest" href="{f:uri.resource(path: 'EXT:ps14_site/Resources/Public/Icons/site.webmanifest')}" />
+
+        <f:if condition="{site.settings.meta.themeColor}">
+            <meta name="theme-color" content="{site.settings.meta.themeColor}" />
+        </f:if>
+    </fo:format.html>
+</html>

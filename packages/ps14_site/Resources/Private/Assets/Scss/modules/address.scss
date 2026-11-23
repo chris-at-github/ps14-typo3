@@ -1,0 +1,102 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & Site
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Address
+.ce-address {
+    // .address {
+        @extend %address;
+
+    // }
+
+    .address--google-maps-link {
+        svg {
+            position: relative;
+            top: 1px;
+            fill: $theme-color-primary;
+            width: 18px;
+            height: 15px;
+        }
+    }
+
+    .address--description, .address--additional-description {
+        & {
+            font-size: rem(15px);
+            color: $color-grey;
+        }
+
+        ul {
+            margin-top: rem(5px);
+        }
+
+        li {
+            & {
+                margin-top: rem(3px);
+                padding: rem(0 0 0 15px);
+            }
+
+            &::before {
+                top: 10px;
+                width: 4px;
+                height: 4px;
+                border-color: $color-grey;
+            }
+        }
+    }
+
+    .address--opening-hours-grouped {
+        & {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li + li {
+            margin-top: rem(15px);
+        }
+    }
+
+    .address--opening-hours-grouped-title {
+        font-weight: $font-weight-bold;
+    }
+}
+
+.ce-address--default {
+    .address--name {
+        margin-top: rem(15px);
+    }
+
+    .address--item-group--location {
+        margin-top: 0;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 767px
+@include media-breakpoint-up(md) {
+    .ce-address--default {
+        .address .address--item-group--opening-hours {
+            margin-top: 0;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 992px
+@include media-breakpoint-up(lg) {
+    .ce-address {
+        .address--opening-hours-grouped {
+            li + li {
+                margin-top: rem(35px);
+            }
+        }
+    }
+}

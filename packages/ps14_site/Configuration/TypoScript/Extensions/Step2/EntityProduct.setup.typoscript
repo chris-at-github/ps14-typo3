@@ -1,0 +1,2 @@
+@import 'EXT:entity/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:entity_product/Configuration/TypoScript/setup.typoscript'

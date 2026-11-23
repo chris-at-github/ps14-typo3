@@ -1,0 +1,39 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:section name="Main">
+    <div class="filter-item filter-item--group filter-item--tree-radio {f:if(condition: '{item.autoSubmit} == 1', then: ' filter-item--auto-submit')}">
+        <ul class="filter-item--options">
+            <f:for each="{item.data}" as="properties">
+                <f:if condition="{properties.children}">
+                    <li class="filter-item--option-group">
+                        <div class="filter-item--option-group-title">{properties.label}</div>
+
+                        <f:if condition="{properties.children}">
+                            <ul class="filter-item--options filter-item--children {f:if(condition: '{item.resetable} == 1', then: ' filter-item--resetable')}">
+                                <f:render section="Options" arguments="{filter: filter, item: item, options: properties.children, groupedBy: properties.identifier}" />
+                            </ul>
+                        </f:if>
+                    </li>
+                </f:if>
+            </f:for>
+        </ul>
+    </div>
+</f:section>
+
+<f:section name="Options">
+    <f:for each="{options}" as="properties">
+        <li>
+            <label class="filter-item--option" for="{properties.identifier}" title="{properties.description}">
+                <f:form.radio id="{properties.identifier}" name="{filter.identifier}[{item.name}][{groupedBy}][]" value="{properties.value}" checked="{properties.selected}" additionalAttributes="{data-filter-name: item.name}" />
+                <span>{properties.label}</span>
+                <f:if condition="{properties.description}"><span class="filter-item--option-description"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/help.svg" /></span></f:if>
+            </label>
+
+            <f:if condition="{properties.children}">
+                <ul class="filter-item--options filter-item--children">
+                    <f:render section="Options" arguments="{filter: filter, item: item, options: properties.children, groupedBy: properties.identifier}" />
+                </ul>
+            </f:if>
+        </li>
+    </f:for>
+</f:section>
+</html>

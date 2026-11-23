@@ -1,0 +1,48 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:comment>
+        Geparkt fuer Schritt 2 (tt_address): Adresse im Footer. Wird aktiv, sobald der Pfad
+        Resources/Private/Extensions/Foundation/Partials/ in partialRootPaths steht und fo:address.entity
+        (bzw. ein Ersatz in ps14_site) vorhanden ist.
+    </f:comment>
+
+    <f:section name="Main">
+        <fo:address.entity identifier="provider">
+            <f:if condition="{address}">
+                <address class="address">
+                    <f:render partial="Components/Address" section="Name" arguments="{address: address}" />
+
+                    <div class="address--item-group">
+                        <f:render partial="Components/Address" section="Location" arguments="{address: address}" />
+                    </div>
+
+                    <f:render partial="Components/Address" section="Phone" arguments="{address: address}" />
+                    <f:render partial="Components/Address" section="Mail" arguments="{address: address}" />
+
+                    <div class="address--item-group address--social">
+                        <header><f:translate key="address.social" domain="ps14_foundation.frontend" /></header>
+
+                        <f:if condition="{address.facebook} || {address.instagram} || {address.youtube} || {address.linkedIn}">
+                            <ul>
+                                <f:if condition="{address.facebook}">
+                                    <li class="address--item address--facebook"><f:link.typolink parameter="{address.facebook}"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/facebook.svg" /></f:link.typolink></li>
+                                </f:if>
+
+                                <f:if condition="{address.instagram}">
+                                    <li class="address--item address--instagram"><f:link.typolink parameter="{address.instagram}"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/instagram.svg" /></f:link.typolink></li>
+                                </f:if>
+
+                                <f:if condition="{address.youtube}">
+                                    <li class="address--item address--youtube"><f:link.typolink parameter="{address.youtube}"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/youtube.svg" /></f:link.typolink></li>
+                                </f:if>
+
+                                <f:if condition="{address.linkedIn}">
+                                    <li class="address--item address--linkedin"><f:link.typolink parameter="{address.linkedIn}"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/linkedin.svg" /></f:link.typolink></li>
+                                </f:if>
+                            </ul>
+                        </f:if>
+                    </div>
+                </address>
+            </f:if>
+        </fo:address.entity>
+    </f:section>
+</html>

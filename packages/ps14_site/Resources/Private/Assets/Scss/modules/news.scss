@@ -1,0 +1,76 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+$ce-news-use-css: true !default;
+$ce-news-layout-detail: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+@include stylesheet-context($stylesheet-context-screen) {
+    @if $ce-news-use-css {
+        @if $ce-news-layout-detail {
+            .article {
+                margin-bottom: rem(55px);
+            }
+
+            .article-header__date {
+                display: block;
+                margin: rem(10px 0 0 0);
+                font-size: $font-size-base;
+                color: $theme-color-secondary;
+            }
+
+            .article-image {
+                img {
+                    @extend %image-responsive;
+
+                    width: 100%;
+                }
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // >= 768px
+        @include media-breakpoint-up(md) {
+            .article {
+                margin-bottom: rem(75px);
+            }
+
+            .article__body {
+                @include clearfix;
+            }
+
+            .article__media {
+                max-width: 50%;
+                float: right;
+                margin: rem(0 0 20px 30px);
+            }
+
+            .article__bodytext {
+                padding-right: percentage(2 / 12);
+            }
+        }
+
+        // -------------------------------------------------------------------------------------------------------------------
+        // >= 1200px
+        @include media-breakpoint-up(xl) {
+            .article__media {
+                float: right;
+                margin: rem(0 0 20px 45px);
+            }
+
+            .article__bodytext {
+                padding-right: rem(190px)
+            }
+        }
+    }
+}

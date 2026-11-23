@@ -1,73 +1,11 @@
-// ---------------------------------------------------------------------------------------------------------------------
-// Variables
-:root {
-    --list-bullet-point-color: var(--color-neutral-700);
+.list--check {
+    @include list--check;
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Definitions
-@mixin list-default {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 0;
-}
-
-@mixin list-default-ul {
-    li {
-        position: relative;
-        padding: 0 0 0 16px;
-    }
-
-    li::before {
-        content: '';
-        position: absolute;
-        top: 12px; left: 2px;
-        border: 2px solid var(--list-bullet-point-color);
-        border-radius: 1px;
-    }
-
-    ul {
-        margin-top: 0;
-    }
-}
-
-@mixin list-default-ol {
-    counter-reset: ol;
-
-    li {
-        position: relative;
-        padding: 0 0 0 20px;
-        counter-increment: ol;
-    }
-
-    li::before {
-        content: counter(ol) ".";
-        position: absolute;
-        top: 0; left: 0;
-        font-size: var(--font-size-normal);
-        font-weight: var(--font-weight-semibold);
-        color: var(--list-bullet-point-color);
-    }
-
-    ol li::before {
-        content: counter(ol, lower-latin) ".";
-    }
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Classes
 ul.list--default {
-    &, ul {
-        @include list-default;
-        @include list-default-ul;
-    }
+    @include list-default-ul;
 }
 
 ol.list--default {
-    &, ol {
-        @include list-default;
-        @include list-default-ol;
-    }
+    @include list-default-ol;
 }

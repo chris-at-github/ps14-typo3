@@ -1,0 +1,198 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Form Elements
+%form-item {
+    position: relative;
+}
+
+%form-field {
+    & {
+        outline: 0;
+        padding: rem(4px 8px);
+
+        // border: 2px solid $theme-color-primary;
+        border: 2px solid $color-grey-light;
+        border-radius: $border-radius-default;
+        background: $color-grey-light;
+        transition-property: border, background;
+        transition-duration: $transition-duration;
+    }
+
+    &:focus {
+        // border-color: $theme-color-primary-dark;
+        border-color: $theme-color-primary;
+        background: #fff;
+    }
+
+    &[disabled] {
+        background: $color-grey-light;
+        border-color: $color-grey-light;
+        cursor: not-allowed;
+    }
+}
+
+select%form-field {
+    & {
+        min-height: rem(39px);
+    }
+
+    &[disabled] {
+        opacity: 1;
+    }
+}
+
+%form-field--checkbox, %form-field--radio {
+    & {
+        position: relative;
+        padding: rem(0 0 0 26px);
+    }
+
+    & + %form-field--checkbox {
+        margin: rem(3px 0 0 0);
+    }
+
+    .focusable & {
+        @extend %accessibility-focus-within;
+    }
+
+    input {
+        & {
+            position: absolute;
+            top: rem(7px); left: rem(1px);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+%form-field--checkbox-custom, %form-field--radio-custom {
+    & {
+        padding: rem(0 0 0 28px);
+    }
+
+    input {
+        opacity: 0;
+    }
+
+    label {
+        & {
+            display: inline-block;
+            font-weight: $font-weight-base;
+            cursor: pointer;
+        }
+
+        &:hover span::after {
+            background: $color-grey-lighten;
+        }
+    }
+
+    span::after {
+        content: '';
+        position: absolute;
+        top: rem(4px); left: rem(1px);
+        z-index: 5;
+        width: 19px;
+        height: 19px;
+        background: $color-grey-light;
+        border-radius: 2px;
+        transition: background 0.15s;
+    }
+
+    span::before {
+        content: '';
+        position: absolute;
+        top: rem(8px); left: rem(5px);
+        z-index: 10;
+        font-size: 8px;
+        color: #000;
+        opacity: 0;
+        transition: opacity $transition-duration;
+    }
+
+    input:checked + span::before {
+        opacity: 1;
+    }
+}
+
+%form-field--radio-custom {
+    span::before {
+        top: rem(5px); left: rem(1px);
+        z-index: 5;
+        width: 13px;
+        height: 13px;
+        border: 1px solid #ababab;
+        border-radius: 50%;
+        opacity: 1;
+        transition: border $transition-duration;
+    }
+
+    span::after {
+        content: '';
+        position: absolute;
+        top: rem(5px); left: rem(1px);
+        z-index: 10;
+        width: 13px;
+        height: 13px;
+        border: 4px solid $theme-color-primary;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: transform $transition-duration;
+    }
+
+    input:checked + span::after {
+        transform: scale(1.05);
+    }
+
+    &:hover, .focusable &:focus-within {
+        span::before {
+            border-color: $color-grey-darken;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Buttons
+%button {
+    & {
+        padding: $spacing-tiny $spacing-small;
+        border: 0;
+                outline: 0;
+        background: #ccc;
+        cursor: pointer;
+        border-radius: $border-radius-default;
+        font-weight: $font-weight-normal;
+    }
+
+    &:hover, &:focus {
+        background: #bbb;
+    }
+}
+
+%button--disabled {
+    & {
+        cursor: default;
+    }
+
+    &:hover {
+        background: #ccc;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Layout 0 (Default)
+%form--layout-0 {
+    %form-item, %form-action {
+        margin: $spacing-small 0 0 0;
+    }
+
+    %form-label {
+        & + %form-field {
+            margin: $spacing-tiny 0 0 0;
+        }
+    }
+
+    %form-field {
+        width: 100%;
+    }
+}

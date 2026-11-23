@@ -1,48 +1,98 @@
-// ---------------------------------------------------------------------------------------------------------------------
-// Variables
-:root {
-    --link-color: var(--color-font);
-    --link-font-weight: var(--font-weight-normal);
-    --link-underline-color: var(--color-neutral-400);
-    --link-active-color: #000;
-    --link-active-underline-color: var(--color-neutral-900);
-    --link-focus-outline-color: var(--color-focus-outline);
+.link--external {
+    & {
+        @include iconfont(external);
+
+        position: relative;
+        padding: rem(0 0 0 19px);
+    }
+
+    &::before {
+        position: absolute;
+        top: rem(5px); left: rem(1px);
+        font-size: rem(11px);
+    }
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Defintions
-@mixin link-default {
-    font-weight: var(--link-font-weight);
-    color: var(--link-color);
-    text-decoration: underline;
-    text-decoration-color: var(--link-underline-color);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
-    border-radius: var(--border-radius-default);
+.link--download {
+    & {
+        @include iconfont(download);
+
+        position: relative;
+        padding: rem(0 0 0 24px);
+    }
+
+    &::before {
+        position: absolute;
+        top: rem(0px); left: rem(1px);
+        font-size: rem(16px);
+        transform: translate(0, 0);
+        transition: transform 0.15s;
+    }
+
+    &:hover, .focusable &:focus {
+        & {
+            background: none;
+        }
+
+        &::before {
+            transform: translate(0, 3px);
+        }
+    }
 }
 
-@mixin link-default-hover {
-    color: var(--link-active-color);
-    text-decoration-color: var(--link-active-underline-color);
+.link--phone {
+    &, &:hover, .focusable &:focus {
+        color: $font-color-base;
+        text-decoration: none;
+    }
 }
 
-@mixin link-default-focus {
-    color: var(--link-active-color);
-    text-decoration-color: var(--link-active-underline-color);
-    outline: 1px solid var(--link-focus-outline-color);
-    outline-offset: 3px;
+.link--cta {
+    & {
+        @extend %button;
+        @include iconfont(arrow-right);
+
+        padding-right: rem(58px);
+    }
+
+    &::before {
+        position: absolute;
+        top: 17px; right: 30px;
+        font-size: rem(12px);
+        transition: transform $transition-duration;
+    }
+
+    &:hover, .focusable &:focus {
+        &::before {
+            transform: translate(5px, 0);
+        }
+    }
 }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// Classes
-.link--default {
-    @include link-default;
-}
+.link--arrow {
+    & {
+        display: inline;
+    }
 
-.link--default:hover {
-    @include link-default-hover;
-}
+    &::after {
+        display: inline;
+        content: iconfont-item(arrow-right);
+        margin-left: rem(12px);
+        padding-right: rem(5px);
+        font-family: $font-family-icon;
+        font-size: rem(12px);
+        transition-property: margin, padding;
+        transition-duration: $transition-duration;
+    }
 
-.link--default:focus-visible {
-    @include link-default-focus;
+    &:hover, .focusable &:focus {
+        & {
+            background-size: 0;
+        }
+
+        &::after {
+            margin-left: rem(17px);
+            padding-right: 0;
+        }
+    }
 }

@@ -1,53 +1,44 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// Bootstrap
-@use "bootstrap/root";
-@use "bootstrap/normalize";
-@use "bootstrap/font";
-@use "bootstrap/typography";
+// Bootstrap & Xo
+@import 'functions';
+@import 'variables';
+@import 'mixins';
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Mixins
-@use "mixins/richtext" as richtext;
+// Definitions
+@import 'definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Reboot & Type
+@import 'reboot';
+@import 'type';
+@import 'iconfont';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Components
-@use "components/link";
-@use "components/list" as list;
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Root
-:root {
-    --font-size-normal: 16px;
-}
+@import 'components/link';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // CKE
 body {
-    padding: 24px;
-    font-family: var(--font-family-default);
-    font-size: var(--font-size-normal);
-    font-weight: var(--font-weight-normal);
-    line-height: var(--font-line-height);
-    color: var(--color-font);
-    text-align: left;
-
     & > *:first-child {
         margin-top: 0;
     }
 }
 
 ul {
-    @include list.list-default;
-    @include list.list-default-ul;
+    @include list-default-ul;
 }
 
 ol {
-    @include list.list-default;
-    @include list.list-default-ol;
+    @include list-default-ol;
 }
 
-// table {
-// 	@include table--layout-0;
-// }
+table {
+    @include table--layout-0;
+}
 
-@include richtext.richtext;
+.ck-content {
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+}

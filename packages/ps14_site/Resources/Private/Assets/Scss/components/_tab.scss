@@ -1,0 +1,130 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Tabs
+.tab--container {
+    & {
+        @extend %tab--container;
+    }
+
+    button {
+        & {
+            @extend %tab--item;
+        }
+
+        &.active, &:hover, .focusable &:focus {
+            @extend %tab--item-active;
+        }
+    }
+
+    & + .tab--content {
+        margin: rem(30px 0 0 0);
+    }
+}
+
+.tab--content {
+    .tab--pane {
+        & {
+            display: none;
+            transition: opacity 0.15s linear;
+        }
+
+        &.active {
+            display: block;
+            opacity: 1;
+        }
+
+        &:not(.show) {
+            opacity: 0;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Tabs Radio
+.tabs__container--radio {
+    --tabs-radio-indicator: #ababab;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: rem(10px);
+    margin: 0;
+    max-width: rem(600px);
+
+    li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .tabs__button {
+        display: grid;
+        grid-template-columns: 1fr rem(15px);
+        gap: rem(8px);
+        place-items: center start;
+        width: 100%;
+        height: 100%;
+        padding: rem(15px);
+        background: $color-grey-light;
+        border: 0;
+        font-weight: $font-weight-normal;
+        color: $font-color-base;
+
+        &.active {
+            &, &:hover, .focusable &:focus {
+                --tabs-radio-indicator: #{$theme-color-primary};
+            }
+
+            background: $color-grey-light;
+            color: $font-color-base;
+
+            .tabs__button-indicator {
+                box-shadow: inset 0 0 0 4px var(--tabs-radio-indicator);
+            }
+        }
+
+        &:hover, .focusable &:focus {
+            --tabs-radio-indicator: #{$color-grey};
+
+            background: $color-grey-lighten;
+            color: $font-color-base;
+        }
+    }
+
+    .tabs__button--icon {
+        grid-template-columns: rem(32px) 1fr rem(15px);
+    }
+
+    .tabs__button-icon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tabs__button-title {
+        text-align: left;
+    }
+
+    .tabs__button-indicator {
+        width: 15px;
+        height: 15px;
+        box-shadow: inset 0 0 0 1.5px var(--tabs-radio-indicator);
+        border-radius: 50%;
+    }
+
+    & + .tab--content {
+        margin: 0;
+    }
+}
+
+// => 768px
+@include media-breakpoint-up(sm) {
+    .tabs__container--radio {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+

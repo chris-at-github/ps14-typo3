@@ -1,0 +1,66 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Header
+@mixin header-1 {
+    font-size: rem(40px);
+
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        margin-top: rem(80px);
+        font-size: rem(52px);
+    }
+}
+
+@mixin header-2 {
+    font-size: rem(28px);
+
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        font-size: rem(34px);
+    }
+}
+
+@mixin header-3 {
+    font-size: rem(19px);
+    font-weight: $font-weight-bold;
+
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        font-size: rem(21px);
+    }
+
+    // >= 992px
+    @include media-breakpoint-up(lg) {
+        font-size: rem(23px);
+        font-weight: $font-weight-normal;
+    }
+}
+
+@mixin header-4 {
+    font-weight: $font-weight-bold;
+}
+
+@mixin link-arrow {
+    span {
+        & {
+            display: inline;
+        }
+
+        &::after {
+            display: inline;
+            content: iconfont-item(arrow-right);
+            margin-left: rem(12px);
+            padding-right: rem(5px);
+            font-family: $font-family-icon;
+            font-size: rem(12px);
+            transition-property: margin, padding;
+            transition-duration: $transition-duration;
+        }
+    }
+
+    &:hover, .focusable &:focus {
+        span::after {
+            margin-left: rem(17px);
+            padding-right: 0;
+        }
+    }
+}

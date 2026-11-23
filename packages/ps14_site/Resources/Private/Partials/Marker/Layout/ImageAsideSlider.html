@@ -1,0 +1,67 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+<f:section name="Main">
+    <f:if condition="{data.bodytext}">
+        <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+    </f:if>
+
+    <div class="row marker marker--layout-{data.tx_foundation_variant}">
+        <f:if condition="{images.0}">
+            <div class="col-lg-6">
+                <div class="marker--media">
+                    <f:render partial="Media/Main" section="Main" arguments="{
+                            file: images.0,
+                            settings: '{fo:settings.get(extension: \'Ps14Marker\', path: \'images.aside\')}'
+                        }" />
+                </div>
+            </div>
+        </f:if>
+
+        <f:if condition="{elements}">
+            <div class="col-lg-6">
+                <f:render section="Listing" arguments="{_all}" />
+            </div>
+        </f:if>
+    </div>
+</f:section>
+
+<f:section name="Listing">
+    <div class="slider slider--marker-legend">
+        <f:render section="SliderNavigation" arguments="{_all}" />
+
+        <ol class="marker--legend-slider">
+            <f:for each="{elements}" as="element" iteration="iterator">
+                <f:render section="ListingItem" arguments="{data: data, element: element.data, iterator: iterator, headerLayout: data.tx_foundation_elements_header}" />
+            </f:for>
+        </ol>
+    </div>
+</f:section>
+
+<f:section name="ListingItem">
+    <li class="marker--legend-item">
+        <div class="marker--legend-item-index">{iterator.cycle}</div>
+
+        <f:if condition="{element.title}">
+            <div class="marker--legend-item-title">
+                <f:render partial="Header/Header" arguments="{header: element.title, layout: headerLayout}" />
+            </div>
+        </f:if>
+
+        <f:if condition="{element.description}">
+            <f:format.html>{element.description}</f:format.html>
+        </f:if>
+    </li>
+</f:section>
+
+<f:section name="SliderNavigation">
+    <div class="slider--navigation slider--navigation-legend">
+        <div class="slider--navigation-inner">
+            <ul>
+                <f:for each="{elements}" as="item" iteration="iterator">
+                    <li title="{iterator.cycle}: {item.data.title}"><button>{iterator.cycle}</button></li>
+                </f:for>
+            </ul>
+        </div>
+    </div>
+</f:section>
+</html>

@@ -1,0 +1,23 @@
+.modal--backdrop {
+    @include modal--backdrop;
+}
+
+.modal--close {
+    @include modal--close;
+}
+
+.modal {
+    @include modal;
+}
+
+.modal--container {
+    @include modal--container;
+}
+
+.is--modal-open {
+    @include is--modal-open;
+}
+
+.is--modal-closing {
+    @include is--modal-closing;
+}

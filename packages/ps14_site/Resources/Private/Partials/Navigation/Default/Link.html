@@ -1,0 +1,45 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <fo:variable name="cssClass">
+            navigation-item
+            {f:if(condition: item.current, then: 'is--active')}
+            {f:if(condition: item.data.tx_foundation_identifier, then: 'navigation-item--{item.data.tx_foundation_identifier}')}
+        </fo:variable>
+
+        <f:if condition="{item.data.tx_foundation_navigation_not_linked}">
+            <f:then>
+                <span class="{cssClass}">
+                    <f:render section="Inner" arguments="{_all}" />
+                </span>
+            </f:then>
+            <f:else if="{item.data.target}">
+                <a class="{cssClass}" href="{item.link}" target="{item.data.target}">
+                    <f:render section="Inner" arguments="{_all}" />
+                </a>
+            </f:else>
+            <f:else if="{item.target}">
+                <a class="{cssClass}" href="{item.link}" target="{item.target}">
+                    <f:render section="Inner" arguments="{_all}" />
+                </a>
+            </f:else>
+            <f:else>
+                <f:if condition="{item.current}">
+                    <f:then>
+                        <a class="{cssClass}" href="{item.link}" aria-current="true">
+                        <f:render section="Inner" arguments="{_all}" />
+                        </a>
+                    </f:then>
+                    <f:else>
+                        <a class="{cssClass}" href="{item.link}">
+                            <f:render section="Inner" arguments="{item: item}" />
+                        </a>
+                    </f:else>
+                </f:if>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="Inner">
+        <span class="navigation-item__title">{item.title}</span>
+    </f:section>
+</div>

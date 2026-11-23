@@ -1,0 +1,91 @@
+.table--container {
+    & {
+        position: relative;
+        margin-top: $spacing-default;
+    }
+
+    & + .table--container {
+        margin-top: rem(45px);
+    }
+
+    table {
+        & {
+            margin: 0;
+        }
+
+        tr > th:first-child, tr > td:first-child {
+            min-width: rem(190px);
+            hyphens: auto;
+        }
+    }
+
+    .table--scroll-container {
+        & {
+            overflow: auto;
+        }
+
+        tr > th:first-child, tr > td:first-child {
+            visibility: hidden;
+        }
+    }
+
+    .table--fixed-container {
+        & {
+            position: absolute;
+            top: 0;
+            left: 0; right: 0;
+            overflow: hidden;
+            user-select: none;
+            cursor: move;
+        }
+
+        table {
+            tr > th:first-child, tr > td:first-child {
+                background: #fff;
+            }
+
+            tr > th:not(:first-child), tr > td:not(:first-child) {
+                visibility: hidden;
+            }
+        }
+    }
+}
+
+// >= 768
+@include media-breakpoint-up(md) {
+    .table--container {
+        table {
+            th, td {
+                padding-right: rem(35px);
+            }
+
+            tr > th:first-child, tr > td:first-child {
+                min-width: 0;
+                hyphens: manual;
+            }
+
+            tr > th:last-child, tr > td:last-child {
+                padding-right: rem(10px);
+            }
+        }
+    }
+}
+
+// >= 992
+@include media-breakpoint-up(lg) {
+    .table--container {
+        .table--scroll-container {
+            & {
+                overflow: inherit;
+            }
+
+            tr > th:first-child, tr > td:first-child {
+                visibility: visible;
+            }
+        }
+
+        .table--fixed-container {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <header class="accordion--header" id="a--{identifier}-header">
+            <f:switch expression="{titleType}">
+                <f:case value="1">
+                    <h1><f:render section="Button" arguments="{_all}" /></h1>
+                </f:case>
+                <f:case value="2">
+                    <h2><f:render section="Button" arguments="{_all}" /></h2>
+                </f:case>
+                <f:case value="3">
+                    <h3><f:render section="Button" arguments="{_all}" /></h3>
+                </f:case>
+                <f:case value="4">
+                    <h4><f:render section="Button" arguments="{_all}" /></h4>
+                </f:case>
+                <f:defaultCase>
+                    <f:render section="Button" arguments="{_all}" />
+                </f:defaultCase>
+            </f:switch>
+        </header>
+    </f:section>
+
+    <f:section name="Button">
+        <button data-bs-toggle="collapse" data-bs-target="#a--{identifier}-container" aria-expanded="{f:if(condition: '{expanded}', then: 'true', else: 'false')}" aria-controls="a--{identifier}-container">
+            {title}
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/chevron-down.svg" />
+        </button>
+    </f:section>
+</div>

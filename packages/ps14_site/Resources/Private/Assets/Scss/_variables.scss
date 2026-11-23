@@ -1,0 +1,167 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Einsatzzweck (Inline, Import)
+$stylesheet-context: null !default;
+$stylesheet-context-screen: 'screen' !default;
+$stylesheet-context-embed: 'embed' !default;
+$stylesheet-context-import: 'import' !default;
+$stylesheet-context-print: 'print' !default;
+$stylesheet-context-pdf: 'pdf' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Colors
+$theme-color-primary: #003865 !default;
+$theme-color-primary-dark: #002d52 !default;
+$theme-color-secondary: #cc033d !default;
+$theme-color-hover: #000 !default;
+$theme-color-error: #cc033d !default;
+$color-grey-lighter: #f3f3f3 !default;
+$color-grey-light: #ececed !default;
+$color-grey-lighten: #d8d8d8 !default;
+$color-grey: #737373 !default;
+$color-grey-darken: #595959 !default;
+$color-grey-dark: #3e3e3e !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Header
+$headings-font-weight: 400 !default;
+$headings-line-height: 1.15 !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Font
+$font-family-base: 'Carlito', 'Calibri', sans-serif !default;
+$font-family-icon: 'icons' !default;
+$font-color-base: #3e3e3e !default;
+$font-size-base-px: 16px !default;
+$font-size-base: 1.15rem !default;
+$font-weight-light: 300;
+$font-weight-base: 400;
+$font-weight-bold: 700;
+$line-height-base: 1.5 !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Links
+$link-color: $theme-color-primary !default;
+$link-color-hover: $theme-color-primary-dark !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Grid columns
+$grid-gutter-width: 30px !default;
+$grid-order-enabled: false !default;
+$grid-offset-enabled: false !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Border Radius
+$border-radius-small: 2px !default;
+$border-radius-default: 3px !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Layout
+$page-max-width: 1140px !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Transition
+$transition-duration: 0.25s !default;
+$transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1) !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Icon Font
+// Steuerung: Schrift und Klassen nur in Stylesheets mit true ausgeben (siehe _iconfont.scss)
+$iconfont-create-font-face: true !default;
+$iconfont-create-icon-class: true !default;
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Tobi
+$tobi-zoom-icon-background: rgb(26 42 58 / 94%) !default;
+$tobi-zoom-icon-color: #fff !default;
+$tobi-lightbox-background: rgb(80 80 80 / 95%) !default;
+$tobi-caption-background: rgb(255 255 255 / 90%) !default;
+$tobi-caption-color: $font-color-base !default;
+$tobi-counter-background: transparent !default;
+$tobi-counter-color: #fff !default;
+$tobi-button-background: transparent !default;
+$tobi-button-color: #fff !default;
+$tobi-loader-color: #fff !default;
+$tobi-slide-max-height: 85vh !default;
+$tobi-slide-max-width: 85vw !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Fluid Styled Content
+$fsc-textmedia-border-width: 1px !default;
+$fsc-textmedia-border-color: $font-color-base !default;
+$fsc-textmedia-margin: rem(20px) !default;
+$fsc-row-spacing: rem(20px) !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Spacing
+$spacing-default: rem(20px) !default;
+$spacing-tiny: rem(4px) !default;
+$spacing-small: rem(15px) !default;
+$spacing-medium: rem(24px) !default;
+$spacing-large: rem(48px) !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Hamburger
+// @see: https://github.com/jonsuh/hamburgers/blob/master/_sass/hamburgers/hamburgers.scss
+$hamburger-padding-x: 13px !default;
+$hamburger-padding-y: 15px !default;
+$hamburger-layer-width: 33px !default;
+$hamburger-layer-height: 3px !default;
+$hamburger-layer-spacing: 5px !default;
+$hamburger-layer-color: $font-color-base !default;
+$hamburger-layer-border-radius: 0 !default;
+$hamburger-hover-opacity: 1 !default;
+$hamburger-hover-color: $theme-color-hover !default;
+$hamburger-active-layer-color: $hamburger-layer-color !default;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity !default;
+
+// To use CSS filters as the hover effect instead of opacity,
+// set $hamburger-hover-use-filter as true and
+// change the value of $hamburger-hover-filter accordingly.
+$hamburger-hover-use-filter: false !default;
+$hamburger-hover-filter: opacity(50%) !default;
+$hamburger-active-hover-filter: $hamburger-hover-filter !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Facts
+$ce-facts-use-css: true !default;
+$ce-facts-layout-inline: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Gallery
+$ce-gallery-use-css: false !default;
+$ce-gallery-layout-default: false !default;
+$ce-gallery-layout-slider: false !default;
+$ce-gallery-layout-hero-slider: false !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Hero
+$ce-hero-use-css: true !default;
+$ce-hero-layout-default: true !default;
+$ce-hero-layout-slider: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Icon Text
+$ce-icon-text-use-css: true !default;
+$ce-icon-text-layout-vertical: true !default;
+$ce-icon-text-layout-horizontal: true !default;
+$ce-icon-text-layout-inline: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Employee
+$tx-employee-use-css: true !default;
+$tx-employee-layout-default: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Contact
+$tx-contact-use-css: true !default;
+$tx-contact-layout-search: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Chart
+$tx-chart-use-css: true !default;
+$tx-chart-layout-default: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap
+@import 'vendors/bootstrap/variables';

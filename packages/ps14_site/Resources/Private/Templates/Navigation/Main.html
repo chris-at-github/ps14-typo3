@@ -1,0 +1,54 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+
+    <f:section name="Main">
+        <ul>
+            <f:for each="{navigation}" as="item">
+                <li>
+                    <f:render partial="Navigation/Default/Link" section="Main" arguments="{item: item}" />
+
+                    <f:if condition="{item.children} || {item.data.tx_foundation_navigation_content}">
+                        <div class="navigation--container-outer navigation--container-layout-{f:if(condition: item.data.tx_foundation_navigation_layout, then: '{item.data.tx_foundation_navigation_layout -> fo:format.sanitize()}', else: 'default')}">
+                            <div class="navigation--container-background"></div>
+                            <div class="navigation--container-inner">
+                                <f:if condition="{item.children}">
+                                    <f:render section="{item.data.tx_foundation_navigation_layout -> fo:format.ucFirst()}" optional="1" arguments="{_all}">
+                                        <f:render partial="Navigation/Default/Listing" section="Main" arguments="{navigation: item.children}" />
+                                    </f:render>
+                                </f:if>
+
+                                <f:if condition="{item.data.tx_foundation_navigation_content}">
+                                    <div class="navigation-item--content"><f:cObject typoscriptObjectPath="block.navigationContent" data="{item.data}" /></div>
+                                </f:if>
+                            </div>
+                        </div>
+                    </f:if>
+
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="Card">
+        <ul>
+            <f:for each="{item.children}" as="card">
+                <li class="card" data-uri-target="{card.link}">
+                    <f:render partial="Components/Card" section="Media" arguments="{media: card.media.0, settings: settings.picture}" />
+                    <f:render partial="Components/Card" section="Title" arguments="{title: card.title, link: card.link}" />
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="LargeCard">
+        <ul>
+            <f:for each="{item.children}" as="card">
+                <li class="card" data-uri-target="{card.link}">
+                    <f:render partial="Components/Card" section="Media" arguments="{media: card.media.0, settings: settings.picture}" />
+                    <f:render partial="Components/Card" section="Title" arguments="{title: card.title, link: card.link}" />
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+</html>

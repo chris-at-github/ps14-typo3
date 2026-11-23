@@ -1,0 +1,110 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+@import '../iconfont';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Register
+.ce-powermail-pi1 {
+    .powermail_fieldwrap {
+        @extend %form-item;
+
+        margin: rem(10px 0 0 0);
+    }
+
+    .powermail_label {
+        & {
+            @extend %form-label;
+        }
+
+        & + .powermail_field {
+            margin: $spacing-tiny 0 0 0;
+        }
+
+        .mandatory {
+            color: $theme-color-primary;
+            margin-left: 3px;
+        }
+    }
+
+    .powermail_description {
+        font-size: rem(15px);
+        color: $color-grey;
+
+        & + .powermail_field {
+            margin: $spacing-tiny 0 0 0;
+        }
+    }
+
+    .powermail_input,
+    .powermail_select,
+    .powermail_textarea {
+        width: 100%;
+
+        @extend %form-field;
+    }
+
+    .powermail_field .checkbox {
+        @extend %form-field--checkbox;
+        @extend %form-field--checkbox-custom;
+
+        span {
+            & {
+                @include iconfont(check);
+            }
+
+            &::before {
+                font-weight: $font-weight-bold;
+            }
+        }
+    }
+
+    &.ce-frame--variant-default {
+        .powermail_fieldwrap {
+            max-width: rem(600px);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 768px
+@include media-breakpoint-up(md) {
+    .ce-powermail-pi1 {
+        .powermail_fieldwrap {
+            margin-top: rem(20px);
+        }
+    }
+
+    .ce-powermail-pi1.ce-frame--variant-1 {
+        .powermail_fieldset {
+            margin-top: rem(-20px);
+
+            @include make-row;
+        }
+
+        .powermail_fieldwrap {
+            margin-top: rem(20px);
+
+            @include make-col-ready;
+            @include make-col(6);
+        }
+
+        .powermail_fieldwrap_anrede, .powermail_fieldwrap_interest, .powermail_fieldwrap_dataprotection {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .powermail_fieldwrap_anrede .powermail_field {
+            width: calc(50% - 15px);
+        }
+    }
+}

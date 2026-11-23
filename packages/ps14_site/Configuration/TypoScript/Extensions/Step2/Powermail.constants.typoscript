@@ -1,0 +1,25 @@
+@import 'EXT:powermail/Configuration/TypoScript/Main/constants.typoscript'
+
+plugin.tx_powermail {
+  settings {
+    spamshield {
+      enable = 1
+      email = pschorr.christian@gmail.com
+    }
+    validation.client = 0
+    db.enable = 0
+
+    javascript {
+      addAdditionalJavaScript = 0
+    }
+
+    // Im Reiter 'Mail to User' muss nur der Betreff ausgefuellt werden
+    sender.default.senderName = KIST + ESCHERICH
+    sender.default.senderEmail = kontakt@kist-escherich.com
+
+    // Im Reiter 'Mail to Receiver' muessen weiterhin alle Felder ausgefuellt werden -> nur die E-Mail Header werden
+    // korrekt befuellt
+    receiver.overwrite.senderName = KIST + ESCHERICH
+    receiver.overwrite.senderEmail = kontakt@kist-escherich.com
+  }
+}

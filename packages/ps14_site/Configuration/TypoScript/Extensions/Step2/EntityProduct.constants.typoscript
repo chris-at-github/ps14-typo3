@@ -1,0 +1,8 @@
+@import 'EXT:entity/Configuration/TypoScript/constants.typoscript'
+@import 'EXT:entity_product/Configuration/TypoScript/constants.typoscript'
+
+plugin.tx_entityproduct {
+  persistence {
+    storagePid = 51
+  }
+}

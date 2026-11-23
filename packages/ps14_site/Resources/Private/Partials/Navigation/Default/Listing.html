@@ -1,0 +1,11 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:spaceless>
+            <ul class="navigation__group {f:if(condition: parent.data.tx_foundation_navigation_layout, then: 'navigation__group-item--layout-{parent.data.tx_foundation_navigation_layout}')}">
+                <f:for each="{navigation}" as="item">
+                    <f:render partial="Navigation/Default/Item" section="Main" arguments="{item: item}" />
+                </f:for>
+            </ul>
+        </f:spaceless>
+    </f:section>
+</div>

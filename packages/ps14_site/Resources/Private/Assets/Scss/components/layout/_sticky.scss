@@ -1,0 +1,152 @@
+@include stylesheet-context($stylesheet-context-embed) {
+    :root {
+        --sticky-icon-size: #{rem(45px)};
+        --sticky-icon-color: #{$theme-color-primary};
+        --sticky-icon-hover-color: #fff;
+        --sticky-icon-background: #fff;
+        --sticky-icon-hover-background: #{$theme-color-primary};
+    }
+
+    .sticky--container {
+        position: fixed;
+        bottom: 60px; right: rem(15px);
+        z-index: 50;
+    }
+
+    .sticky--element {
+        & + .sticky--element {
+            margin-top: rem(10px);
+        }
+    }
+
+    .sticky--icon {
+        @extend %button--rounded-icon;
+
+        position: relative;
+    }
+
+    .sticky--element-totop {
+        & {
+            max-height: 0;
+            transition: max-height $transition-duration;
+        }
+
+        .sticky--icon {
+            & {
+                @extend %button--rounded-icon--inverted;
+
+                transform: scale(0);
+                transition: transform $transition-duration;
+            }
+
+            &::before {
+                border-color: $theme-color-primary-dark;
+            }
+
+            svg {
+                fill: $theme-color-primary-dark;
+                transition-property: fill, transform;
+            }
+
+            &:hover, .focusable &:focus {
+                &::before, &:not([disabled])::before {
+                    background: $theme-color-primary-dark;
+                }
+            }
+
+            .is--totop-down & {
+                transform: scale(1);
+            }
+        }
+
+        .is--totop-down & {
+            max-height: var(--sticky-icon-size);
+        }
+    }
+
+    .sticky--element-print-pdf, .sticky--element-contact {
+        .sticky--icon {
+            &::before {
+                border-color: $theme-color-primary-dark;
+                background: $theme-color-primary-dark;
+            }
+
+            &:hover, .focusable &:focus {
+                &::before {
+                    // border-color: $theme-color-primary;
+                    background: #fff;
+                }
+
+                svg {
+                    fill: $theme-color-primary-dark;
+                }
+            }
+        }
+    }
+
+    .sticky--element-print-pdf svg {
+        width: 20px;
+        height: 28px;
+    }
+
+    .sticky--element-contact svg {
+        margin: 4px 0 0 2px;
+        width: 24px;
+        height: 28px;
+    }
+
+    .sticky--element-totop svg {
+        width: 14px;
+        height: 18px;
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------
+    // >= 768px
+    @include media-breakpoint-up(md) {
+        :root {
+            --sticky-icon-size: #{rem(55px)};
+        }
+
+        .sticky--container {
+            right: rem(30px);
+        }
+
+        .sticky--element-print-pdf svg {
+            width: 22px;
+            height: 32px;
+        }
+
+        .sticky--element-contact svg {
+            width: 28px;
+            height: 23px;
+        }
+
+        .sticky--element-totop svg {
+            width: 16px;
+            height: 21px;
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------------
+    // >= 1200px
+    @include media-breakpoint-up(xl) {
+        :root {
+            --sticky-icon-size: #{rem(65px)};
+        }
+
+        .sticky--element-print-pdf svg {
+            width: 24px;
+            height: 35px;
+        }
+
+        .sticky--element-contact svg {
+            width: 32px;
+            height: 26px;
+        }
+
+        .sticky--element-totop svg {
+            width: 18px;
+            height: 23px;
+        }
+    }
+}

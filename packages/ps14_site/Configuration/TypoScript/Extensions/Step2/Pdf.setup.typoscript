@@ -1,0 +1,27 @@
+// Geparkt fuer Schritt 2: Pfade /assets/... werden mit der Extension auf Vite (vite:asset) umgestellt
+[request && traverse(request.getQueryParams(), 'pdf') == 1]
+  page {
+    includeCSS {
+      pdf = /assets/css/pdf.css
+
+      site >
+      print >
+    }
+
+    includeJSFooter {
+      pdf = /assets/js/site-pdf.js
+    }
+
+    10.dataProcessing.140.inlineCss >
+  }
+
+  plugin.tx_ps14foundation.settings {
+    moduleProcessor {
+      cssModuleEnabled = 0
+      cssModuleInlineLimit = 0
+      cssUseMinifyOnProduction = 0
+      jsModuleInlineLimit = 0
+      imageLazyloadLimit = 9999
+    }
+  }
+[END]

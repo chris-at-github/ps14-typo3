@@ -1,0 +1,8 @@
+@mixin stylesheet-context($identifier, $list: $stylesheet-context) {
+    // @if $identifier == $stylesheet-context or $identifier == '*' {
+    //	@content;
+    // }
+    @if contains($list, $identifier) {
+        @content;
+    }
+}

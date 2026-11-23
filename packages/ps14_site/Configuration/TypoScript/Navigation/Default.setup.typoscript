@@ -10,4 +10,35 @@ navigation.default {
   partialRootPaths {
     20 = EXT:ps14_site/Resources/Private/Partials/
   }
+
+  // Bilder der Karten im Mega-Menue (Layouts card/largeCard)
+  settings {
+    picture {
+      width = 410
+      cropVariant = desktop
+      mediaQueries >
+      mediaQueries {
+        992 {
+          width = 410
+          cropVariant = desktop
+          mediaQuery = (min-width: 992px)
+        }
+
+        576 {
+          width = 290
+          cropVariant = mobile
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          width = 280
+          cropVariant = mobile
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+  }
 }
+
+// Hauptnavigation mit Mega-Menue (Templates/Navigation/Main.html), vier Ebenen fuer die mobile Navigation
+navigation.main.dataProcessing.10.levels = 4

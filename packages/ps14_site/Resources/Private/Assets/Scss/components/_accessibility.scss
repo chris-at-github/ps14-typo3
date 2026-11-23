@@ -1,0 +1,21 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Screenreader
+.accessibility-hidden {
+    @extend %accessibility-hidden;
+}
+
+.accessibility-hidden-focusable {
+    @extend %accessibility-hidden-focusable;
+}
+
+.accessibility-shortcut {
+    @extend %accessibility-hidden-focusable;
+
+    &:focus {
+        position: fixed;
+        top: 5px;
+        left: 5px; right: 5px;
+        z-index: 100;
+        background: #fff;
+    }
+}

@@ -1,0 +1,127 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$stylesheet-context: 'screen' !default;
+$ce-downloads-use-css: true !default;
+$ce-downloads-layout-default: true !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & Site
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// CSS
+@if $ce-downloads-use-css {
+    // -------------------------------------------------------------------------------------------------------------------
+    // Component
+    .download--item {
+        & {
+            position: relative;
+            padding: rem(15px 0 15px 50px);
+            cursor: pointer;
+
+            @extend %accessibility-focus-within;
+        }
+
+        &:hover, .focusable &:focus-within {
+            .download--item-link {
+                background-size: 100% 2px;
+                color: $theme-color-primary;
+            }
+
+            svg {
+                transform: translate(0, 3px);
+            }
+        }
+
+        svg {
+            position: absolute;
+            top: 20px; left: 1px;
+            width: 29px;
+            height: 28px;
+            fill: $theme-color-primary;
+            transition: transform $transition-duration;
+        }
+
+        .download--item-link {
+            & {
+                font-size: rem(20px);
+                color: $font-color-base;
+            }
+
+            &:hover, .focusable &:focus {
+                outline: 0;
+            }
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                inset: 0;
+                z-index: 10;
+            }
+        }
+
+        .download--item-description, .download--item-properties {
+            margin: rem(3px 0 0 0);
+            font-size: rem(16px);
+            color: $color-grey;
+        }
+
+        .download--item-description {
+            margin: rem(3px 0 0 0);
+        }
+
+        .download--item-properties {
+            & {
+                display: flex;
+                margin: rem(3px 0 0 0);
+                padding: 0;
+                list-style: none;
+            }
+
+            li {
+                display: block;
+                text-transform: uppercase;
+            }
+
+            li + li {
+                & {
+                    position: relative;
+                    margin-left: rem(12px);
+                    padding-left: rem(13px);
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 6px; left: 0;
+                    display: block;
+                    height: 12px;
+                    border-left: 1px solid $color-grey;
+                }
+            }
+        }
+    }
+
+    .downloads--container {
+        & {
+            margin: rem(-15px 0 0 0);
+            padding: 0;
+            list-style: none;
+        }
+
+        & > li {
+            & {
+                margin: 0;
+            }
+
+            & + li {
+                border-top: 1px solid $color-grey-light;
+            }
+        }
+    }
+}

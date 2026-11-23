@@ -1,20 +1,113 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2026-11-06T00:00:00Z" product-name="ps14_site" target-language="de">
-        <header/>
-        <body>
-            <trans-unit id="pages.navigation-layout.listing">
-                <target>Liste mit Icon und Beschreibung</target>
-            </trans-unit>
-            <trans-unit id="pages.navigation-layout.card">
-                <target>Karten</target>
-            </trans-unit>
-            <trans-unit id="backend-layout.footer.brand">
-                <target>Footer: Marke (Text, Social Media)</target>
-            </trans-unit>
-            <trans-unit id="backend-layout.footer.navigation">
-                <target>Footer: Navigation (eine Spalte je Element)</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-11-22T00:00:00Z" product-name="ps14_site" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="backend-layout.product.title">
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.product.main">
+        <target>Standard</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.product.product">
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.product.footer">
+        <target>Footer</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.footer.title">
+        <target>Footer</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.footer.middle">
+        <target>Mittlere Spalte</target>
+      </trans-unit>
+      <trans-unit id="backend-layout.footer.right">
+        <target>Rechte Spalte</target>
+      </trans-unit>
+      <trans-unit id="pages.layout.4">
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="pages.layout.5">
+        <target>Ohne Footer</target>
+      </trans-unit>
+      <trans-unit id="pages.navigation-layout.product">
+        <target>Produkt</target>
+      </trans-unit>
+      <trans-unit id="pages.navigation-layout.card">
+        <target>Card</target>
+      </trans-unit>
+      <trans-unit id="pages.navigation-layout.large-card">
+        <target>Large Card</target>
+      </trans-unit>
+      <trans-unit id="pages.disable-sticky">
+        <target>Sticky Elemente ausblenden</target>
+      </trans-unit>
+      <trans-unit id="pages.palette.sticky">
+        <target>Sticky Elemente</target>
+      </trans-unit>
+      <trans-unit id="pages.disable-sticky.pdf">
+        <target>PDF Druck ausblenden</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.1">
+        <target>Links mit Pfeilchen</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.teaser.2">
+        <target>Grauer Container / Transparente Bilder (Technologie)</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.teaser.1">
+        <target>Technologie</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.powermail.1">
+        <target>Newsletter</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.timeline.no-date">
+        <target>Ohne Datum</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.tabs.radio">
+        <target>Radio</target>
+      </trans-unit>
+      <trans-unit id="tt_content.layout.1">
+        <target>Eingerückt Rechts</target>
+      </trans-unit>
+      <trans-unit id="tt_content.layout.2">
+        <target>Volle Breite</target>
+      </trans-unit>
+      <trans-unit id="tt_content.layout.4">
+        <target>Weite Laufweite</target>
+      </trans-unit>
+      <trans-unit id="tt_content.frame-class.0">
+        <target>Default</target>
+      </trans-unit>
+      <trans-unit id="tt_content.frame-class.1">
+        <target>Grau</target>
+      </trans-unit>
+      <trans-unit id="tt_content.frame-class.2">
+        <target>Blau</target>
+      </trans-unit>
+      <trans-unit id="tt_content.frame-class.3">
+        <target>Dunkelblau</target>
+      </trans-unit>
+      <trans-unit id="tt_content.frame-class.4">
+        <target>Hellblau</target>
+      </trans-unit>
+      <trans-unit id="tt_content.wkhtmltopdf.enabled">
+        <target>Zeige einen PDF Printlink für die aktuelle Seite</target>
+      </trans-unit>
+      <trans-unit id="tt_content.wkhtmltopdf.title">
+        <target>PDF Link Titel</target>
+      </trans-unit>
+      <trans-unit id="flexform.sheet.main">
+        <target>Main</target>
+      </trans-unit>
+      <trans-unit id="menu-subpages.flexform.sorting">
+        <target>Sortierung</target>
+      </trans-unit>
+      <trans-unit id="menu-subpages.flexform.sorting.default">
+        <target>Default</target>
+      </trans-unit>
+      <trans-unit id="menu-subpages.flexform.sorting.title">
+        <target>Titel</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

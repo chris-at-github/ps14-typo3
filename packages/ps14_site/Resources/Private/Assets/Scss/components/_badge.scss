@@ -1,87 +1,16 @@
-// ---------------------------------------------------------------------------------------------------------------------
-// Variables
-:root {
-    --badge-height: 27px;
-    --badge-padding: 0 12px;
-    --badge-color: var(--color-font);
-    --badge-background: transparent;
-    --badge-interactive-color: var(--color-font);
-    --badge-interactive-background: var(--color-neutral-100);
-    --badge-focus-color-outline: var(--color-focus-outline);
-    --badge-icon-object-size: 20px;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Defintion
-@mixin badge-default {
-    min-height: var(--badge-height);
-    display: inline-flex;
-    align-items: center;
-    padding: var(--badge-padding);
-    font-size: var(--font-size-small);
-    color: var(--badge-color);
-    background: var(--badge-background);
-    border: 0;
-    border-radius: var(--border-radius-default);
-    text-decoration: none;
-    line-height: 1;
-}
-
-@mixin badge-default-interactive {
-    color: var(--badge-interactive-color);
-    background: var(--badge-interactive-background);
-    cursor: pointer;
-}
-
-@mixin badge-default-focus {
-    outline: 1px solid var(--badge-focus-color-outline);
-    outline-offset: 2px;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Classes
 .badge {
-    @include badge-default;
-
-    &:disabled,
-    &.is--disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-}
-
-.badge--interactive:hover {
-    @include badge-default-interactive;
-}
-
-.badge--interactive:focus-visible {
-    @include badge-default-interactive;
-    @include badge-default-focus;
+    display: inline-block;
+    padding: rem(0 5px);
+    line-height: $line-height-base;
+    font-size: rem(14px);
+    font-weight: $font-weight-bold;
+    border-radius: $border-radius-small;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-top: rem(-3px);
 }
 
 .badge--default {
-    --badge-background: var(--color-neutral-200);
-    --badge-interactive-color: var(--color-neutral-50);
-    --badge-interactive-background: var(--color-neutral-900);
-}
-
-.badge__icon {
-    width: var(--badge-icon-object-size);
-    height: var(--badge-icon-object-size);
-    flex-shrink: 0;
-}
-
-.badge--icon-prefix,
-.badge--icon-suffix {
-    gap: 4px;
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// Button Group
-.badge-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    list-style: none;
+    background: $theme-color-primary;
+    color: #fff;
 }

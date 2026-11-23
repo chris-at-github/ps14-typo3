@@ -1,38 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2026-11-11T00:00:00Z" product-name="ps14_site" target-language="de">
-        <header/>
-        <body>
-            <trans-unit id="page-header.logo">
-                <target>%s – zur Startseite</target>
-            </trans-unit>
-            <trans-unit id="page-header.main-navigation">
-                <target>Hauptnavigation</target>
-            </trans-unit>
-            <trans-unit id="page-header.meta-navigation">
-                <target>Service</target>
-            </trans-unit>
-            <trans-unit id="page-header.language-navigation">
-                <target>Sprache</target>
-            </trans-unit>
-            <trans-unit id="page-header.menu-open">
-                <target>Menü öffnen</target>
-            </trans-unit>
-            <trans-unit id="page-header.menu-close">
-                <target>Menü schließen</target>
-            </trans-unit>
-            <trans-unit id="main-menu.back">
-                <target>Zurück</target>
-            </trans-unit>
-            <trans-unit id="page-footer.title">
-                <target>Fußbereich</target>
-            </trans-unit>
-            <trans-unit id="page-footer.meta-navigation">
-                <target>Rechtliche Hinweise</target>
-            </trans-unit>
-            <trans-unit id="page-footer.consent-settings">
-                <target>Cookie-Einstellungen</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" datatype="plaintext" original="messages" date="2026-11-22T00:00:00Z" product-name="ps14_site" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="sticky.print-pdf">
+        <target>Als PDF drucken</target>
+      </trans-unit>
+      <trans-unit id="sticky.contact">
+        <target>Direktkontakt</target>
+      </trans-unit>
+      <trans-unit id="sticky.to-top">
+        <target>Zum Seitenanfang</target>
+      </trans-unit>
+      <trans-unit id="teaser.technology.title-prefix">
+        <target>Technologie</target>
+      </trans-unit>
+      <trans-unit id="teaser.technology.readmore">
+        <target>Zur Technologie</target>
+      </trans-unit>
+      <trans-unit id="filter.action.submit">
+        <target>Anwenden</target>
+      </trans-unit>
+      <trans-unit id="filter.action.reset">
+        <target>Alle Filter zurücksetzen</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

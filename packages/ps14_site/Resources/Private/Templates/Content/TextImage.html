@@ -1,0 +1,87 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default"/>
+    <f:section name="Header">
+        <f:if condition="{flexform.text.header.position} == 'above'">
+            <f:render partial="Header/All" arguments="{_all}"/>
+        </f:if>
+    </f:section>
+
+    <f:section name="Main">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Scss/modules/text-image.scss" />
+
+        <f:if condition="{gallery.position.noWrap}">
+            <f:then>
+                <f:render section="Columns" arguments="{_all}" />
+            </f:then>
+        </f:if>
+
+        <f:comment>
+            <!--
+            <div class="ce-text-image ce-{gallery.position.horizontal} ce-{gallery.position.vertical}{f:if(condition: gallery.position.noWrap, then: ' ce-nowrap')}">
+                <f:if condition="{gallery.position.vertical} != 'below'">
+                    <f:render partial="Media/Gallery" arguments="{_all}"/>
+                </f:if>
+
+                <div class="ce-bodytext">
+                    <f:if condition="{gallery.position.noWrap}">
+                        <f:render partial="Header/All" arguments="{_all}"/>
+                    </f:if>
+                    <f:format.html>{data.bodytext}</f:format.html>
+                </div>
+
+                <f:if condition="{gallery.position.vertical} == 'below'">
+                    <f:render partial="Media/Gallery" arguments="{_all}"/>
+                </f:if>
+            </div>
+            -->
+        </f:comment>
+
+    </f:section>
+
+    <f:section name="Columns">
+        <div class="ce-textmedia--container ce-textmedia--grid ce-textmedia--grid-{flexform.column} ce-textmedia--arrangement-{flexform.arrangement} ce-textmedia--media-position-{gallery.position.horizontal}">
+            <f:if condition="{flexform.arrangement} == 'after'">
+                <f:then><f:render section="Content" arguments="{_all}" /></f:then>
+                <f:else><div class="ce-textmedia--column ce-textmedia--media"><f:render section="Gallery" arguments="{_all}"/></div></f:else>
+            </f:if>
+
+            <f:if condition="{flexform.arrangement} == 'before'">
+                <f:else><div class="ce-textmedia--column ce-textmedia--media"><f:render section="Gallery" arguments="{_all}"/></div></f:else>
+                <f:then><f:render section="Content" arguments="{_all}" /></f:then>
+            </f:if>
+        </div>
+    </f:section>
+
+    <f:section name="Content">
+        <div class="ce-textmedia--column ce-textmedia--content {f:if(condition: flexform.text.align.vertical, then: 'ce-textmedia--content-vertical-{flexform.text.align.vertical}')}">
+        <f:if condition="{flexform.text.header.position} == 'aside'">
+            <f:render partial="Header/All" arguments="{_all}"/>
+        </f:if>
+
+        <f:format.html>{data.bodytext}</f:format.html>
+        </div>
+    </f:section>
+
+    <f:section name="Gallery">
+        <div class="ce-image--container {f:if(condition: flexform.image.align.horizontal, then: 'ce-image--container-horizontal-{flexform.image.align.horizontal}')} {f:if(condition: flexform.image.align.vertical, then: 'ce-image--container-vertical-{flexform.image.align.vertical}')}">
+            <f:for each="{gallery.rows}" as="row">
+                <f:for each="{row.columns}" as="column">
+                    <f:if condition="{column.media}">
+                        <f:render partial="Media/Rendering/Picture" arguments="{
+                            file: column.media,
+                            sizes: column.dimensions.mediaQueries,
+                            settings: {
+                                maxWidth: column.dimensions.width,
+                                maxHeight: column.dimensions.height,
+                            },
+                            cssClass: 'ce-image--item'
+                        }" />
+                    </f:if>
+                    <f:if condition="{column.media.description}">
+                        <div class="ce-image--caption image-caption">{column.media.description -> f:format.nl2br()}</div>
+                    </f:if>
+                </f:for>
+            </f:for>
+        </div>
+    </f:section>
+</html>

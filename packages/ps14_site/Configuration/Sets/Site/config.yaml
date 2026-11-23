@@ -1,0 +1,4 @@
+name: site/settings
+label: 'Site Settings (KIST + ESCHERICH)'
+dependencies:
+  - foundation/settings

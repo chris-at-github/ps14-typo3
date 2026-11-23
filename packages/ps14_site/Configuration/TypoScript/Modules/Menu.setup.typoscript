@@ -1,0 +1,20 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Menue ausgewaehlter Seiten: auch Seiten, die im Menue versteckt sind
+tt_content.menu_pages.dataProcessing.10 {
+  includeNotInMenu = 1
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Menue der Unterseiten: Sortierung aus der FlexForm (settings.sorting, Configuration/FlexForms/Modules/MenuSubpages.xml)
+tt_content.menu_subpages.dataProcessing.10 {
+  alternativeSortingField.cObject = CASE
+  alternativeSortingField.cObject {
+    key.data = flexform: pi_flexform:settings.sorting
+
+    default = TEXT
+    default.value =
+
+    title = TEXT
+    title.value = title
+  }
+}

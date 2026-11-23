@@ -1,0 +1,22 @@
+[data-loader='circle-side'] {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    animation: circle infinite 1s linear;
+    border: 2px solid $theme-color-primary;
+
+    // border-top-color: #fff;
+    border-right-color: #fff;
+    border-bottom-color: #fff;
+    border-radius: 100%;
+}
+
+@keyframes circle{
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

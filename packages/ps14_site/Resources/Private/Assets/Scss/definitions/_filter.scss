@@ -1,0 +1,139 @@
+%filter {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .filter-actions {
+        & {
+            margin-top: rem(20px);
+        }
+
+        .button {
+            margin-right: rem(5px);
+        }
+    }
+}
+
+%filter-actions--reset {
+    & {
+        position: relative;
+        padding: rem(5px 0 5px 30px);
+        border: 0;
+        background: transparent;
+        font-size: rem(17px);
+        color: $theme-color-primary;
+        cursor: pointer;
+    }
+
+    svg {
+        position: absolute;
+        top: rem(11px); left: rem(5px);
+        width: 14px;
+        height: 14px;
+        fill: $theme-color-primary;
+    }
+
+    &:disabled {
+        & {
+            color: $color-grey;
+            cursor: default;
+        }
+
+        svg {
+            fill: $color-grey;
+        }
+    }
+
+    &:hover:enabled, .focusable &:focus:enabled {
+        & {
+            color: $theme-color-hover;
+        }
+
+        svg {
+            fill: $theme-color-hover;
+        }
+    }
+}
+
+%filter--tree {
+    .filter-item--option-group-title {
+        font-weight: $font-weight-bold;
+    }
+
+    .filter-item--option {
+        & {
+            margin-top: rem(6px);
+            padding-top: rem(2px);
+            padding-bottom: rem(2px);
+            font-size: rem(17px);
+            font-weight: $font-weight-normal;
+            line-height: 1.2;
+            cursor: pointer;
+        }
+
+        input {
+            top: rem(5px); left: rem(2px);
+        }
+    }
+
+    .filter-item--option-group + .filter-item--option-group {
+        margin-top: rem(25px);
+    }
+}
+
+%filter--tree-radio {
+    .filter-item--option {
+        & {
+            display: flex;
+
+            @extend %form-field--radio;
+            @extend %form-field--radio-custom;
+        }
+
+        .filter-item--option-description {
+            & {
+                position: relative;
+                top: rem(-3px);
+                margin: rem(0 0 0 5px);
+                background: $color-grey-lighten;
+                width: 17px;
+                height: 17px;
+                border-radius: 50%;
+                transition: background $transition-duration;
+            }
+
+            svg {
+                position: absolute;
+                top: 4px; left: 4px;
+                width: 10px;
+                height: 10px;
+                fill: $font-color-base;
+                transition: fill $transition-duration;
+            }
+
+            &::before, &::after {
+                display: none;
+            }
+        }
+
+        &:hover, .focusable &:focus {
+            .filter-item--option-description {
+                & {
+                    background: $theme-color-primary;
+                }
+
+                svg {
+                    fill: #fff;
+                }
+            }
+        }
+    }
+}
+
+%filter--tree-checkbox {
+    .filter-item--option {
+        @extend %form-field--checkbox;
+    }
+}

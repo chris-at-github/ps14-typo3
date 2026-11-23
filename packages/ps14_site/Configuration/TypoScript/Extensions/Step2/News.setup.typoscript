@@ -1,0 +1,145 @@
+// Geparkt fuer Schritt 2: Pfade /assets/... werden mit der Extension auf Vite (vite:asset) umgestellt
+@import 'EXT:news/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:news/Configuration/TypoScript/SeoSitemap/setup.typoscript'
+@import 'EXT:ps14_kist_news/Configuration/TypoScript/setup.typoscript'
+
+plugin.tx_news {
+  view {
+    layoutRootPaths {
+      10 = EXT:ps14_kist_news/Resources/Private/Layouts/
+      20 = EXT:ps14_site/Resources/Private/Extensions/News/Layouts/
+    }
+
+    templateRootPaths {
+      10 = EXT:ps14_kist_news/Resources/Private/Templates/
+      20 = EXT:ps14_site/Resources/Private/Extensions/News/Templates/
+    }
+
+    partialRootPaths {
+      10 = EXT:ps14_kist_news/Resources/Private/Partials/
+      20 = EXT:ps14_site/Resources/Private/Extensions/News/Partials/
+      30 = EXT:ps14_foundation/Resources/Private/Partials/
+      40 = EXT:ps14_site/Resources/Private/Partials/
+    }
+  }
+
+  settings {
+    cssFile >
+    displayDummyIfNoMedia = 0
+    analytics >
+    detail {
+      // Detail-Plugin hat keinen Startpunkt -> ab news 13 wuerde jede News abgelehnt (bis news 11 wurde die Pruefung dann uebersprungen)
+      checkPidOfNewsRecord = 0
+      showSocialShareButtons = 0
+    }
+
+    list {
+      paginate.insertAbove = 0
+      paginate.insertBelow = 0
+    }
+
+    pictureSettings {
+      detail {
+        width = 720
+        cropVariant = default
+        mediaQueries {
+          992 {
+            maxWidth = 570
+            cropVariant = default
+            mediaQuery = (min-width: 992px)
+          }
+          768 {
+            width = 460
+            cropVariant = default
+            mediaQuery = (min-width: 768px)
+          }
+          576 {
+            width = 720
+            cropVariant = default
+            mediaQuery = (min-width: 576px)
+          }
+          0 {
+            width = 530
+            cropVariant = default
+            mediaQuery = (min-width: 0px)
+          }
+        }
+      }
+
+      card {
+        width = 530
+        cropVariant = thumbnail
+        mediaQueries {
+          576 {
+            width = 360
+            cropVariant = thumbnail
+            mediaQuery = (min-width: 576px)
+          }
+          0 {
+            width = 530
+            cropVariant = thumbnail
+            mediaQuery = (min-width: 0px)
+          }
+        }
+      }
+    }
+  }
+}
+
+tt_content.news_newsdetail {
+  dataProcessing {
+    200 = Ps14\Foundation\DataProcessing\ModuleProcessor
+    200 {
+      importCss {
+        10 = /assets/css/modules/news.css
+        20 = /assets/css/modules/downloads.css
+      }
+    }
+  }
+}
+
+plugin.tx_seo {
+  config {
+    xmlSitemap {
+      sitemaps {
+        news {
+          config {
+            excludedTypes = 1,2,3
+            additionalWhere = tx_kist_news_no_detail = 0
+          }
+        }
+      }
+    }
+  }
+}
+#plugin.tx_seo {
+#	config {
+#		xmlSitemap {
+#			sitemaps {
+#				news {
+#					provider = TYPO3\CMS\Seo\XmlSitemap\RecordsXmlSitemapDataProvider
+#					config {
+#						table = tx_news_domain_model_news
+#						sortField = sorting
+#						lastModifiedField = tstamp
+#						#						changeFreqField = news_changefreq
+#						#						priorityField = news_priority
+#						#						additionalWhere = AND (no_index = 0 OR no_follow = 0)
+#						pid = {$plugin.tx_news.settings.sitemap.startingpoint}
+#						url {
+#							pageId = {$plugin.tx_news.settings.sitemap.detailPid}
+#							fieldToParameterMap {
+#								uid = tx_news_pi1[news]
+#							}
+#
+#							additionalGetParameters {
+#								tx_news_pi1.controller = News
+#								tx_news_pi1.action = detail
+#							}
+#						}
+#					}
+#				}
+#			}
+#		}
+#	}
+#}

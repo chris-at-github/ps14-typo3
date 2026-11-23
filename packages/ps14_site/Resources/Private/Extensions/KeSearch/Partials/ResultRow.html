@@ -1,0 +1,13 @@
+<li class="search--result-list-item search--result-list-item-type-{resultrow.type}">
+    <h2 class="search--result-list-item-title"><f:format.raw>{resultrow.title}</f:format.raw></h2>
+
+    <f:if condition="{conf.showResultUrl}">
+        <i>{f:translate(key: 'LLL:EXT:ke_search/Resources/Private/Language/locallang_searchbox.xlf:label_resulturl')}:</i> <f:format.raw>{resultrow.url}</f:format.raw><br />
+    </f:if>
+
+    <f:if condition="{conf.showTags}">
+        <i>{f:translate(key: 'LLL:EXT:ke_search/Resources/Private/Language/locallang_searchbox.xlf:label_tags')}:</i> {resultrow.tags}<br />
+    </f:if>
+
+    <p class="search--result-list-item-teaser"><f:format.raw>{resultrow.teaser}</f:format.raw></p>
+</li>

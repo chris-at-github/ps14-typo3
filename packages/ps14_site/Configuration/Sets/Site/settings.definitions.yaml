@@ -1,0 +1,52 @@
+categories:
+  site:
+    label: 'KIST + ESCHERICH'
+  site.pages:
+    label: 'Pages'
+    parent: site
+  site.tracking:
+    label: 'Tracking'
+    parent: site
+
+settings:
+  pages.contact:
+    type: page
+    default: 0
+    label: 'Contact page'
+    description: 'Page id of the contact page (sticky bar)'
+    category: site.pages
+
+  pages.footerContent:
+    type: page
+    default: 0
+    label: 'Footer content page'
+    description: 'Page id of the page with the footer columns (colPos 0 middle, colPos 2 right)'
+    category: site.pages
+
+  pages.navigationContent:
+    type: page
+    default: 0
+    label: 'Navigation content page'
+    description: 'Page id of the page with the content elements of the main navigation (navigation content)'
+    category: site.pages
+
+  pages.individualProduct:
+    type: page
+    default: 0
+    label: 'Individual product page'
+    description: 'Page id of the page for individual products'
+    category: site.pages
+
+  tracking.etrackerSecureCode:
+    type: string
+    default: ''
+    label: 'etracker secure code'
+    description: 'Tracking is only rendered if set and not in the Development context'
+    category: site.tracking
+
+  tracking.etrackerProxyDomain:
+    type: string
+    default: ''
+    label: 'etracker proxy domain'
+    description: 'Domain of the etracker proxy without protocol, e.g. analytics.example.com'
+    category: site.tracking

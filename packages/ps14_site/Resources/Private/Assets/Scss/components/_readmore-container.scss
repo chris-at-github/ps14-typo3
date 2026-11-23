@@ -1,0 +1,65 @@
+.readmore-container {
+    .readmore-container--collapse {
+        transition: max-height $transition-duration;
+        overflow: hidden;
+    }
+
+    .readmore-container--toggle {
+        & {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: rem(96px);
+            transition-property: transform, height;
+            transition-duration: $transition-duration;
+            transform: scale(1);
+        }
+
+        button {
+            & {
+                position: relative;
+                padding-left: rem(66px);
+            }
+
+            svg {
+                position: absolute;
+                top: rem(19px); left: rem(30px);
+                width: 24px;
+                height: 14px;
+                fill: #fff;
+            }
+        }
+    }
+
+    &.readmore-container-open {
+        .readmore-container--toggle {
+            transform: scale(0);
+            height: 0;
+        }
+    }
+
+    &.readmore-container-opened {
+        .readmore-container--collapse {
+            overflow: visible;
+            max-height: inherit;
+        }
+
+        .readmore-container--toggle {
+            display: none;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Print
+@include stylesheet-context($stylesheet-context-print) {
+    .readmore-container {
+        .readmore-container--toggle {
+            display: none;
+        }
+
+        .card {
+            display: flex !important;
+        }
+    }
+}

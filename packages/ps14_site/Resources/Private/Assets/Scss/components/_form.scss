@@ -1,246 +1,33 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// Variables
-:root {
-    --form-field-height: 43px;
-    --form-field-padding: 0 8px;
-    --form-field-background: transparent;
-    --form-field-border-color: var(--color-neutral-300);
-    --form-field-focus-font-color: var(--color-neutral-900);
-    --form-field-interactive-border-color: var(--color-neutral-500);
-    --form-field-choice-active-background-color: var(--color-neutral-900);
-    --form-field-checkbox-active-icon-color: var(--color-neutral-100);
-    --form-field-checkbox-active-icon-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960' %3E%3Cpath d='M389-235 163-460l84-85 142 142 324-323 84 84-408 407Z'/%3E%3C/svg%3E");
-}
-
-// ---------------------------------------------------------------------------------------------------------------------
-// CSS Classes Default
-.form--default {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
+// Form Elements
 .form-item {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-item--disabled {
-    pointer-events: none;
+    @extend %form-item;
 }
 
 .form-label {
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-font);
+    @extend %form-label;
 }
 
-.form-label__required {
-    font-size: var(--font-size-small);
-    font-weight: var(--font-weight-normal);
-    color: var(--color-muted);
+.form-field {
+    @extend %form-field;
 }
 
-.form-field--default {
-    display: flex;
-    min-height: var(--form-field-height);
-    padding: var(--form-field-padding);
-    background: var(--form-field-background);
-    box-shadow: 0 0 0 1px var(--form-field-border-color);
-    border: 0;
-    border-radius: var(--border-radius-default);
-}
-
-.form-field--default:hover {
-    box-shadow: 0 0 0 1px var(--form-field-interactive-border-color);
-}
-
-.form-field--default:focus,
-.form-field--default:focus-visible {
-    color: var(--form-field-focus-font-color);
-    box-shadow: 0 0 0 2px var(--form-field-interactive-border-color);
-    outline: 0;
-}
-
-.is--focusable .form-field--default:focus,
-.is--focusable .form-field--default:focus-visible {
-    outline: 1px solid var(--color-focus-outline);
-    outline-offset: 4px;
-}
-
-.form-field--default:disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-.form-field--textarea {
-    --form-field-height: 93px;
-}
-
-.form-field--error {
-    --form-field-border-color: var(--color-error);
-    --form-field-interactive-border-color: var(--color-error);
-}
-
-.form-description {
-    margin: 0 0 4px;
-    font-size: var(--font-size-small);
-    color: var(--color-muted);
-}
-
-.form-error {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    list-style: none;
-    margin: 4px 0 0;
-    font-size: var(--font-size-small);
-    color: var(--color-error);
+.form-action {
+    @extend %form-action;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// CSS Checkbox | Radio
-.form-item--choice {
-    position: relative;
+// Button
+.button {
+    @extend %button;
 
-    .form-field {
-        position: absolute;
-        opacity: 0;
-
-        &:checked {
-            & + .form-label {
-                &::before {
-                    box-shadow: 0 0 0 1px var(--form-field-interactive-border-color);
-                }
-
-                &::after {
-                    display: block;
-                }
-            }
-        }
-
-        &:disabled {
-            & + .form-label {
-                cursor: not-allowed;
-                pointer-events: none;
-                opacity: 0.5;
-            }
-        }
-
-        .is--focusable &:focus,
-        .is--focusable &:focus-visible {
-            & + .form-label {
-                outline: 1px solid var(--color-focus-outline);
-                outline-offset: 4px;
-            }
-        }
-    }
-
-    .form-field--error {
-        & + .form-label {
-            --color-font: var(--color-error);
-            --form-field-border-color: var(--color-error);
-            --form-field-interactive-border-color: var(--color-error);
-        }
-    }
-
-    .form-label {
-        position: relative;
-        padding: 0 0 0 32px;
-
-        &::before, &::after {
-            position: absolute;
-            content: '';
-            display: block;
-        }
-
-        &::before {
-            top: 4px; left: 1px;
-            z-index: 10;
-            box-shadow: 0 0 0 1px var(--form-field-border-color);
-        }
-
-        &::after {
-            display: none;
-            top: 5px; left: 2px;
-            z-index: 20;
-        }
-
-        &:hover {
-            &::before {
-                box-shadow: 0 0 0 1px var(--form-field-interactive-border-color);
-            }
-        }
-    }
-}
-
-.form-item--checkbox {
-    .form-field {
-        &:checked {
-            & + .form-label {
-                &::before {
-                    background: var(--form-field-choice-active-background-color);
-                }
-            }
-        }
-    }
-
-    .form-label {
-        &::before {
-            width: 20px;
-            height: 20px;
-        }
-
-        &::after {
-            top: 5px; left: 2px;
-            mask-image: var(--form-field-checkbox-active-icon-image);
-            background: var(--form-field-checkbox-active-icon-color);
-            width: 18px;
-            height: 18px;
-        }
-    }
-}
-
-.form-item--radio {
-    .form-field {
-        &:checked {
-            & + .form-label {
-                &::after {
-                    background: var(--form-field-choice-active-background-color);
-                }
-            }
-        }
-    }
-
-    .form-label {
-        &::before {
-            border-radius: 50%;
-            width: 19px;
-            height: 19px;
-        }
-
-        &::after {
-            top: 7px; left: 4px;
-            border-radius: 50%;
-            width: 13px;
-            height: 13px;
-        }
+    &:disabled {
+        @extend %button--disabled;
     }
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Form Group
-.form-item-group {
-    border: 0;
-}
-
-.form-item-group__choices {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.form-item-group__choices--horizontal {
-    flex-flow: row wrap;
-    gap: 4px 24px;
+// Layouts
+.form--layout-0 {
+    @extend %form--layout-0;
 }

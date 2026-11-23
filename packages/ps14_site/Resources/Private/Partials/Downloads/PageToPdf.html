@@ -1,0 +1,10 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/download.svg" />
+        <a class="download--item-link" href="{f:cObject(typoscriptObjectPath: 'block.linkToPdf')}" target="_blank">{title}</a>
+
+        <ul class="download--item-properties">
+            <li class="download--item-property download--item-property-type">PDF</li>
+        </ul>
+    </f:section>
+</div>

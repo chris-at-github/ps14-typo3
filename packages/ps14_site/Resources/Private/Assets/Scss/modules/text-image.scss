@@ -1,0 +1,185 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Pre-Define Variables
+$iconfont-create-font-face: false !default;
+$iconfont-create-icon-class: false !default;
+$stylesheet-context: 'screen' !default;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Bootstrap & XNA
+@import '../functions';
+@import '../variables';
+@import '../mixins';
+@import '../definitions';
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Image
+.ce-image--item {
+    & {
+        margin: 0;
+    }
+
+    picture {
+        display: block;
+    }
+
+    img, svg {
+        @extend %image-responsive;
+    }
+}
+
+.ce-image--container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: rem(8px);
+}
+
+.ce-image--container-horizontal-center {
+    justify-content: center;
+}
+
+.ce-image--container-horizontal-right {
+    justify-content: flex-end;
+}
+
+.ce-image--container-vertical-center {
+    justify-content: center;
+}
+
+.ce-image--container-vertical-bottom {
+    justify-content: end;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Header
+.ce-header--layout-2, .ce-header--layout-3 {
+    & + .ce-textmedia--container {
+        margin-top: $spacing-small;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Columns
+.ce-textmedia--grid {
+    & {
+        display: flex;
+        flex-flow: row wrap;
+        margin-left: -15px;
+        margin-right: -15px;
+        gap: $spacing-default;
+    }
+
+    .ce-textmedia--content {
+        & > *:first-child, .ce-header > *:first-child {
+            margin-top: 0;
+        }
+
+        &-vertical-center {
+            align-self: center;
+        }
+    }
+
+    .ce-textmedia--content + .ce-textmedia--media {
+        margin-top: $spacing-default;
+    }
+}
+
+.ce-textmedia--column {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// >= 768px
+@include media-breakpoint-up(md) {
+    .ce-textmedia--grid {
+        & {
+            gap: 0;
+        }
+
+        &.ce-textmedia--arrangement-after.ce-textmedia--media-position-left,
+        &.ce-textmedia--arrangement-before.ce-textmedia--media-position-right {
+            flex-direction: row-reverse;
+        }
+
+        .ce-textmedia--content + .ce-textmedia--media {
+            margin-top: 0;
+        }
+
+        &.ce-textmedia--media-position-left {
+            .ce-textmedia--content {
+                padding-left: 35px; // $spacing-default + 15px Grid
+            }
+        }
+
+        &.ce-textmedia--media-position-right {
+            .ce-textmedia--content {
+                padding-right: 35px; // $spacing-default + 15px Grid
+            }
+        }
+    }
+
+    .ce-textmedia--grid-33-66 {
+        &.ce-textmedia--arrangement-before {
+            .ce-textmedia--column:nth-child(1) {
+                width: percentage(4 / 12);
+            }
+
+            .ce-textmedia--column:nth-child(2) {
+                width: percentage(8 / 12);
+            }
+        }
+
+        &.ce-textmedia--arrangement-after {
+            .ce-textmedia--column:nth-child(1) {
+                width: percentage(8 / 12);
+            }
+
+            .ce-textmedia--column:nth-child(2) {
+                width: percentage(4 / 12);
+            }
+        }
+    }
+
+    .ce-textmedia--grid-50-50 {
+        .ce-textmedia--column:nth-child(1),
+        .ce-textmedia--column:nth-child(2) {
+            width: percentage(6 / 12);
+        }
+    }
+
+    .ce-textmedia--grid-66-33 {
+        &.ce-textmedia--arrangement-before {
+            .ce-textmedia--column:nth-child(1) {
+                width: percentage(4 / 12);
+            }
+
+            .ce-textmedia--column:nth-child(2) {
+                width: percentage(8 / 12);
+            }
+        }
+
+        &.ce-textmedia--arrangement-after {
+            .ce-textmedia--column:nth-child(1) {
+                width: percentage(8 / 12);
+            }
+
+            .ce-textmedia--column:nth-child(2) {
+                width: percentage(4 / 12);
+            }
+        }
+    }
+}
+
+@include stylesheet-context($stylesheet-context-print) {
+    .ce-textmedia {
+        page-break-inside: avoid;
+    }
+}
+
+@include stylesheet-context($stylesheet-context-pdf) {
+    .ce-textmedia--grid {
+        display: -webkit-box;
+    }
+}

@@ -1,0 +1,26 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Fonts
+// @see: https://google-webfonts-helper.herokuapp.com/fonts/nunito?subsets=latin
+// @see: https://www.cdnfonts.com/carlito.font
+
+// Carlito Regular
+@font-face {
+    font-family: Carlito;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Carlito'),
+        url('EXT:ps14_site/Resources/Public/Fonts/carlito-regular.woff2') format('woff2'),
+        url('EXT:ps14_site/Resources/Public/Fonts/carlito-regular.woff') format('woff');
+}
+
+// Carlito Bold
+@font-face {
+    font-family: Carlito;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('Carlito '), local('Nunito-SemiBold'),
+        url('EXT:ps14_site/Resources/Public/Fonts/carlito-bold.woff2') format('woff2'),
+        url('EXT:ps14_site/Resources/Public/Fonts/carlito-bold.woff') format('woff');
+}

@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:section name="Container">
+    <div class="sticky--container">
+        <f:if condition="{data.tx_site_disable_sticky_pdf} == 0">
+            <f:render section="PrintPdf" arguments="{_all}" />
+        </f:if>
+
+        <f:if condition="{site.settings.pages.contact}">
+            <f:render section="Contact" arguments="{_all}" />
+        </f:if>
+        <f:render section="ToTop" arguments="{_all}" />
+    </div>
+</f:section>
+
+<f:section name="PrintPdf">
+    <div class="sticky--element sticky--element-print-pdf">
+        <a rel="nofollow" class="sticky--icon" aria-label="{f:translate(key: 'sticky.print-pdf', domain: 'ps14_site.messages')}" href="{f:cObject(typoscriptObjectPath: 'block.linkToPdf')}" target="_blank">
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/print-pdf.svg" />
+        </a>
+    </div>
+</f:section>
+
+<f:section name="Contact">
+    <div class="sticky--element sticky--element-contact">
+        <a class="sticky--icon" aria-label="{f:translate(key: 'sticky.contact', domain: 'ps14_site.messages')}" data-target="#contact-search--form" href="{f:uri.page(pageUid: site.settings.pages.contact)}">
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/contact.svg" />
+        </a>
+    </div>
+</f:section>
+
+<f:section name="ToTop">
+    <div class="sticky--element sticky--element-totop">
+        <button class="sticky--icon" aria-label="{f:translate(key: 'sticky.to-top', domain: 'ps14_site.messages')}">
+            <fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/arrow-top.svg" />
+        </button>
+    </div>
+</f:section>
+</html>

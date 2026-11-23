@@ -1,0 +1,18 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Text & Bild: Bildausschnitte wie in KIST v12 aus der Crop-Variante "default"
+plugin.tx_ps14foundation_textimage.settings.pictureMediaQueries {
+  intext {
+    992.cropVariant = default
+    768.cropVariant = default
+    576.cropVariant = default
+    0.cropVariant = default
+  }
+
+  maximal {
+    1200.cropVariant = default
+    768.cropVariant = default
+    0.cropVariant = default
+  }
+}
+
+module.tx_ps14foundation_textimage.settings < plugin.tx_ps14foundation_textimage.settings

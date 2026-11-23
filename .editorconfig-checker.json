@@ -10,7 +10,8 @@
         "package-lock\\.json$",
         "\\.(png|jpe?g|gif|ico|webp|woff2?|ttf|eot|otf|pdf|zip)$",
         "^\\.ddev/",
-        "^LICENSE$"
+        "^LICENSE$",
+        "/Resources/Private/Assets/(Scss|Js)/vendors/bootstrap/"
     ],
     "Disable": {
         "MaxLineLength": true
