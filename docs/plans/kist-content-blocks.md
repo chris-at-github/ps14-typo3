@@ -77,12 +77,20 @@ Nicht Teil dieses Plans:
 7. **Wizards** Elements → Collection für die generischen Module in
    `ps14_migration`; Marker und Firmenwerte in `ps14_site`.
 8. **Druckfelder** (`print_break`, `print_visibility`) nur in KIST:
-   `tx_site_print_*` per TCA-Override in `ps14_site`, Werte per Post-SQL.
+   `tx_site_print_*` per TCA-Override in `ps14_site`, Werte per Wizard
+   `ps14Site_accordionItemPrintMigration` (kein SQL: jede Feldänderung
+   gegenüber v12 bekommt einen Upgrade-Wizard). Damit die Wizards aus
+   `ps14_migration` vor denen aus `ps14_site` laufen, schlägt `ps14_site`
+   das Paket per `suggest` vor (Ladereihenfolge).
 9. **Rendering**: `lib.contentElement` (Layout `Default`) mit
    `record-transformation` (`{record}`), kein `frontend.html` des Content
    Blocks; Felder aus foundation-TCA-Overrides (z. B.
    `tx_foundation_elements_header`) werden per TCA-Override in die Palette
    gehängt, da Content Blocks vor den Overrides kompiliert.
+10. **Basics** in `ps14_modules` für alle Content Blocks (auch `ps14_site`):
+    `Ps14/Header` (Palette wie Core `headers`) und `Ps14/Appearance`
+    (Erscheinungsbild, Links, Kategorien). foundation-Felder kommen per
+    `addFieldsToPalette` in `<CType>_headers` / `<CType>_links_palette`.
 
 ### Offene Punkte
 
