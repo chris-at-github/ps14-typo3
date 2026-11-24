@@ -72,9 +72,7 @@ Nicht Teil dieses Plans:
 
 ### Offene Punkte
 
-1. Repository `ps14-modules` auf GitHub (legst du an; lokal bereits per
-   `git init` unter `packages/ps14_modules`).
-2. Folgeplan für Hero, Downloads, Textmedia, Teaser.
+1. Folgeplan für Hero, Downloads, Textmedia, Teaser.
 
 ### Risks
 
@@ -116,4 +114,6 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | Task | Stand | Commit |
 |---|---|---|
 | 1 Plan | erledigt 2026-11-24 (Entscheidungen 1–5) | `6235e67` |
-| 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` (Branch `feature/skeleton`, lokal unter `packages/ps14_modules`, noch nicht installiert) | KIST `cf7cac5`, Paket `3019619` |
+| 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` auf `main` (lokal unter `packages/ps14_modules`, Repository `ps14-modules` angelegt, in KIST noch nicht installiert) | KIST `cf7cac5`, Paket `831081d` |
+| 3 Akkordeon | nächster Schritt (freigegeben nach `/clear`): `ps14_modules` in KIST installieren (`ddev composer require 'ps14/ps14_modules:^14.0@dev'`), Content Block mit `typeName: ps14_accordion`, Template-Override in `ps14_site`, Wizard Elements → Collection | – |
+
