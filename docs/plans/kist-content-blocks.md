@@ -116,3 +116,4 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | Task | Stand | Commit |
 |---|---|---|
 | 1 Plan | erledigt 2026-11-24 (Entscheidungen 1–5) | `6235e67` |
+| 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` (Branch `feature/skeleton`, lokal unter `packages/ps14_modules`, noch nicht installiert) | KIST `cf7cac5`, Paket `3019619` |
