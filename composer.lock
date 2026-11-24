@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3252ce683f6872e1c24748ad62b712c3",
+    "content-hash": "0f2a9047da6ca27a6427a8d860c12d8c",
     "packages": [
         {
             "name": "b13/container",
@@ -942,6 +942,95 @@
                 "source": "https://github.com/googleapis/php-jwt/tree/v7.2.1"
             },
             "time": "2026-09-28T17:51:46+00:00"
+        },
+        {
+            "name": "friendsoftypo3/content-blocks",
+            "version": "2.4.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfTYPO3/content-blocks.git",
+                "reference": "95cd2c8b08ad8afd184142f96bba094c0d9652a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfTYPO3/content-blocks/zipball/95cd2c8b08ad8afd184142f96bba094c0d9652a2",
+                "reference": "95cd2c8b08ad8afd184142f96bba094c0d9652a2",
+                "shasum": ""
+            },
+            "require": {
+                "opis/json-schema": "^2.6",
+                "php": "^8.2",
+                "symfony/console": "^7.4",
+                "symfony/dependency-injection": "^7.4",
+                "symfony/filesystem": "^7.4",
+                "symfony/finder": "^7.4",
+                "symfony/var-exporter": "^7.4 || ^8.0",
+                "symfony/yaml": "^7.4",
+                "typo3/cms-backend": "^14.3.7",
+                "typo3/cms-core": "^14.3.7",
+                "typo3/cms-fluid": "^14.3.7",
+                "typo3/cms-frontend": "^14.3.7"
+            },
+            "replace": {
+                "contentblocks/content-blocks": "*"
+            },
+            "require-dev": {
+                "bnf/phpstan-psr-container": "^1.1",
+                "contentblocks/examples": "@dev",
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "typo3/cms-extbase": "^14.3.7",
+                "typo3/cms-extensionmanager": "^14.3.7",
+                "typo3/cms-filelist": "^14.3.7",
+                "typo3/cms-install": "^14.3.7",
+                "typo3/cms-lowlevel": "^14.3.7",
+                "typo3/cms-rte-ckeditor": "^14.3.7",
+                "typo3/cms-tstemplate": "^14.3.7",
+                "typo3/cms-workspaces": "^14.3.7",
+                "typo3/coding-standards": "^0.9",
+                "typo3/testing-framework": "^9.5"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "Package": {
+                        "serviceProvider": "TYPO3\\CMS\\ContentBlocks\\ServiceProvider",
+                        "providesPackages": {
+                            "opis/json-schema": "",
+                            "symfony/var-exporter": ""
+                        }
+                    },
+                    "version": "2.4.10",
+                    "web-dir": ".Build/public",
+                    "extension-key": "content_blocks"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\ContentBlocks\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Content Types Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 CMS Content Blocks - Content Types API | Define reusable components via YAML",
+            "homepage": "https://typo3.org",
+            "support": {
+                "chat": "https://typo3.slack.com/archives/C8Z2UM50Q",
+                "docs": "https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/",
+                "issues": "https://github.com/FriendsOfTYPO3/content-blocks/issues",
+                "source": "https://github.com/FriendsOfTYPO3/content-blocks"
+            },
+            "time": "2026-09-22T14:35:10+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

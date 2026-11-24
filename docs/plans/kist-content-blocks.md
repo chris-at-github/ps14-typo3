@@ -51,23 +51,30 @@ Nicht Teil dieses Plans:
 - Module ohne Elements (Hero, Downloads, Textmedia, Teaser), Produktkatalog.
 - Entfernen der Elements-Tabelle (erst nach Go-Live-Migration, P9).
 
-### Key Decisions (offen, siehe unten)
+### Key Decisions (2026-11-24)
 
-### Offene Punkte (vor Task 2 klären)
+1. **Ablage**: neue Extension `ps14_modules` (eigenes Repository
+   `ps14-modules`, gemeinsames Paket wie ps14_container) für die generischen
+   Module Akkordeon, Tabs und Timeline. Marker und Firmenwerte als Content
+   Blocks in `ps14_site`. KIST behält das alte Markup über Template-Overrides
+   in `ps14_site` (höherer `templateRootPaths`-Key).
+2. **Verschachtelte Inhaltselemente** (Akkordeon/Tabs, Typ `records`):
+   Collection mit Kind-Inhaltselementen (`tt_content` mit Elternverweis wie
+   bisher), kein Umbau auf b13/container.
+3. **Installation** von `friendsoftypo3/content-blocks` per Composer freigegeben.
+4. **Beispielseiten** unter „Modules“ [11], per MCP, sobald die Content Blocks
+   existieren. Varianten: Akkordeon Text + verschachtelt (ein Item initial
+   offen); Tabs default + radio; Timeline mit Datum + `no-date`; Marker in den
+   Layouts Default, ImageAbove, ImageAsideSlider; Firmenwerte mit allen
+   Farbschemata.
+5. CTypes bleiben (`ps14_accordion`, `ps14_tabs`, `ps14_timeline`,
+   `ps14_marker`, `ps14_kist_values`), per `typeName` im Content Block.
 
-1. **Ablage der Content Blocks**: alle in `ps14_site` (KIST-spezifisch, schnell)
-   oder generische Module (Akkordeon, Tabs, Timeline) in einem gemeinsamen Paket
-   (z. B. `ps14_component` oder eigenes), KIST-Module (Marker, Firmenwerte) in
-   `ps14_site`?
-2. **Verschachtelte Inhaltselemente** (Akkordeon/Tabs, Typ `records`): Collection
-   mit Kind-Inhaltselementen (`tt_content` mit Elternverweis, wie bisher
-   colPos 5628) oder Umbau auf b13/container (Spalte pro Item)?
-3. **Installation** `ddev composer require friendsoftypo3/content-blocks` (nicht in
-   den erlaubten Befehlen).
-4. **Beispielseiten**: unter „Modules“ [11]; anlegen erst, wenn die Content Blocks
-   existieren (die alten CTypes sind in v14 nicht registriert, MCP kann sie nicht
-   anlegen). Varianten je Modul abstimmen (CLAUDE.md, Example Content).
-5. **Folgeplan** für Hero, Downloads, Textmedia, Teaser?
+### Offene Punkte
+
+1. Repository `ps14-modules` auf GitHub (legst du an; lokal bereits per
+   `git init` unter `packages/ps14_modules`).
+2. Folgeplan für Hero, Downloads, Textmedia, Teaser.
 
 ### Risks
 
@@ -108,4 +115,4 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 
 | Task | Stand | Commit |
 |---|---|---|
-| 1 Plan | Entwurf, offene Punkte 1–5 | – |
+| 1 Plan | erledigt 2026-11-24 (Entscheidungen 1–5) | `6235e67` |

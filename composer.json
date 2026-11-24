@@ -30,6 +30,7 @@
     },
     "require": {
         "b13/container": "^4.1",
+        "friendsoftypo3/content-blocks": "^2.4",
         "helhum/dotenv-connector": "^3.0",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
