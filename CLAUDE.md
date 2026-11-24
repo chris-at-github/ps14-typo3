@@ -46,6 +46,7 @@ The following commands are explicitly allowed (no confirmation needed):
 | `bin/create-system.sh …` | Neues Kundenprojekt aus der Vorlage anlegen (Skill `creating-typo3-projects`), erst nach bestätigter Zusammenfassung der Projektdaten |
 | `ddev exec bin/update-system.sh` | Lokal `extension:setup`, `upgrade:run`, `cache:flush`, `cache:warmup` |
 | `ddev exec vendor/bin/dep build:artifact <stage>` | Deploy-Artefakt lokal bauen (`temp/deploy/package.tgz`), ohne Server-Zugriff |
+| `ddev exec vendor/bin/ps14-migrate` | Datenübernahme aus einem Altprojekt (Paket `ps14/ps14_migration`, nur während einer Migration installiert): Pre-SQL, Schema-Update, Upgrade-Wizards, Post-SQL. Nur lokal auf einem frisch importierten Dump |
 
 Any other script (destructive DB operations, deployments, etc.) still requires
 confirmation.
