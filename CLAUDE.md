@@ -143,7 +143,7 @@ zusätzlich die jeweilige Komponenten-Spezifikation unter
 `.claude/rules/frontend/components/` lesen.
 Regeln für Fluid-Komponenten, Content-Templates, Übersetzungen und
 Fremd-Extensions liegen in `.claude/rules/typo3/` (`fluid-components.md`,
-`content-templates.md`, `translations.md`, `third-party-extensions.md`, `own-extensions.md`).
+`content-templates.md`, `translations.md`, `third-party-extensions.md`, `own-extensions.md`, `content-blocks.md`).
 
 # File and Directory Structure
 Ensure strict adherence to the directory structure of a modern TYPO3 extension when generating code:
