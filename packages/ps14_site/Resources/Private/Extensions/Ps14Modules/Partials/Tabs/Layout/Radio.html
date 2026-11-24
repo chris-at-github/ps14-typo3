@@ -1,0 +1,35 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{record.ps14_tabs_items}">
+            <div class="tabs--radio">
+                <ul class="tab--container tabs__container--radio nav" role="tablist">
+                    <f:for each="{record.ps14_tabs_items}" as="item">
+                        <li role="presentation">
+                            <button
+                                class="tabs__button tabs__button--radio {f:if(condition: item.thumbnail, then: 'tabs__button--icon')} {f:if(condition: item.active, then: 'active')}"
+                                id="tab--{item.uid}"
+                                data-bs-toggle="tab"
+                                data-bs-target="#tab-panel--{item.uid}"
+                                type="button"
+                                role="tab"
+                                aria-controls="#tab-panel--{item.uid}"
+                                aria-selected="{f:if(condition: item.active, then: 'true', else: 'false')}">
+                                <f:if condition="{item.thumbnail}">
+                                    <fo:svg.inline source="{item.thumbnail.publicUrl}" class="tabs__button-icon" />
+                                </f:if>
+                                <span class="tabs__button-title">{item.title}</span>
+                                <span class="tabs__button-indicator"></span>
+                            </button>
+                        </li>
+                    </f:for>
+                </ul>
+
+                <div class="tab--content">
+                    <f:for each="{record.ps14_tabs_items}" as="item">
+                        <f:render partial="Tabs/Listing/Panel" section="Main" arguments="{item: item}" />
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
+    </f:section>
+</div>

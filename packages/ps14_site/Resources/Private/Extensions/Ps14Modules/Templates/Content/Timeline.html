@@ -1,0 +1,15 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+    <f:section name="Main">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Scss/modules/timeline.scss" />
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Js/modules/timeline.js" />
+
+        <f:if condition="{data.bodytext}">
+            <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+        </f:if>
+
+        <f:if condition="{record.ps14_timeline_items}">
+            <f:render partial="Timeline/Elements" section="Main" arguments="{data: data, items: record.ps14_timeline_items, settings: settings}" />
+        </f:if>
+    </f:section>
+</html>

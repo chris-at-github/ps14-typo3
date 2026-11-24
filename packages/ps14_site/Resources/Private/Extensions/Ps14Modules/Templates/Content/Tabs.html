@@ -1,0 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+    <f:section name="Main">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Js/components/tab.js" />
+
+        <f:render partial="Tabs/Layout/{data.tx_foundation_variant -> fo:format.pascalCase()}" section="Main" optional="{true}" arguments="{_all}">
+            <f:render partial="Tabs/Layout/Default" section="Main" arguments="{_all}" />
+        </f:render>
+    </f:section>
+</html>

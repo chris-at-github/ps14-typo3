@@ -1,0 +1,25 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{data.bodytext}">
+            <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+        </f:if>
+
+        <f:if condition="{record.ps14_tabs_items}">
+            <div class="tabs">
+                <ul class="tab--container nav" role="tablist">
+                    <f:for each="{record.ps14_tabs_items}" as="item">
+                        <li role="presentation">
+                            <button class="{f:if(condition: item.active, then: 'active')}" id="tab--{item.uid}" data-bs-toggle="tab" data-bs-target="#tab-panel--{item.uid}" type="button" role="tab" aria-controls="#tab-panel--{item.uid}" aria-selected="{f:if(condition: item.active, then: 'true', else: 'false')}">{item.title}</button>
+                        </li>
+                    </f:for>
+                </ul>
+
+                <div class="tab--content">
+                    <f:for each="{record.ps14_tabs_items}" as="item">
+                        <f:render partial="Tabs/Listing/Panel" section="Main" arguments="{item: item}" />
+                    </f:for>
+                </div>
+            </div>
+        </f:if>
+    </f:section>
+</div>
