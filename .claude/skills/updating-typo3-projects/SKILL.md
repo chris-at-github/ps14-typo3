@@ -139,6 +139,15 @@ runs on every deploy.
 - Deploying the update (e.g. to staging) only on the user's instruction
   (`CLAUDE.md`, section Deployment).
 
+## Data takeover from an older TYPO3 version
+
+Not part of this skill. Projects coming from an older TYPO3 version (v10–v13)
+get their data with the package `ps14/ps14_migration` (plan
+`docs/plans/migration-tool.md`): import a fresh dump (e.g. `ddev pull
+<provider>`), then `ddev exec vendor/bin/ps14-migrate`. Never run
+`extension:setup` on an old database before that: it changes columns that
+`ps14-migrate` deliberately protects (`MIGRATION_SKIP_COLUMNS`).
+
 ## To be refined during the next migration
 
 - Updating shared packages (`ddev composer update 'ps14/*'`, needs
