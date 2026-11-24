@@ -1,0 +1,12 @@
+name: ps14/marker-item
+table: tx_site_marker_item
+labelField: title
+prefixFields: false
+fields:
+  - identifier: title
+    type: Text
+    required: true
+  - identifier: description
+    type: Textarea
+    enableRichtext: true
+    richtextConfiguration: ps14Default

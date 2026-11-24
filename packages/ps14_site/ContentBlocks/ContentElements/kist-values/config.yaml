@@ -1,0 +1,23 @@
+name: ps14/kist-values
+typeName: ps14_kist_values
+vendorPrefix: tx_site
+group: default
+basics:
+  - Ps14/Appearance
+fields:
+  - identifier: Ps14/Header
+    type: Basic
+  - identifier: bodytext
+    useExistingField: true
+    enableRichtext: true
+    richtextConfiguration: ps14Default
+  - identifier: items
+    type: Collection
+    foreign_table: tx_site_kist_values_item
+    minitems: 1
+    appearance:
+      collapseAll: true
+      levelLinksPosition: bottom
+      showAllLocalizationLink: true
+      showSynchronizationLink: true
+      showPossibleLocalizationRecords: true

@@ -1,8 +1,8 @@
 <div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:section name="Main">
         <ol class="marker--legend">
-            <f:for each="{elements}" as="element" iteration="iterator">
-                <f:render section="Item" arguments="{data: data, element: element.data, iterator: iterator, headerLayout: data.tx_foundation_elements_header}" />
+            <f:for each="{record.tx_site_marker_items}" as="element" iteration="iterator">
+                <f:render section="Item" arguments="{data: data, element: element, iterator: iterator, headerLayout: data.tx_foundation_elements_header}" />
             </f:for>
         </ol>
     </f:section>

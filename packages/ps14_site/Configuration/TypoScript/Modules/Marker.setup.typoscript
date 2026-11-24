@@ -1,0 +1,73 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Marker (Content Block ps14/marker): Bild mit nummerierter Legende
+tt_content.ps14_marker =< lib.contentElement
+tt_content.ps14_marker {
+  templateName = Marker
+
+  dataProcessing {
+    10 = record-transformation
+    10.as = record
+  }
+
+  settings.images {
+    aside {
+      width = 1000
+      cropVariant = default
+      mediaQueries {
+        992 {
+          width = 750
+          cropVariant = desktop
+          mediaQuery = (min-width: 992px)
+        }
+
+        768 {
+          width = 935
+          cropVariant = mobile
+          mediaQuery = (min-width: 768px)
+        }
+
+        576 {
+          width = 740
+          cropVariant = mobile
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          width = 545
+          cropVariant = mobile
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+
+    above {
+      width = 1140
+      cropVariant = default
+      mediaQueries {
+        992 {
+          width = 1140
+          cropVariant = desktop
+          mediaQuery = (min-width: 992px)
+        }
+
+        768 {
+          width = 935
+          cropVariant = desktop
+          mediaQuery = (min-width: 768px)
+        }
+
+        576 {
+          width = 740
+          cropVariant = mobile
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          width = 545
+          cropVariant = mobile
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+  }
+}

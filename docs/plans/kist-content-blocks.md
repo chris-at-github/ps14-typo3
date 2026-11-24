@@ -91,6 +91,18 @@ Nicht Teil dieses Plans:
     `Ps14/Header` (Palette wie Core `headers`) und `Ps14/Appearance`
     (Erscheinungsbild, Links, Kategorien). foundation-Felder kommen per
     `addFieldsToPalette` in `<CType>_headers` / `<CType>_links_palette`.
+11. **Generische Wizards** erben von `AbstractElementsMigration` (Items mit
+    gleicher UID, Dateireferenzen umhängen, Zähler, verschachtelte Elemente).
+    `ps14_site` hat eine Kopie der Basisklasse, weil `ps14_migration` nur
+    require-dev ist (Elternklasse fehlt sonst beim Deployment).
+12. **Content Blocks in `ps14_site`** mit `vendorPrefix: tx_site` (Felder und
+    Paletten `tx_site_<name>_*`, Bindestriche im Namen entfallen:
+    `tx_site_kistvalues_items`); Item-Tabellen `tx_site_marker_item`,
+    `tx_site_kist_values_item`. Templates direkt in `ps14_site`
+    (`lib.contentElement`, Key 110).
+13. **Overrides für `ps14_modules`** in `ps14_site` auf Key **120**: Key 110
+    belegt `ps14_site` schon über `lib.contentElement` (sonst fehlen die
+    KIST-Partials wie `Header/All`, `Content/Bodytext`).
 
 ### Offene Punkte
 
@@ -98,7 +110,15 @@ Nicht Teil dieses Plans:
 2. HTTP 500 (`ModuleProcessor::__construct()` ohne Argument) auf
    `/unternehmen/tech-center/…`, `/unternehmen/ueber-kist-escherich`,
    `/produkte/individuelles-produkt` — bestand schon vor Task 3 (Log
-   2026-11-23), Ursache offen.
+   2026-11-23), Ursache offen. Stand 2026-11-24: nicht der Hero (Platzhalter
+   ändert nichts); ein Element der Hauptspalte (`block.contentMain`) erzeugt
+   `ModuleProcessor` per `makeInstance` ohne Container. Betrifft die
+   Timeline-Seiten, daher Timeline im Frontend ungeprüft.
+4. Nicht übernommen (in v12 nicht im Formular, Daten veraltet): Timeline
+   `files` (4 Referenzen) und `content` (2 Text & Bild); bleiben an der
+   Elements-Tabelle.
+5. Generische Templates in `ps14_modules` (Tabs, Timeline, Akkordeon) sind im
+   Frontend ungeprüft, da KIST sie überschreibt (Beispielseiten Task 8).
 3. Release `ps14_modules` (Push, Tag, VCS-Eintrag, `SHARED_PACKAGES`);
    erst dann `composer.json`/`composer.lock` committen.
 
@@ -144,4 +164,9 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | 1 Plan | erledigt 2026-11-24 (Entscheidungen 1–5) | `6235e67` |
 | 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` auf `main` (lokal unter `packages/ps14_modules`, Repository `ps14-modules` angelegt, in KIST noch nicht installiert) | KIST `cf7cac5`, Paket `831081d` |
 | 3 Akkordeon | erledigt 2026-11-24: Content Block in `ps14_modules` (`feature/accordion`), Wizard in `ps14_migration` (`feature/accordion-wizard`), KIST-Markup in `ps14_site`. Frischer Dump + `ps14-migrate`: 144 Items (de 74 / en 70) wie vorher, 69 verschachtelte Elemente verknüpft, 11 Seiten je Sprache HTTP 200 mit gleicher Item-Anzahl (Marker darin erst mit Task 6). `ps14_modules` lokal per Path installiert, `composer.json`/`.lock` noch nicht committet | siehe Commits |
+| 4 Tabs | erledigt 2026-11-24: 8 Items (de/en je 4, Typ `content`), 8 SVG-Icons, 8 verschachtelte Powermail-Elemente; Variante `radio` mit KIST-Markup, Seite `/service-support` de/en HTTP 200 | siehe Commits |
+| 5 Timeline | umgesetzt 2026-11-24: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; Frontend nicht prüfbar (HTTP 500 der Seiten, Offene Punkte 2) | siehe Commits |
+| 6 Marker | erledigt 2026-11-24: Content Block in `ps14_site`, 224 Items (je 112), 3 Varianten; Marker eigenständig und in Akkordeons gerendert | siehe Commits |
+| 7 Firmenwerte | erledigt 2026-11-24: Content Block in `ps14_site`, 38 Items, 63 Dateireferenzen, Farbschemata, Varianten `default`/`icons`, Modal; `/unternehmen/ueber-kist-escherich/unsere-werte` und Stellenangebote de/en HTTP 200 | siehe Commits |
+| Test | Auf der lokalen DB per `update-schema` + einzelnen Wizards; ein Lauf `ps14-migrate` auf frischem Dump steht aus | – |
 

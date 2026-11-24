@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="labels.xlf" date="2026-11-24T00:00:00Z" product-name="ps14_site">
+    <header/>
+    <body>
+      <trans-unit id="title">
+        <source>Company value</source>
+      </trans-unit>
+      <trans-unit id="title.label">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="description.label">
+        <source>Text</source>
+      </trans-unit>
+      <trans-unit id="media.label">
+        <source>Image</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.label">
+        <source>Colour scheme</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.green-white.label">
+        <source>Green-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.white-black.label">
+        <source>White-Black</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.purple-white.label">
+        <source>Purple-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.blue-white.label">
+        <source>Blue-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.yellow-white.label">
+        <source>Yellow-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.red-white.label">
+        <source>Red-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.darkgrey-white.label">
+        <source>Darkgrey-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.orange-white.label">
+        <source>Orange-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.turquoise-white.label">
+        <source>Turquoise-White</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.white-primary.label">
+        <source>White-Primary</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.white-secondary.label">
+        <source>White-Secondary</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.primary-default.label">
+        <source>Primary (Default)</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.primary-light.label">
+        <source>Primary (Light)</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.secondary-default.label">
+        <source>Secondary (Default)</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.secondary-light.label">
+        <source>Secondary (Light)</source>
+      </trans-unit>
+      <trans-unit id="color_scheme.items.grey-default.label">
+        <source>Grey (Default)</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

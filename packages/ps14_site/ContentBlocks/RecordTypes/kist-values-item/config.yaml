@@ -1,0 +1,55 @@
+name: ps14/kist-values-item
+table: tx_site_kist_values_item
+labelField: title
+prefixFields: false
+fields:
+  - identifier: title
+    type: Text
+    required: true
+  - identifier: description
+    type: Textarea
+    enableRichtext: true
+    richtextConfiguration: ps14Default
+  - identifier: media
+    type: File
+    allowed: common-image-types
+    maxitems: 1
+    relationship: manyToOne
+  - identifier: color_scheme
+    type: Select
+    renderType: selectSingle
+    items:
+      - label: 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value'
+        value: ''
+      - label: green-white
+        value: green-white
+      - label: white-black
+        value: white-black
+      - label: purple-white
+        value: purple-white
+      - label: blue-white
+        value: blue-white
+      - label: yellow-white
+        value: yellow-white
+      - label: red-white
+        value: red-white
+      - label: darkgrey-white
+        value: darkgrey-white
+      - label: orange-white
+        value: orange-white
+      - label: turquoise-white
+        value: turquoise-white
+      - label: white-primary
+        value: white-primary
+      - label: white-secondary
+        value: white-secondary
+      - label: primary-default
+        value: primary-default
+      - label: primary-light
+        value: primary-light
+      - label: secondary-default
+        value: secondary-default
+      - label: secondary-light
+        value: secondary-light
+      - label: grey-default
+        value: grey-default

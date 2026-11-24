@@ -1,5 +1,4 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
-    <f:layout name="Default" />
     <f:section name="Main">
         <f:if condition="{data.bodytext}">
             <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
@@ -11,13 +10,13 @@
                     <div class="marker--media">
                         <f:render partial="Media/Main" section="Main" arguments="{
                             file: images.0,
-                            settings: '{fo:settings.get(extension: \'Ps14Marker\', path: \'images.aside\')}'
+                            settings: settings.images.aside
                         }" />
                     </div>
                 </div>
             </f:if>
 
-            <f:if condition="{elements}">
+            <f:if condition="{record.tx_site_marker_items}">
                 <div class="col-lg-6">
                     <f:render partial="Marker/Listing/Listing" section="Main" arguments="{_all}" />
                 </div>
