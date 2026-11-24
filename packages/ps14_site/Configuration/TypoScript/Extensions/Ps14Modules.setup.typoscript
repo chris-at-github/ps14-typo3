@@ -1,27 +1,29 @@
 @import 'EXT:ps14_modules/Configuration/TypoScript/setup.typoscript'
 
+// Key 120: 110 belegt ps14_site bereits ueber lib.contentElement (Templates/Content/, Partials/)
+
 // ---------------------------------------------------------------------------------------------------------------------
 // Akkordeon mit KIST-Markup
 tt_content.ps14_accordion {
   templateRootPaths {
-    110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+    120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
   }
 
   partialRootPaths {
-    110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+    120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
   }
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Tabs und Timeline mit KIST-Markup
 tt_content.ps14_tabs {
-  templateRootPaths.110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
-  partialRootPaths.110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
 }
 
 tt_content.ps14_timeline {
-  templateRootPaths.110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
-  partialRootPaths.110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
 
   settings.media {
     maxHeight = 300
