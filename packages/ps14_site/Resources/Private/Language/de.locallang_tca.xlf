@@ -66,6 +66,9 @@
       <trans-unit id="tt_content.variant.tabs.radio">
         <target>Radio</target>
       </trans-unit>
+      <trans-unit id="tt_content.header-layout.10">
+        <target>Container</target>
+      </trans-unit>
       <trans-unit id="tt_content.layout.1">
         <target>Eingerückt Rechts</target>
       </trans-unit>

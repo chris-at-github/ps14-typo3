@@ -400,6 +400,12 @@ Dieser Plan; Freigabe der Entscheidungen und offenen Punkte.
   `site:format.uri` (Namespace `Ps14\Site\ViewHelpers`); genutzt erst von
   Templates aus Schritt 2 (Hero, Adresse, Kontakt, Produkte), daher nur per
   PHPStan geprüft.
+- Nachtrag 2026-11-24: Menüs (`menu_pages`, `menu_subpages`) wurden vom
+  Vorlagen-Paket `ps14_menu` (Templates Key 108) mit neuem Markup gerendert.
+  `ps14_site` setzt `templateRootPaths.109` auf die foundation-Templates
+  (v12-Markup) und entfernt `includeNotInMenu.data` (KIST:
+  `menu_pages` immer mit versteckten Seiten). Umstellung auf `ps14_menu`
+  als Optimierung O18.
 - Entfallen: `Image`-Template (B4, in KIST nicht genutzt), Vorlagen-`Div`
   (KIST nutzt den Core-Stand `ce-div`), alter `MenuProcessor`,
   Modul-CSS/JS über `ModuleProcessor` (`importCss`/`importJs`) → in

@@ -27,6 +27,7 @@ Feature-Branch. Neue Funde während der Migration hier ergänzen.
 | O15 | Aktiv-Zustände der Navigation wie in der Vorlage (H5): `is--active` für den Pfad, `is--current` und `aria-current="page"` für die aktuelle Seite; KIST-CSS/JS anpassen | Barrierefreiheit, Vorlage | S |
 | O16 | Footer-Seite (`pages.footerContent`, Backend-Layout `footer`) durch Footer-Spalten auf der Startseite (colPos 20 ff., `slide = -1`) ersetzen, wie in der Vorlage | eine Pflegestelle | S–M |
 | O17 | Logo-Leiste im Footer: statt Inhaltselement mit Kennung `tisax-certification` eigenes Feld/Content Block | robuster als Kennung | S |
+| O18 | Menü-Inhaltselemente (`menu_pages`, `menu_subpages`) auf die Ansichten von `ps14_menu` umstellen (Varianten default/listing/icon, BEM `navigation__list`, Heading-Komponente, Option `includeNotInMenu` per FlexForm). Bis dahin überschreibt `ps14_site` die Templates mit dem v12-Markup aus ps14_foundation (`templateRootPaths.109` in `Extensions/Ps14Menu.setup.typoscript`) und entfernt `includeNotInMenu.data`; die KIST-Variante `1` („Links mit Pfeilen“) und das Sortier-FlexForm von `menu_subpages` müssen dabei in `ps14_menu` aufgehen | Vorlage statt Sonderweg, weniger Overrides | M |
 | O11 | Bilder: `fo:media.picture` mit `loading="lazy"`, `fetchpriority` für Hero, AVIF/WebP prüfen | Core Web Vitals | S–M |
 
 ## P · Backend und Datenmodell
@@ -42,6 +43,7 @@ Feature-Branch. Neue Funde während der Migration hier ergänzen.
 | P7 | PDF-Export (CloudConvert-Middleware) prüfen: Print-CSS + Browser-Druck könnte reichen; sonst Zugangsdaten nur über `.env` | weniger Fremddienste | M |
 | P8 | Sitzende Fremd-Extensions prüfen und ggf. ablösen: `scriptmerger` (Vite), `ps14_theme` (leer), `masi`, `warming`, `typed_extconf` | weniger Abhängigkeiten | S je Extension |
 | P9 | Elements-, Readmore- und alte `tx_foundation_*`-Spalten nach den Wizards per Schemabereinigung entfernen | saubere DB | S |
+| P10 | Prüfen, ob `Ps14\Foundation\DataProcessing\TextImageProcessor` (ps14_foundation) noch benötigt wird. Er erweitert die Galerie von „Text & Bild“ (`textpic`) um Media-Queries je Bild aus TypoScript (`plugin.tx_ps14foundation_textimage.settings.pictureMediaQueries`, begrenzt auf die Spaltenbreite) und erbt vom `ModuleProcessor` nur die Registrierung für die Rendering-Priorität. Alternativen: Media-Queries direkt im Template bzw. über eine Picture-Komponente, Core-`GalleryProcessor` ohne Erweiterung. Hintergrund: fehlender `public`-Eintrag führte zu HTTP 500 auf Seiten mit `textpic` (behoben in 14.0.1) | weniger eigener Code in foundation | S–M |
 
 ## R · Altlasten in den geparkten Dateien (Task 6)
 
@@ -63,5 +65,5 @@ in Schritt 2 umsetzen.
 | Q1 | Backup- und Sync-Skripte (Prod → Staging) für das Composer-/Deployer-Layout neu (G1) | Betrieb | S–M |
 | Q2 | ~470 `.htaccess`-Redirects nach `sys_redirect` übernehmen (G2) | Pflege im Backend | M |
 | Q3 | Tracking (etracker) nur noch über Site Settings, nicht im Development-Kontext (D14) | keine festen IDs im Code | S |
-| Q4 | Visuelle Regressionstests (z. B. Playwright-Screenshots) für Kernseiten vor und nach Optimierungen | sichere Refactorings | M |
+| Q4 | Visuelle Regressionstests mit Playwright (Screenshots) für Kernseiten: v12 gegen v14 nach der Datenübernahme, danach vor und nach Optimierungen | sichere Migration und Refactorings | M |
 | Q5 | Barrierefreiheit prüfen (Kontraste, Fokus, ARIA der Navigationen) nach `interaction-states.md` | BFSG | M |

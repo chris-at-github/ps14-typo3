@@ -112,6 +112,13 @@ TCEFORM {
   tt_content {
     imageborder.types.image.disabled = 1
 
+    // Ueberschrift "Container" als Zahl (10): die Spalte header_layout ist in v14 INT, der Wert "container" aus
+    // ps14_foundation laesst sich dort nicht speichern. removeItems ueberschreibt "0" aus ps14_foundation.
+    header_layout {
+      removeItems = 0, container
+      addItems.10 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.header-layout.10
+    }
+
     layout {
       altLabels {
         1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.1
@@ -176,14 +183,14 @@ TCEMAIN.permissions.groupid = 2
 // Inhalte des Footers und der Hauptnavigation (Site Settings pages.footerContent, pages.navigationContent)
 [{$pages.footerContent} > 0 && {$pages.footerContent} in tree.rootLineIds]
   TCAdefaults.tt_content {
-    header_layout = container
+    header_layout = 10
     tx_foundation_no_frame = 0
   }
 [END]
 
 [{$pages.navigationContent} > 0 && {$pages.navigationContent} in tree.rootLineIds]
   TCAdefaults.tt_content {
-    header_layout = container
+    header_layout = 10
     tx_foundation_no_frame = 0
   }
 [END]

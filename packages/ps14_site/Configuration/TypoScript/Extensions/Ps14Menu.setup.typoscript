@@ -1,1 +1,20 @@
 @import 'EXT:ps14_menu/Configuration/TypoScript/setup.typoscript'
+
+// ---------------------------------------------------------------------------------------------------------------------
+// KIST: Menues mit dem Markup von v12 (Templates aus ps14_foundation) statt der Ansichten von ps14_menu (Key 108).
+// Key 109 liegt ueber ps14_menu und unter ps14_site (110). Abbau in der Optimierungsrunde (kist-v14-optimizations.md).
+tt_content {
+  menu_pages {
+    templateRootPaths.109 = EXT:ps14_foundation/Resources/Private/Templates/Content/
+
+    // ps14_menu liest includeNotInMenu aus der FlexForm, KIST gibt versteckte Seiten immer aus (Modules/Menu.setup.typoscript)
+    dataProcessing.10.includeNotInMenu.data >
+  }
+
+  menu_subpages {
+    templateRootPaths.109 = EXT:ps14_foundation/Resources/Private/Templates/Content/
+
+    // v12: keine Option, versteckte Unterseiten werden nicht ausgegeben
+    dataProcessing.10.includeNotInMenu.data >
+  }
+}

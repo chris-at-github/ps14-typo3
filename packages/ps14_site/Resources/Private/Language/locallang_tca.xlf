@@ -66,6 +66,9 @@
       <trans-unit id="tt_content.variant.tabs.radio">
         <source>Radio</source>
       </trans-unit>
+      <trans-unit id="tt_content.header-layout.10">
+        <source>Container</source>
+      </trans-unit>
       <trans-unit id="tt_content.layout.1">
         <source>Indent Right</source>
       </trans-unit>

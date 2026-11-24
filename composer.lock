@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "196dd3a41fb3e4ff95d312ac02941929",
+    "content-hash": "3252ce683f6872e1c24748ad62b712c3",
     "packages": [
         {
             "name": "b13/container",
@@ -10589,6 +10589,57 @@
             "time": "2026-07-22T06:50:43+00:00"
         },
         {
+            "name": "ps14/ps14_migration",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "./packages/ps14_migration",
+                "reference": "7e3b86a48b09e7b39a8324163559709b7ad1a316"
+            },
+            "require": {
+                "php": "^8.4",
+                "typo3/cms-core": "^14.3"
+            },
+            "bin": [
+                "bin/ps14-migrate"
+            ],
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_migration"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ps14\\Migration\\": "Classes/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Migration of older TYPO3 projects to the ps14 template (TYPO3 v14): schema update, SQL scripts and upgrade wizards. Installed only during a migration.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "extension",
+                "migration",
+                "upgrade"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "react/cache",
             "version": "v1.2.0",
             "source": {
@@ -11901,6 +11952,7 @@
         "ps14/ps14_container": 20,
         "ps14/ps14_foundation": 20,
         "ps14/ps14_menu": 20,
+        "ps14/ps14_migration": 20,
         "ps14/ps14_site": 20
     },
     "prefer-stable": true,
