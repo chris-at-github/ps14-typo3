@@ -141,12 +141,15 @@ runs on every deploy.
 
 ## Data takeover from an older TYPO3 version
 
-Not part of this skill. Projects coming from an older TYPO3 version (v10–v13)
-get their data with the package `ps14/ps14_migration` (plan
-`docs/plans/migration-tool.md`): import a fresh dump (e.g. `ddev pull
-<provider>`), then `ddev exec vendor/bin/ps14-migrate`. Never run
+Not part of this skill: use `migrating-typo3-projects`. Projects coming from
+an older TYPO3 version (v10–v13) get their data with the package
+`ps14/ps14_migration` (`ddev exec vendor/bin/ps14-migrate`). Never run
 `extension:setup` on an old database before that: it changes columns that
 `ps14-migrate` deliberately protects (`MIGRATION_SKIP_COLUMNS`).
+
+While a project is still being migrated (`config/migration/` exists), check
+`MIGRATION_SKIP_COLUMNS` before running `extension:setup` or
+`bin/update-system.sh` in step 6: a protected column would be changed.
 
 ## To be refined during the next migration
 
