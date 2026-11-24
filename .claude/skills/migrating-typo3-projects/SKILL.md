@@ -95,8 +95,21 @@ ddev exec vendor/bin/ps14-migrate
   the column in `MIGRATION_SKIP_COLUMNS`.
 - Generic wizards/SQL belong into `ps14_migration`, project-specific ones into
   `ps14_site/Classes/Upgrades/` and `config/migration/sql/`.
+- Every field change is a **wizard**, even a plain column-to-column copy.
+  SQL only for steps before the schema update (pre) and for cleanup (post).
+- Project wizards run after the package wizards only if `ps14_site` suggests
+  the package (`"suggest": {"ps14/ps14_migration": "…"}` in its
+  `composer.json`, then `ddev composer update ps14/ps14_site`); check the order
+  with `ddev typo3 upgrade:list --all`.
+- Elements (`tx_foundation_domain_model_elements`) → Content Block
+  Collection: keep the element uid as item uid, so nested content
+  (`tt_content.tx_foundation_parent`) and file references stay valid; set the
+  parent table (`tx_foundation_parent_table`) and recalculate the counter of
+  the inline field (old counters can be wrong). See
+  `.claude/rules/typo3/content-blocks.md`.
 - A run always starts from a fresh dump; a second run on a migrated database
-  is refused.
+  is refused. The marker is written at the end, so a **failed** run can be
+  repeated on the same database — keep every SQL file repeatable.
 
 ### 6. Verify
 
@@ -127,6 +140,10 @@ ddev exec vendor/bin/ps14-migrate
 | Index error in the first schema pass | Index on a column added in the same pass | Second pass (automatic in `ps14-migrate`) |
 | HTTP 500 on pages with a CType, `Too few arguments … __construct()` | Data processor with constructor dependencies not `public` in `Services.yaml` | Make it public in the package, release |
 | Menus/elements with template markup instead of the old one | Template package registers its own `templateRootPaths` | Override with a higher key in `ps14_site` |
+| A project wizard never ran but is marked done | `upgrade:run` marks wizards whose `updateNecessary()` is false as done; project wizards ran before the package wizard they depend on | `ps14_site` suggests `ps14/ps14_migration` (load order), check `upgrade:list --all` |
+| `Illegal mix of collations` in post SQL | New tables (`utf8mb4_unicode_520_ci`) compared with old ones (`utf8mb4_unicode_ci`) | Wizard instead of SQL; no string comparison across tables |
+| Pre SQL fails on a repeated run (`Truncated incorrect DECIMAL value`) | The column is already INT after the first run | `WHERE CAST(col AS CHAR) = '…'` |
+| Content Block: `field "…" is missing the required "type"` | `useExistingField` on a field created in another extension's TCA overrides | Add it with `addFieldsToPalette` (see `content-blocks.md`) |
 | Wizard counts higher than expected | Wizards remove all restrictions (deleted/hidden rows included) | Expected; compare with `deleted = 0` |
 | Different numbers than in the old local site | Local old instance has an older data state | Always compare against the production dump |
 | Remote PHP script stops after the first `exec()` | Script read from STDIN (`php -- … < file`), child consumes STDIN; `STDERR` undefined | Copy the script into a temp file on the server first |
