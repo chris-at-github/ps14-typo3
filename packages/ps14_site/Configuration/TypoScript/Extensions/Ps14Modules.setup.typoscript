@@ -1,0 +1,13 @@
+@import 'EXT:ps14_modules/Configuration/TypoScript/setup.typoscript'
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Akkordeon mit KIST-Markup
+tt_content.ps14_accordion {
+  templateRootPaths {
+    110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  }
+
+  partialRootPaths {
+    110 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+  }
+}

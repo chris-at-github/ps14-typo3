@@ -69,10 +69,30 @@ Nicht Teil dieses Plans:
    Farbschemata.
 5. CTypes bleiben (`ps14_accordion`, `ps14_tabs`, `ps14_timeline`,
    `ps14_marker`, `ps14_kist_values`), per `typeName` im Content Block.
+6. **Items** (Task 3, 2026-11-24): eigene Tabelle je Modul (Akkordeon:
+   `tx_modules_accordion_item`, Record Types `text` und `content`); der Wizard
+   übernimmt die UID des Elements, damit `tt_content.tx_foundation_parent` der
+   verschachtelten Elemente gültig bleibt (zusätzlich
+   `tx_foundation_parent_table`).
+7. **Wizards** Elements → Collection für die generischen Module in
+   `ps14_migration`; Marker und Firmenwerte in `ps14_site`.
+8. **Druckfelder** (`print_break`, `print_visibility`) nur in KIST:
+   `tx_site_print_*` per TCA-Override in `ps14_site`, Werte per Post-SQL.
+9. **Rendering**: `lib.contentElement` (Layout `Default`) mit
+   `record-transformation` (`{record}`), kein `frontend.html` des Content
+   Blocks; Felder aus foundation-TCA-Overrides (z. B.
+   `tx_foundation_elements_header`) werden per TCA-Override in die Palette
+   gehängt, da Content Blocks vor den Overrides kompiliert.
 
 ### Offene Punkte
 
 1. Folgeplan für Hero, Downloads, Textmedia, Teaser.
+2. HTTP 500 (`ModuleProcessor::__construct()` ohne Argument) auf
+   `/unternehmen/tech-center/…`, `/unternehmen/ueber-kist-escherich`,
+   `/produkte/individuelles-produkt` — bestand schon vor Task 3 (Log
+   2026-11-23), Ursache offen.
+3. Release `ps14_modules` (Push, Tag, VCS-Eintrag, `SHARED_PACKAGES`);
+   erst dann `composer.json`/`composer.lock` committen.
 
 ### Risks
 
@@ -115,5 +135,5 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 |---|---|---|
 | 1 Plan | erledigt 2026-11-24 (Entscheidungen 1–5) | `6235e67` |
 | 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` auf `main` (lokal unter `packages/ps14_modules`, Repository `ps14-modules` angelegt, in KIST noch nicht installiert) | KIST `cf7cac5`, Paket `831081d` |
-| 3 Akkordeon | nächster Schritt (freigegeben nach `/clear`): `ps14_modules` in KIST installieren (`ddev composer require 'ps14/ps14_modules:^14.0@dev'`), Content Block mit `typeName: ps14_accordion`, Template-Override in `ps14_site`, Wizard Elements → Collection | – |
+| 3 Akkordeon | erledigt 2026-11-24: Content Block in `ps14_modules` (`feature/accordion`), Wizard in `ps14_migration` (`feature/accordion-wizard`), KIST-Markup in `ps14_site`. Frischer Dump + `ps14-migrate`: 144 Items (de 74 / en 70) wie vorher, 69 verschachtelte Elemente verknüpft, 11 Seiten je Sprache HTTP 200 mit gleicher Item-Anzahl (Marker darin erst mit Task 6). `ps14_modules` lokal per Path installiert, `composer.json`/`.lock` noch nicht committet | siehe Commits |
 
