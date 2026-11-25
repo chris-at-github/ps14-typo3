@@ -103,6 +103,11 @@ denselben Regeln, haben aber eigene Zuständigkeiten (siehe `CLAUDE.md`).
   das Layout `Default` aus `ps14_foundation`.
 - Template- und Partial-Pfade der Extension bekommen den Key `50`, damit
   `ps14_foundation` (`100`) und `ps14_site` (`110`) sie überschreiben können.
+  Über `lib.contentElement` belegt `ps14_site` Key `110` bereits mit seinen
+  allgemeinen Pfaden (`Templates/Content/`, `Partials/`). Überschreibt ein
+  Projekt die Pfade **eines CType** (`tt_content.<CType>.*RootPaths`), nimmt
+  es Key `120` — mit `110` verdrängt es die Projekt-Partials (z. B.
+  `Header/All`, `Content/Bodytext`), und es erscheint foundation-Markup.
   Lege die Dateien unter derselben relativen Struktur ab wie in
   `ps14_site` (z. B. `Resources/Private/Templates/Content/<Name>.html`).
 - Gib kein HTML mit `f:format.raw` aus. Verschachtelte Inhaltselemente werden
