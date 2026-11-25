@@ -10,14 +10,17 @@ use TYPO3\CMS\Core\Attribute\UpgradeWizard;
 /**
  * tx_foundation_domain_model_elements.print_break / print_visibility (ps14_foundation 2.x)
  * -> tx_modules_accordion_item.tx_site_print_break / tx_site_print_visibility.
- * Die Items behalten die UID des Elements (Wizard "ps14Migration_accordionElementsMigration" aus ps14_migration);
- * laeuft dieser Wizard spaeter, findet dieser hier zunaechst keine Items und wird beim naechsten Lauf faellig.
+ * Die Items behalten die UID des Elements (Wizard "ps14Migration_accordionElementsMigration" aus ps14_migration).
+ * upgrade:run fragt updateNecessary() aller Wizards ab, bevor der erste laeuft: deshalb zaehlen Elemente mit
+ * Druckwerten, deren Item noch fehlt, schon als offen. Ausgefuehrt wird nach dem Akkordeon-Wizard (ps14_site schlaegt
+ * ps14_migration per "suggest" vor, Ladereihenfolge).
  */
 #[UpgradeWizard('ps14Site_accordionItemPrintMigration')]
 final class AccordionItemPrintMigration extends AbstractMigration
 {
     private const SOURCE_TABLE = 'tx_foundation_domain_model_elements';
     private const TARGET_TABLE = 'tx_modules_accordion_item';
+    private const CONTENT_TYPE = 'ps14_accordion';
 
     /**
      * Feld alt => Feld neu
@@ -42,7 +45,7 @@ final class AccordionItemPrintMigration extends AbstractMigration
     #[\Override]
     public function updateNecessary(): bool
     {
-        return $this->getPendingUpdates() !== [];
+        return $this->getPendingUpdates() !== [] || $this->hasElementsWithoutItem();
     }
 
     #[\Override]
@@ -111,6 +114,44 @@ final class AccordionItemPrintMigration extends AbstractMigration
         }
 
         return $pendingUpdates;
+    }
+
+    /**
+     * Akkordeon-Elemente mit Druckwerten, deren Item noch nicht uebernommen wurde.
+     */
+    private function hasElementsWithoutItem(): bool
+    {
+        if (!$this->isAvailable()) {
+            return false;
+        }
+
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TARGET_TABLE);
+        $queryBuilder->getRestrictions()->removeAll();
+        $migratedUids = array_map('intval', $queryBuilder->select('uid')->from(self::TARGET_TABLE)->executeQuery()->fetchFirstColumn());
+
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::SOURCE_TABLE);
+        $queryBuilder->getRestrictions()->removeAll();
+        $queryBuilder
+            ->count('e.uid')
+            ->from(self::SOURCE_TABLE, 'e')
+            ->join('e', 'tt_content', 'c', $queryBuilder->expr()->eq('c.uid', $queryBuilder->quoteIdentifier('e.foreign_uid')))
+            ->where(
+                $queryBuilder->expr()->eq('e.deleted', 0),
+                $queryBuilder->expr()->eq('c.deleted', 0),
+                $queryBuilder->expr()->eq('c.CType', $queryBuilder->createNamedParameter(self::CONTENT_TYPE)),
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->neq('e.print_break', $queryBuilder->createNamedParameter('')),
+                    $queryBuilder->expr()->neq('e.print_visibility', $queryBuilder->createNamedParameter('')),
+                ),
+            );
+
+        if ($migratedUids !== []) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->notIn('e.uid', $queryBuilder->createNamedParameter($migratedUids, ArrayParameterType::INTEGER)),
+            );
+        }
+
+        return (int)$queryBuilder->executeQuery()->fetchOne() > 0;
     }
 
     private function isAvailable(): bool

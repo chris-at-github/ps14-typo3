@@ -81,7 +81,9 @@ Nicht Teil dieses Plans:
    `ps14Site_accordionItemPrintMigration` (kein SQL: jede Feldänderung
    gegenüber v12 bekommt einen Upgrade-Wizard). Damit die Wizards aus
    `ps14_migration` vor denen aus `ps14_site` laufen, schlägt `ps14_site`
-   das Paket per `suggest` vor (Ladereihenfolge).
+   das Paket per `suggest` vor (Ladereihenfolge). `upgrade:run` prüft
+   `updateNecessary()` aller Wizards vor dem ersten Lauf: der Wizard meldet
+   deshalb auch Elemente mit Druckwerten, deren Item noch fehlt.
 9. **Rendering**: `lib.contentElement` (Layout `Default`) mit
    `record-transformation` (`{record}`), kein `frontend.html` des Content
    Blocks; Felder aus foundation-TCA-Overrides (z. B.
@@ -110,10 +112,10 @@ Nicht Teil dieses Plans:
 2. HTTP 500 (`ModuleProcessor::__construct()` ohne Argument) auf
    `/unternehmen/tech-center/…`, `/unternehmen/ueber-kist-escherich`,
    `/produkte/individuelles-produkt` — bestand schon vor Task 3 (Log
-   2026-11-23), Ursache offen. Stand 2026-11-24: nicht der Hero (Platzhalter
-   ändert nichts); ein Element der Hauptspalte (`block.contentMain`) erzeugt
-   `ModuleProcessor` per `makeInstance` ohne Container. Betrifft die
-   Timeline-Seiten, daher Timeline im Frontend ungeprüft.
+   2026-11-23). Ursache gefunden 2026-11-25: `TextImageProcessor` (Text &
+   Bild) erbt von `ModuleProcessor` und war nicht `public` → Instanz ohne
+   Container. Behoben in ps14_foundation 14.0.1 (auf GitHub), KIST hat noch
+   14.0.0 → `ddev composer update ps14/ps14_foundation`.
 4. Nicht übernommen (in v12 nicht im Formular, Daten veraltet): Timeline
    `files` (4 Referenzen) und `content` (2 Text & Bild); bleiben an der
    Elements-Tabelle.
@@ -168,5 +170,5 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | 5 Timeline | umgesetzt 2026-11-24: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; Frontend nicht prüfbar (HTTP 500 der Seiten, Offene Punkte 2) | siehe Commits |
 | 6 Marker | erledigt 2026-11-24: Content Block in `ps14_site`, 224 Items (je 112), 3 Varianten; Marker eigenständig und in Akkordeons gerendert | siehe Commits |
 | 7 Firmenwerte | erledigt 2026-11-24: Content Block in `ps14_site`, 38 Items, 63 Dateireferenzen, Farbschemata, Varianten `default`/`icons`, Modal; `/unternehmen/ueber-kist-escherich/unsere-werte` und Stellenangebote de/en HTTP 200 | siehe Commits |
-| Test | Auf der lokalen DB per `update-schema` + einzelnen Wizards; ein Lauf `ps14-migrate` auf frischem Dump steht aus | – |
+| Test | 2026-11-25: `ps14-migrate` auf frischem Dump, Exit 0, alle Wizards, Zahlen wie oben; Druckwerte erst nach Wizard-Korrektur (`updateNecessary` vor Items) | siehe Commits |
 
