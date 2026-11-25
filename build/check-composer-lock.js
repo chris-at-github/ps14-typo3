@@ -7,6 +7,7 @@ const SHARED_PACKAGES = [
   'ps14/ps14_container',
   'ps14/ps14_foundation',
   'ps14/ps14_menu',
+  'ps14/ps14_modules',
 ];
 
 let lock;

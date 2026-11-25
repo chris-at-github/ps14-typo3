@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f2a9047da6ca27a6427a8d860c12d8c",
+    "content-hash": "6c01e6f52d5c48add3bdcc08d100bd4e",
     "packages": [
         {
             "name": "b13/container",
@@ -2474,16 +2474,16 @@
         },
         {
             "name": "ps14/ps14_foundation",
-            "version": "14.0.0",
+            "version": "14.0.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:chris-at-github/ps14-foundation.git",
-                "reference": "4d2517212afdc2cdcf4c794783ec20ca775c917d"
+                "reference": "8c7d2b71484a572171f40e75e331c65a62835d32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chris-at-github/ps14-foundation/zipball/4d2517212afdc2cdcf4c794783ec20ca775c917d",
-                "reference": "4d2517212afdc2cdcf4c794783ec20ca775c917d",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-foundation/zipball/8c7d2b71484a572171f40e75e331c65a62835d32",
+                "reference": "8c7d2b71484a572171f40e75e331c65a62835d32",
                 "shasum": ""
             },
             "require": {
@@ -2523,10 +2523,10 @@
                 "extension"
             ],
             "support": {
-                "source": "https://github.com/chris-at-github/ps14-foundation/tree/14.0.0",
+                "source": "https://github.com/chris-at-github/ps14-foundation/tree/14.0.1",
                 "issues": "https://github.com/chris-at-github/ps14-foundation/issues"
             },
-            "time": "2026-11-19T21:13:35+00:00"
+            "time": "2026-11-24T05:51:54+00:00"
         },
         {
             "name": "ps14/ps14_menu",
@@ -2581,12 +2581,63 @@
             "time": "2026-11-19T21:13:35+00:00"
         },
         {
+            "name": "ps14/ps14_modules",
+            "version": "14.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chris-at-github/ps14-modules.git",
+                "reference": "82912b764442e607d71771d3a779d2511cbb8eb4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-modules/zipball/82912b764442e607d71771d3a779d2511cbb8eb4",
+                "reference": "82912b764442e607d71771d3a779d2511cbb8eb4",
+                "shasum": ""
+            },
+            "require": {
+                "friendsoftypo3/content-blocks": "^2.4",
+                "php": "^8.4",
+                "ps14/ps14_foundation": "^14.0",
+                "typo3/cms-core": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_modules"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Content elements (modules) as Content Blocks: accordion, tabs and timeline.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "content-blocks",
+                "extension"
+            ],
+            "support": {
+                "source": "https://github.com/chris-at-github/ps14-modules/tree/14.0.0",
+                "issues": "https://github.com/chris-at-github/ps14-modules/issues"
+            },
+            "time": "2026-11-25T20:49:35+00:00"
+        },
+        {
             "name": "ps14/ps14_site",
             "version": "14.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "8b722a319051b8de377efbbb56df184bbf3b25df"
+                "reference": "e463ead5ab488ab801f2e241c6a44748d1656ff2"
             },
             "require": {
                 "php": "^8.4",
@@ -2594,7 +2645,8 @@
                 "typo3/cms-core": "^14.3"
             },
             "suggest": {
-                "ps14/ps14_image": "^13.0"
+                "ps14/ps14_image": "^13.0",
+                "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards"
             },
             "type": "typo3-cms-extension",
             "extra": {
@@ -10683,7 +10735,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_migration",
-                "reference": "7e3b86a48b09e7b39a8324163559709b7ad1a316"
+                "reference": "133fbb03366dabc04fcf98557e6be19969c05ce3"
             },
             "require": {
                 "php": "^8.4",
@@ -12042,6 +12094,7 @@
         "ps14/ps14_foundation": 20,
         "ps14/ps14_menu": 20,
         "ps14/ps14_migration": 20,
+        "ps14/ps14_modules": 20,
         "ps14/ps14_site": 20
     },
     "prefer-stable": true,
