@@ -114,8 +114,8 @@ Nicht Teil dieses Plans:
    `/produkte/individuelles-produkt` — bestand schon vor Task 3 (Log
    2026-11-23). Ursache gefunden 2026-11-25: `TextImageProcessor` (Text &
    Bild) erbt von `ModuleProcessor` und war nicht `public` → Instanz ohne
-   Container. Behoben in ps14_foundation 14.0.1 (auf GitHub), KIST hat noch
-   14.0.0 → `ddev composer update ps14/ps14_foundation`.
+   Container. Behoben mit ps14_foundation 14.0.1 (installiert 2026-11-25):
+   alle 77 Seiten mit Hero, Text & Bild oder Timeline HTTP 200.
 4. Nicht übernommen (in v12 nicht im Formular, Daten veraltet): Timeline
    `files` (4 Referenzen) und `content` (2 Text & Bild); bleiben an der
    Elements-Tabelle.
@@ -167,7 +167,7 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | 2 Content Blocks installieren | erledigt 2026-11-24: `friendsoftypo3/content-blocks` 2.4.10 in KIST; Grundgerüst `ps14_modules` auf `main` (lokal unter `packages/ps14_modules`, Repository `ps14-modules` angelegt, in KIST noch nicht installiert) | KIST `cf7cac5`, Paket `831081d` |
 | 3 Akkordeon | erledigt 2026-11-24: Content Block in `ps14_modules` (`feature/accordion`), Wizard in `ps14_migration` (`feature/accordion-wizard`), KIST-Markup in `ps14_site`. Frischer Dump + `ps14-migrate`: 144 Items (de 74 / en 70) wie vorher, 69 verschachtelte Elemente verknüpft, 11 Seiten je Sprache HTTP 200 mit gleicher Item-Anzahl (Marker darin erst mit Task 6). `ps14_modules` lokal per Path installiert, `composer.json`/`.lock` noch nicht committet | siehe Commits |
 | 4 Tabs | erledigt 2026-11-24: 8 Items (de/en je 4, Typ `content`), 8 SVG-Icons, 8 verschachtelte Powermail-Elemente; Variante `radio` mit KIST-Markup, Seite `/service-support` de/en HTTP 200 | siehe Commits |
-| 5 Timeline | umgesetzt 2026-11-24: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; Frontend nicht prüfbar (HTTP 500 der Seiten, Offene Punkte 2) | siehe Commits |
+| 5 Timeline | erledigt 2026-11-25: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; „Über KIST“ de/en 16 Einträge mit Datum und 22 Bildern, Tech-Center (`no-date`) de 14 / en 7, HTTP 200 nach foundation 14.0.1 | siehe Commits |
 | 6 Marker | erledigt 2026-11-24: Content Block in `ps14_site`, 224 Items (je 112), 3 Varianten; Marker eigenständig und in Akkordeons gerendert | siehe Commits |
 | 7 Firmenwerte | erledigt 2026-11-24: Content Block in `ps14_site`, 38 Items, 63 Dateireferenzen, Farbschemata, Varianten `default`/`icons`, Modal; `/unternehmen/ueber-kist-escherich/unsere-werte` und Stellenangebote de/en HTTP 200 | siehe Commits |
 | Test | 2026-11-25: `ps14-migrate` auf frischem Dump, Exit 0, alle Wizards, Zahlen wie oben; Druckwerte erst nach Wizard-Korrektur (`updateNecessary` vor Items) | siehe Commits |
