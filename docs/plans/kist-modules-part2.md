@@ -68,8 +68,9 @@ Menü-Ansichten `default`, `listing`, `icon`.
    `typeName`, Felder `bodytext` und `image` als `useExistingField` → keine
    Datenmigration. KIST-Markup per Override in `ps14_site` (Key 120),
    Variante `16-9` per TSconfig in `ps14_site`.
-2. **Downloads als Core-`uploads`**, erweitert durch die neue Extension
-   `ps14_downloads` (Repository `ps14-downloads`, legt der Nutzer an).
+2. **Downloads als Core-`uploads`**, erweitert durch `ps14_downloads`
+   (Repository `ps14-downloads`, bisher v12 auf `master`: wird `12.x`,
+   v14 auf `main` wie bei den anderen Extensions).
    Wizard: CType `ps14_downloads` → `uploads`, Referenzen
    `tx_foundation_file` → `media`. Der Link „Seite als PDF“
    (`tx_site_wkhtmltopdf_*`, 26 Elemente) ist ein KIST-Sonderfall und
@@ -79,13 +80,25 @@ Menü-Ansichten `default`, `listing`, `icon`.
    ein Einzelvideo. In KIST enthält `textpic` keine Videos (174 Bilder,
    4 Elemente mit 4 Bildern), `textmedia` nur Videos (25 mp4 mit
    Vorschaubild) → beide CTypes bleiben, keine CType-Migration.
+   Umsetzung in `ps14_textmedia` (Repository `ps14-textmedia`, bisher v13
+   auf `main` für den Core-Typ `image`: wird `13.x`, v14 auf `main`) für
+   `image`, `textpic` und `textmedia`. ps14_foundation behält sein
+   `textpic`-Rendering (kein Breaking Change innerhalb 14.x); KIST nutzt
+   die Extension, Entfernen aus foundation erst mit der nächsten Major.
 4. **Teaser über `ps14_menu`**: `pages` → `menu_pages`, `subpages` →
    `menu_subpages`, `categories` → `menu_categorized_pages`. Über jede
    Option wird einzeln entschieden, ob sie in `ps14_menu` (generisch) oder
    `ps14_site` (KIST) landet (Tabelle unten).
-5. **Neue Repositories** legt der Nutzer an.
+5. **Repositories** `ps14-downloads` und `ps14-textmedia` bestehen; Klon
+   nach `packages/`, Push und Default-Branch auf GitHub macht der Nutzer.
+6. **Nachtlauf** (2026-11-25): keine Merges nach `main`, keine Tags; alles
+   auf Feature-Branches, Pakete per Path, `composer.lock` uncommittet.
+   Lint-Befunde, die nur per Ausnahme lösbar wären, werden notiert. Test auf
+   frischem Dump (`ddev pull prod-v12`) zuletzt, Beispielseiten danach in
+   der nächsten Sitzung aus `docs/examples/content-blocks.yaml`.
+   Reihenfolge: Hero, Text & Bild/Media, Downloads, Teaser, Beispiele.
 
-### Teaser-Optionen: Ziel je Option (Empfehlung, Entscheidung offen)
+### Teaser-Optionen: Ziel je Option (entschieden 2026-11-25)
 
 | Option (v12) | Ziel | Umsetzung |
 |---|---|---|
@@ -95,19 +108,23 @@ Menü-Ansichten `default`, `listing`, `icon`.
 | `hiddenEnabled` | `ps14_menu` | vorhanden: `includeNotInMenu` |
 | eigene Seite ausschließen | `ps14_menu` | neue Option bzw. immer |
 | `titleType` | `ps14_menu` | vorhandenes Feld `tx_foundation_elements_header` |
-| `readmoreEnabled` | `ps14_menu` | neue Option `showReadmore` |
-| `layout` `default` | `ps14_menu` | neue Ansicht `teaser` mit `co:card` |
+| `readmoreEnabled` | `ps14_site` | Feld `tx_site_teaser_readmore` |
+| `layout` `default` | `ps14_site` | Ansicht `teaser` (KIST-Markup) |
 | `layout` `technology`, `aside` | `ps14_site` | KIST-Ansichten (Partials) |
 | `asideAlignment`, `asideMediaSize`, `textAlignment` | `ps14_site` | Felder `tx_site_teaser_*` nur für `aside` |
 | `abstractType` `long` + `pages.tx_teaser_abstract_long` | `ps14_site` | Feld `tx_site_teaser_abstract_long` |
 | `subpagesEnabled`, `subpagesLayout` | `ps14_site` | KIST-Felder, Unterseiten je Teaser |
 | `pages.tx_teaser_title`, `_readmore`, `_media_large` | `ps14_site` | `tx_site_teaser_*` per Wizard |
 
-### Offene Punkte
+### Beispielseiten (abgestimmt 2026-11-25)
 
-1. Teaser-Optionen: Tabelle oben bestätigen.
-2. Ablage der Erweiterungen für `textpic` (mehrere Bilder) und `textmedia`
-   (Videooptionen `tx_textmedia_controls`/`_loop`).
+| Modul | Varianten |
+|---|---|
+| Hero | `16-9`, `default` |
+| Text & Bild | 1 Bild, 4 Bilder (Galerie), Bild links/rechts |
+| Text & Media | Video mit Steuerelementen; Autoplay + Schleife ohne Steuerelemente |
+| Downloads | Dateiliste mit Beschreibung; KIST-Link „Seite als PDF“ |
+| Teaser | `teaser` (feste Auswahl), `technology`, `aside` links/rechts, Kategorien mit Startpunkt, Unterseiten mit Unterseiten-Liste |
 
 ### Risks
 
@@ -158,4 +175,4 @@ Dump.
 
 | Task | Stand | Commit |
 |---|---|---|
-| 1 Plan | in Arbeit 2026-11-25: Entscheidungen 1–5, offen: Teaser-Optionen, Ablage textpic/textmedia | – |
+| 1 Plan | erledigt 2026-11-25: Entscheidungen 1–6, Teaser-Optionen, Beispielvarianten | siehe Commits |
