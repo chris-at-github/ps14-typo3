@@ -2582,17 +2582,11 @@
         },
         {
             "name": "ps14/ps14_modules",
-            "version": "14.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/chris-at-github/ps14-modules.git",
-                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920"
-            },
+            "version": "14.x-dev",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/chris-at-github/ps14-modules/zipball/1b24dde52c8ff4d377512cec9023acac9f619920",
-                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920",
-                "shasum": ""
+                "type": "path",
+                "url": "./packages/ps14_modules",
+                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920"
             },
             "require": {
                 "friendsoftypo3/content-blocks": "^2.4",
@@ -2625,11 +2619,10 @@
                 "content-blocks",
                 "extension"
             ],
-            "support": {
-                "source": "https://github.com/chris-at-github/ps14-modules/tree/14.0.1",
-                "issues": "https://github.com/chris-at-github/ps14-modules/issues"
-            },
-            "time": "2026-11-25T21:46:16+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "ps14/ps14_site",

@@ -176,3 +176,4 @@ Dump.
 | Task | Stand | Commit |
 |---|---|---|
 | 1 Plan | erledigt 2026-11-25: Entscheidungen 1–6, Teaser-Optionen, Beispielvarianten | siehe Commits |
+| 2 Hero | erledigt 2026-11-25: Content Block `ps14/hero` in `ps14_modules` (Branch `feature/hero` `15dee9d`, generisches Template ungeprüft, da KIST überschreibt), KIST-Markup in `ps14_site` (Key 120, Bildgrößen wie v12, Variante `16-9` per TSconfig, RTE `ps14Minimal`), keine Datenmigration; 77 Seiten de/en mit Hero HTTP 200 (pid 215 hat keine en-Seite). Hero ohne Bild (3 Elemente) rendert ohne leeres `<img>` | `7b7883c`, `46468e7` |
