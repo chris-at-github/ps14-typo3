@@ -156,6 +156,11 @@ TCEFORM {
       powermail_pi1.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.powermail.1
       ps14_timeline.addItems.no-date = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.timeline.no-date
       ps14_tabs.addItems.radio = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.tabs.radio
+      ps14_marker.addItems {
+        image-above = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.marker.image-above
+        image-aside-slider = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.marker.image-aside-slider
+      }
+      ps14_kist_values.addItems.icons = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.kist-values.icons
     }
   }
 }
