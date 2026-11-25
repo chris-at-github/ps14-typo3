@@ -45,6 +45,11 @@ Inhaltselemente mit eigenen Feldern oder Items werden als Content Blocks
 - Felder einer Collection bekommen das Präfix des Content Blocks
   (`ps14_accordion_items`); Record Types mit eigener Tabelle setzen
   `prefixFields: false`.
+- Inhaltselemente in `ps14_site` setzen `vendorPrefix: tx_site` (Felder und
+  Paletten `tx_site_<name>_*`). Bindestriche im Namen entfallen im Präfix
+  (`ps14/kist-values` → `tx_site_kistvalues_items`). Nie `prefixFields: false`
+  bei Inhaltselementen: die Palette des Basics hieße dann `headers` und
+  überschriebe die Core-Palette.
 - Projektspezifische Zusatzfelder an Tabellen eines Pakets (z. B. Druckfelder)
   kommen per TCA-Override in `ps14_site` mit Präfix `tx_site_`.
 
@@ -82,5 +87,16 @@ Inhaltselemente mit eigenen Feldern oder Items werden als Content Blocks
 - Verschachtelte Inhaltselemente mit
   `<f:cObject typoscriptObjectPath="tt_content" data="{child}" table="tt_content" />`
   rendern, nie mit `f:format.raw`.
-- Projekte überschreiben Templates und Partials mit Key `110`
-  (`ps14_site/Configuration/TypoScript/Extensions/<Extension>.setup.typoscript`).
+- Projekte überschreiben Templates und Partials eines Pakets mit Key `120`
+  (`ps14_site/Configuration/TypoScript/Extensions/<Extension>.setup.typoscript`,
+  Dateien unter `Resources/Private/Extensions/<Extension>/`). Key `110`
+  belegt `ps14_site` bereits über `lib.contentElement`; wer ihn überschreibt,
+  verliert die Projekt-Partials (z. B. `Header/All`, `Content/Bodytext`).
+- Content Blocks aus `ps14_site` selbst brauchen keine Pfade: ihre Templates
+  liegen direkt in `Templates/Content/` und `Partials/` (Key `110`).
+
+## Datenübernahme
+
+- Wizards für Elements → Collection erben von `AbstractElementsMigration`
+  (`ps14_migration`; `ps14_site` hat eine Kopie, weil eine Elternklasse aus
+  dem require-dev-Paket beim Deployment fehlen würde).
