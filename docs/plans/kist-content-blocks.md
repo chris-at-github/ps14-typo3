@@ -170,5 +170,6 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | 5 Timeline | erledigt 2026-11-25: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; „Über KIST“ de/en 16 Einträge mit Datum und 22 Bildern, Tech-Center (`no-date`) de 14 / en 7, HTTP 200 nach foundation 14.0.1 | siehe Commits |
 | 6 Marker | erledigt 2026-11-24: Content Block in `ps14_site`, 224 Items (je 112), 3 Varianten; Marker eigenständig und in Akkordeons gerendert | siehe Commits |
 | 7 Firmenwerte | erledigt 2026-11-24: Content Block in `ps14_site`, 38 Items, 63 Dateireferenzen, Farbschemata, Varianten `default`/`icons`, Modal; `/unternehmen/ueber-kist-escherich/unsere-werte` und Stellenangebote de/en HTTP 200 | siehe Commits |
+| 9 Bereinigung | 2026-11-25: Step2-Dateien der fünf Module entfernt, geparkte Partials übernommen, Readme `ps14_migration`, Optimierungsliste (O19, R1, R3). `MIGRATION_SKIP_COLUMNS` mit `record_type` **bleibt**: Elements werden noch für den Produktkatalog (258) und Hero (22) gebraucht → Folgepläne | siehe Commits |
 | Test | 2026-11-25: `ps14-migrate` auf frischem Dump, Exit 0, alle Wizards, Zahlen wie oben; Druckwerte erst nach Wizard-Korrektur (`updateNecessary` vor Items) | siehe Commits |
 
