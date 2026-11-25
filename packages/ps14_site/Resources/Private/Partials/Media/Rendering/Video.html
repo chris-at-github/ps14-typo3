@@ -1,0 +1,54 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <div class="video video--ratio-16-9 {f:if(condition: preview.image, then: 'video--preview-image')} {f:if(condition: options.autoplay, then: 'video--autoplay')}">
+            <f:if condition="{media}">
+                <f:render section="Video" arguments="{
+                    file: media,
+                    options: options,
+                    cssClass: 'video__source'
+                }" />
+            </f:if>
+
+            <f:if condition="{preview.image}">
+                <div class="video__preview">
+                    <f:render section="PlayButton" arguments="{
+                        media: media,
+                        cssClass: 'video__preview-play-button'
+                    }" />
+                    <f:render partial="Media/Rendering/Picture" arguments="{
+                        file: preview.image,
+                        sizes: preview.settings.mediaQueries,
+                        settings: preview.settings,
+                        cssClass: 'video__preview-image'
+                    }" />
+                </div>
+            </f:if>
+
+            <f:if condition="{options.controls} == 0">
+                <f:render section="PlayButton" arguments="{
+                    media: media,
+                    cssClass: 'video__play-button'
+                }" />
+            </f:if>
+        </div>
+    </f:section>
+
+    <f:section name="Video">
+        <fo:media.video
+            id="video--{file.uid}"
+            class="media media--video {cssClass}"
+            file="{file}"
+            width="{dimensions.width}"
+            height="{dimensions.height}"
+            options="{options}"
+            additionalAttributes="{additionalAttributes}"
+        />
+    </f:section>
+
+    <f:section name="PlayButton">
+        <button class="play-button {cssClass}" aria-controls="video--{media.uid}" aria-label="{f:translate(key: 'LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_frontend.xlf:action.video.play-pause')}">
+            <fo:svg.inline class="play-button__play" source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/play.svg" />
+            <fo:svg.inline class="play-button__pause" source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/pause.svg" />
+        </button>
+    </f:section>
+</html>

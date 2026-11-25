@@ -1,0 +1,18 @@
+@import 'EXT:ps14_textmedia/Configuration/TypoScript/setup.typoscript'
+
+// Key 120: 110 belegt ps14_site bereits ueber lib.contentElement (Templates/Content/, Partials/)
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Text & Bild und Bilder behalten das KIST-Markup (Templates/Content/TextImage.html bzw. Core-Template Image)
+tt_content.textpic.templateName = TextImage.html
+
+tt_content.image {
+  templateRootPaths.50 >
+  partialRootPaths.50 >
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Text & Media (Einzelvideo) mit KIST-Styles
+tt_content.textmedia {
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Textmedia/Templates/Content/
+}
