@@ -62,51 +62,52 @@ Menü-Ansichten `default`, `listing`, `icon`.
 - „Seite als PDF“ selbst (Middleware, Seitentyp): Schritt 2, Punkt 9 — hier
   nur die Frage, wo der Link künftig hängt.
 
-### Key Decisions (Vorschläge 2026-11-25, offen)
+### Key Decisions (2026-11-25)
 
-1. **Hero als Content Block** (Vorschlag Nutzer). Empfehlung: in
-   `ps14_modules` (generisch, wie Akkordeon/Tabs), CType `ps14_hero` per
-   `typeName`, Felder `bodytext` und `image` als `useExistingField` →
-   **keine Datenmigration** nötig. KIST-Markup per Override in `ps14_site`
-   (Key 120). Variante `16-9` per TSconfig in `ps14_site`.
-2. **Downloads als Core-`uploads`** (Vorschlag Nutzer), erweitert durch
-   eine neue Extension `ps14_downloads` (eigenes Repository, gemeinsames
-   Paket): Template/Markup, Ausgabe von Titel, Beschreibung, Typ und Größe,
-   `tx_foundation_elements_header`. KIST-Sonderfelder (`tx_site_wkhtmltopdf_*`)
-   bleiben in `ps14_site`. Wizard: CType `ps14_downloads` → `uploads`,
-   Referenzen `tx_foundation_file` → `media`.
-3. **Text & Media** (Vorschlag Nutzer: ggf. über `textpic`, gleicher Weg wie
-   Downloads). Empfehlung: **Core-`textmedia` behalten** (für Video gedacht,
-   CType bleibt → keine CType-Migration) und um eine Extension
-   `ps14_textmedia` erweitern: Felder `tx_textmedia_controls`/`_loop` an
-   `sys_file_reference` (Namen bleiben → keine Datenmigration),
-   Vorschaubild, Template. Alternative `textpic`: Bild-Galerie aus
-   foundation (`TextImageProcessor`) müsste um Video erweitert werden, dazu
-   Wizard für 25 Elemente.
-4. **Teaser** (Vorschlag Nutzer: Extension lassen oder über `ps14_menu`).
-   Empfehlung: **`ps14_menu`** mit Core-Menüs — `pages` → `menu_pages`,
-   `subpages` → `menu_subpages`, `categories` → `menu_categorized_pages`
-   (neu in `ps14_menu`, inkl. Einschränkung auf Startpunkt), KIST-Layouts
-   `default`/`technology`/`aside` als Ansichten in `ps14_site` (Basis
-   `co:card`), Optionen als FlexForm/Felder in `ps14_menu`, Seitenfelder
-   `tx_teaser_*` → `tx_site_teaser_*` per Wizard. Größter Teil des Plans;
-   Alternative: `ps14_teaser` als v14-Extension (CType-Plugin) mit dem
-   bisherigen Extbase-Code.
+1. **Hero als Content Block in `ps14_modules`**, CType `ps14_hero` per
+   `typeName`, Felder `bodytext` und `image` als `useExistingField` → keine
+   Datenmigration. KIST-Markup per Override in `ps14_site` (Key 120),
+   Variante `16-9` per TSconfig in `ps14_site`.
+2. **Downloads als Core-`uploads`**, erweitert durch die neue Extension
+   `ps14_downloads` (Repository `ps14-downloads`, legt der Nutzer an).
+   Wizard: CType `ps14_downloads` → `uploads`, Referenzen
+   `tx_foundation_file` → `media`. Der Link „Seite als PDF“
+   (`tx_site_wkhtmltopdf_*`, 26 Elemente) ist ein KIST-Sonderfall und
+   bleibt in `ps14_site`.
+3. **Text & Bild / Text & Media** wie bei Unterschleißheim: `textpic` für
+   Bilder, vorbereitet für mehrere Bilder (Galerie); `textmedia` nur für
+   ein Einzelvideo. In KIST enthält `textpic` keine Videos (174 Bilder,
+   4 Elemente mit 4 Bildern), `textmedia` nur Videos (25 mp4 mit
+   Vorschaubild) → beide CTypes bleiben, keine CType-Migration.
+4. **Teaser über `ps14_menu`**: `pages` → `menu_pages`, `subpages` →
+   `menu_subpages`, `categories` → `menu_categorized_pages`. Über jede
+   Option wird einzeln entschieden, ob sie in `ps14_menu` (generisch) oder
+   `ps14_site` (KIST) landet (Tabelle unten).
+5. **Neue Repositories** legt der Nutzer an.
+
+### Teaser-Optionen: Ziel je Option (Empfehlung, Entscheidung offen)
+
+| Option (v12) | Ziel | Umsetzung |
+|---|---|---|
+| `source` `pages`/`pagesProcessing` `pages` | Core | `menu_pages` (Reihenfolge der Auswahl) |
+| `pagesProcessing` `subpages` | Core | `menu_subpages` |
+| `source` `categories` + Startpunkt | `ps14_menu` | `menu_categorized_pages` neu in `ps14_menu`, Einschränkung auf Startpunkt (`pages`, `recursive`) |
+| `hiddenEnabled` | `ps14_menu` | vorhanden: `includeNotInMenu` |
+| eigene Seite ausschließen | `ps14_menu` | neue Option bzw. immer |
+| `titleType` | `ps14_menu` | vorhandenes Feld `tx_foundation_elements_header` |
+| `readmoreEnabled` | `ps14_menu` | neue Option `showReadmore` |
+| `layout` `default` | `ps14_menu` | neue Ansicht `teaser` mit `co:card` |
+| `layout` `technology`, `aside` | `ps14_site` | KIST-Ansichten (Partials) |
+| `asideAlignment`, `asideMediaSize`, `textAlignment` | `ps14_site` | Felder `tx_site_teaser_*` nur für `aside` |
+| `abstractType` `long` + `pages.tx_teaser_abstract_long` | `ps14_site` | Feld `tx_site_teaser_abstract_long` |
+| `subpagesEnabled`, `subpagesLayout` | `ps14_site` | KIST-Felder, Unterseiten je Teaser |
+| `pages.tx_teaser_title`, `_readmore`, `_media_large` | `ps14_site` | `tx_site_teaser_*` per Wizard |
 
 ### Offene Punkte
 
-1. „ps14_media“ im Vorschlag zum Teaser — gemeint ist vermutlich
-   `ps14_menu`? Eine Extension `ps14_media` gibt es nicht.
-2. Hero: `ps14_modules` (generisch) oder `ps14_site` (nur KIST)?
-3. Text & Media: Core-`textmedia` + `ps14_textmedia` oder `textpic`?
-4. Teaser: `ps14_menu` oder eigene Extension? Bei `ps14_menu`: Optionen,
-   die nur KIST braucht (`aside*`, `abstractType`, `subpagesEnabled`), in
-   `ps14_menu` oder per `ps14_site`?
-5. Downloads: 26 von 30 Elementen sind nur der Link „Seite als PDF“ ohne
-   Dateien. Bleibt das ein Download-Element (Feld in `ps14_site`) oder wird
-   es ein eigenes Element der PDF-Funktion (Punkt 9)?
-6. Neue Repositories (`ps14-downloads`, ggf. `ps14-textmedia`) legt der
-   Nutzer an und nimmt sie in den Composer-Token auf.
+1. Teaser-Optionen: Tabelle oben bestätigen.
+2. Ablage der Erweiterungen für `textpic` (mehrere Bilder) und `textmedia`
+   (Videooptionen `tx_textmedia_controls`/`_loop`).
 
 ### Risks
 
@@ -157,4 +158,4 @@ Dump.
 
 | Task | Stand | Commit |
 |---|---|---|
-| 1 Plan | in Arbeit 2026-11-25: Bestandsaufnahme, Entscheidungen offen | – |
+| 1 Plan | in Arbeit 2026-11-25: Entscheidungen 1–5, offen: Teaser-Optionen, Ablage textpic/textmedia | – |
