@@ -13,7 +13,8 @@
         "ps14/ps14_foundation": "^14.0"
     },
     "suggest": {
-        "ps14/ps14_image": "^13.0"
+        "ps14/ps14_image": "^13.0",
+        "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards"
     },
     "autoload": {
         "psr-4": {

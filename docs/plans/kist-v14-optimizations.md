@@ -29,6 +29,7 @@ Feature-Branch. Neue Funde während der Migration hier ergänzen.
 | O17 | Logo-Leiste im Footer: statt Inhaltselement mit Kennung `tisax-certification` eigenes Feld/Content Block | robuster als Kennung | S |
 | O18 | Menü-Inhaltselemente (`menu_pages`, `menu_subpages`) auf die Ansichten von `ps14_menu` umstellen (Varianten default/listing/icon, BEM `navigation__list`, Heading-Komponente, Option `includeNotInMenu` per FlexForm). Bis dahin überschreibt `ps14_site` die Templates mit dem v12-Markup aus ps14_foundation (`templateRootPaths.109` in `Extensions/Ps14Menu.setup.typoscript`) und entfernt `includeNotInMenu.data`; die KIST-Variante `1` („Links mit Pfeilen“) und das Sortier-FlexForm von `menu_subpages` müssen dabei in `ps14_menu` aufgehen | Vorlage statt Sonderweg, weniger Overrides | M |
 | O11 | Bilder: `fo:media.picture` mit `loading="lazy"`, `fetchpriority` für Hero, AVIF/WebP prüfen | Core Web Vitals | S–M |
+| O19 | Akkordeon, Tabs und Timeline auf die Templates von `ps14_modules` umstellen (Akkordeon mit `co:accordion`, Tabs/Timeline mit BEM-Markup) und die KIST-Overrides unter `Resources/Private/Extensions/Ps14Modules/` entfernen; Bootstrap-Collapse/-Tab-JS durch die Komponenten-JS der Vorlage ersetzen. Marker und Firmenwerte (Content Blocks in `ps14_site`) analog auf BEM und Komponenten | Vorlage statt Sonderweg, weniger Bootstrap | M |
 
 ## P · Backend und Datenmodell
 
@@ -44,6 +45,7 @@ Feature-Branch. Neue Funde während der Migration hier ergänzen.
 | P8 | Sitzende Fremd-Extensions prüfen und ggf. ablösen: `scriptmerger` (Vite), `ps14_theme` (leer), `masi`, `warming`, `typed_extconf` | weniger Abhängigkeiten | S je Extension |
 | P9 | Elements-, Readmore- und alte `tx_foundation_*`-Spalten nach den Wizards per Schemabereinigung entfernen | saubere DB | S |
 | P10 | Prüfen, ob `Ps14\Foundation\DataProcessing\TextImageProcessor` (ps14_foundation) noch benötigt wird. Er erweitert die Galerie von „Text & Bild“ (`textpic`) um Media-Queries je Bild aus TypoScript (`plugin.tx_ps14foundation_textimage.settings.pictureMediaQueries`, begrenzt auf die Spaltenbreite) und erbt vom `ModuleProcessor` nur die Registrierung für die Rendering-Priorität. Alternativen: Media-Queries direkt im Template bzw. über eine Picture-Komponente, Core-`GalleryProcessor` ohne Erweiterung. Hintergrund: fehlender `public`-Eintrag führte zu HTTP 500 auf Seiten mit `textpic` (behoben in 14.0.1) | weniger eigener Code in foundation | S–M |
+| P11 | Vorgaben für Inhaltselemente, die nicht über das Backend-Formular entstehen (DataHandler, MCP, Importe): `tx_foundation_variant` bekommt in der foundation-TCA `'default' => 'default'` (bisher leer → Klassen `ce-frame--variant-` / `ce-<ctype>--`). `frame_class` behält die Core-Vorgabe `default`, die KIST per TSconfig entfernt; dafür `TCAdefaults.tt_content.frame_class = 0` in `ps14_site`. Bis dahin setzen MCP-Anlagen beide Felder explizit (gefunden bei den Beispielseiten, 2026-11-25) | korrekte Klassen ohne Handarbeit | S |
 
 ## R · Altlasten in den geparkten Dateien (Task 6)
 
@@ -52,9 +54,9 @@ in Schritt 2 umsetzen.
 
 | ID | Vorschlag | Betrifft | Aufwand |
 |---|---|---|---|
-| R1 | `fo:settings.get` durch Settings aus dem Template-Kontext bzw. Site Settings ersetzen | Partials Marker, Hero, Teaser, Timeline; Powermail `Form.html` (`pageType.ajaxContent` → `site.settings`) | S–M |
+| R1 | `fo:settings.get` durch Settings aus dem Template-Kontext bzw. Site Settings ersetzen (Marker und Timeline erledigt mit den Content Blocks: `settings` am Inhaltselement) | Partials Hero, Teaser; Powermail `Form.html` (`pageType.ajaxContent` → `site.settings`) | S–M |
 | R2 | Labels aus `EXT:xo` und `EXT:ps14_kist_news` in die Sprachdateien von `ps14_site` (Domain-Syntax) überführen | News `Detail.html`/`List/Item.html`, `Components/Person.html` | S |
-| R3 | `xo:`-Namespace (Altlast der XO-Extension) entfernen und die ViewHelper ersetzen | `Partials/Timeline/Elements.html` | S |
+| R3 | ~~`xo:`-Namespace (Altlast der XO-Extension) entfernen~~ erledigt mit dem Content Block Timeline (2026-11-24) | `Partials/Timeline/Elements.html` | – |
 | R4 | `f:format.raw` in den ke_search-Templates prüfen und, wo möglich, durch sichere Ausgabe ersetzen | `Extensions/KeSearch/Templates/*`, `Partials/*` | S |
 | R5 | `/assets/...`-Pfade im geparkten TypoScript auf Vite umstellen (`vite:asset` im Template statt `importCss`/`importJs`) | `Configuration/TypoScript/Extensions/Step2/{KeSearch,News,Powermail,Pdf}` | S–M |
 

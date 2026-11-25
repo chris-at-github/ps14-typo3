@@ -30,6 +30,7 @@
     },
     "require": {
         "b13/container": "^4.1",
+        "friendsoftypo3/content-blocks": "^2.4",
         "helhum/dotenv-connector": "^3.0",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
@@ -37,6 +38,7 @@
         "ps14/ps14_container": "^14.0@dev",
         "ps14/ps14_foundation": "^14.0@dev",
         "ps14/ps14_menu": "^14.0@dev",
+        "ps14/ps14_modules": "^14.0@dev",
         "ps14/ps14_site": "^14.0@dev",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",
@@ -76,6 +78,7 @@
                     "ps14/ps14_container": "14.x-dev",
                     "ps14/ps14_foundation": "14.x-dev",
                     "ps14/ps14_menu": "14.x-dev",
+                    "ps14/ps14_modules": "14.x-dev",
                     "ps14/ps14_site": "14.x-dev"
                 }
             }
@@ -95,6 +98,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/chris-at-github/ps14-menu.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-modules.git"
         }
     ],
     "prefer-stable": true,

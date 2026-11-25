@@ -1,0 +1,17 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <ul class="accordion">
+            <f:for each="{record.ps14_accordion_items}" as="item">
+                <f:variable name="identifier">{data.uid}-{item.uid}</f:variable>
+                <f:variable name="cssClass">
+                    accordion__item <f:if condition="{item.tx_site_print_break}">print--break-{item.tx_site_print_break}</f:if> <f:if condition="{item.tx_site_print_visibility}">print--visibility-{item.tx_site_print_visibility}</f:if>
+                </f:variable>
+
+                <li class="{cssClass -> fo:format.trim()}">
+                    <f:render partial="Accordion/Listing/Header" section="Main" arguments="{identifier: identifier, title: item.title, titleType: data.tx_foundation_elements_header, expanded: item.active}" />
+                    <f:render partial="Accordion/Listing/Item" section="Main" arguments="{identifier: identifier, item: item, expanded: item.active}" />
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+</div>

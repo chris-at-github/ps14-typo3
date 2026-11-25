@@ -1,5 +1,4 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:layout name="Default" />
 <f:section name="Main">
     <f:if condition="{data.bodytext}">
         <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
@@ -11,13 +10,13 @@
                 <div class="marker--media">
                     <f:render partial="Media/Main" section="Main" arguments="{
                             file: images.0,
-                            settings: '{fo:settings.get(extension: \'Ps14Marker\', path: \'images.aside\')}'
+                            settings: settings.images.aside
                         }" />
                 </div>
             </div>
         </f:if>
 
-        <f:if condition="{elements}">
+        <f:if condition="{record.tx_site_marker_items}">
             <div class="col-lg-6">
                 <f:render section="Listing" arguments="{_all}" />
             </div>
@@ -30,8 +29,8 @@
         <f:render section="SliderNavigation" arguments="{_all}" />
 
         <ol class="marker--legend-slider">
-            <f:for each="{elements}" as="element" iteration="iterator">
-                <f:render section="ListingItem" arguments="{data: data, element: element.data, iterator: iterator, headerLayout: data.tx_foundation_elements_header}" />
+            <f:for each="{record.tx_site_marker_items}" as="element" iteration="iterator">
+                <f:render section="ListingItem" arguments="{data: data, element: element, iterator: iterator, headerLayout: data.tx_foundation_elements_header}" />
             </f:for>
         </ol>
     </div>
@@ -57,8 +56,8 @@
     <div class="slider--navigation slider--navigation-legend">
         <div class="slider--navigation-inner">
             <ul>
-                <f:for each="{elements}" as="item" iteration="iterator">
-                    <li title="{iterator.cycle}: {item.data.title}"><button>{iterator.cycle}</button></li>
+                <f:for each="{record.tx_site_marker_items}" as="item" iteration="iterator">
+                    <li title="{iterator.cycle}: {item.title}"><button>{iterator.cycle}</button></li>
                 </f:for>
             </ul>
         </div>

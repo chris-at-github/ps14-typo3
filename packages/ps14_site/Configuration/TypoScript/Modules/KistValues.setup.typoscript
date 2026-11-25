@@ -1,0 +1,55 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// Firmenwerte (Content Block ps14/kist-values): Kacheln mit Modal
+tt_content.ps14_kist_values =< lib.contentElement
+tt_content.ps14_kist_values {
+  templateName = KistValues
+
+  dataProcessing {
+    10 = record-transformation
+    10.as = record
+  }
+
+  settings.images {
+    listing {
+      maxHeight = 370
+      cropVariant = thumbnail
+      mediaQueries {
+        768 {
+          maxHeight = 260
+          cropVariant = thumbnail
+          mediaQuery = (min-width: 768px)
+        }
+
+        0 {
+          maxWidth = 240
+          cropVariant = thumbnail
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+
+    modal {
+      maxWidth = 280
+      cropVariant = fullsize
+      mediaQueries {
+        992 {
+          maxWidth = 280
+          cropVariant = fullsize
+          mediaQuery = (min-width: 992px)
+        }
+
+        576 {
+          maxWidth = 180
+          cropVariant = fullsize
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          maxWidth = 460
+          cropVariant = fullsize
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+  }
+}

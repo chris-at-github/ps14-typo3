@@ -11,7 +11,8 @@
         "\\.(png|jpe?g|gif|ico|webp|woff2?|ttf|eot|otf|pdf|zip)$",
         "^\\.ddev/",
         "^LICENSE$",
-        "/Resources/Private/Assets/(Scss|Js)/vendors/bootstrap/"
+        "/Resources/Private/Assets/(Scss|Js)/vendors/bootstrap/",
+        "/Resources/Public/ContentBlocks/"
     ],
     "Disable": {
         "MaxLineLength": true

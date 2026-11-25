@@ -66,6 +66,15 @@
       <trans-unit id="tt_content.variant.tabs.radio">
         <target>Radio</target>
       </trans-unit>
+      <trans-unit id="tt_content.variant.marker.image-above">
+        <target>Bild oben</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.marker.image-aside-slider">
+        <target>Bild seitlich mit Slider</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.kist-values.icons">
+        <target>Icons</target>
+      </trans-unit>
       <trans-unit id="tt_content.header-layout.10">
         <target>Container</target>
       </trans-unit>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3252ce683f6872e1c24748ad62b712c3",
+    "content-hash": "6c01e6f52d5c48add3bdcc08d100bd4e",
     "packages": [
         {
             "name": "b13/container",
@@ -942,6 +942,95 @@
                 "source": "https://github.com/googleapis/php-jwt/tree/v7.2.1"
             },
             "time": "2026-09-28T17:51:46+00:00"
+        },
+        {
+            "name": "friendsoftypo3/content-blocks",
+            "version": "2.4.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfTYPO3/content-blocks.git",
+                "reference": "95cd2c8b08ad8afd184142f96bba094c0d9652a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfTYPO3/content-blocks/zipball/95cd2c8b08ad8afd184142f96bba094c0d9652a2",
+                "reference": "95cd2c8b08ad8afd184142f96bba094c0d9652a2",
+                "shasum": ""
+            },
+            "require": {
+                "opis/json-schema": "^2.6",
+                "php": "^8.2",
+                "symfony/console": "^7.4",
+                "symfony/dependency-injection": "^7.4",
+                "symfony/filesystem": "^7.4",
+                "symfony/finder": "^7.4",
+                "symfony/var-exporter": "^7.4 || ^8.0",
+                "symfony/yaml": "^7.4",
+                "typo3/cms-backend": "^14.3.7",
+                "typo3/cms-core": "^14.3.7",
+                "typo3/cms-fluid": "^14.3.7",
+                "typo3/cms-frontend": "^14.3.7"
+            },
+            "replace": {
+                "contentblocks/content-blocks": "*"
+            },
+            "require-dev": {
+                "bnf/phpstan-psr-container": "^1.1",
+                "contentblocks/examples": "@dev",
+                "friendsofphp/php-cs-fixer": "^3.22",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "typo3/cms-extbase": "^14.3.7",
+                "typo3/cms-extensionmanager": "^14.3.7",
+                "typo3/cms-filelist": "^14.3.7",
+                "typo3/cms-install": "^14.3.7",
+                "typo3/cms-lowlevel": "^14.3.7",
+                "typo3/cms-rte-ckeditor": "^14.3.7",
+                "typo3/cms-tstemplate": "^14.3.7",
+                "typo3/cms-workspaces": "^14.3.7",
+                "typo3/coding-standards": "^0.9",
+                "typo3/testing-framework": "^9.5"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "Package": {
+                        "serviceProvider": "TYPO3\\CMS\\ContentBlocks\\ServiceProvider",
+                        "providesPackages": {
+                            "opis/json-schema": "",
+                            "symfony/var-exporter": ""
+                        }
+                    },
+                    "version": "2.4.10",
+                    "web-dir": ".Build/public",
+                    "extension-key": "content_blocks"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\ContentBlocks\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Content Types Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 CMS Content Blocks - Content Types API | Define reusable components via YAML",
+            "homepage": "https://typo3.org",
+            "support": {
+                "chat": "https://typo3.slack.com/archives/C8Z2UM50Q",
+                "docs": "https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/",
+                "issues": "https://github.com/FriendsOfTYPO3/content-blocks/issues",
+                "source": "https://github.com/FriendsOfTYPO3/content-blocks"
+            },
+            "time": "2026-09-22T14:35:10+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2385,16 +2474,16 @@
         },
         {
             "name": "ps14/ps14_foundation",
-            "version": "14.0.0",
+            "version": "14.0.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:chris-at-github/ps14-foundation.git",
-                "reference": "4d2517212afdc2cdcf4c794783ec20ca775c917d"
+                "reference": "8c7d2b71484a572171f40e75e331c65a62835d32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chris-at-github/ps14-foundation/zipball/4d2517212afdc2cdcf4c794783ec20ca775c917d",
-                "reference": "4d2517212afdc2cdcf4c794783ec20ca775c917d",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-foundation/zipball/8c7d2b71484a572171f40e75e331c65a62835d32",
+                "reference": "8c7d2b71484a572171f40e75e331c65a62835d32",
                 "shasum": ""
             },
             "require": {
@@ -2434,10 +2523,10 @@
                 "extension"
             ],
             "support": {
-                "source": "https://github.com/chris-at-github/ps14-foundation/tree/14.0.0",
+                "source": "https://github.com/chris-at-github/ps14-foundation/tree/14.0.1",
                 "issues": "https://github.com/chris-at-github/ps14-foundation/issues"
             },
-            "time": "2026-11-19T21:13:35+00:00"
+            "time": "2026-11-24T05:51:54+00:00"
         },
         {
             "name": "ps14/ps14_menu",
@@ -2492,12 +2581,63 @@
             "time": "2026-11-19T21:13:35+00:00"
         },
         {
+            "name": "ps14/ps14_modules",
+            "version": "14.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chris-at-github/ps14-modules.git",
+                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-modules/zipball/1b24dde52c8ff4d377512cec9023acac9f619920",
+                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920",
+                "shasum": ""
+            },
+            "require": {
+                "friendsoftypo3/content-blocks": "^2.4",
+                "php": "^8.4",
+                "ps14/ps14_foundation": "^14.0",
+                "typo3/cms-core": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_modules"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Content elements (modules) as Content Blocks: accordion, tabs and timeline.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "content-blocks",
+                "extension"
+            ],
+            "support": {
+                "source": "https://github.com/chris-at-github/ps14-modules/tree/14.0.1",
+                "issues": "https://github.com/chris-at-github/ps14-modules/issues"
+            },
+            "time": "2026-11-25T21:46:16+00:00"
+        },
+        {
             "name": "ps14/ps14_site",
             "version": "14.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "8b722a319051b8de377efbbb56df184bbf3b25df"
+                "reference": "e463ead5ab488ab801f2e241c6a44748d1656ff2"
             },
             "require": {
                 "php": "^8.4",
@@ -2505,7 +2645,8 @@
                 "typo3/cms-core": "^14.3"
             },
             "suggest": {
-                "ps14/ps14_image": "^13.0"
+                "ps14/ps14_image": "^13.0",
+                "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards"
             },
             "type": "typo3-cms-extension",
             "extra": {
@@ -10594,7 +10735,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_migration",
-                "reference": "7e3b86a48b09e7b39a8324163559709b7ad1a316"
+                "reference": "8fc286146b6a8a323e3d4c721a4c69b44c501158"
             },
             "require": {
                 "php": "^8.4",
@@ -11953,6 +12094,7 @@
         "ps14/ps14_foundation": 20,
         "ps14/ps14_menu": 20,
         "ps14/ps14_migration": 20,
+        "ps14/ps14_modules": 20,
         "ps14/ps14_site": 20
     },
     "prefer-stable": true,

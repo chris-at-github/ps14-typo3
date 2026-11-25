@@ -1,0 +1,51 @@
+@import 'EXT:ps14_modules/Configuration/TypoScript/setup.typoscript'
+
+// Key 120: 110 belegt ps14_site bereits ueber lib.contentElement (Templates/Content/, Partials/)
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Akkordeon mit KIST-Markup
+tt_content.ps14_accordion {
+  templateRootPaths {
+    120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  }
+
+  partialRootPaths {
+    120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Tabs und Timeline mit KIST-Markup
+tt_content.ps14_tabs {
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+}
+
+tt_content.ps14_timeline {
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+
+  settings.media {
+    maxHeight = 300
+    cropVariant = default
+    mediaQueries {
+      992 {
+        maxHeight = 300
+        cropVariant = default
+        mediaQuery = (min-width: 992px)
+      }
+
+      576 {
+        maxHeight = 200
+        cropVariant = default
+        mediaQuery = (min-width: 576px)
+      }
+
+      0 {
+        maxWidth = 490
+        cropVariant = default
+        mediaQuery = (min-width: 0px)
+      }
+    }
+  }
+}

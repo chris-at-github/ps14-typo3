@@ -1,0 +1,42 @@
+<div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{data.bodytext}">
+            <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+        </f:if>
+
+        <f:if condition="{record.tx_site_kistvalues_items}">
+            <ul class="ce-kist-values__container">
+                <f:for each="{record.tx_site_kistvalues_items}" as="item">
+                    <li class="ce-kist-values__item" id="ce-kist-values__item--{item.uid}" data-color-scheme="{item.color_scheme}">
+                        <button aria-controls="ce-kist-values__modal--{item.uid}">
+                            <f:if condition="{item.media}">
+                                <f:render partial="Media/Main" section="Main" arguments="{file: item.media, settings: settings.images.listing}" />
+                            </f:if>
+
+                            <f:if condition="{item.title}">
+                                <div class="ce-kist-values__item-title">
+                                    <f:switch expression="{data.tx_foundation_elements_header}">
+                                        <f:case value="2">
+                                            <h2>{item.title}</h2>
+                                        </f:case>
+                                        <f:case value="3">
+                                            <h3>{item.title}</h3>
+                                        </f:case>
+                                        <f:case value="4">
+                                            <h4>{item.title}</h4>
+                                        </f:case>
+                                        <f:defaultCase>
+                                            {item.title}
+                                        </f:defaultCase>
+                                    </f:switch>
+                                </div>
+                            </f:if>
+                        </button>
+                    </li>
+                </f:for>
+            </ul>
+
+            <f:render partial="KistValues/Modal/Main" section="Main" arguments="{items: record.tx_site_kistvalues_items, settings: settings}" />
+        </f:if>
+    </f:section>
+</div>
