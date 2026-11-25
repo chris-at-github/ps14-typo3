@@ -123,6 +123,87 @@
       <trans-unit id="menu-subpages.flexform.sorting.title">
         <source>Title</source>
       </trans-unit>
+      <trans-unit id="pages.teaser.title">
+        <source>Teaser title</source>
+      </trans-unit>
+      <trans-unit id="pages.teaser.abstract-long">
+        <source>Long abstract</source>
+      </trans-unit>
+      <trans-unit id="pages.teaser.readmore">
+        <source>Read more text</source>
+      </trans-unit>
+      <trans-unit id="pages.teaser.media-large">
+        <source>Large teaser image</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.sheet.teaser">
+        <source>Teaser</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.readmore-enabled">
+        <source>Show more entries on click</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.readmore-enabled.description">
+        <source>Shows the first three entries, the others after a click on „Load more“.</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type">
+        <source>Abstract</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type.default">
+        <source>Abstract</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type.long">
+        <source>Long abstract</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment">
+        <source>Image position</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment.left">
+        <source>Left</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment.right">
+        <source>Right</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size">
+        <source>Image size</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size.default">
+        <source>Default</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size.small">
+        <source>Small</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment">
+        <source>Text alignment</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment.default">
+        <source>Left</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment.center">
+        <source>Centered</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-enabled">
+        <source>Show subpages</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout">
+        <source>Layout of the subpages</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout.default">
+        <source>List</source>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout.columns">
+        <source>Columns</source>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser">
+        <source>Teaser (cards)</source>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-grey">
+        <source>Teaser: grey container / transparent images</source>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-technology">
+        <source>Teaser: technology</source>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-aside">
+        <source>Teaser: image beside text</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -39,10 +39,10 @@ defined('TYPO3') or die();
     ]);
 
     // -----------------------------------------------------------------------------------------------------------------
-    // Menue der Unterseiten: Sortierung per FlexForm (Auswertung in Configuration/TypoScript/Modules/Menu.setup.typoscript)
-    $GLOBALS['TCA']['tt_content']['types']['menu_subpages']['columnsOverrides']['pi_flexform']['config']['ds'] = 'FILE:EXT:ps14_site/Configuration/FlexForms/Modules/MenuSubpages.xml';
-    $GLOBALS['TCA']['tt_content']['types']['menu_subpages']['columnsOverrides']['pi_flexform']['label'] = ' ';
-    ExtensionManagementUtility::addToAllTCAtypes('tt_content', 'pi_flexform', 'menu_subpages', 'after:pages');
+    // Menues (ps14_menu): Optionen von ps14_menu, Sortierung der Unterseiten und Teaser-Optionen (Ansichten teaser*)
+    foreach (['menu_pages', 'menu_subpages', 'menu_categorized_pages'] as $cType) {
+        $GLOBALS['TCA']['tt_content']['types'][$cType]['columnsOverrides']['pi_flexform']['config']['ds'] = 'FILE:EXT:ps14_site/Configuration/FlexForms/Modules/Menu.xml';
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     // Content Blocks (ContentBlocks/ContentElements): Felder aus ps14_foundation in die Paletten der Basics haengen

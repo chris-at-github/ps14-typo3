@@ -1,0 +1,44 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{menu -> f:count()} > {settings.readmoreLimit} && {options.readmoreEnabled}">
+            <f:then>
+                <div class="readmore-container">
+                    <div class="readmore-container--collapse">
+                        <f:render section="CardContainer" arguments="{_all}" />
+                    </div>
+                    <div class="readmore-container--toggle">
+                        <button class="button"><fo:svg.inline source="EXT:ps14_site/Resources/Private/Assets/Svg/Embed/readmore.svg" /><f:translate key="LLL:EXT:ps14_foundation/Resources/Private/Language/locallang_frontend.xlf:action.loadmore" /></button>
+                    </div>
+                </div>
+            </f:then>
+            <f:else>
+                <f:render section="CardContainer" arguments="{_all}" />
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="CardContainer">
+        <ul class="card--container{f:if(condition: '{menu -> f:count()} > {settings.readmoreLimit} && {options.readmoreEnabled}', then: ' readmore-container--body')}">
+            <f:for each="{menu}" as="page">
+                <li class="card card--layout-1" data-uri-target="{page.link}">
+                    <f:render section="Item" arguments="{page: page, data: data, options: options, settings: settings}" />
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+
+    <f:section name="Item">
+        <f:variable name="title" value="{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}" />
+        <f:variable name="abstract" value="{f:if(condition: '{options.abstractType} == \'long\' && {page.data.tx_site_teaser_abstract_long}', then: page.data.tx_site_teaser_abstract_long, else: page.data.abstract)}" />
+
+        <f:render partial="Components/Card" section="Media" arguments="{media: page.media.0, settings: settings.media.card}" />
+        <f:render partial="Components/Card" section="Badges" arguments="{badges: page.badges}" />
+
+        <div class="card--body">
+            <f:render partial="Components/Card" section="Title" arguments="{title: title, titleType: data.tx_foundation_elements_header, link: page.link}" />
+            <f:if condition="{abstract}">
+                <f:render partial="Components/Card" section="Description" arguments="{description: abstract}" />
+            </f:if>
+        </div>
+    </f:section>
+</html>

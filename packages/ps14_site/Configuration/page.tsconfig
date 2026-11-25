@@ -152,6 +152,24 @@ TCEFORM {
     tx_foundation_variant.types {
       menu_pages.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.1
       menu_subpages.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.1
+      menu_pages.addItems {
+        teaser = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser
+        teaser-grey = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-grey
+        teaser-technology = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-technology
+        teaser-aside = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-aside
+      }
+      menu_subpages.addItems {
+        teaser = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser
+        teaser-grey = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-grey
+        teaser-technology = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-technology
+        teaser-aside = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-aside
+      }
+      menu_categorized_pages.addItems {
+        teaser = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser
+        teaser-grey = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-grey
+        teaser-technology = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-technology
+        teaser-aside = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.menu.teaser-aside
+      }
       powermail_pi1.addItems.1 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.powermail.1
       ps14_timeline.addItems.no-date = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.timeline.no-date
       ps14_tabs.addItems.radio = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.tabs.radio

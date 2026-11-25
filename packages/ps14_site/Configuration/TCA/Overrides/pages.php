@@ -51,4 +51,66 @@ defined('TYPO3') or die();
             'selectedRatio' => '16_9',
         ],
     ]);
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // Teaser (Menue-Ansichten teaser*): eigener Titel, lange Zusammenfassung, Weiterlesen-Text und grosses Bild
+    ExtensionManagementUtility::addTCAcolumns('pages', [
+        'tx_site_teaser_title' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.teaser.title',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim',
+            ],
+        ],
+        'tx_site_teaser_abstract_long' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.teaser.abstract-long',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'ps14Minimal',
+            ],
+        ],
+        'tx_site_teaser_readmore' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.teaser.readmore',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim',
+            ],
+        ],
+        'tx_site_teaser_media_large' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:pages.teaser.media-large',
+            'config' => [
+                'type' => 'file',
+                'maxitems' => 1,
+                'allowed' => 'common-image-types',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+                'overrideChildTca' => [
+                    'columns' => [
+                        'crop' => [
+                            'config' => [
+                                'cropVariants' => TcaService::getCropVariants([
+                                    'default' => [
+                                        'allowedAspectRatios' => ['NaN', '16_9', '4_3'],
+                                        'selectedRatio' => 'NaN',
+                                    ],
+                                ]),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ]);
+
+    ExtensionManagementUtility::addFieldsToPalette('pages', 'foundation_teaser', '--linebreak--, tx_site_teaser_abstract_long,', 'after:abstract');
+    ExtensionManagementUtility::addFieldsToPalette('pages', 'foundation_teaser', 'tx_site_teaser_title, --linebreak--, tx_site_teaser_readmore, --linebreak--', 'before:media');
+    ExtensionManagementUtility::addFieldsToPalette('pages', 'foundation_teaser', '--linebreak--, tx_site_teaser_media_large', 'after:media');
 })();
