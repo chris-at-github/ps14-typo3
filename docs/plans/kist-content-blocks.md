@@ -123,18 +123,19 @@ Nicht Teil dieses Plans:
    Frontend ungeprüft, da KIST sie überschreibt (Beispielseiten Task 8).
 3. Release `ps14_modules` (Push, Tag, VCS-Eintrag, `SHARED_PACKAGES`);
    erst dann `composer.json`/`composer.lock` committen.
-6. Gefunden bei Task 8 (2026-11-25), nicht behoben:
+6. Gefunden bei Task 8 (2026-11-25):
    - Verschachtelte Inhaltselemente (Akkordeon/Tabs, Collection `content`)
-     bekommen beim Anlegen colPos 0 statt 5628 (kein `overrideChildTca`)
-     und werden dadurch zusätzlich frei in der Hauptspalte gerendert.
-     Migrierte Elemente haben 5628. Die Beispiele wurden per MCP auf 5628
-     gesetzt.
+     bekamen beim Anlegen colPos 0 statt 5628 und wurden zusätzlich frei in
+     der Hauptspalte gerendert. Behoben in `ps14_modules`
+     (`overrideChildTca` colPos 5628, Branch `feature/nested-content-colpos`);
+     greift nur im Backend-Formular, MCP/DataHandler setzen colPos selbst.
+     Das Formular zeigt 5628 als „ungültigen Wert“ an (wie bei den
+     migrierten Elementen).
    - Varianten `image-above`/`image-aside-slider` (Marker) und `icons`
-     (Firmenwerte) fehlen in `TCEFORM…tx_foundation_variant.types`:
-     Redakteure können sie im Backend nicht wählen.
+     (Firmenwerte) waren im Backend nicht wählbar. Behoben per Page-TSconfig
+     in `ps14_site`.
    - Per MCP angelegte Elemente bekommen `frame_class = default` und ein
-     leeres `tx_foundation_variant` (TSconfig-Vorgaben greifen nicht);
-     die Beispiele setzen `0`/`default` explizit.
+     leeres `tx_foundation_variant` → Optimierungsliste P11.
 
 ### Risks
 
@@ -182,7 +183,7 @@ Je eine Seite unter „Modules“ [11] per MCP, abgestimmte Varianten.
 | 5 Timeline | erledigt 2026-11-25: 53 Items (de 23 / en 30), 81 Dateireferenzen umgehängt; „Über KIST“ de/en 16 Einträge mit Datum und 22 Bildern, Tech-Center (`no-date`) de 14 / en 7, HTTP 200 nach foundation 14.0.1 | siehe Commits |
 | 6 Marker | erledigt 2026-11-24: Content Block in `ps14_site`, 224 Items (je 112), 3 Varianten; Marker eigenständig und in Akkordeons gerendert | siehe Commits |
 | 7 Firmenwerte | erledigt 2026-11-24: Content Block in `ps14_site`, 38 Items, 63 Dateireferenzen, Farbschemata, Varianten `default`/`icons`, Modal; `/unternehmen/ueber-kist-escherich/unsere-werte` und Stellenangebote de/en HTTP 200 | siehe Commits |
-| 8 Beispielseiten | erledigt 2026-11-25 (nur lokal, verschwinden mit `ddev pull`): unter „Modules“ [11], alle HTTP 200 mit erwartetem Markup. Akkordeon [520] (bestehend) + Element 3068 (Items 1244–1246, erstes offen, verschachtelt 3069); Tabs [714] 3071 default (Text + verschachtelt 3073), 3072 radio (Icons, verschachtelt 3074–3076); Timeline [715] 3078 mit Datum und Bildern, 3079 `no-date`; Marker [716] 3081 default, 3082 `image-above`, 3083 `image-aside-slider`; Firmenwerte [717] 3085 default (12 Schemata inkl. Default), 3086 `icons` (5 Schemata). Befunde siehe Offene Punkte 6 | siehe Commits |
+| 8 Beispielseiten | erledigt 2026-11-25 (nur lokal, verschwinden mit `ddev pull`): unter „Modules“ [11], alle HTTP 200 mit erwartetem Markup. Akkordeon [520] (bestehend) + Element 3068 (Items 1244–1246, erstes offen, verschachtelt 3069); Tabs [714] 3071 default (Text + verschachtelt 3073), 3072 radio (Icons, verschachtelt 3074–3076); Timeline [715] 3078 mit Datum und Bildern, 3079 `no-date`; Marker [716] 3081 default, 3082 `image-above`, 3083 `image-aside-slider`; Firmenwerte [717] 3085 default (12 Schemata inkl. Default), 3086 `icons` (5 Schemata). Befunde und Behebung siehe Offene Punkte 6 | siehe Commits |
 | 9 Bereinigung | 2026-11-25: Step2-Dateien der fünf Module entfernt, geparkte Partials übernommen, Readme `ps14_migration`, Optimierungsliste (O19, R1, R3). `MIGRATION_SKIP_COLUMNS` mit `record_type` **bleibt**: Elements werden noch für den Produktkatalog (258) und Hero (22) gebraucht → Folgepläne | siehe Commits |
 | Test | 2026-11-25: `ps14-migrate` auf frischem Dump, Exit 0, alle Wizards, Zahlen wie oben; Druckwerte erst nach Wizard-Korrektur (`updateNecessary` vor Items) | siehe Commits |
 
