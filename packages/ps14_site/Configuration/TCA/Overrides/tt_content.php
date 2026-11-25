@@ -63,4 +63,7 @@ defined('TYPO3') or die();
             'selectedRatio' => '4_3',
         ],
     ]);
+
+    // Hero (Content Block aus ps14_modules): Text mit dem reduzierten Editor wie in KIST v12
+    $GLOBALS['TCA']['tt_content']['types']['ps14_hero']['columnsOverrides']['bodytext']['config']['richtextConfiguration'] = 'ps14Minimal';
 })();

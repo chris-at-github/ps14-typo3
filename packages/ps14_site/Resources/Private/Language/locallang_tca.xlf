@@ -72,6 +72,9 @@
       <trans-unit id="tt_content.variant.marker.image-aside-slider">
         <source>Image Aside with Slider</source>
       </trans-unit>
+      <trans-unit id="tt_content.variant.hero.16-9">
+        <source>16:9</source>
+      </trans-unit>
       <trans-unit id="tt_content.variant.kist-values.icons">
         <source>Icons</source>
       </trans-unit>

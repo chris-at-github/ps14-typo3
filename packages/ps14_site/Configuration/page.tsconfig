@@ -131,7 +131,6 @@ TCEFORM {
       // Layout 4 (z. B. Hero) nur fuer bestimmte Inhaltstypen
       types {
         ps14_hero.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
-        ps14_hero_slider.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
         textmedia.addItems.4 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.layout.4
       }
     }
@@ -160,6 +159,7 @@ TCEFORM {
         image-above = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.marker.image-above
         image-aside-slider = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.marker.image-aside-slider
       }
+      ps14_hero.addItems.16-9 = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.hero.16-9
       ps14_kist_values.addItems.icons = LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:tt_content.variant.kist-values.icons
     }
   }
@@ -171,9 +171,10 @@ TCAdefaults.tt_content {
   layout.types.text = 1
 
   header_layout.types.ps14_hero = 100
-  header_layout.types.ps14_hero_slider = 100
   layout.types.ps14_hero = 4
-  layout.types.ps14_hero_slider = 4
+  space_before_class.types.ps14_hero = none
+  space_after_class.types.ps14_hero = none
+  tx_foundation_variant.types.ps14_hero = 16-9
 
   frame_class.types.entityproduct_keyfacts = 2
   space_before_class.types.entityproduct_keyfacts = medium

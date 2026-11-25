@@ -72,6 +72,9 @@
       <trans-unit id="tt_content.variant.marker.image-aside-slider">
         <target>Bild seitlich mit Slider</target>
       </trans-unit>
+      <trans-unit id="tt_content.variant.hero.16-9">
+        <target>16:9</target>
+      </trans-unit>
       <trans-unit id="tt_content.variant.kist-values.icons">
         <target>Icons</target>
       </trans-unit>

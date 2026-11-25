@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+    <f:section name="Header" />
+    <f:section name="Main">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Scss/modules/hero.scss" />
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Js/modules/hero.js" />
+
+        <f:render partial="Hero/Item/Main" section="Main" arguments="{
+            data: data,
+            header: data.header,
+            headerLayout: data.header_layout,
+            text: data.bodytext,
+            media: images.0,
+            settings: settings.images.hero
+        }" />
+    </f:section>
+</html>
