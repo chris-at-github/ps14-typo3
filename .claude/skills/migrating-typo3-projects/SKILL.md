@@ -78,6 +78,12 @@ Plans live in `<project>/docs/plans/`, one feature branch per task.
   runs on the server (credentials: `.env` first, then `additional.php`;
   password never on the command line). Reserve `prod` for the new production.
 - Test the provider without a dump first (check mode, `rsync -n`).
+- Every pull replaces `be_users` and with it the in2mcp API key (hash in
+  `be_users.in2mcp_apikey`). Afterwards create a new key and register the
+  server again, passing the key through a shell variable — never print it:
+  `ddev typo3 in2mcp:apikey <user>`, then `claude mcp remove in2mcp -s local`
+  and `claude mcp add --transport http --scope local in2mcp <url>/typo3/mcp
+  --header "Api-Key: $KEY"`. A running session needs a restart.
 
 ### 5. Data takeover
 
@@ -95,6 +101,10 @@ ddev exec vendor/bin/ps14-migrate
   the column in `MIGRATION_SKIP_COLUMNS`.
 - Generic wizards/SQL belong into `ps14_migration`, project-specific ones into
   `ps14_site/Classes/Upgrades/` and `config/migration/sql/`.
+- Project wizards never extend or use classes of `ps14_migration`: the
+  package is require-dev, the deployment installs `--no-dev`, and a missing
+  parent class breaks the DI container. Copy a base class into `ps14_site`
+  instead (e.g. `AbstractElementsMigration`).
 - Every field change is a **wizard**, even a plain column-to-column copy.
   SQL only for steps before the schema update (pre) and for cleanup (post).
 - Project wizards run after the package wizards only if `ps14_site` suggests
@@ -114,6 +124,12 @@ ddev exec vendor/bin/ps14-migrate
 ### 6. Verify
 
 - Script output: no failed wizard, `upgrade:list` empty, check URLs 200.
+- While developing a wizard, test it without a fresh dump:
+  `ddev typo3 ps14:migration:update-schema --skip=<table>.<column>` (same
+  skips as `MIGRATION_SKIP_COLUMNS`), `ddev typo3 upgrade:run <identifier>`,
+  `ddev typo3 upgrade:mark:undone <identifier>` to repeat it. The final proof
+  is always `ps14-migrate` on a fresh dump (wizard order, `updateNecessary()`
+  before other wizards ran).
 - HTTP status of all pages of the main, meta and footer navigation, old vs.
   new; open every page type and every used CType at least once.
 - Markup samples per CType against the old site; TYPO3 log without errors.
@@ -138,12 +154,13 @@ ddev exec vendor/bin/ps14-migrate
 | Values like `container` or element types become `0` | Schema change VARCHAR → INT from TCA (select with numeric items) | Convert in pre SQL (e.g. `container` → `10`) or `MIGRATION_SKIP_COLUMNS`; fix the definition |
 | `sys_reaction`: "only one auto column" | Table created by EXT:external_import without `uid` | Generic pre SQL in `ps14_migration` |
 | Index error in the first schema pass | Index on a column added in the same pass | Second pass (automatic in `ps14-migrate`) |
-| HTTP 500 on pages with a CType, `Too few arguments … __construct()` | Data processor with constructor dependencies not `public` in `Services.yaml` | Make it public in the package, release |
+| HTTP 500 on pages with a CType, `Too few arguments … __construct()` | Data processor with constructor dependencies not `public` in `Services.yaml`. The message names the class that **declares** the constructor — often the parent (`TextImageProcessor extends ModuleProcessor` reports `ModuleProcessor`) | Check every subclass (`grep -rn 'extends .*Processor' Classes/DataProcessing`), make them public in the package, release |
 | Menus/elements with template markup instead of the old one | Template package registers its own `templateRootPaths` | Override with a higher key in `ps14_site` |
 | A project wizard never ran but is marked done | `upgrade:run` asks `updateNecessary()` of **all** wizards before running the first and marks the others done | Load order (`ps14_site` suggests `ps14/ps14_migration`) **and** `updateNecessary()` must already be true before the package wizard created its data (e.g. count source rows whose target is still missing) |
 | `Illegal mix of collations` in post SQL | New tables (`utf8mb4_unicode_520_ci`) compared with old ones (`utf8mb4_unicode_ci`) | Wizard instead of SQL; no string comparison across tables |
 | Pre SQL fails on a repeated run (`Truncated incorrect DECIMAL value`) | The column is already INT after the first run | `WHERE CAST(col AS CHAR) = '…'` |
 | Content Block: `field "…" is missing the required "type"` | `useExistingField` on a field created in another extension's TCA overrides | Add it with `addFieldsToPalette` (see `content-blocks.md`) |
+| MCP fails after `ddev pull` with `Dynamic Client Registration rejected (HTTP 404)` | API key in `be_users` was replaced by the production data; the client falls back to OAuth | New key + register again (step 4) |
 | Wizard counts higher than expected | Wizards remove all restrictions (deleted/hidden rows included) | Expected; compare with `deleted = 0` |
 | Different numbers than in the old local site | Local old instance has an older data state | Always compare against the production dump |
 | Remote PHP script stops after the first `exec()` | Script read from STDIN (`php -- … < file`), child consumes STDIN; `STDERR` undefined | Copy the script into a temp file on the server first |
