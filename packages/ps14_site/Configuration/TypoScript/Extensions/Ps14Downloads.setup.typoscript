@@ -1,0 +1,5 @@
+@import 'EXT:ps14_downloads/Configuration/TypoScript/setup.typoscript'
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Dateilinks mit KIST-Markup: Template per Key 120, Partials Downloads/* aus ps14_site (Key 110) inkl. „Seite als PDF“
+tt_content.uploads.templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Downloads/Templates/Content/
