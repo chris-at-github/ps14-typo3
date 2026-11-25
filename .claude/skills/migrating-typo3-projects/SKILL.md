@@ -140,7 +140,7 @@ ddev exec vendor/bin/ps14-migrate
 | Index error in the first schema pass | Index on a column added in the same pass | Second pass (automatic in `ps14-migrate`) |
 | HTTP 500 on pages with a CType, `Too few arguments … __construct()` | Data processor with constructor dependencies not `public` in `Services.yaml` | Make it public in the package, release |
 | Menus/elements with template markup instead of the old one | Template package registers its own `templateRootPaths` | Override with a higher key in `ps14_site` |
-| A project wizard never ran but is marked done | `upgrade:run` marks wizards whose `updateNecessary()` is false as done; project wizards ran before the package wizard they depend on | `ps14_site` suggests `ps14/ps14_migration` (load order), check `upgrade:list --all` |
+| A project wizard never ran but is marked done | `upgrade:run` asks `updateNecessary()` of **all** wizards before running the first and marks the others done | Load order (`ps14_site` suggests `ps14/ps14_migration`) **and** `updateNecessary()` must already be true before the package wizard created its data (e.g. count source rows whose target is still missing) |
 | `Illegal mix of collations` in post SQL | New tables (`utf8mb4_unicode_520_ci`) compared with old ones (`utf8mb4_unicode_ci`) | Wizard instead of SQL; no string comparison across tables |
 | Pre SQL fails on a repeated run (`Truncated incorrect DECIMAL value`) | The column is already INT after the first run | `WHERE CAST(col AS CHAR) = '…'` |
 | Content Block: `field "…" is missing the required "type"` | `useExistingField` on a field created in another extension's TCA overrides | Add it with `addFieldsToPalette` (see `content-blocks.md`) |
