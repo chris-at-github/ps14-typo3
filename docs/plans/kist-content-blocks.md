@@ -142,8 +142,12 @@ Nicht Teil dieses Plans:
 - Verschachtelte Elemente (colPos 5628, `tx_foundation_parent`) sind der aufwendigste
   Teil; Marker und Downloads in Akkordeons hängen davon ab.
 - Lokale Beispielseiten gehen bei jedem `ddev pull prod-v12` verloren (Datenbank wird
-  ersetzt). Für dauerhafte Beispiele: Inhalte nach Go-Live anlegen oder per Skript
-  wiederherstellbar machen.
+  ersetzt). Entscheidung 2026-11-25: bis zum Go-Live beschreibt
+  `docs/examples/content-blocks.yaml` alle Beispielinhalte; nach jedem Pull legt
+  Claude sie daraus per MCP neu an. **Go-Live-Schritt:** die Seiten einmal in der
+  Produktion anlegen (`in2mcp-prod`, nur auf ausdrückliche Anweisung) und
+  „Modules“ [11] aus Menü und Suchindex nehmen (dort `nav_hide = 0`,
+  `no_index = 0`); danach kommen sie mit jedem Pull mit.
 - CType-Wechsel auf das Content-Blocks-Schema (`vendor_name`) würde Inhalte,
   TSconfig und Rechte betreffen.
 

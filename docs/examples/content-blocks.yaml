@@ -1,0 +1,353 @@
+# Beispielseiten der Content Blocks (KIST, Schritt 2.1, Task 8)
+#
+# Zweck: Nach jedem `ddev pull prod-v12` die Beispielseiten unter „Modules“
+# [11] per MCP (`in2mcp`) neu anlegen. Nach dem Go-Live werden die Seiten
+# einmal in der Produktion angelegt; danach kommen sie mit jedem Pull mit und
+# diese Datei dient nur noch als Vorlage.
+#
+# Ablauf für Claude (nur MCP, kein SQL):
+# 1. Prüfen, ob die Seiten schon existieren (`search_pages` nach Slug).
+# 2. Seiten unter `parent` anlegen (`create_page`, Felder aus `page`);
+#    existiert eine Seite (`existing: true`), nur die Elemente ergänzen.
+# 3. Elemente in der angegebenen Reihenfolge anlegen
+#    (`create_content_element`), `defaults` immer mitgeben: MCP übernimmt
+#    die TSconfig-Vorgaben für `frame_class`/`tx_foundation_variant` nicht
+#    (Optimierung P11).
+# 4. Items per `add_child_record` (Feld `items_field`), verschachtelte
+#    Inhaltselemente per `add_child_record` am Item (Feld `content`) mit
+#    `colPos: 5628` — die Vorgabe aus `overrideChildTca` greift nur im
+#    Backend-Formular.
+# 5. Dateien per `search_files` (Pfad) suchen und mit `add_file_reference`
+#    an das Feld hängen.
+# 6. `ddev typo3 cache:flush`, jede Seite unter `/de/<slug>` auf HTTP 200
+#    und erwartetes Markup prüfen, neue UIDs im Plan
+#    `docs/plans/kist-content-blocks.md` (Status Task 8) nachtragen.
+
+parent: 11
+
+defaults:
+  page:
+    hidden: 0
+    no_index: 1
+    no_search: 1
+  content:
+    frame_class: '0'
+    tx_foundation_variant: default
+  nested:
+    colPos: 5628
+    frame_class: '0'
+    tx_foundation_variant: default
+    header_layout: 100
+
+pages:
+  - title: Akkordeon
+    slug: /modules/akkordeon
+    existing: true
+    content:
+      - CType: ps14_accordion
+        fields:
+          header: 'Variante: Text und verschachtelte Inhalte, erstes Item initial offen'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          bodytext: >-
+            <p>Akkordeon mit zwei Text-Items und einem Item mit
+            verschachtelten Inhaltselementen. Nur das erste Item ist beim
+            Laden geöffnet.</p>
+        items_field: ps14_accordion_items
+        items:
+          - record_type: text
+            title: Reinigung im Trockenverfahren
+            active: 1
+            description: >-
+              <p>Bauteile werden ohne Flüssigkeiten gereinigt. Eine
+              integrierte Ionisierung neutralisiert die elektrostatischen
+              Bindungskräfte zwischen Staub und Oberfläche.</p><ul><li>keine
+              Trocknungszeit</li><li>sauberer Arbeitsplatz</li><li>geringer
+              Energiebedarf</li></ul>
+          - record_type: text
+            title: Einsatzgebiete
+            active: 0
+            description: >-
+              <p>Die Anlagen eignen sich für Kunststoff-, Metall- und
+              Glasbauteile vor dem Lackieren, Bedrucken oder Verkleben.</p>
+          - record_type: content
+            title: Funktionsprinzip
+            active: 0
+            content:
+              - CType: text
+                header: Ionisierung und Absaugung
+                bodytext: >-
+                  <p>Druckluft löst die Partikel von der Oberfläche,
+                  ionisierte Luft verhindert die erneute Anhaftung. Die
+                  Absaugung führt den Staub direkt ab.</p>
+
+  - title: Tabs
+    slug: /modules/tabs
+    content:
+      - CType: header
+        fields: {header: Tabs, header_layout: 1, layout: 1}
+      - CType: ps14_tabs
+        fields:
+          header: 'Variante: Standard'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+        items_field: ps14_tabs_items
+        items:
+          - record_type: text
+            title: Beschreibung
+            active: 1
+            description: >-
+              <p>Die Reinigungsanlage entfernt Staub und Partikel trocken und
+              berührungslos von empfindlichen Oberflächen.</p>
+          - record_type: text
+            title: Technische Daten
+            active: 0
+            description: >-
+              <ul><li>Arbeitsbreite: 600 mm</li><li>Druckluftbedarf:
+              6 bar</li><li>Anschlussspannung: 230 V</li></ul>
+          - record_type: content
+            title: Anwendung
+            active: 0
+            content:
+              - CType: text
+                header: Anwendung
+                bodytext: >-
+                  <p>Typische Anwendungen sind die Vorbehandlung vor dem
+                  Lackieren sowie die Endreinigung vor der Montage.</p>
+      - CType: ps14_tabs
+        fields:
+          header: 'Variante: Auswahl mit Icons (radio)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          tx_foundation_variant: radio
+          space_before_class: large
+        items_field: ps14_tabs_items
+        items:
+          - record_type: content
+            title: Störung oder Fehler melden
+            active: 1
+            files:
+              thumbnail: /Bilder/06_Service/Icons/stoerung-fehler.svg
+            content:
+              - CType: text
+                header: Störung melden
+                bodytext: >-
+                  <p>Beschreiben Sie die Störung möglichst genau und nennen
+                  Sie die Seriennummer Ihrer Anlage. Unser Service meldet
+                  sich umgehend.</p>
+          - record_type: content
+            title: Ersatzteil oder Reparatur anfragen
+            active: 0
+            files:
+              thumbnail: /Bilder/06_Service/Icons/ersatzteil-reperatur.svg
+            content:
+              - CType: text
+                header: Ersatzteil anfragen
+                bodytext: >-
+                  <p>Nennen Sie uns die Artikelnummer des Ersatzteils oder
+                  beschreiben Sie den Reparaturbedarf.</p>
+          - record_type: content
+            title: Technische Dokumente anfordern
+            active: 0
+            files:
+              thumbnail: /Bilder/06_Service/Icons/anfrage-dokumentation.svg
+            content:
+              - CType: text
+                header: Dokumente anfordern
+                bodytext: >-
+                  <p>Betriebsanleitungen, Datenblätter und
+                  Konformitätserklärungen senden wir Ihnen gerne zu.</p>
+
+  - title: Timeline
+    slug: /modules/timeline
+    content:
+      - CType: header
+        fields: {header: Timeline, header_layout: 1, layout: 1}
+      - CType: ps14_timeline
+        fields:
+          header: 'Variante: Standard mit Datum'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          bodytext: <p>Meilensteine mit Jahreszahl, Text und Bildern.</p>
+        items_field: ps14_timeline_items
+        items:
+          - date: '1973'
+            title: Der Grundstein wird gelegt
+            description: <p>Gründung des Unternehmens in München.</p>
+            files:
+              media:
+                - /Bilder/04_Unternehmen/company_milestones/Dr._Escherich2_O.jpg
+          - date: '1984'
+            title: Erste Eigenentwicklung
+            description: <p>Markteinführung des ersten selbst entwickelten Geräts.</p>
+            files:
+              media:
+                - /Bilder/04_Unternehmen/company_milestones/Dr_Escherich_Messe_1984.jpg
+                - /Bilder/04_Unternehmen/company_milestones/Dr_Escherich_2.jpg
+          - date: '2000'
+            title: Automatisierte Reinigungstechnologie
+            description: <p>Die erste vollautomatische Reinigungsanlage geht in Serie.</p>
+            files:
+              media:
+                - /Bilder/04_Unternehmen/company_milestones/Ausbau-internationales-Vertriebsnetz.jpg
+      - CType: ps14_timeline
+        fields:
+          header: 'Variante: Ohne Datum (no-date)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          tx_foundation_variant: no-date
+          space_before_class: large
+          bodytext: <p>Ablauf in Schritten ohne Jahreszahl.</p>
+        items_field: ps14_timeline_items
+        items:
+          - title: Anfrage
+            description: <p>Sie schildern uns Ihre Reinigungsaufgabe und senden Musterbauteile.</p>
+          - title: Versuch im Tech-Center
+            description: <p>Wir testen die Bauteile auf unseren Anlagen und dokumentieren die Ergebnisse.</p>
+          - title: Angebot
+            description: <p>Sie erhalten ein auf Ihre Anwendung zugeschnittenes Angebot.</p>
+
+  - title: Marker
+    slug: /modules/marker
+    content:
+      - CType: header
+        fields: {header: Marker, header_layout: 1, layout: 1}
+      - CType: ps14_marker
+        fields:
+          header: 'Variante: Standard (Bild neben Legende)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          bodytext: <p>Funktionsprinzip mit nummerierter Legende neben dem Bild.</p>
+        files:
+          image: /Bilder/02_Technologien/TAIFUN-CLEAN/Fktprinzip_TAIFUN-CLEAN.png
+        items_field: tx_site_marker_items
+        items:
+          - title: Zu reinigendes Bauteil
+          - title: Ionisation
+            description: <p>Elektrostatische Bindekräfte zwischen Bauteil und Partikel werden aufgehoben.</p>
+          - title: Rotationsdüsen
+            description: <p>Druckluftbetriebene Düsen lösen die Partikel von der Oberfläche.</p>
+      - CType: ps14_marker
+        fields:
+          header: 'Variante: Bild oben (image-above)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          tx_foundation_variant: image-above
+          space_before_class: large
+        files:
+          image: /Bilder/02_Technologien/ELEPHANT/Fktprinzip_ELEPHANT.png
+        items_field: tx_site_marker_items
+        items:
+          - title: Elektrostatik
+            description: <p>Lösungen zur Kontrolle elektrostatischer Effekte.</p>
+          - title: Oberflächenreinigung
+            description: <p>Von Standardlösungen bis zu spezialisierten Applikationen.</p>
+          - title: Absaugtechnik
+            description: <p>Absauganlagen für unterschiedliche Leistungs- und Filterstufen.</p>
+      - CType: ps14_marker
+        fields:
+          header: 'Variante: Bild seitlich mit Slider (image-aside-slider)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          tx_foundation_variant: image-aside-slider
+          space_before_class: large
+        files:
+          image: /Bilder/02_Technologien/TAIFUN-CLEAN/Anlagenaufbau_TAIFUN-CLEAN.png
+        items_field: tx_site_marker_items
+        items:
+          - title: Reinigungssystem
+            description: <p>Wird mit der erforderlichen Arbeitsbreite in die Linie integriert.</p>
+          - title: Absaug-, Filter- und Versorgungseinheit
+            description: <p>Die Absaugleistung richtet sich nach der Arbeitsbreite.</p>
+          - title: Steuerung
+            description: <p>Bedienung und Überwachung über ein zentrales Bedienpanel.</p>
+
+  - title: Firmenwerte
+    slug: /modules/firmenwerte
+    content:
+      - CType: header
+        fields: {header: Firmenwerte, header_layout: 1, layout: 1}
+      - CType: ps14_kist_values
+        fields:
+          header: 'Variante: Standard mit Bildern (Farbschemata der Werte)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+        items_field: tx_site_kistvalues_items
+        items:
+          - title: Qualität ist kein Zufall (Default)
+            color_scheme: ''
+            description: <p>Qualität ist das Ergebnis angestrengten Denkens.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/Qualitaet_kein_Zufall.png}
+          - title: Enkelgerechtes Handeln (green-white)
+            color_scheme: green-white
+            description: <p>Wir agieren in allen Geschäftsbereichen nachhaltig.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Enkelgerechtes_Handeln.png}
+          - title: Das Auge isst mit (white-black)
+            color_scheme: white-black
+            description: <p>Wir legen Wert auf gutes Design.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/08.KIST-ESCHERICH_das_auge_isst_mit.jpg}
+          - title: Haltung bewahren (purple-white)
+            color_scheme: purple-white
+            description: <p>Fairness, Loyalität und Ehrlichkeit prägen unser Handeln.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Haltung_Bewahren.png}
+          - title: Mit offenem Herz und Horizont (blue-white)
+            color_scheme: blue-white
+            description: <p>Unser Unternehmen folgt einzigartigen Prinzipien.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Herz_Horizont.png}
+          - title: Der Markt macht die Musik (yellow-white)
+            color_scheme: yellow-white
+            description: <p>Wir machen das Leben unserer Kunden mit innovativen Lösungen einfacher.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Markt_Musik.png}
+          - title: Menschsein im Mittelpunkt (red-white)
+            color_scheme: red-white
+            description: <p>Bei uns steht der Mensch im Mittelpunkt.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Menschsein.png}
+          - title: Uns interessieren Produktlösungen (darkgrey-white)
+            color_scheme: darkgrey-white
+            description: <p>Wir investieren überdurchschnittlich in Entwicklung.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Produktloesungen.png}
+          - title: Jeden Tag ein bisschen besser (orange-white)
+            color_scheme: orange-white
+            description: <p>Wir verbessern uns kontinuierlich.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Tag_Besser.png}
+          - title: Unabhängig erfolgreich (turquoise-white)
+            color_scheme: turquoise-white
+            description: <p>Als unabhängiges Familienunternehmen denken wir langfristig.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Unabhaengig_Erfolgreich.png}
+          - title: Wir probieren neue Sachen aus (white-primary)
+            color_scheme: white-primary
+            description: <p>Wir entwickeln unsere Kernkompetenzen weiter.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Neue_Sachen_Probieren.png}
+          - title: Gemeinsam stark (white-secondary)
+            color_scheme: white-secondary
+            description: <p>Wir arbeiten partnerschaftlich mit Kunden und Lieferanten.</p>
+            files: {media: /Bilder/04_Unternehmen/company_values/company_values_dt/Enkelgerechtes_Handeln.png}
+      - CType: ps14_kist_values
+        fields:
+          header: 'Variante: Icons (Farbschemata der Benefits)'
+          header_layout: 2
+          tx_foundation_elements_header: auto
+          tx_foundation_variant: icons
+          space_before_class: large
+        items_field: tx_site_kistvalues_items
+        items:
+          - title: Sicheres Arbeitsverhältnis (primary-default)
+            color_scheme: primary-default
+            description: <p>Profitieren Sie von einem langfristigen Arbeitsverhältnis.</p>
+            files: {media: /Bilder/04_Unternehmen/career/benefits/factory-svgrepo-com.svg}
+          - title: Flexible Arbeitszeitmodelle (primary-light)
+            color_scheme: primary-light
+            description: <p>Passen Sie Ihre Arbeitszeiten individuell an.</p>
+            files: {media: /Bilder/04_Unternehmen/career/benefits/signpost-split-svgrepo-com.svg}
+          - title: Innovatives Umfeld (secondary-default)
+            color_scheme: secondary-default
+            description: <p>Arbeiten Sie mit modernsten Technologien.</p>
+            files: {media: /Bilder/04_Unternehmen/career/benefits/idea-bulb-glow-svgrepo-com.svg}
+          - title: Home-Office-Möglichkeiten (secondary-light)
+            color_scheme: secondary-light
+            description: <p>Abhängig von der Tätigkeit arbeiten Sie auch von zu Hause.</p>
+            files: {media: /Bilder/04_Unternehmen/career/benefits/home-wifi-home-wifi-connection-home-internet-svgrepo-com.svg}
+          - title: Familiäres Betriebsklima (grey-default)
+            color_scheme: grey-default
+            description: <p>Arbeiten Sie in einem Team, das auf gegenseitige Unterstützung setzt.</p>
+            files: {media: /Bilder/04_Unternehmen/career/benefits/happy-smile-smile-face-icon-svgrepo-com.svg}
