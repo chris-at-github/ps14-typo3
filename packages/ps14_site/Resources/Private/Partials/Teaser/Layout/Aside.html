@@ -41,9 +41,16 @@
 
     <f:section name="MediaContainer">
         <f:if condition="{page.media.0}">
-            <f:link.typolink parameter="{page.link}" class="teaser--media" additionalAttributes="{'tabindex': '-1'}">
-                <f:render partial="Media/Main" section="Main" arguments="{file: page.media.0, settings: settings}" />
-            </f:link.typolink>
+            <f:if condition="{page.data.tx_foundation_navigation_not_linked}">
+                <f:then>
+                    <div class="teaser--media"><f:render partial="Media/Main" section="Main" arguments="{file: page.media.0, settings: settings}" /></div>
+                </f:then>
+                <f:else>
+                    <f:link.typolink parameter="{page.link}" class="teaser--media" additionalAttributes="{'tabindex': '-1'}">
+                        <f:render partial="Media/Main" section="Main" arguments="{file: page.media.0, settings: settings}" />
+                    </f:link.typolink>
+                </f:else>
+            </f:if>
         </f:if>
     </f:section>
 
@@ -51,13 +58,20 @@
         <f:variable name="title" value="{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}" />
         <header class="teaser--title">
             <f:switch expression="{data.tx_foundation_elements_header}">
-                <f:case value="1"><h1><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></h1></f:case>
-                <f:case value="2"><h2><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></h2></f:case>
-                <f:case value="3"><h3><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></h3></f:case>
-                <f:case value="4"><h4><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></h4></f:case>
-                <f:defaultCase><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></f:defaultCase>
+                <f:case value="1"><h1><f:render section="TitleInner" arguments="{page: page, title: title}" /></h1></f:case>
+                <f:case value="2"><h2><f:render section="TitleInner" arguments="{page: page, title: title}" /></h2></f:case>
+                <f:case value="3"><h3><f:render section="TitleInner" arguments="{page: page, title: title}" /></h3></f:case>
+                <f:case value="4"><h4><f:render section="TitleInner" arguments="{page: page, title: title}" /></h4></f:case>
+                <f:defaultCase><f:render section="TitleInner" arguments="{page: page, title: title}" /></f:defaultCase>
             </f:switch>
         </header>
+    </f:section>
+
+    <f:section name="TitleInner">
+        <f:if condition="{page.data.tx_foundation_navigation_not_linked}">
+            <f:then>{title}</f:then>
+            <f:else><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></f:else>
+        </f:if>
     </f:section>
 
     <f:section name="Abstract">
@@ -68,8 +82,10 @@
     </f:section>
 
     <f:section name="Readmore">
+        <f:if condition="!{page.data.tx_foundation_navigation_not_linked}">
         <f:variable name="title" value="{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}" />
         <f:link.typolink class="link--cta teaser--readmore" parameter="{page.link}" additionalAttributes="{'tabindex': '-1'}">{f:if(condition: page.data.tx_site_teaser_readmore, then: page.data.tx_site_teaser_readmore, else: title)}</f:link.typolink>
+        </f:if>
     </f:section>
 
     <f:section name="Subpages">

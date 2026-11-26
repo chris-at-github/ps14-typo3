@@ -54,6 +54,11 @@
         container.classList.add('video--paused');
         container.classList.remove('video--played');
       });
+
+      // Autoplay (stumm) startet oft, bevor dieses Modul geladen ist: das Play-Event ist dann schon vorbei
+      if(player.paused === false) {
+        player.dispatchEvent(new Event('play'));
+      }
     });
   });
 })();
