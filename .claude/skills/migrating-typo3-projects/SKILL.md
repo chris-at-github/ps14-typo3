@@ -81,9 +81,11 @@ Plans live in `<project>/docs/plans/`, one feature branch per task.
 - Every pull replaces `be_users` and with it the in2mcp API key (hash in
   `be_users.in2mcp_apikey`). Afterwards create a new key and register the
   server again, passing the key through a shell variable — never print it:
-  `ddev typo3 in2mcp:apikey <user>`, then `claude mcp remove in2mcp -s local`
-  and `claude mcp add --transport http --scope local in2mcp <url>/typo3/mcp
-  --header "Api-Key: $KEY"`. A running session needs a restart.
+  `KEY=$(ddev typo3 in2mcp:apikey <user> | tr -d '\r' | grep -oE
+  '^1\.[^[:space:]]+')` (the key contains special characters), then
+  `claude mcp remove in2mcp -s local` and `claude mcp add --transport http
+  --scope local in2mcp <url>/typo3/mcp --header "X-Api-Key: $KEY"`. A running
+  session needs a restart.
 
 ### 5. Data takeover
 
@@ -133,6 +135,9 @@ ddev exec vendor/bin/ps14-migrate
 - HTTP status of all pages of the main, meta and footer navigation, old vs.
   new; open every page type and every used CType at least once.
 - Markup samples per CType against the old site; TYPO3 log without errors.
+- Compare markup with the live site per element id and in every language:
+  normalise whitespace, hide SVGs, compare JSON-LD as parsed data instead of
+  text. Old bugs that are fixed on purpose go into the plan as deviations.
 - Browser check by the user (layout, JS); later visual regression with
   Playwright.
 
@@ -163,6 +168,12 @@ ddev exec vendor/bin/ps14-migrate
 | MCP fails after `ddev pull` with `Dynamic Client Registration rejected (HTTP 404)` | API key in `be_users` was replaced by the production data; the client falls back to OAuth | New key + register again (step 4) |
 | Wizard counts higher than expected | Wizards remove all restrictions (deleted/hidden rows included) | Expected; compare with `deleted = 0` |
 | Different numbers than in the old local site | Local old instance has an older data state | Always compare against the production dump |
+| Wizard copies rows, but the target only has empty records with new uids; a second run skips them (uids taken) | DBAL 4: `Table::getColumns()` returns a list without column names as keys, the intersection with the row is empty | Fixed column list per table; repeat on a fresh dump |
+| `Truncated incorrect DECIMAL value: ''` in a wizard UPDATE | Strict mode: INT column (e.g. inline counter) compared with `''` | Conditions per field type: numbers with `0`, strings with `''` |
+| Translated elements render empty, the default language works | v12 elements of a translation selected the translated record directly (e.g. address 103 instead of 14); Extbase accepted it | Processor resolves the selection via `l10n_parent` to the original, then applies the language overlay |
+| `50.97784000` instead of `50.97784` in links or JSON-LD | v12 Extbase models returned floats, raw rows return the DECIMAL string | Cast to float in the processor |
+| `settings.php` suddenly contains local values (e.g. in2mcp `mcpServer = 1`) | When TYPO3 writes extension configuration (e.g. after installing an extension), it stores the effective values, including those from `additional.php` | Check the diff of `settings.php` before every commit; environment values only in `additional.php` |
+| A later step needs an old column that no extension defines anymore (e.g. `tt_address.record_type` of contact persons) | Column is in no TCA/SQL and disappears when the schema is cleaned up | Keep it temporarily in `ps14_site` as `passthrough` TCA plus SQL until the step takes it over |
 | Remote PHP script stops after the first `exec()` | Script read from STDIN (`php -- … < file`), child consumes STDIN; `STDERR` undefined | Copy the script into a temp file on the server first |
 
 ## Common Mistakes
