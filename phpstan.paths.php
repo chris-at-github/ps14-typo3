@@ -9,6 +9,8 @@ $candidates = [
     'packages/ps14_foundation/Configuration',
     'packages/ps14_foundation/ext_localconf.php',
     'packages/ps14_foundation/ext_tables.php',
+    'packages/ps14_address/Classes',
+    'packages/ps14_address/Configuration',
     'packages/ps14_component/Classes',
     'packages/ps14_container/Configuration',
     'packages/ps14_downloads/Configuration',
