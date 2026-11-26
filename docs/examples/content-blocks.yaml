@@ -1,9 +1,12 @@
 # Beispielseiten der Content Blocks (KIST, Schritt 2.1, Task 8)
 #
-# Zweck: Nach jedem `ddev pull prod-v12` die Beispielseiten unter „Modules“
-# [11] per MCP (`in2mcp`) neu anlegen. Nach dem Go-Live werden die Seiten
-# einmal in der Produktion angelegt; danach kommen sie mit jedem Pull mit und
-# diese Datei dient nur noch als Vorlage.
+# Zweck: Beschreibt alle Beispielseiten unter „Modules“ [11]; ein
+# `ddev pull prod-v12` löscht sie lokal. Nach der Umsetzung eines Schritts
+# nur die Beispiele der neuen Module per MCP (`in2mcp`) anlegen und hier
+# ergänzen. Die gesamte Liste erst ganz am Ende oder auf Aufforderung
+# anlegen. Nach dem Go-Live werden die Seiten einmal in der Produktion
+# angelegt; danach kommen sie mit jedem Pull mit und diese Datei dient nur
+# noch als Vorlage.
 #
 # Ablauf für Claude (nur MCP, kein SQL):
 # 1. Prüfen, ob die Seiten schon existieren (`search_pages` nach Slug).
@@ -22,8 +25,9 @@
 #    `{path, fields}` (Felder der Dateireferenz, z. B. Video-Optionen).
 #    `flexform` (Sheet => Feld => Wert) als `pi_flexform`-XML schreiben.
 # 6. `ddev typo3 cache:flush`, jede Seite unter `/de/<slug>` auf HTTP 200
-#    und erwartetes Markup prüfen, neue UIDs im Plan
-#    `docs/plans/kist-content-blocks.md` (Status Task 8) nachtragen.
+#    und erwartetes Markup prüfen, neue UIDs in den Plänen
+#    `docs/plans/kist-content-blocks.md` (Status Task 8) und
+#    `docs/plans/kist-modules-part2.md` (Status Task 6) nachtragen.
 
 parent: 11
 
@@ -388,6 +392,8 @@ pages:
     content:
       - CType: header
         fields: {header: Text & Bild, header_layout: 1, layout: 1}
+      # FlexForm (pi_flexform) ist Pflicht: ohne `main.arrangement` rendert das
+      # KIST-Template (ps14_site TextImage.html) weder Überschrift noch Text.
       - CType: textpic
         fields:
           header: 'Variante: ein Bild rechts neben dem Text'
@@ -395,6 +401,10 @@ pages:
           imageorient: 25
           imagecols: 1
           bodytext: <p>Text mit einem Bild rechts daneben.</p>
+        flexform:
+          main: {column: 50-50, arrangement: after}
+          image: {image.align.horizontal: center, image.align.vertical: top}
+          text: {text.header.position: aside}
         files:
           image: /Bilder/04_Unternehmen/About/KE_GF_web-60.jpg
       - CType: textpic
@@ -405,6 +415,10 @@ pages:
           imagecols: 1
           space_before_class: large
           bodytext: <p>Text mit einem Bild links daneben.</p>
+        flexform:
+          main: {column: 33-66, arrangement: before}
+          image: {image.align.horizontal: left, image.align.vertical: center}
+          text: {text.header.position: aside, text.align.vertical: center}
         files:
           image: /Bilder/01_Produkte/Sonder/KIST_ESCHERICH_Sonder__3_.jpg
       - CType: textpic
@@ -415,6 +429,10 @@ pages:
           imagecols: 2
           space_before_class: large
           bodytext: <p>Text mit vier Bildern in zwei Spalten.</p>
+        flexform:
+          main: {column: 50-50, arrangement: after}
+          image: {image.align.horizontal: center, image.align.vertical: top}
+          text: {text.header.position: above}
         files:
           image:
             - /Bilder/01_Produkte/Sonder/KIST-ESCHERICH-Sonder.jpg
@@ -519,8 +537,10 @@ pages:
           selected_categories: '141'
           category_field: categories
           pages: '76'
-          recursive: 2
-        flexform: {main: {excludeCurrentPage: 1}, teaser: {readmoreEnabled: 1}}
+          # Kategorie-Seiten liegen drei Ebenen tiefer (76 → 78 → 84 → 272)
+          # und sind nav_hide → recursive 3 und includeNotInMenu nötig
+          recursive: 3
+        flexform: {main: {includeNotInMenu: 1, excludeCurrentPage: 1}, teaser: {readmoreEnabled: 1}}
       - CType: menu_subpages
         fields:
           header: 'Variante: Unterseiten, grauer Container'
