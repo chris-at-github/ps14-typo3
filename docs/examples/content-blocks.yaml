@@ -549,3 +549,21 @@ pages:
           space_before_class: large
           pages: '136'
         flexform: {main: {excludeCurrentPage: 1}}
+
+  # -------------------------------------------------------------------------------------------------------------------
+  # Schritt 2.3 (docs/plans/kist-address.md): Adresse (ps14_address)
+
+  - title: Address
+    slug: /address
+    existing: true
+    # Bestehend: Element 22 (Variante default, München 14, Öffnungszeiten, JSON-LD), kommt mit dem Dump
+    content:
+      - CType: ps14_address
+        fields:
+          header: 'Variante: Impressum'
+          header_layout: 2
+          tx_foundation_variant: imprint
+          space_before_class: large
+        flexform:
+          main: {address: 14}
+          display: {showName: 1, showDescription: 0, showLocation: 1, showContact: 1, showUrl: 0, showOpeningHours: 0}

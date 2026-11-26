@@ -32,6 +32,12 @@ return [
             'mcpServer' => '0',
             'mcpServerPath' => 'mcp',
         ],
+        'tt_address' => [
+            'readOnlyNameField' => '1',
+            'storeBackwardsCompatName' => '1',
+            'telephoneValidationPatternForJs' => '/[^\\d\\+\\s\\-]/g',
+            'telephoneValidationPatternForPhp' => '/[^\\d\\+\\s\\-]/',
+        ],
         'vite_asset_collector' => [
             'defaultManifest' => '_assets/vite/.vite/manifest.json',
             'devServerUri' => 'auto',

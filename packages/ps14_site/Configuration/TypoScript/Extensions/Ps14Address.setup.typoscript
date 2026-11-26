@@ -1,0 +1,8 @@
+@import 'EXT:ps14_address/Configuration/TypoScript/setup.typoscript'
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Adresse mit KIST-Markup (v12): Template und Ansichten per Key 120, Bausteine Components/Address aus ps14_site (110)
+tt_content.ps14_address {
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Address/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Address/Partials/
+}

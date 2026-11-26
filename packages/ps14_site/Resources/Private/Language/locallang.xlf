@@ -24,6 +24,33 @@
       <trans-unit id="filter.action.reset">
         <source>Reset all filters</source>
       </trans-unit>
+      <trans-unit id="address.phone">
+        <source>Phone</source>
+      </trans-unit>
+      <trans-unit id="address.email">
+        <source>E-mail</source>
+      </trans-unit>
+      <trans-unit id="address.maps-link">
+        <source>Display on map</source>
+      </trans-unit>
+      <trans-unit id="address.opening-hours">
+        <source>Opening hours</source>
+      </trans-unit>
+      <trans-unit id="address.directors">
+        <source>Managing Directors</source>
+      </trans-unit>
+      <trans-unit id="address.vat-number">
+        <source>VAT ID No.</source>
+      </trans-unit>
+      <trans-unit id="address.commercial-register">
+        <source>Commercial Register</source>
+      </trans-unit>
+      <trans-unit id="address.registered-office">
+        <source>Registered Office</source>
+      </trans-unit>
+      <trans-unit id="address.social">
+        <source>Follow us</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

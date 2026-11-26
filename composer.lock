@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70237f44f90443fcb070d1a4be2cc07c",
+    "content-hash": "a77a00353f5f0251ab60d4f3a8f2bac7",
     "packages": [
         {
             "name": "b13/container",
@@ -1031,6 +1031,71 @@
                 "source": "https://github.com/FriendsOfTYPO3/content-blocks"
             },
             "time": "2026-09-22T14:35:10+00:00"
+        },
+        {
+            "name": "friendsoftypo3/tt-address",
+            "version": "10.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfTYPO3/tt_address.git",
+                "reference": "f22107e67d51cd30cdca8c62f25235e977d916a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfTYPO3/tt_address/zipball/f22107e67d51cd30cdca8c62f25235e977d916a2",
+                "reference": "f22107e67d51cd30cdca8c62f25235e977d916a2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/console": "^7.2",
+                "typo3/cms-core": "^13.4.20 || ^14.0",
+                "typo3/cms-install": "^13.4.20 || ^14.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^v3.89.2",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.35.1",
+                "phpunit/phpunit": "^10.5.58",
+                "typo3/coding-standards": "^0.8.0",
+                "typo3/testing-framework": "^8.3.1",
+                "webmozart/assert": "^1.12.1"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "app-dir": ".Build",
+                    "web-dir": ".Build/public",
+                    "extension-key": "tt_address"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfTYPO3\\TtAddress\\": "Classes"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "tt_address Development Team",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Displays a list of addresses from an address table on the page.",
+            "homepage": "https://extensions.typo3.org/extension/tt_address",
+            "keywords": [
+                "addresses",
+                "extension",
+                "typo3"
+            ],
+            "support": {
+                "docs": "https://docs.typo3.org/p/friendsoftypo3/tt-address/main/en-us/",
+                "issues": "https://github.com/FriendsOfTYPO3/tt_address/issues",
+                "source": "https://github.com/FriendsOfTYPO3/tt_address"
+            },
+            "time": "2026-05-18T15:27:01+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2365,6 +2430,63 @@
             "time": "2026-10-16T11:34:24+00:00"
         },
         {
+            "name": "ps14/ps14_address",
+            "version": "14.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chris-at-github/ps14-address.git",
+                "reference": "661d1ba1d201a7ff234621352edf76d264b9067c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-address/zipball/661d1ba1d201a7ff234621352edf76d264b9067c",
+                "reference": "661d1ba1d201a7ff234621352edf76d264b9067c",
+                "shasum": ""
+            },
+            "require": {
+                "friendsoftypo3/tt-address": "^10.0",
+                "php": "^8.4",
+                "ps14/ps14_foundation": "^14.0",
+                "typo3/cms-core": "^14.3",
+                "typo3/cms-fluid-styled-content": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_address"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ps14\\Address\\": "Classes/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Extends tt_address with legal data and opening hours and adds an address content element with JSON-LD.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "extension",
+                "tt_address"
+            ],
+            "support": {
+                "source": "https://github.com/chris-at-github/ps14-address/tree/14.0.0",
+                "issues": "https://github.com/chris-at-github/ps14-address/issues"
+            },
+            "time": "2026-11-26T22:08:52+00:00"
+        },
+        {
             "name": "ps14/ps14_component",
             "version": "14.0.0",
             "source": {
@@ -2692,7 +2814,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "7b2075f842d545e8b32c6b4b90396e527c346c29"
+                "reference": "ae9e8dab847f4b052137741a6b95a55fe8601b61"
             },
             "require": {
                 "php": "^8.4",
@@ -10843,7 +10965,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_migration",
-                "reference": "fbd9bcba1993739b3c6bbbf60291fc4c570d95f4"
+                "reference": "05dd7e10ba43cc1371ef5f64c6dc46baf12bc790"
             },
             "require": {
                 "php": "^8.4",
@@ -12197,6 +12319,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "ps14/ps14_address": 20,
         "ps14/ps14_component": 20,
         "ps14/ps14_container": 20,
         "ps14/ps14_downloads": 20,

@@ -31,9 +31,11 @@
     "require": {
         "b13/container": "^4.1",
         "friendsoftypo3/content-blocks": "^2.4",
+        "friendsoftypo3/tt-address": "^10.0",
         "helhum/dotenv-connector": "^3.0",
         "in2code/in2mcp": "^2.4",
         "praetorius/vite-asset-collector": "^1.18",
+        "ps14/ps14_address": "^14.0@dev",
         "ps14/ps14_component": "^14.0@dev",
         "ps14/ps14_container": "^14.0@dev",
         "ps14/ps14_downloads": "^14.0@dev",
@@ -76,6 +78,7 @@
             "options": {
                 "symlink": true,
                 "versions": {
+                    "ps14/ps14_address": "14.x-dev",
                     "ps14/ps14_component": "14.x-dev",
                     "ps14/ps14_container": "14.x-dev",
                     "ps14/ps14_downloads": "14.x-dev",
@@ -86,6 +89,10 @@
                     "ps14/ps14_textmedia": "14.x-dev"
                 }
             }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/chris-at-github/ps14-address.git"
         },
         {
             "type": "vcs",

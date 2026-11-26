@@ -60,3 +60,4 @@ routes:
       Sitemap: https://www.kist-escherich.com/en/sitemap.xml
 dependencies:
   - site/settings
+  - ps14/address

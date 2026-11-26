@@ -1,0 +1,47 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:comment>
+        <!--
+            KIST: Impressum mit dem Markup von v12 (Kontakt nur Telefon und Website, rechtliche Angaben in zwei Gruppen)
+        -->
+    </f:comment>
+
+    <f:section name="Main">
+        <div class="address">
+            <f:if condition="{flexform.showName}">
+                <f:render partial="Components/Address" section="Name" arguments="{address: address}" />
+            </f:if>
+
+            <f:if condition="{flexform.showLocation}">
+                <div class="address--item-group">
+                    <f:render partial="Components/Address" section="Location" arguments="{address: address}" />
+                </div>
+            </f:if>
+
+            <f:if condition="{flexform.showContact}">
+                <div class="address--item-group">
+                    <f:render partial="Components/Address" section="Phone" arguments="{address: address}" />
+
+                    <f:if condition="{flexform.showUrl}">
+                        <f:render partial="Components/Address" section="Url" arguments="{address: address}" />
+                    </f:if>
+                </div>
+            </f:if>
+
+            <f:if condition="{address.tx_address_vat_number} || {address.tx_address_directors}">
+                <div class="address--item-group">
+                    <f:render partial="Components/Address" section="Directors" arguments="{address: address}" />
+                    <f:render partial="Components/Address" section="VatNumber" arguments="{address: address}" />
+                </div>
+            </f:if>
+
+            <f:if condition="{address.tx_address_registered_office} || {address.tx_address_commercial_register}">
+                <div class="address--item-group">
+                    <f:render partial="Components/Address" section="CommercialRegister" arguments="{address: address}" />
+                    <f:render partial="Components/Address" section="RegisteredOffice" arguments="{address: address}" />
+                </div>
+            </f:if>
+        </div>
+    </f:section>
+</html>

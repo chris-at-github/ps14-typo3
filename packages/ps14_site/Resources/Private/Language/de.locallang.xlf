@@ -24,6 +24,33 @@
       <trans-unit id="filter.action.reset">
         <target>Alle Filter zurücksetzen</target>
       </trans-unit>
+      <trans-unit id="address.phone">
+        <target>Telefon</target>
+      </trans-unit>
+      <trans-unit id="address.email">
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="address.maps-link">
+        <target>Auf der Karte anzeigen</target>
+      </trans-unit>
+      <trans-unit id="address.opening-hours">
+        <target>Öffnungszeiten</target>
+      </trans-unit>
+      <trans-unit id="address.directors">
+        <target>Geschäftsführung</target>
+      </trans-unit>
+      <trans-unit id="address.vat-number">
+        <target>USt.-IDNr.</target>
+      </trans-unit>
+      <trans-unit id="address.commercial-register">
+        <target>Handelsregister</target>
+      </trans-unit>
+      <trans-unit id="address.registered-office">
+        <target>Sitz der Gesellschaft</target>
+      </trans-unit>
+      <trans-unit id="address.social">
+        <target>Folgen Sie uns auf</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

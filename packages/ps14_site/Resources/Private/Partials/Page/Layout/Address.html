@@ -1,0 +1,30 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:comment>
+        <!--
+            KIST: Adresse des Anbieters im Footer ({provider} aus ps14_address, Site Setting address.provider) mit dem
+            Markup von v12.
+        -->
+    </f:comment>
+
+    <f:section name="Main">
+        <f:if condition="{provider}">
+            <address class="address">
+                <f:render partial="Components/Address" section="Name" arguments="{address: provider}" />
+
+                <div class="address--item-group">
+                    <f:render partial="Components/Address" section="Location" arguments="{address: provider}" />
+                </div>
+
+                <f:render partial="Components/Address" section="Phone" arguments="{address: provider}" />
+                <f:render partial="Components/Address" section="Mail" arguments="{address: provider}" />
+
+                <div class="address--item-group address--social">
+                    <header><f:translate key="address.social" domain="ps14_site.messages" /></header>
+                    <f:render partial="Components/Address" section="Social" arguments="{address: provider}" />
+                </div>
+            </address>
+        </f:if>
+    </f:section>
+</html>

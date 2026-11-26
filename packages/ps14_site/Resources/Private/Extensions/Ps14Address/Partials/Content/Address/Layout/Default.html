@@ -1,0 +1,59 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:ad="http://typo3.org/ns/Ps14/Address/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+    <f:comment>
+        <!--
+            KIST: Adresse mit dem Markup von v12 (Beschreibung, Name, Anschrift und Kontakt neben den Oeffnungszeiten)
+        -->
+    </f:comment>
+
+    <f:section name="Main">
+        <address class="address">
+            <f:if condition="{flexform.showDescription}">
+                <f:render partial="Components/Address" section="Description" arguments="{_all}" />
+            </f:if>
+
+            <f:if condition="{flexform.showName}">
+                <f:render partial="Components/Address" section="Name" arguments="{_all}" />
+            </f:if>
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <f:if condition="{flexform.showLocation}">
+                        <div class="address--item-group address--item-group--location">
+                            <f:render partial="Components/Address" section="Location" arguments="{address: address, icon: 1}" />
+                        </div>
+                    </f:if>
+
+                    <f:if condition="{flexform.showContact}">
+                        <f:render partial="Components/Address" section="Phone" arguments="{_all}" />
+                        <f:render partial="Components/Address" section="Mail" arguments="{_all}" />
+
+                        <f:if condition="{flexform.showUrl}">
+                            <f:render partial="Components/Address" section="Url" arguments="{_all}" />
+                        </f:if>
+                    </f:if>
+                </div>
+                <div class="col-12 col-md-6 col-lg-8">
+                    <f:if condition="{flexform.showOpeningHours}">
+                        <f:if condition="{address.openingHoursGrouped} || {address.tx_address_opening_hours_description}">
+                            <div class="address--item-group address--item-group--opening-hours address--opening-hours">
+                                <f:render partial="Components/Address" section="OpeningHoursDaysGrouped" arguments="{_all}" />
+                                <f:render partial="Components/Address" section="OpeningHoursDescription" arguments="{_all}" />
+                            </div>
+                        </f:if>
+                    </f:if>
+                </div>
+            </div>
+
+            <f:if condition="{flexform.showDescription}">
+                <f:render partial="Components/Address" section="AdditionalDescription" arguments="{_all}" />
+            </f:if>
+
+            <f:if condition="{flexform.structuredData} == 'localBusiness'">
+                <ad:jsonLd.localBusiness address="{address}" openingHoursCategory="{flexform.openingHoursCategory}" />
+            </f:if>
+        </address>
+    </f:section>
+</html>
