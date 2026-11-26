@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default"/>
+    <f:section name="Main">
+        <f:switch expression="{data.tx_foundation_variant}">
+            <f:case value="teaser-technology">
+                <f:render section="Teaser" arguments="{layout: 'Technology', menu: menu, data: data, options: options, settings: settings.teaser}" />
+            </f:case>
+            <f:case value="teaser-aside">
+                <f:render section="Teaser" arguments="{layout: 'Aside', menu: menu, data: data, options: options, settings: settings.teaser}" />
+            </f:case>
+            <f:case value="teaser">
+                <f:render section="Teaser" arguments="{layout: 'Default', menu: menu, data: data, options: options, settings: settings.teaser}" />
+            </f:case>
+            <f:case value="teaser-grey">
+                <f:render section="Teaser" arguments="{layout: 'Default', menu: menu, data: data, options: options, settings: settings.teaser}" />
+            </f:case>
+            <f:defaultCase>
+                <f:if condition="{menu}">
+                    <nav class="navigation">
+                        <f:render partial="Navigation/Default/Listing" section="Main" arguments="{navigation: menu}" />
+                    </nav>
+                </f:if>
+            </f:defaultCase>
+        </f:switch>
+    </f:section>
+
+    <f:section name="Teaser">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Scss/modules/teaser.scss" />
+        <f:if condition="{menu}">
+            <f:render partial="Teaser/Layout/{layout}" section="Main" arguments="{_all}" />
+        </f:if>
+    </f:section>
+</html>

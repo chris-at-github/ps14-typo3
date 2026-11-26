@@ -1,0 +1,41 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:vite="http://typo3.org/ns/Praetorius/ViteAssetCollector/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:layout name="Default" />
+    <f:section name="Main">
+        <vite:asset entry="EXT:ps14_site/Resources/Private/Assets/Scss/modules/textmedia.scss" />
+
+        <div class="textmedia textmedia--video textmedia--vertical-{f:if(condition: '{data.imageorient} == 8', then: 'below', else: 'above')}">
+            <f:if condition="{data.imageorient} != 8">
+                <f:render section="Video" arguments="{_all}" />
+            </f:if>
+
+            <f:if condition="{data.bodytext}">
+                <div class="textmedia__body">
+                    <f:render partial="Content/Bodytext" arguments="{bodytext: data.bodytext}" />
+                </div>
+            </f:if>
+
+            <f:if condition="{data.imageorient} == 8">
+                <f:render section="Video" arguments="{_all}" />
+            </f:if>
+        </div>
+    </f:section>
+
+    <f:section name="Video">
+        <f:if condition="{videos.0}">
+            <div class="textmedia__media media-container media-container--video">
+                <f:render partial="Media/Rendering/Video" section="Main" arguments="{
+                    media: videos.0,
+                    options: {
+                        autoplay: videos.0.properties.autoplay,
+                        controls: videos.0.properties.tx_textmedia_controls,
+                        loop: videos.0.properties.tx_textmedia_loop
+                    },
+                    preview: {
+                        image: images.0,
+                        settings: settings.images.preview
+                    }
+                }" />
+            </div>
+        </f:if>
+    </f:section>
+</html>

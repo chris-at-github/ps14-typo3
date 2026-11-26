@@ -231,7 +231,7 @@ $tx-teaser-frontend-use-css: true !default;
     //	}
     // }
 
-    .ce-teaser-frontend.ce-frame--variant-2 {
+    .ce-frame--variant-teaser-grey {
         .card--media {
             & {
                 background: transparent;
@@ -437,7 +437,7 @@ $tx-teaser-frontend-use-css: true !default;
 }
 
 @include stylesheet-context($stylesheet-context-print) {
-    .ce-teaser-frontend,
+    [class*="ce-frame--variant-teaser"],
     .ce-entityproduct-teaser {
         page-break-inside: avoid;
     }

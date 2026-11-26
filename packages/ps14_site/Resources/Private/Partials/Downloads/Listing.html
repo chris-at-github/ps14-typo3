@@ -1,8 +1,8 @@
 <div xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
     <f:section name="Main">
-        <f:if condition="{files} || {data.tx_site_wkhtmltopdf_enabled} == 1">
+        <f:if condition="{downloads} || {data.tx_site_wkhtmltopdf_enabled} == 1">
             <ul class="downloads--container">
-                <f:for each="{files}" as="file">
+                <f:for each="{downloads}" as="file">
                     <li class="download--item">
                         <f:render partial="Downloads/Item" section="Main" arguments="{_all}" />
                     </li>

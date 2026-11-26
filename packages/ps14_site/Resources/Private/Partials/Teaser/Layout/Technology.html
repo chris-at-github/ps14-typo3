@@ -1,75 +1,55 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:layout name="Default" />
-<f:section name="Main">
-    <f:if condition="{pages -> f:count()} == 1">
-        <f:then>
-            <f:for each="{pages}" as="page">
-                <div class="teaser teaser--layout-technology">
-                    <f:render section="Item" arguments="{page: page, settings: settings}" />
-                </div>
-            </f:for>
-        </f:then>
-        <f:else>
-            <ul class="teaser--container">
-                <f:for each="{pages}" as="page">
-                    <li class="teaser teaser--layout-technology">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:if condition="{menu -> f:count()} == 1">
+            <f:then>
+                <f:for each="{menu}" as="page">
+                    <div class="teaser teaser--layout-technology">
                         <f:render section="Item" arguments="{page: page, settings: settings}" />
-                    </li>
+                    </div>
                 </f:for>
-            </ul>
-        </f:else>
-    </f:if>
-</f:section>
-
-<f:section name="Item">
-    <div class="teaser--media">
-        <f:if condition="{page.teaserMediaLarge}">
-            <f:render partial="Media/Main" section="Main" arguments="{
-            file: page.teaserMediaLarge.originalResource,
-            settings: '{fo:settings.get(extension: \'Ps14Teaser\', path: \'media.technology\')}'
-        }" />
+            </f:then>
+            <f:else>
+                <ul class="teaser--container">
+                    <f:for each="{menu}" as="page">
+                        <li class="teaser teaser--layout-technology">
+                            <f:render section="Item" arguments="{page: page, settings: settings}" />
+                        </li>
+                    </f:for>
+                </ul>
+            </f:else>
         </f:if>
-    </div>
+    </f:section>
 
-    <div class="teaser--body">
-        <header class="teaser--title ce-header ce-header--layout-2">
-            <h2>
-                <f:link.page pageUid="{page.uid}">
-                    <span class="teaser--title-prefix"><f:translate key="teaser.technology.title-prefix" domain="ps14_site.messages" /></span>
-                    <strong class="teaser--title-main">{page.teaserTitle}</strong>
-                </f:link.page>
-            </h2>
-        </header>
+    <f:section name="Item">
+        <f:variable name="mediaLarge" value="{f:if(condition: page.mediaLarge.0, then: page.mediaLarge.0, else: page.media.0)}" />
 
-        <f:render partial="Teaser/Layout/Aside" section="Abstract" arguments="{page: page, settings: settings}" />
-        <f:link.page class="link--cta teaser--readmore" pageUid="{page.uid}" tabindex="-1">
-            <f:if condition="{page.teaserReadmore}">
-                <f:then>{page.teaserReadmore}</f:then>
-                <f:else><f:translate key="teaser.technology.readmore" domain="ps14_site.messages" /></f:else>
+        <div class="teaser--media">
+            <f:if condition="{mediaLarge}">
+                <f:render partial="Media/Main" section="Main" arguments="{file: mediaLarge, settings: settings.media.technology}" />
             </f:if>
-        </f:link.page>
-    </div>
-</f:section>
+        </div>
 
-<f:section name="Item-X">
-    <div class="col-12 col-md-6">
-        <f:render partial="Teaser/Layout/Aside" section="MediaContainer" arguments="{page: page, settings: settings: '{fo:settings.get(extension: \'Ps14Teaser\', path: \'media.aside\')}'}" />
-    </div>
-
-    <div class="col-12 col-md-6">
         <div class="teaser--body">
             <header class="teaser--title ce-header ce-header--layout-2">
-                <h2><f:link.page pageUid="{page.uid}"><f:translate key="teaser.technology.title-prefix" domain="ps14_site.messages" /> <strong>{page.teaserTitle}</strong></f:link.page></h2>
+                <h2>
+                    <f:link.typolink parameter="{page.link}">
+                        <span class="teaser--title-prefix"><f:translate key="teaser.technology.title-prefix" domain="ps14_site.messages" /></span>
+                        <strong class="teaser--title-main">{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}</strong>
+                    </f:link.typolink>
+                </h2>
             </header>
 
-            <f:render partial="Teaser/Layout/Aside" section="Abstract" arguments="{page: page, settings: settings}" />
-            <f:link.page class="link--cta teaser--readmore" pageUid="{page.uid}" tabindex="-1">
-                <f:if condition="{page.teaserReadmore}">
-                    <f:then>{page.teaserReadmore}</f:then>
+            <f:if condition="{page.data.tx_site_teaser_abstract_long}">
+                <f:then><f:format.html>{page.data.tx_site_teaser_abstract_long}</f:format.html></f:then>
+                <f:else if="{page.data.abstract}"><f:format.html>{page.data.abstract}</f:format.html></f:else>
+            </f:if>
+
+            <f:link.typolink class="link--cta teaser--readmore" parameter="{page.link}" additionalAttributes="{'tabindex': '-1'}">
+                <f:if condition="{page.data.tx_site_teaser_readmore}">
+                    <f:then>{page.data.tx_site_teaser_readmore}</f:then>
                     <f:else><f:translate key="teaser.technology.readmore" domain="ps14_site.messages" /></f:else>
                 </f:if>
-            </f:link.page>
+            </f:link.typolink>
         </div>
-    </div>
-</f:section>
+    </f:section>
 </html>

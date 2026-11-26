@@ -1,0 +1,98 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:fo="http://typo3.org/ns/Ps14/Foundation/ViewHelpers" data-namespace-typo3-fluid="true">
+    <f:section name="Main">
+        <f:variable name="cssClass" value="row teaser teaser--layout-aside{f:if(condition: '{options.asideAlignment} == \'right\'', then: ' teaser--layout-aside-reverse')}" />
+
+        <f:if condition="{menu -> f:count()} == 1">
+            <f:then>
+                <f:for each="{menu}" as="page">
+                    <div class="{cssClass}">
+                        <f:render section="Item" arguments="{page: page, data: data, options: options, settings: settings}" />
+                    </div>
+                </f:for>
+            </f:then>
+            <f:else>
+                <ul>
+                    <f:for each="{menu}" as="page">
+                        <li class="{cssClass}">
+                            <f:render section="Item" arguments="{page: page, data: data, options: options, settings: settings}" />
+                        </li>
+                    </f:for>
+                </ul>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="Item">
+        <f:variable name="small" value="{f:if(condition: '{options.asideMediaSize} == \'small\'', then: 1, else: 0)}" />
+
+        <div class="col-12 {f:if(condition: small, then: 'col-md-4', else: 'col-md-5')}">
+            <f:render section="MediaContainer" arguments="{page: page, settings: settings.media.aside}" />
+        </div>
+
+        <div class="col-12 {f:if(condition: small, then: 'col-md-8', else: 'col-md-7')}">
+            <div class="teaser--body teaser--body-{f:if(condition: options.textAlignment, then: options.textAlignment, else: 'default')}">
+                <f:render section="Header" arguments="{_all}" />
+                <f:render section="Abstract" arguments="{_all}" />
+                <f:render section="Readmore" arguments="{_all}" />
+                <f:render section="Subpages" arguments="{_all}" />
+            </div>
+        </div>
+    </f:section>
+
+    <f:section name="MediaContainer">
+        <f:if condition="{page.media.0}">
+            <f:if condition="{page.data.tx_foundation_navigation_not_linked}">
+                <f:then>
+                    <div class="teaser--media"><f:render partial="Media/Main" section="Main" arguments="{file: page.media.0, settings: settings}" /></div>
+                </f:then>
+                <f:else>
+                    <f:link.typolink parameter="{page.link}" class="teaser--media" additionalAttributes="{'tabindex': '-1'}">
+                        <f:render partial="Media/Main" section="Main" arguments="{file: page.media.0, settings: settings}" />
+                    </f:link.typolink>
+                </f:else>
+            </f:if>
+        </f:if>
+    </f:section>
+
+    <f:section name="Header">
+        <f:variable name="title" value="{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}" />
+        <header class="teaser--title">
+            <f:switch expression="{data.tx_foundation_elements_header}">
+                <f:case value="1"><h1><f:render section="TitleInner" arguments="{page: page, title: title}" /></h1></f:case>
+                <f:case value="2"><h2><f:render section="TitleInner" arguments="{page: page, title: title}" /></h2></f:case>
+                <f:case value="3"><h3><f:render section="TitleInner" arguments="{page: page, title: title}" /></h3></f:case>
+                <f:case value="4"><h4><f:render section="TitleInner" arguments="{page: page, title: title}" /></h4></f:case>
+                <f:defaultCase><f:render section="TitleInner" arguments="{page: page, title: title}" /></f:defaultCase>
+            </f:switch>
+        </header>
+    </f:section>
+
+    <f:section name="TitleInner">
+        <f:if condition="{page.data.tx_foundation_navigation_not_linked}">
+            <f:then>{title}</f:then>
+            <f:else><f:link.typolink parameter="{page.link}">{title}</f:link.typolink></f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="Abstract">
+        <f:if condition="{page.data.tx_site_teaser_abstract_long}">
+            <f:then><f:format.html>{page.data.tx_site_teaser_abstract_long}</f:format.html></f:then>
+            <f:else if="{page.data.abstract}"><f:format.html>{page.data.abstract}</f:format.html></f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="Readmore">
+        <f:if condition="!{page.data.tx_foundation_navigation_not_linked}">
+        <f:variable name="title" value="{f:if(condition: page.data.tx_site_teaser_title, then: page.data.tx_site_teaser_title, else: page.data.title)}" />
+        <f:link.typolink class="link--cta teaser--readmore" parameter="{page.link}" additionalAttributes="{'tabindex': '-1'}">{f:if(condition: page.data.tx_site_teaser_readmore, then: page.data.tx_site_teaser_readmore, else: title)}</f:link.typolink>
+        </f:if>
+    </f:section>
+
+    <f:section name="Subpages">
+        <f:if condition="{options.subpagesEnabled}">
+            <nav class="navigation teaser--sub-navigation teaser--sub-navigation-layout-{f:if(condition: options.subpagesLayout, then: options.subpagesLayout, else: 'default')}">
+                <f:cObject typoscriptObjectPath="block.teaserSubNavigation" data="{parent: page.data.uid}" />
+            </nav>
+        </f:if>
+    </f:section>
+</html>

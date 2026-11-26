@@ -1,0 +1,188 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <main>
+            <ROOT>
+                <sheetTitle>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.sheet.main</sheetTitle>
+                <type>array</type>
+                <el>
+                    <includeNotInMenu type="array">
+                        <label>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.include-not-in-menu</label>
+                        <description>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.include-not-in-menu.description</description>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </includeNotInMenu>
+                    <excludeCurrentPage type="array">
+                        <label>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.exclude-current-page</label>
+                        <description>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.exclude-current-page.description</description>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </excludeCurrentPage>
+                    <showIcon type="array">
+                        <label>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.show-icon</label>
+                        <description>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.show-icon.description</description>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:listing</displayCond>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </showIcon>
+                    <showDescription type="array">
+                        <label>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.show-description</label>
+                        <description>LLL:EXT:ps14_menu/Resources/Private/Language/locallang_tca.xlf:flexform.show-description.description</description>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:listing</displayCond>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </showDescription>
+                    <settings.sorting type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu-subpages.flexform.sorting</label>
+                        <displayCond>FIELD:parentRec.CType:=:menu_subpages</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu-subpages.flexform.sorting.default</label>
+                                    <value>default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu-subpages.flexform.sorting.title</label>
+                                    <value>title</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </settings.sorting>
+                </el>
+            </ROOT>
+        </main>
+        <teaser>
+            <ROOT>
+                <sheetTitle>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.sheet.teaser</sheetTitle>
+                <displayCond>FIELD:parentRec.tx_foundation_variant:IN:teaser,teaser-grey,teaser-technology,teaser-aside</displayCond>
+                <type>array</type>
+                <el>
+                    <readmoreEnabled type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.readmore-enabled</label>
+                        <description>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.readmore-enabled.description</description>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:IN:teaser,teaser-grey</displayCond>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </readmoreEnabled>
+                    <abstractType type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.abstract-type</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.abstract-type.default</label>
+                                    <value>default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.abstract-type.long</label>
+                                    <value>long</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </abstractType>
+                    <asideAlignment type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-alignment</label>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:teaser-aside</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-alignment.left</label>
+                                    <value>left</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-alignment.right</label>
+                                    <value>right</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </asideAlignment>
+                    <asideMediaSize type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-media-size</label>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:teaser-aside</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-media-size.default</label>
+                                    <value>default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.aside-media-size.small</label>
+                                    <value>small</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </asideMediaSize>
+                    <textAlignment type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.text-alignment</label>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:teaser-aside</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.text-alignment.default</label>
+                                    <value>default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.text-alignment.center</label>
+                                    <value>center</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </textAlignment>
+                    <subpagesEnabled type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.subpages-enabled</label>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:teaser-aside</displayCond>
+                        <config>
+                            <type>check</type>
+                            <renderType>checkboxToggle</renderType>
+                            <default>0</default>
+                        </config>
+                    </subpagesEnabled>
+                    <subpagesLayout type="array">
+                        <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.subpages-layout</label>
+                        <displayCond>FIELD:parentRec.tx_foundation_variant:=:teaser-aside</displayCond>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectSingle</renderType>
+                            <items>
+                                <numIndex index="0">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.subpages-layout.default</label>
+                                    <value>default</value>
+                                </numIndex>
+                                <numIndex index="1">
+                                    <label>LLL:EXT:ps14_site/Resources/Private/Language/locallang_tca.xlf:menu.flexform.teaser.subpages-layout.columns</label>
+                                    <value>columns</value>
+                                </numIndex>
+                            </items>
+                        </config>
+                    </subpagesLayout>
+                </el>
+            </ROOT>
+        </teaser>
+    </sheets>
+</T3DataStructure>

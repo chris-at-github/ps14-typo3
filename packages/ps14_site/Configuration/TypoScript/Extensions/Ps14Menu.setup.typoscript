@@ -6,15 +6,187 @@
 tt_content {
   menu_pages {
     templateRootPaths.109 = EXT:ps14_foundation/Resources/Private/Templates/Content/
-
-    // ps14_menu liest includeNotInMenu aus der FlexForm, KIST gibt versteckte Seiten immer aus (Modules/Menu.setup.typoscript)
-    dataProcessing.10.includeNotInMenu.data >
   }
 
   menu_subpages {
     templateRootPaths.109 = EXT:ps14_foundation/Resources/Private/Templates/Content/
+  }
+}
 
-    // v12: keine Option, versteckte Unterseiten werden nicht ausgegeben
-    dataProcessing.10.includeNotInMenu.data >
+// ---------------------------------------------------------------------------------------------------------------------
+// Teaser (Ansichten teaser, teaser-grey, teaser-technology, teaser-aside): Ersatz des Plugins ps14_teaser aus v12.
+// Templates: Templates/Content/Menu*.html (Key 110) verteilen auf Partials/Teaser/Layout/* oder das v12-Menue-Markup.
+lib.siteTeaserMenuItemProcessing {
+  30 = files
+  30 {
+    as = media
+    references.fieldName = media
+  }
+
+  40 = files
+  40 {
+    as = mediaLarge
+    references.fieldName = tx_site_teaser_media_large
+  }
+
+  50 = Ps14\Site\DataProcessing\CategoryBadgesProcessor
+  50 {
+    as = badges
+    parentCategories = 141, 157, 145, 149, 166, 162
+  }
+}
+
+lib.siteTeaserSettings {
+  readmoreLimit = 3
+
+  media {
+    card {
+      width = 530
+      cropVariant = desktop
+      mediaQueries {
+        576 {
+          width = 360
+          cropVariant = desktop
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          width = 530
+          cropVariant = mobile
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+
+    aside {
+      width = 720
+      cropVariant = desktop
+      mediaQueries {
+        992 {
+          width = 560
+          cropVariant = desktop
+          mediaQuery = (min-width: 992px)
+        }
+
+        768 {
+          width = 450
+          cropVariant = desktop
+          mediaQuery = (min-width: 768px)
+        }
+
+        576 {
+          width = 720
+          cropVariant = mobile
+          mediaQuery = (min-width: 576px)
+        }
+
+        0 {
+          width = 545
+          cropVariant = mobile
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+
+    technology {
+      width = 720
+      cropVariant = default
+      mediaQueries {
+        992 {
+          width = 720
+          cropVariant = default
+          mediaQuery = (min-width: 992px)
+        }
+
+        768 {
+          width = 550
+          cropVariant = default
+          mediaQuery = (min-width: 768px)
+        }
+
+        0 {
+          width = 530
+          cropVariant = default
+          mediaQuery = (min-width: 0px)
+        }
+      }
+    }
+  }
+}
+
+// Seiten mit "In Menues verbergen": Teaser nach Option, sonst wie bisher (Seitenmenue immer, Unterseiten nie)
+lib.siteTeaserIncludeNotInMenu = CASE
+lib.siteTeaserIncludeNotInMenu {
+  key.field = tx_foundation_variant
+  default = TEXT
+  default.value = 0
+
+  teaser = TEXT
+  teaser.data = flexform: pi_flexform:includeNotInMenu
+  teaser-grey < .teaser
+  teaser-technology < .teaser
+  teaser-aside < .teaser
+}
+
+tt_content {
+  menu_pages {
+    settings.teaser < lib.siteTeaserSettings
+
+    dataProcessing.10 {
+      includeNotInMenu.cObject < lib.siteTeaserIncludeNotInMenu
+      includeNotInMenu.cObject.default.value = 1
+      dataProcessing < lib.siteTeaserMenuItemProcessing
+      dataProcessing.20 = files
+      dataProcessing.20 {
+        as = icon
+        references.fieldName = tx_foundation_icon
+      }
+    }
+  }
+
+  menu_subpages {
+    settings.teaser < lib.siteTeaserSettings
+
+    dataProcessing.10 {
+      includeNotInMenu.cObject < lib.siteTeaserIncludeNotInMenu
+      dataProcessing < lib.siteTeaserMenuItemProcessing
+      dataProcessing.20 = files
+      dataProcessing.20 {
+        as = icon
+        references.fieldName = tx_foundation_icon
+      }
+    }
+  }
+
+  menu_categorized_pages {
+    templateRootPaths.109 = EXT:ps14_foundation/Resources/Private/Templates/Content/
+    settings.teaser < lib.siteTeaserSettings
+
+    dataProcessing.10 {
+      // v12-Teaser: Reihenfolge wie im Seitenbaum
+      special.sorting = sorting
+      dataProcessing < lib.siteTeaserMenuItemProcessing
+      dataProcessing.20 = files
+      dataProcessing.20 {
+        as = icon
+        references.fieldName = tx_foundation_icon
+      }
+    }
+  }
+}
+
+// Unterseiten je Teaser (Ansicht teaser-aside, Option subpagesEnabled)
+block.teaserSubNavigation = HMENU
+block.teaserSubNavigation {
+  special = directory
+  special.value.field = parent
+  1 = TMENU
+  1 {
+    wrap = <ul>|</ul>
+    NO {
+      wrapItemAndSub = <li>|</li>
+      ATagBeforeWrap = 1
+      linkWrap = <span>|</span>
+    }
   }
 }

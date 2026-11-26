@@ -18,7 +18,9 @@
 #    `colPos: 5628` — die Vorgabe aus `overrideChildTca` greift nur im
 #    Backend-Formular.
 # 5. Dateien per `search_files` (Pfad) suchen und mit `add_file_reference`
-#    an das Feld hängen.
+#    an das Feld hängen. Ein Feld nimmt einen Pfad, eine Liste oder
+#    `{path, fields}` (Felder der Dateireferenz, z. B. Video-Optionen).
+#    `flexform` (Sheet => Feld => Wert) als `pi_flexform`-XML schreiben.
 # 6. `ddev typo3 cache:flush`, jede Seite unter `/de/<slug>` auf HTTP 200
 #    und erwartetes Markup prüfen, neue UIDs im Plan
 #    `docs/plans/kist-content-blocks.md` (Status Task 8) nachtragen.
@@ -351,3 +353,179 @@ pages:
             color_scheme: grey-default
             description: <p>Arbeiten Sie in einem Team, das auf gegenseitige Unterstützung setzt.</p>
             files: {media: /Bilder/04_Unternehmen/career/benefits/happy-smile-smile-face-icon-svgrepo-com.svg}
+
+  # -------------------------------------------------------------------------------------------------------------------
+  # Schritt 2.2 (docs/plans/kist-modules-part2.md): Hero, Text & Bild, Text & Media, Downloads, Teaser
+
+  - title: Hero
+    slug: /modules/hero
+    existing: true
+    content:
+      - CType: ps14_hero
+        fields:
+          header: 'Variante: 16:9'
+          header_layout: 100
+          layout: 4
+          tx_foundation_variant: 16-9
+          space_before_class: none
+          space_after_class: none
+          bodytext: <p>Hero mit Bild im Format 16:9 und Kurztext.</p>
+        files:
+          image: /Bilder/03_Branchen/01_automotive/E-mobility/KIST_ESCHERICH_Reinigung-von-Kabel-und-Bordnetzsystemen.png
+      - CType: ps14_hero
+        fields:
+          header: 'Variante: Standard'
+          header_layout: 100
+          layout: 4
+          space_before_class: large
+          space_after_class: none
+          bodytext: <p>Hero in der Standard-Variante.</p>
+        files:
+          image: /Bilder/03_Branchen/01_automotive/E-mobility/KIST_ESCHERICH_Reinigung-von-Batteriefolien.png
+
+  - title: Text & Bild
+    slug: /modules/text-bild
+    content:
+      - CType: header
+        fields: {header: Text & Bild, header_layout: 1, layout: 1}
+      - CType: textpic
+        fields:
+          header: 'Variante: ein Bild rechts neben dem Text'
+          header_layout: 2
+          imageorient: 25
+          imagecols: 1
+          bodytext: <p>Text mit einem Bild rechts daneben.</p>
+        files:
+          image: /Bilder/04_Unternehmen/About/KE_GF_web-60.jpg
+      - CType: textpic
+        fields:
+          header: 'Variante: ein Bild links neben dem Text'
+          header_layout: 2
+          imageorient: 26
+          imagecols: 1
+          space_before_class: large
+          bodytext: <p>Text mit einem Bild links daneben.</p>
+        files:
+          image: /Bilder/01_Produkte/Sonder/KIST_ESCHERICH_Sonder__3_.jpg
+      - CType: textpic
+        fields:
+          header: 'Variante: vier Bilder (Galerie)'
+          header_layout: 2
+          imageorient: 25
+          imagecols: 2
+          space_before_class: large
+          bodytext: <p>Text mit vier Bildern in zwei Spalten.</p>
+        files:
+          image:
+            - /Bilder/01_Produkte/Sonder/KIST-ESCHERICH-Sonder.jpg
+            - /Bilder/01_Produkte/Sonder/KIST_ESCHERICH_Sonder.jpg
+            - /Bilder/01_Produkte/Sonder/KIST_ESCHERICH_Sonder__3_.jpg
+            - /Bilder/01_Produkte/Sonder/KIST_ESCHERICH_Sonder__8_.jpg
+
+  - title: Text Media
+    slug: /modules/text-media
+    existing: true
+    content:
+      - CType: textmedia
+        fields:
+          header: 'Variante: Video mit Steuerelementen'
+          header_layout: 2
+          imageorient: 0
+          bodytext: <p>Einzelvideo mit Vorschaubild und Steuerelementen.</p>
+        files:
+          assets:
+            path: /Bilder/08_sand_box/KIST_ESCHERICH_TRAYMASTER_1920x1080.mp4
+            fields: {tx_textmedia_controls: 1, tx_textmedia_loop: 0, autoplay: 0}
+          image: /Bilder/01_Produkte/TRAYMASTER/KIST_ESCHERICH_Service_TRAYMASTER_2jpg.jpg
+      - CType: textmedia
+        fields:
+          header: 'Variante: Autoplay und Endlosschleife ohne Steuerelemente'
+          header_layout: 2
+          imageorient: 8
+          space_before_class: large
+          bodytext: <p>Video unter dem Text, startet automatisch und läuft in Schleife.</p>
+        files:
+          assets:
+            path: /Bilder/08_sand_box/KIST_ESCHERICH_TRAYMASTER_1920x1080.mp4
+            fields: {tx_textmedia_controls: 0, tx_textmedia_loop: 1, autoplay: 1}
+
+  - title: Downloads
+    slug: /modules/downloads
+    existing: true
+    content:
+      - CType: uploads
+        fields:
+          header: 'Variante: Dateiliste mit Beschreibung'
+          header_layout: 2
+          uploads_description: 1
+          filelink_size: 1
+        files:
+          media:
+            - path: /Bilder/08_sand_box/example.pdf
+              fields: {description: Beispiel-PDF mit Beschreibung}
+            - /Bilder/04_Unternehmen/news_press/news_2022/KIST_ESCHERICH_Firmenzusammenfuehrung_V02.pdf
+      - CType: uploads
+        fields:
+          header: 'Variante: Link „Seite als PDF“ (KIST)'
+          header_layout: 2
+          space_before_class: large
+          tx_site_wkhtmltopdf_enabled: 1
+          tx_site_wkhtmltopdf_title: Diese Seite als PDF
+
+  - title: Teaser
+    slug: /modules/teaser
+    content:
+      - CType: header
+        fields: {header: Teaser, header_layout: 1, layout: 1}
+      # FlexForm (pi_flexform) per update_content_element: Sheets main/teaser wie
+      # packages/ps14_site/Configuration/FlexForms/Modules/Menu.xml
+      - CType: menu_pages
+        fields:
+          header: 'Variante: Teaser (Karten), feste Auswahl'
+          header_layout: 2
+          tx_foundation_variant: teaser
+          pages: '153,154,150'
+        flexform: {main: {excludeCurrentPage: 1}, teaser: {readmoreEnabled: 0}}
+      - CType: menu_pages
+        fields:
+          header: 'Variante: Technologie'
+          header_layout: 100
+          tx_foundation_variant: teaser-technology
+          space_before_class: large
+          pages: '153'
+        flexform: {main: {excludeCurrentPage: 1}}
+      - CType: menu_pages
+        fields:
+          header: 'Variante: Bild neben Text, links'
+          header_layout: 2
+          tx_foundation_variant: teaser-aside
+          space_before_class: large
+          pages: '78'
+        flexform: {main: {excludeCurrentPage: 1}, teaser: {asideAlignment: left, asideMediaSize: default, textAlignment: default}}
+      - CType: menu_pages
+        fields:
+          header: 'Variante: Bild neben Text, rechts, mit Unterseiten'
+          header_layout: 2
+          tx_foundation_variant: teaser-aside
+          space_before_class: large
+          pages: '76'
+        flexform: {main: {excludeCurrentPage: 1}, teaser: {asideAlignment: right, asideMediaSize: small, textAlignment: center, subpagesEnabled: 1, subpagesLayout: columns}}
+      - CType: menu_categorized_pages
+        fields:
+          header: 'Variante: Kategorien mit Startpunkt'
+          header_layout: 2
+          tx_foundation_variant: teaser
+          space_before_class: large
+          selected_categories: '141'
+          category_field: categories
+          pages: '76'
+          recursive: 2
+        flexform: {main: {excludeCurrentPage: 1}, teaser: {readmoreEnabled: 1}}
+      - CType: menu_subpages
+        fields:
+          header: 'Variante: Unterseiten, grauer Container'
+          header_layout: 2
+          tx_foundation_variant: teaser-grey
+          space_before_class: large
+          pages: '136'
+        flexform: {main: {excludeCurrentPage: 1}}

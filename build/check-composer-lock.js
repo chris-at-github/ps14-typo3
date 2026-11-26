@@ -5,9 +5,11 @@ import { execSync } from 'node:child_process';
 const SHARED_PACKAGES = [
   'ps14/ps14_component',
   'ps14/ps14_container',
+  'ps14/ps14_downloads',
   'ps14/ps14_foundation',
   'ps14/ps14_menu',
   'ps14/ps14_modules',
+  'ps14/ps14_textmedia',
 ];
 
 let lock;

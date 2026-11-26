@@ -3,7 +3,9 @@
     <f:section name="Main">
         <div class="hero {f:if(condition: '{site:media.isImage(file: media)}', then: 'hero--image')}{f:if(condition: '{site:media.isVideo(file: media)}', then: 'hero--video hero--video-played')}">
             <f:render partial="Hero/Item/Content" section="Main" arguments="{_all}" />
-            <f:render partial="Hero/Item/Media" section="Main" arguments="{_all}" />
+            <f:if condition="{media}">
+                <f:render partial="Hero/Item/Media" section="Main" arguments="{_all}" />
+            </f:if>
         </div>
     </f:section>
 </html>

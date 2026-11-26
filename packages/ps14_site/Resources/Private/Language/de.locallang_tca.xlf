@@ -72,6 +72,9 @@
       <trans-unit id="tt_content.variant.marker.image-aside-slider">
         <target>Bild seitlich mit Slider</target>
       </trans-unit>
+      <trans-unit id="tt_content.variant.hero.16-9">
+        <target>16:9</target>
+      </trans-unit>
       <trans-unit id="tt_content.variant.kist-values.icons">
         <target>Icons</target>
       </trans-unit>
@@ -119,6 +122,87 @@
       </trans-unit>
       <trans-unit id="menu-subpages.flexform.sorting.title">
         <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="pages.teaser.title">
+        <target>Teaser-Titel</target>
+      </trans-unit>
+      <trans-unit id="pages.teaser.abstract-long">
+        <target>Lange Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="pages.teaser.readmore">
+        <target>Text für „Weiterlesen“</target>
+      </trans-unit>
+      <trans-unit id="pages.teaser.media-large">
+        <target>Großes Teaser-Bild</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.sheet.teaser">
+        <target>Teaser</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.readmore-enabled">
+        <target>Weitere Einträge per Klick zeigen</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.readmore-enabled.description">
+        <target>Zeigt die ersten drei Einträge, die übrigen nach Klick auf „Mehr laden“.</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type">
+        <target>Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type.default">
+        <target>Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.abstract-type.long">
+        <target>Lange Zusammenfassung</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment">
+        <target>Bildposition</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment.left">
+        <target>Links</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-alignment.right">
+        <target>Rechts</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size">
+        <target>Bildgröße</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size.default">
+        <target>Standard</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.aside-media-size.small">
+        <target>Klein</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment">
+        <target>Textausrichtung</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment.default">
+        <target>Linksbündig</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.text-alignment.center">
+        <target>Zentriert</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-enabled">
+        <target>Unterseiten anzeigen</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout">
+        <target>Darstellung der Unterseiten</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout.default">
+        <target>Liste</target>
+      </trans-unit>
+      <trans-unit id="menu.flexform.teaser.subpages-layout.columns">
+        <target>Spalten</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser">
+        <target>Teaser (Karten)</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-grey">
+        <target>Teaser: grauer Container / transparente Bilder</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-technology">
+        <target>Teaser: Technologie</target>
+      </trans-unit>
+      <trans-unit id="tt_content.variant.menu.teaser-aside">
+        <target>Teaser: Bild neben Text</target>
       </trans-unit>
     </body>
   </file>

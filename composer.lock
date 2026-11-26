@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c01e6f52d5c48add3bdcc08d100bd4e",
+    "content-hash": "70237f44f90443fcb070d1a4be2cc07c",
     "packages": [
         {
             "name": "b13/container",
@@ -2473,6 +2473,56 @@
             "time": "2026-11-19T21:13:35+00:00"
         },
         {
+            "name": "ps14/ps14_downloads",
+            "version": "14.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chris-at-github/ps14-downloads.git",
+                "reference": "3c7315cccbc93fbab396f67c7163b47d90624d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-downloads/zipball/3c7315cccbc93fbab396f67c7163b47d90624d46",
+                "reference": "3c7315cccbc93fbab396f67c7163b47d90624d46",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "ps14/ps14_foundation": "^14.0",
+                "typo3/cms-core": "^14.3",
+                "typo3/cms-fluid-styled-content": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_downloads"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Extends the TYPO3 core element file links (uploads) with a download list.",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "extension"
+            ],
+            "support": {
+                "source": "https://github.com/chris-at-github/ps14-downloads/tree/14.0.0",
+                "issues": "https://github.com/chris-at-github/ps14-downloads/issues"
+            },
+            "time": "2026-11-26T19:44:52+00:00"
+        },
+        {
             "name": "ps14/ps14_foundation",
             "version": "14.0.1",
             "source": {
@@ -2530,16 +2580,16 @@
         },
         {
             "name": "ps14/ps14_menu",
-            "version": "14.0.0",
+            "version": "14.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chris-at-github/ps14-menu.git",
-                "reference": "e3da65a5a7fca1b0915b4680e839a452a8390f68"
+                "reference": "27c6760bdfb64681f1b606eef0ed157a3b588bbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chris-at-github/ps14-menu/zipball/e3da65a5a7fca1b0915b4680e839a452a8390f68",
-                "reference": "e3da65a5a7fca1b0915b4680e839a452a8390f68",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-menu/zipball/27c6760bdfb64681f1b606eef0ed157a3b588bbf",
+                "reference": "27c6760bdfb64681f1b606eef0ed157a3b588bbf",
                 "shasum": ""
             },
             "require": {
@@ -2556,6 +2606,11 @@
                 },
                 "branch-alias": {
                     "dev-main": "14.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ps14\\Menu\\": "Classes/"
                 }
             },
             "license": [
@@ -2575,23 +2630,23 @@
                 "menu"
             ],
             "support": {
-                "source": "https://github.com/chris-at-github/ps14-menu/tree/14.0.0",
+                "source": "https://github.com/chris-at-github/ps14-menu/tree/14.1.0",
                 "issues": "https://github.com/chris-at-github/ps14-menu/issues"
             },
-            "time": "2026-11-19T21:13:35+00:00"
+            "time": "2026-11-26T19:44:52+00:00"
         },
         {
             "name": "ps14/ps14_modules",
-            "version": "14.0.1",
+            "version": "14.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chris-at-github/ps14-modules.git",
-                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920"
+                "reference": "fece33edf3b491150ab5c1a32995ed1ed006d841"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chris-at-github/ps14-modules/zipball/1b24dde52c8ff4d377512cec9023acac9f619920",
-                "reference": "1b24dde52c8ff4d377512cec9023acac9f619920",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-modules/zipball/fece33edf3b491150ab5c1a32995ed1ed006d841",
+                "reference": "fece33edf3b491150ab5c1a32995ed1ed006d841",
                 "shasum": ""
             },
             "require": {
@@ -2626,10 +2681,10 @@
                 "extension"
             ],
             "support": {
-                "source": "https://github.com/chris-at-github/ps14-modules/tree/14.0.1",
+                "source": "https://github.com/chris-at-github/ps14-modules/tree/14.1.0",
                 "issues": "https://github.com/chris-at-github/ps14-modules/issues"
             },
-            "time": "2026-11-25T21:46:16+00:00"
+            "time": "2026-11-26T19:44:52+00:00"
         },
         {
             "name": "ps14/ps14_site",
@@ -2637,7 +2692,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_site",
-                "reference": "e463ead5ab488ab801f2e241c6a44748d1656ff2"
+                "reference": "7b2075f842d545e8b32c6b4b90396e527c346c29"
             },
             "require": {
                 "php": "^8.4",
@@ -2645,8 +2700,11 @@
                 "typo3/cms-core": "^14.3"
             },
             "suggest": {
+                "ps14/ps14_downloads": "Download list for the core element uploads; loaded first so that ps14_site can extend its TCA",
                 "ps14/ps14_image": "^13.0",
-                "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards"
+                "ps14/ps14_menu": "Menu views and options; loaded first so that ps14_site can replace its FlexForm",
+                "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards",
+                "ps14/ps14_textmedia": "Image, text & images and text & media; loaded first so that ps14_site can override its TypoScript"
             },
             "type": "typo3-cms-extension",
             "extra": {
@@ -2678,6 +2736,56 @@
                 "symlink": true,
                 "relative": true
             }
+        },
+        {
+            "name": "ps14/ps14_textmedia",
+            "version": "14.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chris-at-github/ps14-textmedia.git",
+                "reference": "39100a22ff1fdbd3fb6bf049fe58228555fe4fee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chris-at-github/ps14-textmedia/zipball/39100a22ff1fdbd3fb6bf049fe58228555fe4fee",
+                "reference": "39100a22ff1fdbd3fb6bf049fe58228555fe4fee",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.4",
+                "ps14/ps14_foundation": "^14.0",
+                "typo3/cms-core": "^14.3",
+                "typo3/cms-fluid-styled-content": "^14.3"
+            },
+            "type": "typo3-cms-extension",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "ps14_textmedia"
+                },
+                "branch-alias": {
+                    "dev-main": "14.x-dev"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Pschorr",
+                    "email": "pschorr.christian@gmail.com"
+                }
+            ],
+            "description": "Extends the TYPO3 core elements image, text & images (gallery) and text & media (single video).",
+            "homepage": "https://ps14.de/",
+            "keywords": [
+                "TYPO3",
+                "extension"
+            ],
+            "support": {
+                "source": "https://github.com/chris-at-github/ps14-textmedia/tree/14.0.0",
+                "issues": "https://github.com/chris-at-github/ps14-textmedia/issues"
+            },
+            "time": "2026-11-26T19:44:52+00:00"
         },
         {
             "name": "psr/cache",
@@ -10735,7 +10843,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ps14_migration",
-                "reference": "8fc286146b6a8a323e3d4c721a4c69b44c501158"
+                "reference": "fbd9bcba1993739b3c6bbbf60291fc4c570d95f4"
             },
             "require": {
                 "php": "^8.4",
@@ -12091,11 +12199,13 @@
     "stability-flags": {
         "ps14/ps14_component": 20,
         "ps14/ps14_container": 20,
+        "ps14/ps14_downloads": 20,
         "ps14/ps14_foundation": 20,
         "ps14/ps14_menu": 20,
         "ps14/ps14_migration": 20,
         "ps14/ps14_modules": 20,
-        "ps14/ps14_site": 20
+        "ps14/ps14_site": 20,
+        "ps14/ps14_textmedia": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

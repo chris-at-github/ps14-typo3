@@ -49,3 +49,41 @@ tt_content.ps14_timeline {
     }
   }
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Hero mit KIST-Markup (Partials Hero/Item/*), Bildgroessen wie v12 (ps14_site-Override von plugin.tx_ps14hero)
+tt_content.ps14_hero {
+  templateRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Templates/Content/
+  partialRootPaths.120 = EXT:ps14_site/Resources/Private/Extensions/Ps14Modules/Partials/
+
+  settings.images.hero >
+  settings.images.hero {
+    maxWidth = 1200
+    cropVariant = default
+    mediaQueries {
+      992 {
+        maxWidth = 1200
+        cropVariant = default
+        mediaQuery = (min-width: 992px)
+      }
+
+      768 {
+        maxWidth = 992
+        cropVariant = default
+        mediaQuery = (min-width: 768px)
+      }
+
+      576 {
+        maxWidth = 768
+        cropVariant = default
+        mediaQuery = (min-width: 576px)
+      }
+
+      0 {
+        maxWidth = 576
+        cropVariant = default
+        mediaQuery = (min-width: 0px)
+      }
+    }
+  }
+}

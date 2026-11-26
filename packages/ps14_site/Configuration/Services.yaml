@@ -6,3 +6,7 @@ services:
 
   Ps14\Site\:
     resource: '../Classes/*'
+
+  # Instantiated by TypoScript dataProcessing
+  Ps14\Site\DataProcessing\CategoryBadgesProcessor:
+    public: true

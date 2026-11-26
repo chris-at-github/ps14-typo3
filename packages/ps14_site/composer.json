@@ -14,7 +14,10 @@
     },
     "suggest": {
         "ps14/ps14_image": "^13.0",
-        "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards"
+        "ps14/ps14_migration": "Data takeover from an old project; loaded first so that its upgrade wizards run before the project wizards",
+        "ps14/ps14_downloads": "Download list for the core element uploads; loaded first so that ps14_site can extend its TCA",
+        "ps14/ps14_textmedia": "Image, text & images and text & media; loaded first so that ps14_site can override its TypoScript",
+        "ps14/ps14_menu": "Menu views and options; loaded first so that ps14_site can replace its FlexForm"
     },
     "autoload": {
         "psr-4": {
