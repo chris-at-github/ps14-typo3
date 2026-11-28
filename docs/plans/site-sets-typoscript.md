@@ -41,7 +41,10 @@ Nicht im Scope: Umstellung bestehender Kundenprojekte (folgt über
 
 ### Key Decisions (2026-11-28)
 
-1. **Ladereihenfolge immer Extension > Foundation > Sitepackage.** Das Set
+1. **Ladereihenfolge immer Extension > Foundation > Sitepackage:** die
+   Extension liefert die Grundkonfiguration, `ps14_foundation` kann sie
+   überschreiben, `ps14_site` kann beides erneut überschreiben (später
+   geladen = überschreibt). Das Set
    `site/settings` (`ps14_site`) hängt von den Sets der Fremd-Extensions
    und danach von `foundation/settings` ab (Reihenfolge der
    `dependencies`); `foundation/settings` hängt von den Core-Sets
@@ -72,10 +75,11 @@ Nicht im Scope: Umstellung bestehender Kundenprojekte (folgt über
 
 - Kopien/Referenzen (`<`, `=<`) und `dataProcessing`-Keys hängen von der
   Reihenfolge ab — Ergebnis-HTML vorher/nachher vergleichen.
-- Fremd-Extensions ohne Set (Projekt-Extensions wie `kist_contact`) werden
-  weiter über `ps14_site/…/Extensions/*.typoscript` importiert und laden
-  damit nach Foundation — prüfen, ob das reicht oder sie ein eigenes Set
-  bekommen.
+- Extensions ohne Set (z. B. die Projekt-Extensions `kist_contact`,
+  `kist_news`) kämen nur über `ps14_site/…/Extensions/*.typoscript` und
+  damit nach Foundation — Foundation könnte sie nicht überschreiben.
+  Deshalb bekommt jede eigene Extension mit TypoScript ein Set (Setup im
+  Set, Abhängigkeit in `site/settings` vor `foundation/settings`).
 
 ### Validierungsansatz
 
