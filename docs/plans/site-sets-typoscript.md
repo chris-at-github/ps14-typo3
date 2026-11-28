@@ -39,13 +39,43 @@ Weg umstellen — Site Sets liefern Setup, Konstanten und Settings, ein
 Nicht im Scope: Umstellung bestehender Kundenprojekte (folgt über
 `git merge main` je Projekt, z. B. KIST: `@import` des news-Setups entfernen).
 
-### Offene Fragen
+### Key Decisions (2026-11-28)
 
-- Reihenfolge Konstanten/Settings: welche `{$…}`-Konstanten von
-  `ps14_foundation` werden zu Settings?
-- `fluid_styled_content` als Set-Abhängigkeit statt statischem Template —
-  Reihenfolge gegenüber `lib.contentElement`-Anpassungen prüfen.
-- Doppelladung vermeiden, solange Projekte noch ein `sys_template` haben.
+1. **Ladereihenfolge immer Extension > Foundation > Sitepackage.** Das Set
+   `site/settings` (`ps14_site`) hängt von den Sets der Fremd-Extensions
+   und danach von `foundation/settings` ab (Reihenfolge der
+   `dependencies`); `foundation/settings` hängt von den Core-Sets
+   `typo3/fluid-styled-content` und `typo3/seo-sitemap` ab. Die Site
+   (`config/sites/*/config.yaml`) nennt nur `site/settings`.
+2. **Konstanten werden umgeschrieben** (keine Rücksicht auf bestehende
+   Konstanten-Namen):
+   - `styles.content.textmedia.maxW`/`maxWInText` → Settings des Core-Sets
+     `typo3/fluid-styled-content` (Werte in `settings.yaml` bzw. als
+     Default von `foundation/settings`).
+   - `plugin.tx_seo…pages.excludedDoktypes` → Setting
+     `seo.sitemap.pages.excludedDoktypes` von `typo3/seo-sitemap`.
+   - `meta.viewport` → neues Setting in `foundation/settings`.
+   - `config.debug`, `config.adminPanel`, `config.absRefPrefix` → feste
+     Werte im Setup.
+   - Konstanten-Dateien von `ps14_foundation`/`ps14_site` entfallen.
+3. **`config.no_cache` entfällt** (Caching wird über den Application
+   Context gesteuert).
+4. **Kein Übergang mit beiden Wegen:** ein Projekt hat entweder das
+   `sys_template` oder Sets mit TypoScript. Vorlage: `sys_template` aus
+   dem Dump entfernen; migrierte Projekte: Post-SQL; bestehende Projekte:
+   beim `git merge main` im selben Schritt entfernen (MCP, sonst SQL).
+5. **Sitemap über das Set `typo3/seo-sitemap`:** die statischen Routen
+   `/de/sitemap.xml`, `/en/sitemap.xml` (Typ `uri`) entfallen, der
+   `PageTypeSuffix` des Sets liefert `sitemap.xml` (sonst Endlosschleife).
+
+### Risiken
+
+- Kopien/Referenzen (`<`, `=<`) und `dataProcessing`-Keys hängen von der
+  Reihenfolge ab — Ergebnis-HTML vorher/nachher vergleichen.
+- Fremd-Extensions ohne Set (Projekt-Extensions wie `kist_contact`) werden
+  weiter über `ps14_site/…/Extensions/*.typoscript` importiert und laden
+  damit nach Foundation — prüfen, ob das reicht oder sie ein eigenes Set
+  bekommen.
 
 ### Validierungsansatz
 
@@ -55,10 +85,39 @@ Nicht im Scope: Umstellung bestehender Kundenprojekte (folgt über
 
 # Tasks
 
-Werden nach Klärung der offenen Fragen festgelegt.
+### Task 1: Bestandsaufnahme vorher
+HTML aller Seiten der Vorlage (de/en, inkl. Beispielseiten unter
+„Modules“) und `sitemap.xml` als Referenz sichern (`temp/`).
+
+### Task 2: Set `foundation/settings` mit TypoScript
+`setup.typoscript` (Imports der Foundation-Dateien), Abhängigkeiten
+`typo3/fluid-styled-content`, `typo3/seo-sitemap`, Setting `meta.viewport`,
+Konstanten → Settings bzw. feste Werte, `config.no_cache` entfernen,
+Konstanten-Dateien löschen. Release `ps14_foundation`.
+
+### Task 3: Set `site/settings` mit TypoScript
+`setup.typoscript` (Imports von `ps14_site`), Abhängigkeiten: Sets der
+Fremd-Extensions, dann `foundation/settings`; `config.yaml` der Vorlage nur
+`site/settings`; Werte in `settings.yaml`.
+
+### Task 4: `sys_template` und Sitemap-Routen entfernen
+`sys_template` aus der Vorlagen-DB (MCP, sonst SQL) und dem Dump
+`sql/template-*.sql.gz`; statische Sitemap-Routen aus `config.yaml`;
+`create-system.sh` prüfen.
+
+### Task 5: Migration und Projekt-Update
+Post-SQL-Vorlage für `ps14-migrate` (`sys_template` des Altprojekts
+entfernen), Checkliste im Skill `updating-typo3-projects`.
+
+### Task 6: Regeln und Doku
+`third-party-extensions.md`, `own-extensions.md` (Set-Abhängigkeiten,
+Reihenfolge, kein `@import` von Set-Setup), Plan.
+
+### Task 7: Vergleich
+HTML vorher/nachher (Task 1), `sitemap.xml` ohne Selbstaufruf, Lint.
 
 # Status
 
 | Task | Stand | Commit |
 |---|---|---|
-| Plan | angelegt 2026-11-27 (Verbesserung) | — |
+| Plan | angelegt 2026-11-27; Entscheidungen 1–5 am 2026-11-28 | — |
