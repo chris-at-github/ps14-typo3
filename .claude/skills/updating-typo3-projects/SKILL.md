@@ -73,6 +73,22 @@ change needs manual steps in existing projects.
      manually.
   3. `mv packages/ps14_site temp/ps14_site-repo`
   4. Never modify `ps14-site.git` or its branches.
+- **TypoScript still via `sys_template`** (template before the switch to site
+  sets, plan `docs/plans/site-sets-typoscript.md`): the root `sys_template`
+  (`clear = 3`, `@import` of `Site.*.typoscript`) discards the TypoScript of
+  the sets and would load `ps14_site` twice. In the same step as the merge:
+  1. Move project specific `@import`s of set TypoScript (e.g.
+     `@import 'EXT:news/Configuration/Sets/News/setup.typoscript'` in
+     `Extensions/*.setup.typoscript`) out — add the set to
+     `packages/ps14_site/Configuration/Sets/Site/config.yaml` in front of
+     `foundation/settings` instead.
+  2. Site `config.yaml`: `dependencies` only `site/settings`; remove the
+     static routes `/de/sitemap.xml`, `/en/sitemap.xml` (type `uri`) —
+     `typo3/seo-sitemap` provides `sitemap.xml` (otherwise an endless loop
+     of self-requests).
+  3. Delete the root `sys_template` (MCP, otherwise SQL
+     `UPDATE sys_template SET deleted = 1 WHERE uid = …`), `cache:flush`,
+     compare pages and `sitemap.xml` before/after.
 - **Legacy project on the old template** (customer-specific branch based on
   the old template, in the main repo and/or as a customer branch of
   `ps14-site.git`, e.g. `kist-escherich`, `kist-escherich-hyjoin`,

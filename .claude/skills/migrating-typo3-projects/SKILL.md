@@ -101,6 +101,10 @@ ddev exec vendor/bin/ps14-migrate
   --dry-run` and compare every type change with the data (VARCHAR → INT,
   shorter columns). Convert values in `config/migration/sql/pre/`, or protect
   the column in `MIGRATION_SKIP_COLUMNS`.
+- The TypoScript records (`sys_template`) of the old project are deleted by
+  the generic post SQL of `ps14_migration`
+  (`0030_disable_sys_template.sql`); the template loads its TypoScript via
+  site sets. Port their content into `ps14_site` before (inventory).
 - Generic wizards/SQL belong into `ps14_migration`, project-specific ones into
   `ps14_site/Classes/Upgrades/` and `config/migration/sql/`.
 - Project wizards never extend or use classes of `ps14_migration`: the

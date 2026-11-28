@@ -10,7 +10,7 @@ greifen nur die Settings. Ziel: TypoScript auf den von TYPO3 vorgesehenen
 Weg umstellen — Site Sets liefern Setup, Konstanten und Settings, ein
 `sys_template` ist nicht mehr nötig.
 
-- Stand: 2026-11-27 (Verbesserung, noch nicht begonnen)
+- Stand: 2026-11-28 (umgesetzt in der Vorlage, Release `ps14_foundation` und Merge offen)
 - Anlass: KIST Schritt 2.6 (News). Das Set `georgringer/news` hat kein
   TypoScript geliefert (Sortierung der Listen falsch); KIST bindet das
   Set-Setup deshalb per `@import` ein und bleibt vorerst so
@@ -125,3 +125,22 @@ HTML vorher/nachher (Task 1), `sitemap.xml` ohne Selbstaufruf, Lint.
 | Task | Stand | Commit |
 |---|---|---|
 | Plan | angelegt 2026-11-27; Entscheidungen 1–5 am 2026-11-28 | — |
+| 1 Bestandsaufnahme | erledigt 2026-11-28: 56 URLs de/en (51× 200, 5× 307) und Sitemaps (29/18 URLs) in `temp/site-sets-reference/before/` (Skript `capture.sh`) | — |
+| 2 `foundation/settings` | erledigt 2026-11-28 (`ps14_foundation` Branch `feature/site-sets`): `setup.typoscript`, Abhängigkeiten `typo3/fluid-styled-content`, `typo3/seo-sitemap`, `settings.yaml` (maxW 1200/maxWInText 800, excludedDoktypes); `Foundation.*`, `Extensions/Seo.*` entfernt; `config.no_cache` entfernt, `debug`/`admPanel`/`absRefPrefix` fest. `meta.viewport` war ungenutzt (fest in `Page/Meta.setup.typoscript`) → ersatzlos entfernt, kein neues Setting | ps14_foundation f64d16a |
+| 3 `site/settings` | erledigt 2026-11-28: Set in `ps14_site/Configuration/Sets/Site` (`setup.typoscript`, `constants.typoscript` für Extensions ohne Set), Site hängt nur von `site/settings` ab; `Site.*.typoscript` entfernt | siehe Commits |
+| 4 `sys_template`, Sitemap-Routen | erledigt 2026-11-28: `sys_template` uid 1 der Vorlagen-DB per SQL `deleted = 1` (MCP für die Vorlage nicht angebunden), statische Sitemap-Routen entfernt; `create-system.sh` übernimmt die DB der Vorlage, keine Änderung nötig | — |
+| 5 Migration und Projekt-Update | erledigt 2026-11-28: Post-SQL `0030_disable_sys_template.sql` in `ps14_migration` (Branch `feature/disable-sys-template`, nicht auf `main`, damit laufende Migrationen alter Vorlagenstände es nicht ausführen), Checkliste im Skill `updating-typo3-projects`, Hinweis im Skill `migrating-typo3-projects` | ps14_migration 27390bd |
+| 6 Regeln | erledigt 2026-11-28: `third-party-extensions.md` (Set in `site/settings` vor `foundation/settings`, Warnung Route-Enhancer/Sitemap), `own-extensions.md` (eigene Extensions mit TypoScript bekommen ein Set ohne Abhängigkeit zu `foundation/settings`) | siehe Commits |
+| 7 Vergleich | erledigt 2026-11-28: alle Seiten identisch bis auf die zufälligen IDs (`fo:randomId`); Sitemap-Index jetzt mit sprechenden URLs (`/de/sitemap-type/pages/sitemap.xml`), URL-Listen identisch; Lint ohne Befund. Effekt: Seiten der Vorlage werden jetzt gecacht (vorher `no_cache = 1`) | — |
+
+### Offen
+
+- Release `ps14_foundation` (`feature/site-sets` → `main`, Tag; Minor, da
+  Konstanten entfallen — Projekte brauchen die Umstellung von `ps14_site`
+  im selben Schritt).
+- Merge `ps14_migration` `feature/disable-sys-template` erst, wenn alle
+  laufenden Migrationen auf der neuen Vorlage stehen (KIST).
+- Eigene Pakete mit TypoScript (`ps14_container`, `ps14_menu`, …) auf ein
+  eigenes Set umstellen (je Paket-Release).
+- `composer.lock` der Vorlage nach dem Release (`ddev composer update
+  'ps14/*'`) committen, nicht mit Path-Eintrag.

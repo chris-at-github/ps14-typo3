@@ -38,14 +38,6 @@ errorHandling:
     errorContentSource: 't3://page?uid=6'
 routes:
   -
-    route: /de/sitemap.xml
-    type: uri
-    source: 't3://page?type=1533906435'
-  -
-    route: /en/sitemap.xml
-    type: uri
-    source: 't3://page?type=1533906435'
-  -
     route: robots.txt
     type: staticText
     content: |
@@ -56,4 +48,4 @@ routes:
       Sitemap: https://ps14-typo3.ddev.site/de/sitemap.xml
       Sitemap: https://ps14-typo3.ddev.site/en/sitemap.xml
 dependencies:
-  - foundation/settings
+  - site/settings

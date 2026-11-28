@@ -1,0 +1,6 @@
+name: site/settings
+label: 'Site Settings'
+# Load order: extensions > ps14_foundation > ps14_site (later sets override earlier ones).
+# Add the sets of the extensions of the project in front of foundation/settings.
+dependencies:
+  - foundation/settings

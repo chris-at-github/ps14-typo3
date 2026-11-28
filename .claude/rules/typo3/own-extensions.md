@@ -91,11 +91,18 @@ denselben Regeln, haben aber eigene Zuständigkeiten (siehe `CLAUDE.md`).
     `ext_localconf.php`)
   - `.php-cs-fixer.dist.php` und `lint:editorconfig` erfassen alle Ordner
     unter `packages/` automatisch.
-- Hat die Extension kein Site Set, liefert sie
-  `Configuration/TypoScript/setup.typoscript`. Eingebunden wird es per
-  `@import` in
+- Liefert die Extension TypoScript, bekommt sie ein Site Set
+  (`Configuration/Sets/<Name>/config.yaml`, `name: ps14/<name>`,
+  `setup.typoscript`, ggf. `settings.definitions.yaml` statt Konstanten).
+  Das Set hängt **nicht** von `foundation/settings` ab: Ladereihenfolge
+  Extension > `ps14_foundation` > `ps14_site`. Eingetragen wird es in
+  `ps14_site/Configuration/Sets/Site/config.yaml` vor `foundation/settings`.
+  Verweise auf Objekte der Foundation nur als Referenz (`=<`, zur Laufzeit
+  aufgelöst), nie als Kopie (`<`).
+- Bestehende Extensions ohne Set (z. B. `ps14_container`, `ps14_menu`)
+  werden bis zur Umstellung per `@import` in
   `ps14_site/Configuration/TypoScript/Extensions/<ExtensionKeyPascalCase>.setup.typoscript`
-  (z. B. `Ps14Container.setup.typoscript`).
+  eingebunden (z. B. `Ps14Container.setup.typoscript`).
 
 ## Inhaltselemente und Templates
 

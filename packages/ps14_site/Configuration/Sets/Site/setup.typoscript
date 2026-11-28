@@ -1,0 +1,6 @@
+@import 'EXT:ps14_site/Configuration/TypoScript/System/*.setup.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Navigation/*.setup.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Block/*.setup.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Modules/*.setup.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Extensions/*.setup.typoscript'
+@import 'EXT:ps14_site/Configuration/TypoScript/Page/*.setup.typoscript'

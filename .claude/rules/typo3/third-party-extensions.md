@@ -23,14 +23,17 @@ paths:
 
 ## Einbindung des TypoScripts
 
-Prüfe zuerst, ob die Extension ein Site Set mitbringt
-(`vendor/<vendor>/<paket>/Configuration/Sets/*/config.yaml`, Schlüssel
-`name`).
+Das TypoScript kommt ausschließlich über Site Sets, es gibt kein
+`sys_template`. Ladereihenfolge: Extension > `ps14_foundation` > `ps14_site`
+(später geladen überschreibt). Prüfe zuerst, ob die Extension ein Site Set
+mitbringt (`vendor/<vendor>/<paket>/Configuration/Sets/*/config.yaml`,
+Schlüssel `name`).
 
 ### Extension mit Site Set (Standard)
 
-- Trage das Set unter `dependencies` in `config/sites/<site>/config.yaml`
-  ein (nach `foundation/settings`).
+- Trage das Set in `packages/ps14_site/Configuration/Sets/Site/config.yaml`
+  unter `dependencies` **vor** `foundation/settings` ein. Die Site
+  (`config/sites/<site>/config.yaml`) hängt nur von `site/settings` ab.
 - Setup und Settings des Sets werden automatisch geladen. Importiere die
   Setup- oder Konstanten-Dateien der Extension **nicht** zusätzlich per
   `@import` — sonst werden sie doppelt geladen.
@@ -39,9 +42,14 @@ Prüfe zuerst, ob die Extension ein Site Set mitbringt
   (z. B. PIDs von Detail- oder Listenseiten). Im TypoScript stehen sie als
   Konstanten `{$…}` zur Verfügung.
 - Anpassungen am Setup, für die es kein Setting gibt (z. B. Template-Pfade),
-  kommen in die Importdatei `<ExtensionName>.setup.typoscript` (siehe unten).
-  Das `sys_template` wird nach den Site Sets geladen und überschreibt deren
-  Setup.
+  kommen in die Importdatei `<ExtensionName>.setup.typoscript` (siehe unten);
+  sie wird mit dem Set `site/settings` nach dem Set der Extension geladen.
+- Prüfe, ob das Set weitere Sets mitzieht (`dependencies`,
+  `optionalDependencies`) und ob diese Route-Enhancer mitbringen
+  (`route-enhancers.yaml`). Beispiel: `georgringer/news-sitemap` zieht
+  `typo3/seo-sitemap` (`PageTypeSuffix` `sitemap.xml`); eine zusätzliche
+  statische Route `sitemap.xml` vom Typ `uri` erzeugt eine Endlosschleife
+  von Selbstaufrufen.
 
 ### Extension ohne Site Set
 
@@ -51,8 +59,9 @@ Prüfe zuerst, ob die Extension ein Site Set mitbringt
     danach eigene Konstanten.
   - `<ExtensionName>.setup.typoscript`: `@import` der Setup-Datei, danach
     eigene Anpassungen.
-- Binde keine statischen Templates über das Feld `include_static_file` im
-  `sys_template` ein.
+- Die Importdateien laden mit `site/settings`, also nach `ps14_foundation`
+  — `ps14_foundation` kann solche Extensions nicht überschreiben.
+- Lege kein `sys_template` an und nutze kein `include_static_file`.
 
 ## Importdateien
 
@@ -60,9 +69,10 @@ Prüfe zuerst, ob die Extension ein Site Set mitbringt
 - Eine Datei je Extension und Typ, benannt nach dem Extension-Key in
   PascalCase: `news` → `News.setup.typoscript`, `tt_address` →
   `TtAddress.setup.typoscript` bzw. `TtAddress.constants.typoscript`.
-- Die Dateien werden über `Site.setup.typoscript` bzw.
-  `Site.constants.typoscript` per Glob (`Extensions/*.setup.typoscript`)
-  geladen. Eine weitere Registrierung ist nicht nötig.
+- Die Dateien werden über das Set `site/settings`
+  (`Configuration/Sets/Site/setup.typoscript` bzw. `constants.typoscript`)
+  per Glob (`Extensions/*.setup.typoscript`) geladen. Eine weitere
+  Registrierung ist nicht nötig.
 - Aufbau (Extension ohne Site Set; mit Site Set entfällt der `@import`):
 
   ```typoscript

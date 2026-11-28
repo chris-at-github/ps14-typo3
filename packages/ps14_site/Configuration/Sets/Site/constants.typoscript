@@ -1,0 +1,2 @@
+# Constants of extensions without site set (see Configuration/TypoScript/Extensions/)
+@import 'EXT:ps14_site/Configuration/TypoScript/Extensions/*.constants.typoscript'
